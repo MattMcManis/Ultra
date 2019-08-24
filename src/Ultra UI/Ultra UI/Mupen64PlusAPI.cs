@@ -43,11 +43,6 @@ namespace Ultra
 {
     public class Mupen64PlusAPI : IDisposable
     {
-        // Only left in because api needs to know the number of frames passed
-        // because of a bug
-        //private readonly N64 bizhawkCore;
-        //static Mupen64PlusAPI AttachedCore = null;
-
         // API
         public static Mupen64PlusAPI api = null; // mupen64plus DLL Api
 
@@ -193,31 +188,8 @@ namespace Ultra
             SYSTEM_MPAL
         };
 
-        // C Original
-        //typedef struct
-        //{
-        //    uint8_t init_PI_BSB_DOM1_LAT_REG;  /* 0x00 */
-        //    uint8_t init_PI_BSB_DOM1_PGS_REG;  /* 0x01 */
-        //    uint8_t init_PI_BSB_DOM1_PWD_REG;  /* 0x02 */
-        //    uint8_t init_PI_BSB_DOM1_PGS_REG2; /* 0x03 */
-        //    uint32_t ClockRate;                 /* 0x04 */
-        //    uint32_t PC;                        /* 0x08 */
-        //    uint32_t Release;                   /* 0x0C */
-        //    uint32_t CRC1;                      /* 0x10 */
-        //    uint32_t CRC2;                      /* 0x14 */
-        //    uint32_t Unknown[2];                /* 0x18 */
-        //    uint8_t Name[20];                  /* 0x20 */
-        //    uint32_t unknown;                   /* 0x34 */
-        //    uint32_t Manufacturer_ID;           /* 0x38 */
-        //    uint16_t Cartridge_ID;              /* 0x3C - Game serial number  */
-        //    uint16_t Country_code;              /* 0x3E */
-        //}
-        //m64p_rom_header;
-
         // UnmanagedType Enum 
         // https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.unmanagedtype?view=netframework-4.8
-        //[StructLayout(LayoutKind.Sequential, Pack = 1)]
-        //[StructLayout(LayoutKind.Sequential)]
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public struct m64p_rom_header
         {
@@ -256,6 +228,10 @@ namespace Ultra
             public byte mempak;         /* 0 - No, 1 - Yes boolean for memory pak support. */
             public byte biopak;         /* 0 - No, 1 - Yes boolean for bio pak support. */
         }
+
+        public string m64p_handle;
+
+        public double CONFIG_PARAM_VERSION = 1;
 
         // Core Specifc functions
 
@@ -448,6 +424,24 @@ namespace Ultra
         delegate m64p_error CoreDoCommandRenderCallback(m64p_command Command, int ParamInt, RenderCallback ParamPtr);
         CoreDoCommandRenderCallback m64pCoreDoCommandRenderCallback;
 
+        // Plugins Search Load
+        //[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        //delegate m64p_error PluginSearchLoad(string ConfigUI);
+        //PluginSearchLoad m64pPluginSearchLoad;
+
+        // Configuration
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        delegate m64p_error ConfigSetDefaultFloat(string ConfigSectionHandle, string ParamName, double ParamValue, string ParamHelp);
+        ConfigSetDefaultFloat m64pConfigSetDefaultFloat;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        delegate m64p_error ConfigSetDefaultString(string ConfigSectionHandle, string ParamName, string ParamValue, string ParamHelp);
+        ConfigSetDefaultString m64pConfigSetDefaultString;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        delegate m64p_error ConfigSaveFile();
+        ConfigSaveFile m64pConfigSaveFile;
+
         //WARNING - RETURNS A STATIC BUFFER
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate IntPtr biz_r4300_decode_op(uint instr, uint counter);
@@ -556,6 +550,7 @@ namespace Ultra
 
         // DLL handles
         public IntPtr CoreDll { get; private set; }
+        public IntPtr VideoPluginDll { get; private set; }
 
         /// <summary>
         /// Launch - Mupen64Plus API - Ultra Modified
@@ -564,9 +559,6 @@ namespace Ultra
         {
         }
 
-        /// <summary>
-        /// Launch - Mupen64Plus API - Ultra Modified
-        /// </summary>
         public void Launch(byte[] romBuffer,
                            string videoPlugin,
                            string audioPlugin,
@@ -575,6 +567,37 @@ namespace Ultra
                            int windowWidth,
                            int windowHeight
                            )
+        {
+            // -------------------------
+            // Initiate
+            // -------------------------
+            Initiate(romBuffer,
+                    videoPlugin,
+                    audioPlugin,
+                    inputPlugin,
+                    rspPlugin,
+                    windowWidth,
+                    windowHeight);
+
+            // -------------------------
+            // Start
+            // -------------------------
+            // Prepare to start the emulator in a different thread
+            //m64pEmulator = new Thread(ExecuteEmulator);
+            ExecuteEmulator();
+        }
+
+        /// <summary>
+        /// Initiate - Mupen64Plus API - Ultra Modified
+        /// </summary>
+        public void Initiate(byte[] romBuffer,
+                            string videoPlugin,
+                            string audioPlugin,
+                            string inputPlugin,
+                            string rspPlugin,
+                            int windowWidth,
+                            int windowHeight
+                            )
         {
             SetDllDirectory(VM.PathsView.Mupen_Text);
             CoreDll = LoadLibrary("mupen64plus.dll");
@@ -591,7 +614,7 @@ namespace Ultra
             // -------------------------
             m64p_error result = m64pCoreStartup(
                 0x20001,    // API Version
-                "",         // Config Path VM.PathsView.Config_Text
+                VM.PathsView.Config_Text, // Make sure this path is set, Default ""
                 "",         // Data Path ""
                 "Core",     // Context 
                 null,       // DebugCallback 
@@ -740,20 +763,20 @@ namespace Ultra
             // Plugins
             // ------------------------ -
             /*dont know if this even works*/
-            string pluginsDir = "\"" + VM.PathsView.Plugins_Text + "\"";
-            result = m64pConfigSetPlugins(uiconsole_section, "PluginDir", m64p_type.M64TYPE_STRING, ref pluginsDir);
+            //string pluginsDir = "\"" + VM.PathsView.Plugins_Text + "\"";
+            //result = m64pConfigSetPlugins(uiconsole_section, "PluginDir", m64p_type.M64TYPE_STRING, ref pluginsDir);
 
-            string videoPluginPath = "\"" + videoPlugin + "\"";
-            result = m64pConfigSetPlugins(uiconsole_section, "VideoPlugin", m64p_type.M64TYPE_STRING, ref videoPluginPath);
+            //string videoPluginPath = "\"" + videoPlugin + "\"";
+            //result = m64pConfigSetPlugins(uiconsole_section, "VideoPlugin", m64p_type.M64TYPE_STRING, ref videoPluginPath);
 
-            string audioPluginPath = "\"" + audioPlugin + "\"";
-            result = m64pConfigSetPlugins(uiconsole_section, "AudioPlugin", m64p_type.M64TYPE_STRING, ref audioPluginPath);
+            //string audioPluginPath = "\"" + audioPlugin + "\"";
+            //result = m64pConfigSetPlugins(uiconsole_section, "AudioPlugin", m64p_type.M64TYPE_STRING, ref audioPluginPath);
 
-            string inputPluginPath = "\"" + inputPlugin + "\"";
-            result = m64pConfigSetPlugins(uiconsole_section, "InputPlugin", m64p_type.M64TYPE_STRING, ref inputPluginPath);
+            //string inputPluginPath = "\"" + inputPlugin + "\"";
+            //result = m64pConfigSetPlugins(uiconsole_section, "InputPlugin", m64p_type.M64TYPE_STRING, ref inputPluginPath);
 
-            string rspPluginPath = "\"" + rspPlugin + "\"";
-            result = m64pConfigSetPlugins(uiconsole_section, "RspPlugin", m64p_type.M64TYPE_STRING, ref rspPluginPath);
+            //string rspPluginPath = "\"" + rspPlugin + "\"";
+            //result = m64pConfigSetPlugins(uiconsole_section, "RspPlugin", m64p_type.M64TYPE_STRING, ref rspPluginPath);
 
             // --------------------------------------------------
             // ROM Section
@@ -838,13 +861,22 @@ namespace Ultra
 
             //set_video_parameters(video_settings);
 
-            //InitSaveram();
+            // --------------------------------------------------
+            // Configuration Defaults
+            // --------------------------------------------------
+            //IntPtr l_ConfigUI = IntPtr.Zero;
+            //result = m64pConfigSetDefaultFloat("UI-Console", "Version", CONFIG_PARAM_VERSION, "Mupen64Plus UI-Console config parameter set version number. Please don't change this version number.");
+            //result = m64pConfigSetDefaultString("UI-Console", "PluginDir", "\"" + VM.PathsView.Plugins_Text + "\"", "Directory in which to search for plugins");
+            //result = m64pConfigSetDefaultString("UI-Console", "VideoPlugin", videoPlugin, "Filename of video plugin");
+            //result = m64pConfigSetDefaultString("UI-Console", "AudioPlugin", audioPlugin, "Filename of audio plugin");
+            //result = m64pConfigSetDefaultString("UI-Console", "InputPlugin", inputPlugin, "Filename of input plugin");
+            //result = m64pConfigSetDefaultString(/*l_ConfigUI*/"UI-Console", "RspPlugin", rspPlugin, "Filename of RSP plugin");
 
             // --------------------------------------------------
             // Attach Plugins
             // --------------------------------------------------
             //  The plugins must be attached in the following order: Video, Audio, Input, RSP. 
-            IntPtr video_plugin_section = IntPtr.Zero;
+            //IntPtr video_plugin_section = IntPtr.Zero;
 
             // Video
             AttachPlugin(m64p_plugin_type.M64PLUGIN_GFX, videoPlugin/*"mupen64plus-video-glide64mk2.dll"*/);
@@ -854,6 +886,8 @@ namespace Ultra
             AttachPlugin(m64p_plugin_type.M64PLUGIN_INPUT, inputPlugin/*"mupen64plus-input-sdl.dll"*/);
             // RSP
             AttachPlugin(m64p_plugin_type.M64PLUGIN_RSP, rspPlugin/*"mupen64plus-rsp-hle.dll"*/);
+
+            // Generate Defaults here
 
             // --------------------------------------------------
             // Initialize event invoker
@@ -866,11 +900,16 @@ namespace Ultra
             result = m64pCoreDoCommandRenderCallback(m64p_command.M64CMD_SET_RENDER_CALLBACK, 0, m64pRenderCallback);
 
             // -------------------------
-            // Start
+            // Save Config
             // -------------------------
-            // Prepare to start the emulator in a different thread
-            //m64pEmulator = new Thread(ExecuteEmulator);
-            ExecuteEmulator();
+            m64pConfigSaveFile();
+
+            //// -------------------------
+            //// Start
+            //// -------------------------
+            //// Prepare to start the emulator in a different thread
+            ////m64pEmulator = new Thread(ExecuteEmulator);
+            //ExecuteEmulator();
         }
 
         volatile bool emulator_running = false;
@@ -985,66 +1024,14 @@ namespace Ultra
         /// <summary>
         /// ROM Get Header
         /// </summary>
-        //public m64p_rom_header header = new m64p_rom_header();
-        //public int nameSize = 20;
-        //public byte[] name = new byte[20];
         public m64p_rom_header _rom_header;
         public String ROMGetHeader()
         {
-        //unsafe
-        //{
-            //m64p_rom_header header;
-            //header.Name = new byte[20];
-
-            //m64pCoreDoCommandROMHeader(m64p_command.M64CMD_ROM_GET_HEADER, /*ref */header.Name, ref nameSize);
-
             int size = Marshal.SizeOf(typeof(m64p_rom_header));
-
-            //header.Name = new byte[20];
 
             m64pCoreDoCommandROMHeader(m64p_command.M64CMD_ROM_GET_HEADER, size, ref _rom_header);
 
             return System.Text.Encoding.Default.GetString(_rom_header.Name);
-
-            //return _rom_header.Country_code.ToString();
-
-
-            //byte[] name = new byte[20];
-
-            //MessageBox.Show(header.Name.ToString()); 
-            //name = header.Name;
-
-            //string headerName = header.Name.ToString();
-            //m64p_rom_settings.goodname = m64p_rom_header.Name;
-            //return header.Name.ToString();
-
-            //string name = string.Empty;
-            //fixed (byte* buffer = _rom_header.Name)
-            //{
-            //    name = Encoding.Default.GetString(buffer[0]);
-            //}
-
-            //fixed (byte* buffer = _rom_header.Name)
-            //{
-            //    byte[] bytes = buffer[0];
-            //}
-
-
-            //fixed (byte* buffer = _rom_header.Name)
-            //{
-            //    byte[] bytes = new byte[20];
-            //    int index = 0;
-            //    for (byte* counter = buffer; *counter != 0; counter++)
-            //    {
-            //        bytes[index++] = *counter;
-            //    }
-
-            //    return System.Text.Encoding.Default.GetString(bytes, 0, 20);
-            //}
-
-
-            //return string.Empty;
-            //}
         }
 
 
@@ -1261,6 +1248,10 @@ namespace Ultra
             m64pCoreDoCommandCoreStateVideoMode = (CoreDoCommandCoreStateSetVideoMode)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandCoreStateSetVideoMode));
             m64pCoreDoCommandCoreStateSetRef = (CoreDoCommandCoreStateSetRef)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandCoreStateSetRef));
             m64pCoreDoCommandCoreStateQuery = (CoreDoCommandCoreStateQuery)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandCoreStateQuery));
+            //m64pPluginSearchLoad = (PluginSearchLoad)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "PluginSearchLoad"), typeof(PluginSearchLoad));
+            m64pConfigSetDefaultFloat = (ConfigSetDefaultFloat)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetDefaultFloat"), typeof(ConfigSetDefaultFloat));
+            m64pConfigSetDefaultString = (ConfigSetDefaultString)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetDefaultString"), typeof(ConfigSetDefaultString));
+            m64pConfigSaveFile = (ConfigSaveFile)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSaveFile"), typeof(ConfigSaveFile));
             // End Custom
             m64pCoreDoCommandRefInt = (CoreDoCommandRefInt)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandRefInt));
             m64pCoreDoCommandFrameCallback = (CoreDoCommandFrameCallback)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandFrameCallback));

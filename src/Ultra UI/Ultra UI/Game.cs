@@ -96,14 +96,26 @@ namespace Ultra
                             // -------------------------
                             // Set Window Resolution
                             // -------------------------
-                            List<string> resolution = new List<string>();
-                            resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
-
                             int windowWidth = 0;
-                            int.TryParse(resolution[0], out windowWidth);
-
                             int windowHeight = 0;
-                            int.TryParse(resolution[1], out windowHeight);
+                            if (!string.IsNullOrEmpty(VM.DisplayView.Display_Resolution_SelectedItem))
+                            {
+                                List<string> resolution = new List<string>();
+                                resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
+
+                                windowWidth = 0;
+                                int.TryParse(resolution[0], out windowWidth);
+
+                                windowHeight = 0;
+                                int.TryParse(resolution[1], out windowHeight);
+                            }
+                            // Safe Defaults
+                            else
+                            {
+                                windowWidth = 960;
+                                windowHeight = 720;
+                            }
+                            
 
                             // -------------------------
                             // Reset the Label Notice
