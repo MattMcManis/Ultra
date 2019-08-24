@@ -1,0 +1,140 @@
+﻿<!-- 
+    Ultra UI
+    https://github.com/MattMcManis/Ultra
+    https://ultraui.github.io
+    mattmcmanis@outlook.com
+
+    The MIT License
+
+    Copyright (C) 2019 Matt McManis
+
+    Permission is hereby granted, free of charge, to any person obtaining a 
+    copy of this software and associated documentation files (the "Software"), 
+    to deal in the Software without restriction, including without limitation 
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+    and/or sell copies of the Software, and to permit persons to whom the 
+    Software is furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in 
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+    DEALINGS IN THE SOFTWARE.
+-->
+<Window x:Class="Ultra.Glide64mk2Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:my="clr-namespace:Ultra"
+        xmlns:local="clr-namespace:Ultra"
+        xmlns:settings="clr-namespace:Ultra.Properties"
+        mc:Ignorable="d"
+        
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing"  
+        
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        
+        Title="Video Plugin - Glide64mk2"
+        
+        Width="800"
+        Height="600"
+        
+        Style="{DynamicResource WindowStyle}"
+        >
+
+    <Window.Resources>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <ScrollViewer Margin="0,0,0,0" 
+                      RenderOptions.ClearTypeHint="Enabled"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+
+            <Grid>
+
+                <GroupBox Header="Display" 
+                          Style="{DynamicResource GroupBoxStyle}"
+                          Margin="10,10,10,0" 
+                          Height="351" 
+                          VerticalAlignment="Top">
+
+                    <Grid Background="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="58"/>
+                            <RowDefinition Height="53"/>
+                            <RowDefinition Height="53"/>
+                            <RowDefinition Height="53"/>
+                            <RowDefinition Height="53"/>
+                            <RowDefinition Height="53"/>
+                            <RowDefinition Height="53"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Show FPS -->
+                        <Label Content="ShowFPS"
+                               Style="{DynamicResource LabelStyle}"
+                               HorizontalAlignment="Left"
+                               Margin="15,10,0,0" 
+                               VerticalAlignment="Top" 
+                               Width="150"/>
+                        <ComboBox x:Name="cboShowFPS" 
+                                  Style="{DynamicResource ComboBoxStyle}"
+                                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                  DataContext="{Binding PluginsVideoView}"
+                                  ItemsSource="{Binding Glide64mk2_ShowFPS_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValue="{Binding Glide64mk2_ShowFPS_SelectedItem}"
+                                  IsEnabled="{Binding Glide64mk2_ShowFPS_IsEnabled}"
+                                  HorizontalAlignment="Left" 
+                                  Margin="20,36,0,0" 
+                                  VerticalAlignment="Top" 
+                                  Height="22"
+                                  Width="120"/>
+
+                        <!-- Vsync -->
+                        <Label Content="Vsync"
+                               Style="{DynamicResource LabelStyle}"
+                               HorizontalAlignment="Left"
+                               Margin="15,5,0,0" 
+                               VerticalAlignment="Top" 
+                               Width="150" Grid.Row="1"/>
+                        <ComboBox x:Name="cboVsync" 
+                                  Style="{DynamicResource ComboBoxStyle}"
+                                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                  DataContext="{Binding PluginsVideoView}"
+                                  ItemsSource="{Binding Glide64mk2_Vsync_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValue="{Binding Glide64mk2_Vsync_SelectedItem}"
+                                  IsEnabled="{Binding Glide64mk2_Vsync_IsEnabled}"
+                                  HorizontalAlignment="Left" 
+                                  Margin="20,31,0,0" 
+                                  VerticalAlignment="Top" 
+                                  Height="22"
+                                  Width="120" 
+                                  Grid.Row="1"/>
+
+                    </Grid>
+
+                </GroupBox>
+
+            </Grid>
+
+        </ScrollViewer>
+
+    </Grid>
+</Window>

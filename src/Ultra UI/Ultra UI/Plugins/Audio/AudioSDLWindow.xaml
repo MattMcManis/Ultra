@@ -1,0 +1,315 @@
+﻿<!-- 
+    Ultra UI
+    https://github.com/MattMcManis/Ultra
+    https://ultraui.github.io
+    mattmcmanis@outlook.com
+
+    The MIT License
+
+    Copyright (C) 2019 Matt McManis
+
+    Permission is hereby granted, free of charge, to any person obtaining a 
+    copy of this software and associated documentation files (the "Software"), 
+    to deal in the Software without restriction, including without limitation 
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+    and/or sell copies of the Software, and to permit persons to whom the 
+    Software is furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in 
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+    DEALINGS IN THE SOFTWARE.
+-->
+<Window x:Class="Ultra.AudioSDLWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:my="clr-namespace:Ultra"
+        xmlns:local="clr-namespace:Ultra"
+        xmlns:settings="clr-namespace:Ultra.Properties"
+        mc:Ignorable="d"
+        
+        Loaded="Window_Loaded" 
+        Unloaded="Window_Unloaded" 
+        Closing="Window_Closing"  
+        
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        ResizeMode="NoResize"
+        
+        Title="Audio Plugin - Audio SDL "
+        
+        Width="500"
+        Height="337"
+        
+        Style="{DynamicResource WindowStyle}"
+        >
+
+    <Window.Resources>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <!-- Version -->
+        <Label Content="Version"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="15,10,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboVersion" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                 Text="{Binding Version_Text}"
+                 IsEnabled="False"
+                 HorizontalAlignment="Left" 
+                 Margin="20,36,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- Default Frequency -->
+        <Label Content="Default Frequency"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="15,65,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboDefaultFrequency" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                 Text="{Binding DefaultFrequency_Text}"
+                 IsEnabled="{Binding DefaultFrequency_IsEnabled}"
+                 HorizontalAlignment="Left" 
+                 Margin="20,91,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- Swap Channels -->
+        <CheckBox x:Name="cboSwapChannels" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                  IsChecked="{Binding SwapChannels_IsChecked}"
+                  IsEnabled="{Binding SwapChannels_IsEnabled}"
+                  Content="Swap Channels"
+                  HorizontalAlignment="Left" 
+                  Margin="156,237,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="120"/>
+
+        <!-- Primary Buffer Size -->
+        <Label Content="Primary Buffer Size"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="15,120,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboPrimaryBufferSize" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                 Text="{Binding PrimaryBufferSize_Text}"
+                 IsEnabled="{Binding PrimaryBufferSize_IsEnabled}"
+                 HorizontalAlignment="Left" 
+                 Margin="20,146,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- Primary Buffer Target -->
+        <Label Content="Primary Buffer Target"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="15,175,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboPrimaryBufferTarget" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                 Text="{Binding PrimaryBufferTarget_Text}"
+                 IsEnabled="{Binding PrimaryBufferTarget_IsEnabled}"
+                 HorizontalAlignment="Left" 
+                 Margin="20,201,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- Secondary Buffer Size -->
+        <Label Content="Secondary Buffer Size"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="16,230,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboSecondaryBufferSize" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                 Text="{Binding SecondaryBufferSize_Text}"
+                 IsEnabled="{Binding SecondaryBufferSize_IsEnabled}"
+                 HorizontalAlignment="Left" 
+                 Margin="20,256,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- Resample -->
+        <Label Content="Resample"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="156,10,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <ComboBox x:Name="cboResample" 
+                  Style="{DynamicResource ComboBoxStyle}"
+                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                  DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                  ItemsSource="{Binding Resample_Items}"
+                  SelectedValue="{Binding Resample_SelectedItem}"
+                  IsEnabled="{Binding Resample_IsEnabled}"
+                  HorizontalAlignment="Left" 
+                  Margin="160,36,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="120"/>
+
+        <!-- Volume Control Type -->
+        <Label Content="Volume Control Type"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="156,65,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <ComboBox x:Name="cboVolumeControlType" 
+                  Style="{DynamicResource ComboBoxStyle}"
+                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                  DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                  ItemsSource="{Binding VolumeControlType_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  SelectedValue="{Binding VolumeControlType_SelectedItem}"
+                  IsEnabled="{Binding VolumeControlType_IsEnabled}"
+                  HorizontalAlignment="Left" 
+                  Margin="160,91,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="120"/>
+
+        <!-- Volume Adjust -->
+        <Label Content="Volume Adjust"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="156,120,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboVolumeAdjust" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                 Text="{Binding VolumeAdjust_Text}" 
+                 IsEnabled="{Binding VolumeAdjust_IsEnabled}"
+                 HorizontalAlignment="Left" 
+                 Margin="160,146,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- Volume Default -->
+        <Label Content="Volume Default"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="156,175,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboVolumeDefault" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                 Text="{Binding VolumeDefault_Text}" 
+                 IsEnabled="{Binding VolumeDefault_IsEnabled}"
+                 HorizontalAlignment="Left" 
+                 Margin="160,201,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- Audio Sync -->
+        <CheckBox x:Name="cboAudioSync" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                  IsChecked="{Binding AudioSync_IsChecked}"
+                  IsEnabled="{Binding AudioSync_IsEnabled}"
+                  Content="Audio Sync"
+                  HorizontalAlignment="Left" 
+                  Margin="156,263,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="120"/>
+
+        <!-- Defaults -->
+        <Button x:Name="btnDefaults" 
+                Style="{DynamicResource ButtonStyle}"
+                Cursor="Hand"
+                Margin="0,188,20,0" 
+                HorizontalAlignment="Right"
+                Width="80"
+                Click="btnDefaults_Click" 
+                Height="22" 
+                VerticalAlignment="Top">
+            <TextBlock Text="Defaults"
+                       Margin="0,-2,0,0"/>
+        </Button>
+
+        <!-- Save -->
+        <Button x:Name="btnSave" 
+                Style="{DynamicResource ButtonStyle}"
+                Cursor="Hand"
+                Margin="0,227,20,0" 
+                HorizontalAlignment="Right"
+                Width="80"
+                Click="btnSave_Click" 
+                Height="22"
+                VerticalAlignment="Top">
+            <TextBlock Text="Save"
+                       Margin="0,-2,0,0"/>
+        </Button>
+        <Label x:Name="lblSave"
+                Style="{DynamicResource LabelStyle}"
+                DataContext="{Binding Plugins_Audio_AudioSDL_View}"
+                Content="{Binding Save_Text}" 
+                Margin="0,224,102,0"
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Right"
+                HorizontalContentAlignment="Right"
+                Height="23"
+                Width="50"/>
+
+        <!-- Close -->
+        <Button x:Name="btnClose" 
+                Style="{DynamicResource ButtonStyle}"
+                Cursor="Hand"
+                Margin="0,256,20,0" 
+                HorizontalAlignment="Right"
+                Width="80"
+                Click="btnClose_Click" 
+                Height="22" 
+                VerticalAlignment="Top">
+            <TextBlock Text="Close"
+                        Margin="0,-2,0,0"/>
+        </Button>
+
+    </Grid>
+</Window>

@@ -1,0 +1,1471 @@
+﻿<!-- 
+    Ultra UI
+    Copyright (C) 2019 Matt McManis
+    https://github.com/MattMcManis/Ultra
+    https://ultraui.github.io
+    mattmcmanis@outlook.com
+
+    The MIT License
+
+    Copyright (C) 2019 Matt McManis
+
+    Permission is hereby granted, free of charge, to any person obtaining a 
+    copy of this software and associated documentation files (the "Software"), 
+    to deal in the Software without restriction, including without limitation 
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+    and/or sell copies of the Software, and to permit persons to whom the 
+    Software is furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in 
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+    DEALINGS IN THE SOFTWARE.
+-->
+<Window x:Class="Ultra.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:my="clr-namespace:Ultra"
+        xmlns:local="clr-namespace:Ultra"
+        xmlns:settings="clr-namespace:Ultra.Properties"
+        mc:Ignorable="d"
+        
+        Loaded="Window_Loaded" 
+        Closing="Window_Closing"  
+        
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        
+        Title="{Binding MainView.TitleVersion, Mode=OneWay}"
+        
+        Width="480"
+        Height="500" 
+        
+        Style="{DynamicResource WindowStyle}" 
+        Icon="Resources/Icons/ultraui.ico"
+        >
+
+    <Window.Resources>
+
+        
+
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <Border BorderThickness="1" 
+                Background="Transparent"
+                BorderBrush="#FF3D3D3D" 
+                Height="26" 
+                VerticalAlignment="Top">
+
+            <DockPanel>
+
+                <Menu DockPanel.Dock="Top" 
+                      Style="{DynamicResource MenuStyle}"
+                      Height="24">
+                    <!-- File -->
+                    <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                          Header="_File" 
+                          Height="24">
+                        <!-- Open ROM -->
+                        <MenuItem Header="_Open ROM"
+                              Click="OpenROM_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\open-rom.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Change State Slot -->
+                        <MenuItem Header="_Change State Slot"
+                                  DataContext="{Binding MainView}">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\state-slot.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                            <!-- Slot 0 -->
+                            <MenuItem x:Name="mitmStateSlot0"
+                                      Header="_Slot 0" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot0_IsChecked}"
+                                      Checked="StateSlot0_MenuItem_Click" />
+                            <!-- Slot 1 -->
+                            <MenuItem x:Name="mitmStateSlot1"
+                                      Header="_Slot 1" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot1_IsChecked}"
+                                      Checked="StateSlot1_MenuItem_Click" />
+                            <!-- Slot 2 -->
+                            <MenuItem x:Name="mitmStateSlot2"
+                                      Header="_Slot 2" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot2_IsChecked}"
+                                      Checked="StateSlot2_MenuItem_Click" />
+                            <!-- Slot 3 -->
+                            <MenuItem x:Name="mitmStateSlot3"
+                                      Header="_Slot 3" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot3_IsChecked}"
+                                      Checked="StateSlot3_MenuItem_Click" />
+                            <!-- Slot 4 -->
+                            <MenuItem x:Name="mitmStateSlot4"
+                                      Header="_Slot 4" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot4_IsChecked}"
+                                      Checked="StateSlot4_MenuItem_Click" />
+                            <!-- Slot 5 -->
+                            <MenuItem x:Name="mitmStateSlot5"
+                                      Header="_Slot 5" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot5_IsChecked}"
+                                      Checked="StateSlot5_MenuItem_Click" />
+                            <!-- Slot 6 -->
+                            <MenuItem x:Name="mitmStateSlot6"
+                                      Header="_Slot 6" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot6_IsChecked}"
+                                      Checked="StateSlot6_MenuItem_Click" />
+                            <!-- Slot 7 -->
+                            <MenuItem x:Name="mitmStateSlot7"
+                                      Header="_Slot 7" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot7_IsChecked}"
+                                      Checked="StateSlot7_MenuItem_Click" />
+                            <!-- Slot 8 -->
+                            <MenuItem x:Name="mitmStateSlot8"
+                                      Header="_Slot 8" 
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot8_IsChecked}"
+                                      Checked="StateSlot8_MenuItem_Click" />
+                            <!-- Slot 9 -->
+                            <MenuItem x:Name="mitmStateSlot9"
+                                      Header="_Slot 9"
+                                      IsCheckable="True"
+                                      IsChecked="{Binding StateSlot9_IsChecked}"
+                                      Checked="StateSlot9_MenuItem_Click" />
+                        </MenuItem>
+                        <!-- Load State -->
+                        <MenuItem Header="_Load State" 
+                              InputGestureText="F7"
+                              Click="LoadState_MenuItem_Click"/>
+                        <!-- Save State -->
+                        <MenuItem Header="_Save State" 
+                              InputGestureText="F5"
+                              Click="SaveState_MenuItem_Click"/>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Load State File -->
+                        <MenuItem Header="_Load State File..." 
+                              Click="LoadStateFile_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\load-file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Save State File -->
+                        <MenuItem Header="_Save State File..." 
+                              Click="SaveStateFile_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\save-file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Screenshot -->
+                        <MenuItem Header="_Screenshot..."
+                              Click="Screenshot_MenuItem_Click"
+                              InputGestureText="F12">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\screenshot.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Exit -->
+                        <MenuItem Header="_Exit" 
+                              Click="Exit_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\exit.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <!-- Emulation -->
+                    <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                          Header="_Emulation" 
+                          Height="24">
+                        <!-- Pause -->
+                        <MenuItem Header="_Pause" 
+                                  InputGestureText="P"
+                                  Click="Pause_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\pause.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Mute -->
+                        <MenuItem Header="_Mute" 
+                              InputGestureText="M"
+                              Click="Mute_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\mute.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Stop -->
+                        <MenuItem Header="_Stop" 
+                              InputGestureText="Esc"
+                              Click="Stop_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\stop.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Reset -->
+                        <MenuItem Header="_Reset" 
+                              InputGestureText="F9"
+                              Click="Reset_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\reset.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Soft Reset -->
+                        <MenuItem Header="_Soft Reset" 
+                              InputGestureText="F8"
+                              Click="Reset_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\soft-reset.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Slow Down -->
+                        <MenuItem Header="_Slow Down"
+                              InputGestureText="F10"
+                              Click="SlowDown_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\slow-down.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Speed Up -->
+                        <MenuItem Header="_Speed Up"
+                              InputGestureText="F11"
+                              Click="SpeedUp_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\speed-up.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!--<MenuItem Header="_Limit FPS"
+                              IsCheckable="True"/>
+                    <Separator Style="{DynamicResource SeparatorStyle}" />-->
+                        <!-- Cheats -->
+                        <MenuItem Header="_Cheats"
+                                  InputGestureText="F2"
+                                  Click="Cheats_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\cheats.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <!-- View -->
+                    <!--<MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                          Header="_View" 
+                          Height="24">
+                         -->
+                    <!-- Fullscreen -->
+                    <!-- 
+                        <MenuItem Header="_Fullscreen" 
+                                  InputGestureText="Alt+Enter"
+                                  Click="Fullscreen_MenuItem_Click"/>
+                    </MenuItem>-->
+                    <!-- Configure -->
+                    <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                          Header="_Configure" 
+                          Height="24">
+                        <!-- Video -->
+                        <MenuItem Header="_Video"
+                              Click="Video_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\video.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Audio -->
+                        <MenuItem Header="_Audio"
+                              Click="Audio_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\audio.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Controls -->
+                        <MenuItem Header="_Controls"
+                              Click="Controls_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\input.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- RSP -->
+                        <MenuItem Header="_RSP"
+                              Click="RSP_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\rsp.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Reload Config -->
+                        <!--<MenuItem Header="_Reload Configs" 
+                              Click="Reload_MenuItem_Click"/>-->
+                        <!-- Edit Cfg -->
+                        <MenuItem Header="_Edit Cfg" 
+                              Click="EditCfg_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\edit.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Backup Cfg -->
+                        <MenuItem Header="_Backup Cfg" 
+                              Click="BackupCfg_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\backup.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <!-- Shortcuts -->
+                    <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                              Header="_Shortcuts" 
+                              Height="24">
+                        <!-- ROMs Folder -->
+                        <MenuItem Header="_ROMs"
+                              Click="ROMs_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\folder2.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Ultra Folder -->
+                        <MenuItem Header="_Ultra Exe"
+                              Click="UltraFolder_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\ultra-exe.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Ultra Conf Folder -->
+                        <MenuItem Header="_Ultra Conf"
+                              Click="UltraConfFolder_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Style="{DynamicResource SeparatorStyle}" />
+                        <!-- Mupen Folder -->
+                        <MenuItem Header="_Mupen Dll"
+                              Click="MupenFolder_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\mupen-dll.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Mupen Config Folder -->
+                        <MenuItem Header="_Mupen Config"
+                              Click="ConfigFolder_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Screenshots Folder -->
+                        <MenuItem Header="_Screenshots"
+                              Click="Screenshots_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\screenshot-folder.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Saves Folder -->
+                        <MenuItem Header="_Saves"
+                              Click="Saves_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\save-folder.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <!-- About -->
+                    <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                          Header="_About" 
+                          Height="24">
+                        <!-- Website -->
+                        <MenuItem Header="_Website"
+                                  Click="Website_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\website.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Info -->
+                        <MenuItem Header="_Info"
+                                  Click="Info_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\info.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Debug -->
+                        <MenuItem Header="_Debug"
+                                  Click="Debug_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\debug.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <!-- Update -->
+                        <MenuItem Header="_Update"
+                                  Click="Update_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\update.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+
+                <StackPanel></StackPanel>
+            </DockPanel>
+
+        </Border>
+
+        <!--Tab Control-->
+        <TabControl x:Name="tabControl" 
+                    Margin="10,38,10,10" 
+                    Style="{DynamicResource TabControlStyle}"
+                    >
+
+            <!-- Games Tab -->
+            <TabItem Header="Games" 
+                     Width="85"
+                     DataContext="{Binding MainView}"
+                     Style="{DynamicResource TabItemStyle}"
+                     >
+                <Grid Margin="0,0,0,0">
+
+                    <!-- Refresh List -->
+
+                    <Border Margin="0,0,0,0" 
+                            BorderThickness="0" 
+                            Background="Transparent"
+                            BorderBrush="#FF000000">
+
+                        <Grid Margin="0,0,0,0"
+                              Style="{DynamicResource GridStyle}">
+
+                            <!-- Logo -->
+                            <Image Margin="0,0,0,0" 
+                                   Style="{DynamicResource LogoStyle}" >
+                            </Image>
+
+                            <!-- Games List -->
+                            <ListView Margin="0,0,0,42" 
+                                  Padding="6,10,6,6"
+                                  Name="listViewGames" 
+                                  IsSynchronizedWithCurrentItem="False"
+                                  SelectionMode="Single"
+                                  RenderOptions.ClearTypeHint="Enabled"
+                                  RenderOptions.BitmapScalingMode="Fant"
+                                  Style="{DynamicResource ListViewStyle}" 
+                                  ItemsSource="{Binding Games_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                  SelectionChanged="listViewGames_SelectionChanged"
+                                  PreviewMouseDoubleClick="listViewGames_PreviewMouseDoubleClick"
+                            >
+
+                                <ListView.Resources>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </Style>
+                                    <DataTemplate x:Key="Templ">
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding}"/>
+                                    </DataTemplate>
+                                    <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </Style>
+                                    <Style TargetType="ScrollBar">
+                                        <Setter Property="Background" Value="#FF000000"/>
+                                        <Setter Property="BorderBrush" Value="#FF323232"/>
+                                    </Style>
+                                </ListView.Resources>
+
+                                <ListView.View>
+                                    <GridView>
+
+                                        <!-- Game Name Column -->
+                                        <GridViewColumn HeaderTemplate="{StaticResource Templ}" 
+                                                    HeaderContainerStyle="{StaticResource HeaderStyle}"
+                                                    DisplayMemberBinding="{Binding Name}"
+                                                    Width="Auto" 
+                                                    Header="" />
+
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                        </Grid>
+
+                    </Border>
+
+                    <!-- Rebuild List -->
+                    <Button x:Name="btnRebuildList" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,97,10" 
+                            HorizontalAlignment="Right"
+                            Width="30" 
+                            Height="22" 
+                            VerticalAlignment="Bottom" 
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Rebuild Games List" 
+                            Click="btnRebuildList_Click">
+                        <Image Margin="0,-1,0,0" 
+                               Width="16" 
+                               Height="16" 
+                               Stretch="Uniform"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" 
+                               Style="{DynamicResource IconReload}"/>
+                    </Button>
+
+                    <!-- Play -->
+                    <Button x:Name="btnPlay" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,10,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom"
+                            Click="btnPlay_Click">
+                        <TextBlock Text="Play"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                    <!-- Config Error Notice -->
+                    <Label Content="{Binding CfgErrorNotice_Text}"
+                           Style="{DynamicResource LabelStyle}"
+                           HorizontalAlignment="Left" 
+                           Margin="7,0,0,6" 
+                           Width="227" 
+                           Height="28" 
+                           VerticalAlignment="Bottom"/>
+
+                </Grid>
+            </TabItem>
+
+            <!-- Paths -->
+            <TabItem Header="Paths" 
+                     Width="85"
+                     DataContext="{Binding PathsView}"
+                     Style="{DynamicResource TabItemStyle}">
+
+                <Grid Background="Transparent">
+
+                    <!-- Mupen -->
+                    <GroupBox Header="Mupen64Plus" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,10,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <Button x:Name="btnBrowseMupenPath" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    
+                                    Cursor="Hand"
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,10,0,0"
+                                    VerticalAlignment="Top" 
+                                    Height="23"
+                                    Width="75" 
+                                    Click="btnBrowsePathMupen_Click">
+                                <TextBlock Text="Browse"
+                                           Margin="0,-1,0,0"/>
+                            </Button>
+                            <!-- Mupen TextBox -->
+                            <TextBox x:Name="tbxPathMupen"
+                                     
+                                     Style="{DynamicResource TextBoxStyle}" 
+                                     Height="23"
+                                     Margin="90,10,37,0" 
+                                     Padding="2, 2, 0, 2" 
+                                     TextWrapping="NoWrap"
+                                     MaxLines="1" 
+                                     Text="{Binding Mupen_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     VerticalAlignment="Top"/>
+
+                            <!-- Open Mupen64Plus Exe Path -->
+                            <Button x:Name="btnOpenMupen64PlusExePath" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Margin="0,10,10,0"
+                                    Cursor="Hand"
+                                    Click="btnOpenMupen64PlusExePath_Click"
+                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.ShowOnDisabled="True"
+                                    ToolTip="Open location"
+                                    HorizontalAlignment="Right"
+                                    Width="22" 
+                                    Height="23" 
+                                    VerticalAlignment="Top">
+                                <Image Style="{DynamicResource IconPathFolder}" 
+                                       Width="11" 
+                                       Height="7" 
+                                       Stretch="Uniform" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Margin="1,0,0,0" />
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Config -->
+                    <GroupBox Header="Config" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,80,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+                        <Grid Background="Transparent">
+
+                            <Button x:Name="btnBrowsePathConfig" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Cursor="Hand"
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,10,0,0"
+                                    VerticalAlignment="Top" 
+                                    Height="23"
+                                    Width="75" 
+                                    IsEnabled="False"
+                                    Click="btnBrowsePathConfig_Click">
+                                <TextBlock Text="Browse"
+                                           Margin="0,-1,0,0"/>
+                            </Button>
+                            <!-- Config TextBox -->
+                            <TextBox x:Name="tbxPathConfig"
+                                     Style="{DynamicResource TextBoxStyle}" 
+                                     Height="23"
+                                     Margin="90,10,37,0" 
+                                     Padding="2, 2, 0, 2" 
+                                     TextWrapping="NoWrap"
+                                     MaxLines="1" 
+                                     IsEnabled="False"
+                                     Text="{Binding Config_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     VerticalAlignment="Top"/>
+
+                            <!-- Open Config Path -->
+                            <Button x:Name="btnOpenConfigPath" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Margin="0,10,10,0"
+                                    Cursor="Hand"
+                                    Click="btnOpenConfigPath_Click"
+                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.ShowOnDisabled="True"
+                                    ToolTip="Open location"
+                                    HorizontalAlignment="Right"
+                                    Width="22" 
+                                    Height="23" 
+                                    VerticalAlignment="Top">
+                                <Image Style="{DynamicResource IconPathFolder}" 
+                                       Width="11" 
+                                       Height="7" 
+                                       Stretch="Uniform" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Margin="1,0,0,0" />
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Plugins -->
+                    <GroupBox Header="Plugins" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,150,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+                        <Grid Background="Transparent">
+
+                            <!-- Plugins Browse -->
+                            <Button x:Name="btnBrowsePathPlugins" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Cursor="Hand"
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,10,0,0"
+                                    VerticalAlignment="Top" 
+                                    Height="23"
+                                    Width="75" 
+                                    Click="btnBrowsePathPlugins_Click">
+                                <TextBlock Text="Browse"
+                                           Margin="0,-1,0,0"/>
+                            </Button>
+                            <!-- Plugins TextBox -->
+                            <TextBox x:Name="tbxPathPlugins"
+                                     Style="{DynamicResource TextBoxStyle}" 
+                                     Height="23"
+                                     Margin="90,10,37,0"                        
+                                     Padding="2, 2, 0, 2" 
+                                     TextWrapping="NoWrap"
+                                     MaxLines="1"                                                
+                                     Text="{Binding Plugins_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     VerticalAlignment="Top"/>
+
+                            <!-- Open Plugins Path -->
+                            <Button x:Name="btnOpenPluginsPath" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Margin="0,10,10,0"
+                                    Cursor="Hand"
+                                    Click="btnOpenPluginsPath_Click"
+                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.ShowOnDisabled="True"
+                                    ToolTip="Open location"
+                                    HorizontalAlignment="Right"
+                                    Width="22" 
+                                    Height="23" 
+                                    VerticalAlignment="Top">
+                                <Image Style="{DynamicResource IconPathFolder}" 
+                                       Width="11" 
+                                       Height="7" 
+                                       Stretch="Uniform" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Margin="1,0,0,0" />
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Data -->
+                    <!--<GroupBox Header="Data" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,220,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+                        <Grid Background="Transparent">
+
+                            <Button x:Name="btnBrowsePathData" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Cursor="Hand"
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,10,0,0"
+                                    VerticalAlignment="Top" 
+                                    Height="23"
+                                    Width="75" 
+                                    Click="btnBrowsePathData_Click">
+                                <TextBlock Text="Browse"
+                                           Margin="0,-1,0,0"/>
+                            </Button>-->
+                    <!-- Data TextBox -->
+                    <!--<TextBox x:Name="tbxPathData"
+                                     Style="{DynamicResource TextBoxStyle}" 
+                                     Height="23"
+                                     Margin="90,10,37,0" 
+                                     Padding="2, 2, 0, 2" 
+                                     TextWrapping="NoWrap"
+                                     MaxLines="1" 
+                                     Text="{Binding Data_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     VerticalAlignment="Top"/>-->
+
+                    <!-- Open Data Path -->
+                    <!--<Button x:Name="btnOpenDataPath" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Margin="0,10,10,0"
+                                    Cursor="Hand"
+                                    Click="btnOpenDataPath_Click"
+                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.ShowOnDisabled="True"
+                                    ToolTip="Open location"
+                                    HorizontalAlignment="Right"
+                                    Width="22" 
+                                    Height="23" 
+                                    VerticalAlignment="Top">
+                                <Image Style="{DynamicResource IconPathFolder}" 
+                                       Width="11" 
+                                       Height="7" 
+                                       Stretch="Uniform" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Margin="1,0,0,0" />
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>-->
+
+                    <!-- ROMs -->
+                    <GroupBox Header="ROMs" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,220,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+                        <Grid Background="Transparent">
+
+                            <!-- ROMs Browse -->
+                            <Button x:Name="btnBrowsePathROMs" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Cursor="Hand"
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,10,0,0"
+                                    VerticalAlignment="Top" 
+                                    Height="23"
+                                    Width="75" 
+                                    Click="btnBrowsePathROMs_Click">
+                                <TextBlock Text="Browse"
+                                           Margin="0,-1,0,0"/>
+                            </Button>
+                            <!-- ROMs TextBox -->
+                            <TextBox x:Name="tbxPathROMs"
+                                     Style="{DynamicResource TextBoxStyle}" 
+                                     Height="23"
+                                     Margin="90,10,37,0" 
+                                     Padding="2, 2, 0, 2" 
+                                     TextWrapping="NoWrap"
+                                     MaxLines="1" 
+                                     Text="{Binding ROMs_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     VerticalAlignment="Top"/>
+
+                            <!-- Open ROMs Path -->
+                            <Button x:Name="btnOpenROMsPath" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Margin="0,10,10,0"
+                                    Cursor="Hand"
+                                    Click="btnOpenROMsPath_Click"
+                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.ShowOnDisabled="True"
+                                    ToolTip="Open location"
+                                    HorizontalAlignment="Right"
+                                    Width="22" 
+                                    Height="23" 
+                                    VerticalAlignment="Top">
+                                <Image Style="{DynamicResource IconPathFolder}" 
+                                       Width="11" 
+                                       Height="7" 
+                                       Stretch="Uniform" 
+                                       HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" 
+                                       Margin="1,0,0,0" />
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Path Defaults All -->
+                    <Button x:Name="btnPathsDefaultsAll" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,97,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom" 
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Load Defaults for All Tabs" 
+                            Click="btnPathsDefaultsAll_Click">
+                        <TextBlock Text="Defaults All"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                    <!-- Path Defaults -->
+                    <Button x:Name="btnPathsDefaults" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,10,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom"
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Load Defaults for this Tab" 
+                            Click="btnPathsDefaults_Click">
+                        <TextBlock Text="Defaults"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                </Grid>
+            </TabItem>
+
+            <!-- Plugins -->
+            <TabItem Header="Plugins" 
+                     Width="85"
+                     Style="{DynamicResource TabItemStyle}">
+
+                <Grid Background="Transparent">
+
+                    <!-- Video -->
+                    <GroupBox Header="Video"
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,10,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- Video ComboBox -->
+                            <Image Source="Resources\Icons\video.png" 
+                                   Margin="10,13,0,14"
+                                   Width="16" 
+                                   Height="16" 
+                                   HorizontalAlignment="Left" />
+                            <ComboBox x:Name="cboPlugin_Video"
+                                      DataContext="{Binding PluginsView}"
+                                      ItemsSource="{Binding Video_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Name"
+                                      SelectedValue="{Binding Video_SelectedItem}"
+                                      IsEnabled="{Binding Video_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      Margin="38,10,97,0"
+                                      VerticalAlignment="Top" 
+                                      Height="22">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock DataContext="{Binding}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="Name"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <!-- Video Configure -->
+                            <Button x:Name="btnPlugin_Video_Configure" 
+                                    Style="{DynamicResource ButtonStyle}" 
+                                    Cursor="Hand"
+                                    Margin="0,10,10,0" 
+                                    HorizontalAlignment="Right"
+                                    Width="80" 
+                                    Height="22" 
+                                    VerticalAlignment="Top" 
+                                    Click="btnPlugin_Video_Configure_Click">
+                                <TextBlock Text="Configure"
+                                   Margin="0,-2,0,0"/>
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>
+
+
+                    <!-- Audio -->
+                    <GroupBox Header="Audio" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,80,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- Audio ComboBox -->
+                            <Image Source="Resources\Icons\audio.png" 
+                                   Margin="10,13,0,14"
+                                   Width="16" 
+                                   Height="16" 
+                                   HorizontalAlignment="Left" />
+                            <ComboBox x:Name="cboPlugin_Audio"
+                                      DataContext="{Binding PluginsView}"
+                                      ItemsSource="{Binding Audio_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValuePath="Name"
+                                      SelectedValue="{Binding Audio_SelectedItem}"
+                                      IsEnabled="{Binding Audio_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      Margin="38,10,97,0"
+                                      VerticalAlignment="Top" 
+                                      Height="22">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock DataContext="{Binding}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="Name"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <!-- Audio Configure -->
+                            <Button x:Name="btnPlugin_Audio_Configure" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Cursor="Hand"
+                                    Margin="0,10,10,0" 
+                                    HorizontalAlignment="Right"
+                                    Width="80" 
+                                    Height="22"
+                                    VerticalAlignment="Top" 
+                                    Click="btnPlugin_Audio_Configure_Click">
+                                <TextBlock Text="Configure"
+                                   Margin="0,-2,0,0"/>
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- RSP -->
+                    <GroupBox Header="RSP" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,220,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- RSP ComboBox -->
+                            <Image Source="Resources\Icons\rsp.png" 
+                                   Margin="10,13,0,14"
+                                   Width="16" 
+                                   Height="16" 
+                                   HorizontalAlignment="Left" />
+                            <ComboBox x:Name="cboPlugin_RSP"
+                                      DataContext="{Binding PluginsView}"
+                                      ItemsSource="{Binding RSP_Items}"
+                                      SelectedValuePath="Name"
+                                      SelectedValue="{Binding RSP_SelectedItem}"
+                                      IsEnabled="{Binding RSP_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      Margin="38,10,97,0"
+                                      VerticalAlignment="Top" 
+                                      Height="22">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock DataContext="{Binding}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="Name"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <!-- RSP Configure -->
+                            <Button x:Name="btnPlugin_RSP_Configure" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Cursor="Hand"
+                                    Margin="0,10,10,0" 
+                                    HorizontalAlignment="Right"
+                                    Width="80" 
+                                    Height="22" 
+                                    VerticalAlignment="Top" 
+                                    Click="btnPlugin_RSP_Configure_Click">
+                                <TextBlock Text="Configure"
+                                   Margin="0,-2,0,0"/>
+                            </Button>
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Input -->
+                    <GroupBox Header="Input" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,150,10,0" 
+                              Height="65" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- Input ComboBox -->
+                            <Image Source="Resources\Icons\input.png" 
+                                   Margin="10,13,0,14"
+                                   Width="16" 
+                                   Height="16" 
+                                   HorizontalAlignment="Left" />
+                            <ComboBox x:Name="cboPlugin_Input"
+                                      DataContext="{Binding PluginsView}"
+                                      ItemsSource="{Binding Input_Items}"
+                                      SelectedValuePath="Name"
+                                      SelectedValue="{Binding Input_SelectedItem}"
+                                      IsEnabled="{Binding Input_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      Margin="38,10,97,0"
+                                      VerticalAlignment="Top" 
+                                      Height="22">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock DataContext="{Binding}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="Name"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <!-- Input Configure -->
+                            <Button x:Name="btnPlugin_Input_Configure" 
+                                    Style="{DynamicResource ButtonStyle}"
+                                    Cursor="Hand"
+                                    Margin="0,10,10,0" 
+                                    HorizontalAlignment="Right"
+                                    Width="80" 
+                                    Height="22" 
+                                    VerticalAlignment="Top" 
+                                    Click="btnPlugin_Input_Configure_Click">
+                                <TextBlock Text="Configure"
+                                   Margin="0,-2,0,0"/>
+                            </Button>
+
+                        </Grid>
+                    </GroupBox>
+
+                    <!-- Generate Plugin Default Values -->
+                    <Button x:Name="btnGenerate" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,184,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom"
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Generate selected plugin default values in mupen64plus.cfg" 
+                            Click="btnGenerate_Click">
+                        <TextBlock Text="Generate"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                    <!-- Reload Plugins -->
+                    <Button x:Name="btnPluginsReload" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,97,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom"
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Reload Plugins from Path" 
+                            Click="btnPluginReload_Click">
+                        <TextBlock Text="Reload"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                    <!-- Plugin Defaults -->
+                    <Button x:Name="btnPluginsDefaults"
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,10,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom" 
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Load Defaults for this Tab" 
+                            Click="btnPluginsDefaults_Click">
+                        <TextBlock Text="Defaults"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                    <!-- Plugins Error Notice -->
+                    <Label DataContext="{Binding PluginsView}"
+                           Content="{Binding PluginsErrorNotice_Text}"
+                           Style="{DynamicResource LabelStyle}" 
+                           HorizontalContentAlignment="Right"
+                           Margin="0,0,10,44" 
+                           Height="28" 
+                           VerticalAlignment="Bottom" 
+                           HorizontalAlignment="Right" 
+                           Width="227"/>
+
+                </Grid>
+            </TabItem>
+
+            <!-- Emulator -->
+            <TabItem Header="Emulator" 
+                     Width="85"
+                     DataContext="{Binding EmulatorView}"
+                     Style="{DynamicResource TabItemStyle}">
+
+                <Grid Background="Transparent">
+
+                    <!-- CPU Core -->
+                    <GroupBox Header="CPU Core" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,10,10,0" 
+                              Height="121" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- Pure Interpreter -->
+                            <RadioButton x:Name="cbxPureInterpreter" 
+                                         Style="{DynamicResource RadioButtonStyle}"
+                                         IsChecked="{Binding Emulator_PureInterpreter_IsChecked}"
+                                         Content="Pure Interpreter"
+                                         HorizontalAlignment="Left" 
+                                         Margin="7,15,0,0"
+                                         VerticalAlignment="Top"/>
+
+                            <!-- Cached Interpreter -->
+                            <RadioButton x:Name="cbxCachedInterpreter" 
+                                         Style="{DynamicResource RadioButtonStyle}"
+                                         IsChecked="{Binding Emulator_CachedInterpreter_IsChecked}"
+                                         Content="Cached Interpreter"
+                                         HorizontalAlignment="Left" 
+                                         Margin="7,43,0,0"
+                                         VerticalAlignment="Top"/>
+
+                            <!-- Dynamic Recompiler -->
+                            <RadioButton x:Name="cbxDynamicRecompiler" 
+                                         Style="{DynamicResource RadioButtonStyle}"
+                                         IsChecked="{Binding Emulator_DynamicRecompiler_IsChecked}"
+                                         Content="Dynamic Recompiler"
+                                         HorizontalAlignment="Left" 
+                                         Margin="7,71,0,0"
+                                         VerticalAlignment="Top" />
+                        </Grid>
+
+                    </GroupBox>
+
+                    <!-- Compatibility -->
+                    <GroupBox Header="Compatibility" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,136,10,0" 
+                              Height="156" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- No Compiled Jump -->
+                            <CheckBox x:Name="cbxNoCompiledJump" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_NoCompiledJump_IsChecked}"
+                                      Content="No Compiled Jump"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,15,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Disable compiled jump commands in dynamic recompiler (should be set to False)"/>
+
+                            <!-- Disable Extra Memory -->
+                            <CheckBox x:Name="cbxDisableExtraMemory" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_DisableExtraMemory_IsChecked}"
+                                      Content="Disable Extra Memory"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,43,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Disable 4MB expansion RAM pack. May be necessary for some games"/>
+
+                            <!-- Delay SI -->
+                            <CheckBox x:Name="cbxDelaySI" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_DelaySI_IsChecked}"
+                                      Content="Delay SI"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,71,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Delay interrupt after DMA SI read/write" />
+
+                            <!-- Cycles -->
+                            <Label Content="Cycles Per Emulated Instruction" 
+                                   Style="{DynamicResource LabelStyle}"
+                                   HorizontalAlignment="Left" 
+                                   Margin="115,97,0,0" 
+                                   VerticalAlignment="Top"
+                                   Width="183"/>
+                            <ComboBox x:Name="cboEmulator_Cycles"
+                                      ItemsSource="{Binding Emulator_Cycles_Items}"
+                                      SelectedValue="{Binding Emulator_Cycles_SelectedItem}"
+                                      IsEnabled="{Binding Emulator_Cycles_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      Margin="9,100,0,0"
+                                      VerticalAlignment="Top"
+                                      Height="22" 
+                                      HorizontalAlignment="Left" 
+                                      Width="100" />
+
+                        </Grid>
+
+                    </GroupBox>
+
+                    <!-- Emulator Defaults -->
+                    <Button x:Name="btnEmulatorDefaults" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,10,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom" 
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Load Defaults for this Tab" 
+                            Click="btnEmulatorDefaults_Click">
+                        <TextBlock Text="Defaults"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                </Grid>
+            </TabItem>
+
+            <!-- Screen -->
+            <TabItem Header="Display" 
+                     Width="85"
+                     DataContext="{Binding DisplayView}"
+                     Style="{DynamicResource TabItemStyle}"
+                     >
+
+                <Grid Background="Transparent">
+
+                    <!-- Video -->
+                    <GroupBox Header="Video" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,10,10,0" 
+                              Height="133" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- View -->
+                            <Label Content="View" 
+                                   Style="{DynamicResource LabelStyle}"
+                                   HorizontalAlignment="Left" 
+                                   Margin="3,10,0,0" 
+                                   VerticalAlignment="Top"
+                                   Width="62"/>
+                            <ComboBox x:Name="cboView"
+                                      ItemsSource="{Binding Display_View_Items}"
+                                      SelectedValue="{Binding Display_View_SelectedItem}"
+                                      IsEnabled="{Binding Display_View_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      Margin="74,12,0,0"
+                                      VerticalAlignment="Top"
+                                      Height="22" 
+                                      HorizontalAlignment="Left" 
+                                      Width="100" />
+
+                            <!-- Resolution -->
+                            <Label Content="Resolution"
+                                   Style="{DynamicResource LabelStyle}"
+                                   HorizontalAlignment="Left" 
+                                   Margin="3,43,0,0" 
+                                   VerticalAlignment="Top"
+                                   Width="73"/>
+                            <ComboBox x:Name="cboResolution"
+                                      ItemsSource="{Binding Display_Resolution_Items}"
+                                      SelectedValuePath="Name"
+                                      SelectedValue="{Binding Display_Resolution_SelectedItem}"
+                                      IsEnabled="{Binding Display_Resolution_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxCategoryStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxCategoryItemStyle}"
+                                      Margin="74,46,0,0"
+                                      VerticalAlignment="Top"
+                                      Height="22" 
+                                      HorizontalAlignment="Left" 
+                                      Width="100" >
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Margin="0,-7,0,-3"/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="93">
+                                            <TextBlock DataContext="{Binding}">
+                                                <TextBlock.Text>
+                                                    <Binding Path="Name"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <!-- Vsync -->
+                            <CheckBox x:Name="cbxVsync"
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Display_Vsync_IsChecked}"
+                                      Content="Vsync"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,81,0,0"
+                                      VerticalAlignment="Top"
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Prevent frame tearing by waiting for vsync before swapping" 
+                                      />
+
+                            <!-- Video Extension -->
+                            <!--<CheckBox x:Name="cbxVideoExtension" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsEnabled="False"
+                                      IsChecked="{Binding Display_VideoExtension_IsChecked}"
+                                      Content="Enable Video Extension"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,71,0,0"
+                                      VerticalAlignment="Top"
+                                      Checked="cbxVideoExtension_Checked"
+                                      Unchecked="cbxVideoExtension_Checked"
+                                      />-->
+
+                        </Grid>
+
+                    </GroupBox>
+
+                    <!-- Screen -->
+                    <GroupBox Header="Screen" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,148,10,0" 
+                              Height="110" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- OSD -->
+                            <CheckBox x:Name="cbxOSD" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Display_OSD_IsChecked}"
+                                      Content="On Screen Display"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,16,0,0"
+                                      VerticalAlignment="Top"/>
+
+                            <!-- Screensaver -->
+                            <CheckBox x:Name="cbxScreensaver" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsEnabled="False"
+                                      IsChecked="{Binding Display_Screensaver_IsChecked}"
+                                      Content="Disable Screensaver"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,46,0,0"
+                                      VerticalAlignment="Top"/>
+
+                        </Grid>
+
+                    </GroupBox>
+
+                    <!-- Display Defaults -->
+                    <Button x:Name="btnDisplayDefaults" 
+                            Style="{DynamicResource ButtonStyle}"
+                            Cursor="Hand"
+                            Margin="0,0,10,10" 
+                            HorizontalAlignment="Right"
+                            Width="80" 
+                            Height="22" 
+                            VerticalAlignment="Bottom" 
+                            ToolTipService.InitialShowDelay="100" 
+                            ToolTip="Load Defaults for this Tab" 
+                            Click="btnDisplayDefaults_Click">
+                        <TextBlock Text="Defaults"
+                                   Margin="0,-2,0,0"/>
+                    </Button>
+
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+
+</Window>

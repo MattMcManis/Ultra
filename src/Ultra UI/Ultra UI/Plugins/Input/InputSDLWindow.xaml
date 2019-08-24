@@ -1,0 +1,877 @@
+﻿<!-- 
+    Ultra UI
+    https://github.com/MattMcManis/Ultra
+    https://ultraui.github.io
+    mattmcmanis@outlook.com
+
+    The MIT License
+
+    Copyright (C) 2019 Matt McManis
+
+    Permission is hereby granted, free of charge, to any person obtaining a 
+    copy of this software and associated documentation files (the "Software"), 
+    to deal in the Software without restriction, including without limitation 
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+    and/or sell copies of the Software, and to permit persons to whom the 
+    Software is furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in 
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+    DEALINGS IN THE SOFTWARE.
+-->
+<Window x:Class="Ultra.InputSDLWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:my="clr-namespace:Ultra"
+        xmlns:local="clr-namespace:Ultra"
+        xmlns:settings="clr-namespace:Ultra.Properties"
+        mc:Ignorable="d"
+        
+        Loaded="Window_Loaded" 
+        Unloaded="Window_Unloaded" 
+        Closing="Window_Closing"  
+        
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        ResizeMode="NoResize"
+        
+        Title="Input Plugin - Input SDL"
+        
+        Width="615"
+        Height="630"
+        
+        Style="{DynamicResource WindowStyle}" 
+        >
+
+    <Window.Resources>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Ultra;component/Resources/Images/n64-controller-layout.jpg" Stretch="None" AlignmentX="Right" AlignmentY="Top"/>
+        </Grid.Background>
+
+        <!-- Plugin -->
+        <Label Content="Plugin" 
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left" 
+               Margin="14,0,0,74"
+               Width="50" 
+               Height="26"
+               VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="cboPlugin"
+                  Style="{DynamicResource ComboBoxStyle}"
+                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                  DataContext="{Binding Plugins_Input_InputSDL_View}"
+                  ItemsSource="{Binding Plugin_Items}"
+                  SelectedValue="{Binding Plugin_SelectedItem}"
+                  IsEnabled="{Binding Plugin_IsEnabled}"
+                  Margin="65,0,0,76"
+                  HorizontalAlignment="Left" 
+                  Width="128" 
+                  Height="22" 
+                  VerticalAlignment="Bottom" />
+
+        <!-- Controller -->
+        <Label Content="Controller" 
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left" 
+               Margin="15,12,0,0" 
+               VerticalAlignment="Top"
+               Width="66"/>
+        <ComboBox x:Name="cboController"
+                  Style="{DynamicResource ComboBoxStyle}"
+                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                  DataContext="{Binding Plugins_Input_InputSDL_View}"
+                  ItemsSource="{Binding Controller_Items}"
+                  SelectedValue="{Binding Controller_SelectedItem}"
+                  IsEnabled="{Binding Controller_IsEnabled}"
+                  Margin="83,14,0,0"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left" 
+                  Height="22" 
+                  Width="70"
+                  SelectionChanged="cboController_SelectionChanged"/>
+
+        <!-- Plugged -->
+        <CheckBox x:Name="cbxPlugged" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_Input_InputSDL_View}"
+                  IsChecked="{Binding Plugged_IsChecked}"
+                  IsEnabled="{Binding Plugged_IsEnabled}"
+                  Content="Plugged" 
+                  Margin="19,45,0,0"
+                  VerticalAlignment="Top" 
+                  HorizontalAlignment="Left" 
+                  Width="76"/>
+
+        <!-- Mouse -->
+        <CheckBox x:Name="cbxMouse" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_Input_InputSDL_View}"
+                  IsChecked="{Binding Mouse_IsChecked}"
+                  IsEnabled="{Binding Mouse_IsEnabled}"
+                  Content="Mouse" 
+                  Margin="19,69,0,0"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left" 
+                  Width="76"/>
+
+        <!-- Device -->
+        <Label Content="Device" 
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left" 
+               Margin="14,0,0,45"
+               Width="50"
+               Height="26"
+               VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="cboDevice"
+                  Style="{DynamicResource ComboBoxStyle}"
+                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                  DataContext="{Binding Plugins_Input_InputSDL_View}"
+                  ItemsSource="{Binding Device_Items}"
+                  SelectedValue="{Binding Device_SelectedItem}"
+                  IsEnabled="{Binding Device_IsEnabled}"
+                  Margin="65,0,0,47"
+                  HorizontalAlignment="Left" 
+                  Width="128" 
+                  Height="22" 
+                  VerticalAlignment="Bottom" />
+
+        <!-- Mode -->
+        <Label Content="Mode" 
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left" 
+               Margin="14,0,0,16"
+               Width="50" 
+               Height="26" 
+               VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="cboMode"
+                  Style="{DynamicResource ComboBoxStyle}"
+                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                  DataContext="{Binding Plugins_Input_InputSDL_View}"
+                  ItemsSource="{Binding Mode_Items}"
+                  SelectedValue="{Binding Mode_SelectedItem}"
+                  IsEnabled="{Binding Mode_IsEnabled}"
+                  Margin="65,0,0,18"
+                  HorizontalAlignment="Left" 
+                  Width="128"
+                  Height="22" 
+                  VerticalAlignment="Bottom" />
+
+        <!-- DPad L -->
+        <ToggleButton x:Name="btnDPad_L"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding DPad_L_IsChecked}"
+                      IsEnabled="{Binding DPad_L_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,183,484,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      PreviewKeyDown="btnDPad_L_PreviewKeyDown" HorizontalAlignment="Right" Width="65">
+            <TextBlock Text="{Binding DPad_L_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- DPad D -->
+        <ToggleButton x:Name="btnDPad_D"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding DPad_D_IsChecked}"
+                      IsEnabled="{Binding DPad_D_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,215,441,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      PreviewKeyDown="btnDPad_D_PreviewKeyDown" HorizontalAlignment="Right" Width="65">
+            <TextBlock Text="{Binding DPad_D_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- DPad R -->
+        <ToggleButton x:Name="btnDPad_R"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding DPad_R_IsChecked}"
+                      IsEnabled="{Binding DPad_R_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,183,400,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      PreviewKeyDown="btnDPad_R_PreviewKeyDown" 
+                      HorizontalAlignment="Right" 
+                      Width="65">
+            <TextBlock Text="{Binding DPad_R_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- DPad U -->
+        <ToggleButton x:Name="btnDPad_U"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding DPad_U_IsChecked}"
+                      IsEnabled="{Binding DPad_U_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,151,441,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      PreviewKeyDown="btnDPad_U_PreviewKeyDown" 
+                      HorizontalAlignment="Right" Width="65">
+            <TextBlock Text="{Binding DPad_U_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- Start -->
+        <ToggleButton x:Name="btnStart"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding Start_IsChecked}"
+                      IsEnabled="{Binding Start_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,195,265,0" 
+                      Height="35" 
+                      FontWeight="Bold" 
+                      PreviewKeyDown="btnStart_PreviewKeyDown" 
+                      HorizontalAlignment="Right" Width="65">
+            <TextBlock Text="{Binding Start_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- Z Trig -->
+        <Label Content="Z" 
+               Margin="0,0,281,121"
+               HorizontalContentAlignment="Center"
+               Height="26" 
+               VerticalAlignment="Bottom" 
+               HorizontalAlignment="Right" 
+               Width="35"/>
+        <ToggleButton x:Name="btnZ_Trig"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding Z_Trig_IsChecked}"
+                      IsEnabled="{Binding Z_Trig_IsEnabled}"
+                      Margin="0,0,266,150" 
+                      FontWeight="Bold"
+                      Height="30" 
+                      VerticalAlignment="Bottom"
+                      PreviewKeyDown="btnZ_Trig_PreviewKeyDown" 
+                      HorizontalAlignment="Right" 
+                      Width="65">
+            <TextBlock Text="{Binding Z_Trig_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- B Button -->
+        <ToggleButton x:Name="btnB_Button"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding B_Button_IsChecked}"
+                      IsEnabled="{Binding B_Button_IsEnabled}"
+                      VerticalAlignment="Top"
+                      Margin="0,193,158,0" 
+                      FontWeight="Bold" 
+                      HorizontalAlignment="Right"
+                      Width="65" 
+                      Height="30" 
+                      PreviewKeyDown="btnB_Button_PreviewKeyDown">
+            <TextBlock Text="{Binding B_Button_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- A Button -->
+        <ToggleButton x:Name="btnA_Button"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"  
+                      IsChecked="{Binding A_Button_IsChecked}"
+                      IsEnabled="{Binding A_Button_IsEnabled}"
+                      VerticalAlignment="Top"
+                      Margin="0,234,118,0" 
+                      FontWeight="Bold" 
+                      HorizontalAlignment="Right" 
+                      Width="65" 
+                      Height="30" 
+                      PreviewKeyDown="btnA_Button_PreviewKeyDown">
+            <TextBlock Text="{Binding A_Button_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- C Button L -->
+        <ToggleButton x:Name="btnC_Button_L"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding C_Button_L_IsChecked}"
+                      IsEnabled="{Binding C_Button_L_IsEnabled}"
+                      VerticalAlignment="Top"
+                      Margin="0,161,113,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Right" 
+                      Width="65" 
+                      PreviewKeyDown="btnC_Button_L_PreviewKeyDown">
+            <TextBlock Text="{Binding C_Button_L_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- C Button D -->
+        <ToggleButton x:Name="btnC_Button_D"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}" 
+                      IsChecked="{Binding C_Button_D_IsChecked}"
+                      IsEnabled="{Binding C_Button_D_IsEnabled}"
+                      VerticalAlignment="Top"
+                      Margin="0,193,78,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Right"
+                      Width="65" 
+                      PreviewKeyDown="btnC_Button_D_PreviewKeyDown">
+            <TextBlock Text="{Binding C_Button_D_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- C Button R -->
+        <ToggleButton x:Name="btnC_Button_R"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding C_Button_R_IsChecked}"
+                      IsEnabled="{Binding C_Button_R_IsEnabled}"
+                      VerticalAlignment="Top"
+                      Margin="0,161,45,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Right"
+                      Width="65" 
+                      PreviewKeyDown="btnC_Button_R_PreviewKeyDown">
+            <TextBlock Text="{Binding C_Button_R_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- C Button U -->
+        <ToggleButton x:Name="btnC_Button_U"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding C_Button_U_IsChecked}"
+                      IsEnabled="{Binding C_Button_U_IsEnabled}"
+                      VerticalAlignment="Top"
+                      Margin="0,129,78,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Right" 
+                      Width="65" 
+                      PreviewKeyDown="btnC_Button_U_PreviewKeyDown">
+            <TextBlock Text="{Binding C_Button_U_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- R Trig -->
+        <ToggleButton x:Name="btnR_Trig"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding R_Trig_IsChecked}"
+                      IsEnabled="{Binding R_Trig_IsEnabled}"
+                      VerticalAlignment="Top"
+                      Margin="0,70,102,0" 
+                      FontWeight="Bold"
+                      HorizontalAlignment="Right" 
+                      Width="65" 
+                      Height="30" 
+                      PreviewKeyDown="btnR_Trig_PreviewKeyDown">
+            <TextBlock Text="{Binding R_Trig_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- L Trig -->
+        <ToggleButton x:Name="btnL_Trig"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding L_Trig_IsChecked}"
+                      IsEnabled="{Binding L_Trig_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,70,430,0" 
+                      Height="30" 
+                      FontWeight="Bold"
+                      PreviewKeyDown="btnL_Trig_PreviewKeyDown"
+                      HorizontalAlignment="Right" 
+                      Width="65">
+            <TextBlock Text="{Binding L_Trig_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- X Axis L -->
+        <ToggleButton x:Name="btnX_Axis_L"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding X_Axis_L_IsChecked}"
+                      IsEnabled="{Binding X_Axis_L_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,309,306,0" 
+                      Height="30" 
+                      FontWeight="Bold" 
+                      PreviewKeyDown="btnX_Axis_L_PreviewKeyDown"
+                      HorizontalAlignment="Right"
+                      Width="65">
+            <TextBlock Text="{Binding X_Axis_L_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- X Axis R -->
+        <ToggleButton x:Name="btnX_Axis_R"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding X_Axis_R_IsChecked}"
+                      IsEnabled="{Binding X_Axis_R_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,309,223,0" 
+                      Height="30" 
+                      FontWeight="Bold" 
+                      PreviewKeyDown="btnX_Axis_R_PreviewKeyDown" 
+                      HorizontalAlignment="Right"
+                      Width="65">
+            <TextBlock Text="{Binding X_Axis_R_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- Y Axis U -->
+        <ToggleButton x:Name="btnY_Axis_U"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding Y_Axis_U_IsChecked}"
+                      IsEnabled="{Binding Y_Axis_U_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,276,265,0" 
+                      Height="30" 
+                      FontWeight="Bold" 
+                      PreviewKeyDown="btnY_Axis_U_PreviewKeyDown" 
+                      HorizontalAlignment="Right"
+                      Width="65">
+            <TextBlock Text="{Binding Y_Axis_U_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- Y Axis D -->
+        <ToggleButton x:Name="btnY_Axis_D"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding Y_Axis_D_IsChecked}"
+                      IsEnabled="{Binding Y_Axis_D_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,342,265,0" 
+                      Height="30" 
+                      FontWeight="Bold" 
+                      PreviewKeyDown="btnY_Axis_D_PreviewKeyDown" 
+                      HorizontalAlignment="Right"
+                      Width="65">
+            <TextBlock Text="{Binding Y_Axis_D_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- Mem Pak -->
+        <Label Content="Mem Pak" 
+               Margin="0,110,304,0"
+               VerticalAlignment="Top"
+               HorizontalContentAlignment="Center"
+               HorizontalAlignment="Right"
+               Width="68"/>
+        <ToggleButton x:Name="btnMemPak"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding Mempak_IsChecked}"
+                      IsEnabled="{Binding Mempak_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,78,305,0" 
+                      Height="30" 
+                      FontWeight="Bold" 
+                      PreviewKeyDown="btnMemPak_PreviewKeyDown"
+                      HorizontalAlignment="Right"
+                      Width="65">
+            <TextBlock Text="{Binding Mempak_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- Rumble Pak -->
+        <Label Content="Rumble Pak" 
+               Margin="0,110,221,0"
+               VerticalAlignment="Top"
+               HorizontalContentAlignment="Center" 
+               HorizontalAlignment="Right" 
+               Width="77"/>
+        <ToggleButton x:Name="btnRumblePak"
+                      Style="{DynamicResource ToggleButtonInputSDLStyle}"
+                      DataContext="{Binding Plugins_Input_InputSDL_View}"
+                      IsChecked="{Binding Rumblepak_IsChecked}"
+                      IsEnabled="{Binding Rumblepak_IsEnabled}" 
+                      VerticalAlignment="Top"
+                      Margin="0,78,226,0" 
+                      Height="30" 
+                      FontWeight="Bold" 
+                      PreviewKeyDown="btnRumblePak_PreviewKeyDown" 
+                      HorizontalAlignment="Right"
+                      Width="65">
+            <TextBlock Text="{Binding Rumblepak_Text}"
+                       Style="{DynamicResource TextBlockStyle}"
+                       Margin="0,-2,0,0">
+                <TextBlock.Effect>
+                    <DropShadowEffect
+                        ShadowDepth="1"
+                        Direction="330"
+                        BlurRadius="0"
+                        Color="Black"
+                        Opacity="0.50"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </ToggleButton>
+
+        <!-- Defaults -->
+        <Button x:Name="btnDefaults" 
+                Style="{DynamicResource ButtonStyle}"
+                Cursor="Hand"
+                Margin="0,14,14,0" 
+                HorizontalAlignment="Right"
+                Width="80"
+                Click="btnDefaults_Click" 
+                Height="22" 
+                VerticalAlignment="Top">
+            <TextBlock Text="Defaults"
+                       Margin="0,-2,0,0"/>
+        </Button>
+
+        <!-- Save -->
+        <Button x:Name="btnSave" 
+                Style="{DynamicResource ButtonStyle}"
+                Content="Save" 
+                Cursor="Hand"
+                Margin="0,0,14,44" 
+                HorizontalAlignment="Right"
+                Width="80"
+                Click="btnSave_Click" 
+                Height="22"
+                VerticalAlignment="Bottom"/>
+        <Label x:Name="lblSave"
+               Style="{DynamicResource LabelStyle}"
+               DataContext="{Binding Plugins_Input_InputSDL_View}"
+               Content="{Binding Save_Text}" 
+               Margin="0,12,95,0"
+               VerticalAlignment="Top" 
+               HorizontalAlignment="Right"
+               HorizontalContentAlignment="Right"
+               Width="50"/>
+
+        <!-- Close -->
+        <Button x:Name="btnClose" 
+                Style="{DynamicResource ButtonStyle}"
+                Content="Close" 
+                Cursor="Hand"
+                Margin="0,0,14,17" 
+                HorizontalAlignment="Right"
+                Width="80"
+                Click="btnClose_Click" 
+                Height="22"
+                VerticalAlignment="Bottom"/>
+
+        <!-- Analog Deadzone -->
+        <Label Content="Analog Deadzone"
+               Style="{DynamicResource LabelStyle}"
+               Margin="0,0,372,197" 
+               HorizontalAlignment="Right" 
+               Width="110" 
+               Height="26" 
+               VerticalAlignment="Bottom"/>
+        <!-- X -->
+        <Label Content="X" 
+               Style="{DynamicResource LabelStyle}"
+               Margin="0,0,465,171" 
+               HorizontalAlignment="Right" 
+               Width="17" 
+               Height="26"
+               VerticalAlignment="Bottom"/>
+        <TextBox x:Name="tbxAnalogDeadZoneX"
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Input_InputSDL_View}"
+                 Text="{Binding AnalogDeadzoneX_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 IsEnabled="{Binding AnalogDeadzoneX_IsEnabled}"
+                 Margin="0,0,390,172" 
+                 Padding="2, 2, 0, 2" 
+                 TextWrapping="Wrap" 
+                 HorizontalAlignment="Right"
+                 Width="75" 
+                 Height="23" 
+                 VerticalAlignment="Bottom"/>
+        <!-- Y -->
+        <Label Content="Y" 
+               Style="{DynamicResource LabelStyle}"
+               Margin="0,0,465,141" 
+               HorizontalAlignment="Right"
+               Width="17"
+               Height="26" 
+               VerticalAlignment="Bottom"/>
+        <TextBox x:Name="tbxAnalogDeadZoneY"
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Input_InputSDL_View}"
+                 Text="{Binding AnalogDeadzoneY_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 IsEnabled="{Binding AnalogDeadzoneY_IsEnabled}"
+                 Margin="0,0,390,143" 
+                 Padding="2, 2, 0, 2" 
+                 TextWrapping="Wrap"
+                 HorizontalAlignment="Right"
+                 Width="75"
+                 Height="23"
+                 VerticalAlignment="Bottom"/>
+
+        <!-- Analog Peak -->
+        <Label Content="Analog Peak"
+               Style="{DynamicResource LabelStyle}"
+               Margin="0,0,107,197" 
+               HorizontalAlignment="Right" 
+               Width="110"
+               Height="26" 
+               VerticalAlignment="Bottom"/>
+        <!-- X -->
+        <Label Content="X" 
+               Style="{DynamicResource LabelStyle}"
+               Margin="0,0,200,171" 
+               HorizontalAlignment="Right"
+               Width="17" 
+               Height="26"
+               VerticalAlignment="Bottom"/>
+        <TextBox x:Name="tbxAnalogPeakX"
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Input_InputSDL_View}"
+                 Text="{Binding AnalogPeakX_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 IsEnabled="{Binding AnalogPeakX_IsEnabled}"
+                 Margin="0,0,125,172" 
+                 Padding="2, 2, 0, 2" 
+                 TextWrapping="Wrap"
+                 HorizontalAlignment="Right" 
+                 Width="75" 
+                 Height="23" 
+                 VerticalAlignment="Bottom"/>
+        <!-- Y -->
+        <Label Content="Y" 
+               Style="{DynamicResource LabelStyle}"
+               Margin="0,0,200,141" 
+               Height="26" 
+               VerticalAlignment="Bottom" 
+               HorizontalAlignment="Right" 
+               Width="17"/>
+        <TextBox x:Name="tbxAnalogPeakY"
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_Input_InputSDL_View}"
+                 Text="{Binding AnalogPeakY_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 IsEnabled="{Binding AnalogPeakY_IsEnabled}"
+                 Margin="0,0,125,143" 
+                 Padding="2, 2, 0, 2" 
+                 TextWrapping="Wrap" 
+                 HorizontalAlignment="Right"
+                 Width="75" 
+                 Height="23" 
+                 VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>
