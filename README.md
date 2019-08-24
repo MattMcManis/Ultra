@@ -70,7 +70,7 @@ https://github.com/MattMcManis/Ultra/releases
 
 3. **Configure the Graphics, Audio, Controls**
     * The `Plugin Configure Windows`, such as `GLideN64`, will not have the values loaded from `mupen64plus.cfg` yet.
-    * In the `Plugins Tab`, press the `Generate` button to generate the selected plugin default values. It will launch a window for 2 seconds and automatically close.
+    * In the `Plugins Tab`, press the `Generate` button to generate the selected plugin default values.
     * When you open a `Plugin Configure Window` the controls will now be loaded with the defaults.
     * Play a game with your desired settings.
 
