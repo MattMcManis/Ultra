@@ -610,7 +610,7 @@ namespace Ultra
                 // -------------------------
                 // Save Config
                 // -------------------------
-                Configure.WriteUltraConf(ultraConfDir,  // Directory: %AppData%\Ultra UI\
+                Configure.WriteUltraConf(ultraConfDir,     // Directory: %AppData%\Ultra UI\
                                             "ultra.conf",  // Filename
                                             actionsToWrite // Actions to write
                                         );
@@ -1003,181 +1003,6 @@ namespace Ultra
 
 
         /// <summary>
-        /// Press Key
-        /// </summary>
-        /// <remarks>
-        /// Sends key press to chosen process
-        /// </remarks>
-        //[DllImport("User32.dll")]
-        //static extern int SetForegroundWindow(IntPtr point);
-
-        #region Imports
-        //[DllImport("user32.dll")]
-        //public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
-
-        //[DllImport("User32.dll")]
-        //private static extern int SendMessage(IntPtr hWnd, int uMsg, int wParam, string lParam);
-
-        ////this is a constant indicating the window that we want to send a text message
-        //const int WM_SETTEXT = 0X000C;
-        #endregion
-
-        public static void PressKey(string key)
-        {
-            //foreach (Window window in Application.Current.Windows)
-            //{
-            //    if (string.IsNullOrEmpty(window.Title))
-            //    {
-            //        window.Activate();
-            //        window.Focus();
-            //        System.Windows.Forms.SendKeys.SendWait(key);
-            //    }
-            //    //MessageBox.Show(window.Title);
-            //    //window.Activate();
-                
-            //    //System.Windows.Forms.SendKeys.SendWait(key);
-                
-            //    //await Task.Delay(TimeSpan.FromSeconds(1));
-            //}
-
-
-            //Process currentProcess = Process.GetCurrentProcess();
-            //Process p = Process.GetProcessById(currentProcess.Id);         
-
-
-            //string processName = "notepad";
-
-            //Process[] processList = Process.GetProcesses();
-
-            //foreach (Process p in processList)
-            //{
-            //    if (p.ProcessName.Equals(processName))
-            //    {
-            //        IntPtr h = p.MainWindowHandle;
-            //        SetForegroundWindow(h);
-            //        System.Windows.Forms.SendKeys.SendWait(key);
-            //    }
-            //}
-
-
-            //if (!string.IsNullOrEmpty(VM.PathsView.Mupen_Text))
-            //{
-            //Process p = Process.GetProcessesByName("Ultra").FirstOrDefault();
-            //    if (p != null)
-            //    {
-            //        IntPtr h = p.MainWindowHandle;
-            //        SetForegroundWindow(h);
-            //        System.Windows.Forms.SendKeys.SendWait(key);
-            //    }
-            //}
-
-
-            //Process currentProcess = Process.GetCurrentProcess();
-
-            //ManagementObjectSearcher searcher = new ManagementObjectSearcher(
-            //"SELECT * " +
-            //"FROM Win32_Process " +
-            //"WHERE ParentProcessId=" + currentProcess.Id);
-
-            //ManagementObjectCollection collection = searcher.Get();
-            //if (collection.Count > 0)
-            //{
-            //    foreach (var item in collection)
-            //    {
-            //        UInt32 childProcessId = (UInt32)item["ProcessId"];
-            //        if ((int)childProcessId != Process.GetCurrentProcess().Id)
-            //        {
-            //            Process childProcess = Process.GetProcessById((int)childProcessId);
-
-            //            string name = childProcess.ProcessName.ToString();
-            //            Process p = Process.GetProcessesByName(name).FirstOrDefault();
-
-            //            if (p != null)
-            //            {
-            //                IntPtr h = p.MainWindowHandle;
-            //                SetForegroundWindow(h);
-            //                System.Windows.Forms.SendKeys.SendWait(key);
-            //            }
-            //        }
-            //    }
-            //}
-
-
-            //Process currentProcess = Process.GetCurrentProcess();
-            //Process pid = Process.GetProcessById(currentProcess.Id);
-
-            //if (pid != null)
-            //{
-            //    IntPtr h = pid.MainWindowHandle;
-            //    SetForegroundWindow(h);
-            //    System.Windows.Forms.SendKeys.SendWait(key);
-            //}
-
-
-            //Process currentProcess = Process.GetCurrentProcess();
-            ////string pid = currentProcess.Id.ToString();
-
-            ////List<Process> children = new List<Process>();
-            //ManagementObjectSearcher mos = new ManagementObjectSearcher(String.Format("Select * From Win32_Process Where ParentProcessID={0}", currentProcess.Id));
-
-            //List<string> mngobjList = new List<string>();
-
-            //foreach (ManagementObject mo in mos.Get())
-            //{
-            //    //Process p = Process.GetProcessesByName(Convert.ToString(mo["ProcessName"]));
-
-            //    //if (p != null)
-            //    //{
-            //        mngobjList.Add(mo["ProcessID"].ToString());
-            //        //IntPtr h = p.MainWindowHandle;
-            //        //SetForegroundWindow(h);
-            //        //System.Windows.Forms.SendKeys.SendWait(key);
-            //    //}
-            //}
-
-            //MessageBox.Show(string.Join("\n", mngobjList));
-
-
-
-
-
-            //MessageBox.Show(pid);
-
-            //string process = Process.GetCurrentProcess().ProcessName;
-            //MessageBox.Show(process);
-
-
-            //Process p = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(mupen64plusExe)).FirstOrDefault();
-
-            //ManagementClass mngcls = new ManagementClass("Win32_Process");
-
-            //List<string> mngobjList = new List<string>();
-
-            //foreach (ManagementObject instance in mngcls.GetInstances())
-            //{
-            //    mngobjList.Add(instance["ProcessId"].ToString());
-            //    //Console.Write("ID: " + instance["ProcessId"]);
-            //}
-
-            //MessageBox.Show(string.Join("\n", mngobjList));
-
-            //if (!string.IsNullOrEmpty(VM.PathsView.Mupen_Text))
-            //{
-            //    // mupen64plus-ui-console.exe
-            //    //Process p = Process.GetProcessesByName("mupen64plus-ui-console").FirstOrDefault();
-            //    //Process p = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(VM.PathsView.Mupen_Text)).FirstOrDefault();
-            //    Process p = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(mupen64plusExe)).FirstOrDefault();
-            //    if (p != null)
-            //    {
-            //        IntPtr h = p.MainWindowHandle;
-            //        SetForegroundWindow(h);
-            //        System.Windows.Forms.SendKeys.SendWait(key);
-            //    }
-            //}
-        }
-
-
-        /// <summary>
         /// Explore Path
         /// </summary>
         public static void ExplorePath(string path)
@@ -1322,19 +1147,8 @@ namespace Ultra
                     // -------------------------
                     // File Name
                     // -------------------------
-                    //string fileName = Mupen64PlusAPI.api.ROMGetHeader();// SaveFileRenamer(initialDirectory, /*"save"*/, ext);
                     if (Mupen64PlusAPI.api != null)
                     {
-                        // File Renamer
-                        //string romName = System.Text.Encoding.Default.GetString(Mupen64PlusAPI.api._rom_header.Name);
-                        //var files = Directory.GetFiles(VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + @"save\", romName + ".*");
-                        //if (files.Length > 0)
-                        //{
-                        //    saveFile.FileName = SaveFileRenamer(initialDirectory, romName, ext);
-                        //}
-
-                        //saveFile.FileName = Mupen64PlusAPI.api.ROMGetHeader();
-
                         saveFile.FileName = System.Text.Encoding.Default.GetString(Mupen64PlusAPI.api._rom_header.Name);
 
                         //saveFile.FileName = new string(Mupen64PlusAPI.api._rom_settings.goodname);
@@ -1343,15 +1157,6 @@ namespace Ultra
                     {
                         saveFile.FileName = "save";
                     }
-
-                    //MessageBox.Show(saveFile.FileName); //debug
-                    //string directory = Path.GetDirectoryName(saveFile.FileName);
-                    //string fileName = Path.GetFileNameWithoutExtension(saveFile.FileName);
-                    //string ext = ".m64p";
-
-                    //string filename = Mupen64PlusAPI.api.ROMGetHeader().ToString();
-                    //MessageBox.Show(Mupen64PlusAPI.api.ROMGetHeader());
-                    //Mupen64PlusAPI.api.ROMGetHeader();
 
                     // -------------------------
                     // Show Dialog Box
