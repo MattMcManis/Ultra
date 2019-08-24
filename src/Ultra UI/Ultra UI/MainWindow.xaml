@@ -452,8 +452,7 @@
                             Background="Transparent"
                             BorderBrush="#FF000000">
 
-                        <Grid Margin="0,0,0,0"
-                              Style="{DynamicResource GridStyle}">
+                        <Grid Margin="0,0,0,0">
 
                             <!-- Logo -->
                             <Image Margin="0,0,0,42" 
