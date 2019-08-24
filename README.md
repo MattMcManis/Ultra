@@ -19,7 +19,7 @@ Mupen64Plus N64 Emulator Frontend for Windows
 Play N64 games through an easy to use interface.
 
 Special thanks to [M64py](http://m64py.sourceforge.net) for design inspiration.  
-API system by [BizHawk](https://github.com/TASVideos/BizHawk)
+API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 
 &nbsp;
 
