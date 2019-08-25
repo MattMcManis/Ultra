@@ -217,9 +217,9 @@ namespace Ultra
         public struct m64p_rom_settings
         {
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
-            public char[] goodname      /* = new char[256]*/;
+            public char[] goodname;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 33)]
-            public char[] MD5           /* = new char[33]*/;
+            public char[] MD5;
             public byte savetype;
             public byte status;         /* Rom status on a scale from 0-5. */
             public byte players;        /* Local players 0-4, 2/3/4 way Netplay indicated by 5/6/7. */
@@ -1248,30 +1248,7 @@ namespace Ultra
                 );
 
                 mode = 3;
-            }
-
-            //// Fullscreen
-            //if (mode == 3)
-            //{
-            //    m64pCoreDoCommandCoreStateVideoMode(
-            //        m64p_command.M64CMD_CORE_STATE_SET,
-            //        m64p_video_mode.M64VIDEO_FULLSCREEN,
-            //        ref mode
-            //    );
-
-            //    mode = 2;
-            //}
-            //// Windowed
-            //else if (mute == 2)
-            //{
-            //    m64pCoreDoCommandCoreStateVideoMode(
-            //        m64p_command.M64CMD_CORE_STATE_SET,
-            //        m64p_video_mode.M64VIDEO_WINDOWED,
-            //        ref mode
-            //    );
-
-            //    mode = 3;
-            //}           
+            }     
         }
 
         /// <summary>
@@ -1291,7 +1268,6 @@ namespace Ultra
             m64pCoreDoCommandCoreStateVideoMode = (CoreDoCommandCoreStateSetVideoMode)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandCoreStateSetVideoMode));
             m64pCoreDoCommandCoreStateSetRef = (CoreDoCommandCoreStateSetRef)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandCoreStateSetRef));
             m64pCoreDoCommandCoreStateQuery = (CoreDoCommandCoreStateQuery)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandCoreStateQuery));
-            //m64pPluginSearchLoad = (PluginSearchLoad)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "PluginSearchLoad"), typeof(PluginSearchLoad));
             m64pConfigSetDefaultFloat = (ConfigSetDefaultFloat)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetDefaultFloat"), typeof(ConfigSetDefaultFloat));
             m64pConfigSetDefaultString = (ConfigSetDefaultString)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetDefaultString"), typeof(ConfigSetDefaultString));
             m64pConfigSaveFile = (ConfigSaveFile)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSaveFile"), typeof(ConfigSaveFile));
