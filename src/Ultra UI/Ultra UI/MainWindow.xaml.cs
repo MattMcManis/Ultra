@@ -611,8 +611,8 @@ namespace Ultra
                 // Save Config
                 // -------------------------
                 Configure.WriteUltraConf(ultraConfDir,     // Directory: %AppData%\Ultra UI\
-                                            "ultra.conf",  // Filename
-                                            actionsToWrite // Actions to write
+                                         "ultra.conf",  // Filename
+                                         actionsToWrite // Actions to write
                                         );
                 //Configure.WriteUltraConf(this/*, ultraConfFile*/);
             }
@@ -755,7 +755,7 @@ namespace Ultra
                     }
                     catch
                     {
-                        MessageBox.Show("Error reading version.",
+                        MessageBox.Show("Problem reading version.",
                                         "Error",
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Error);
@@ -813,9 +813,9 @@ namespace Ultra
                     else if (MainViewModel.latestVersion <= MainViewModel.currentVersion)
                     {
                         MessageBox.Show("This version is up to date.",
-                                "Notice",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Information);
+                                        "Notice",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Information);
 
                         return;
                     }
@@ -825,9 +825,9 @@ namespace Ultra
                     else // null
                     {
                         MessageBox.Show("Could not find download. Try updating manually.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
+                                        "Error",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Error);
 
                         return;
                     }
@@ -838,13 +838,16 @@ namespace Ultra
                 else
                 {
                     MessageBox.Show("GitHub version file returned empty.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
 
                     return;
                 }
             }
+
+            // No Internet Connection
+            //
             else
             {
                 MessageBox.Show("Could not detect Internet Connection.",
