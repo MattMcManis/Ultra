@@ -41,6 +41,16 @@ namespace Ultra
 {
     public class Game
     {
+        // 1. Play
+        //     2. Mupen64Plus Dll Check
+        //     3. ROM Check
+        //     4. Set Plugins   
+        //     5. PlayProcess (New Thread)
+        //         6. Launch
+        //             7. Initiate Mupen64Plus API
+        //             8. Launch Game
+        //         9. Dispose Thread
+
         //private MainWindow mainwindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
         /// <summary>
@@ -133,7 +143,7 @@ namespace Ultra
                                             rspPlugin,
                                             windowWidth,
                                             windowHeight
-                                            )
+                                           )
                             );
                             t.Start();
                         }
@@ -175,7 +185,7 @@ namespace Ultra
 
         }
         /// <summary>
-        /// Play Process
+        /// Play Process (Thread)
         /// </summary>
         public static void PlayProcess(byte[] romBuffer,
                                        string videoPlugin,
@@ -184,11 +194,12 @@ namespace Ultra
                                        string rspPlugin,
                                        int windowWidth,
                                        int windowHeight
-                                       )
+                                      )
         {
             // Launch Game
             Mupen64PlusAPI.api = new Mupen64PlusAPI();
             Mupen64PlusAPI.api.Launch(
+                    "play",
                     romBuffer,
                     videoPlugin,
                     audioPlugin,
@@ -214,23 +225,18 @@ namespace Ultra
         /// Cfg Exists check
         /// </summary>
         /// <remarks>
-        /// After 3 seconds Reset the "Notice: mupen64plus.cfg not found" if it exists
+        /// After 5 seconds Reset the "Notice: mupen64plus.cfg not found" if it exists
         /// </remarks>
-        public static void /*async Task<int>*/ CfgExitsCheck()
+        private static void CfgExitsCheck()
         {
-            //int count = 0;
-            //await Task.Factory.StartNew(() =>
-            //{
-                // Sleep 5 seconds
-                Thread.Sleep(5000);
+            // Wait 5 seconds to allow mupen64plus.cfg to be created
+            Thread.Sleep(5000);
 
-                if (File.Exists(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")))
-                {
-                    VM.MainView.CfgErrorNotice_Text = "";
-                }
-            //});
-
-            //return count;
+            // Update Label Notice
+            if (File.Exists(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")))
+            {
+                VM.MainView.CfgErrorNotice_Text = "";
+            }
         }
 
     }

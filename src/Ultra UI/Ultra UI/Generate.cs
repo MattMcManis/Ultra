@@ -41,6 +41,14 @@ namespace Ultra
 {
     public class Generate
     {
+        // 1. CfgDefaults
+        //     2. Mupen64Plus Dll Check
+        //     3. ROM Check
+        //     4. Set Plugins   
+        //     5. CfgDefaultsProcess (New Thread)
+        //         6. Initiate Mupen64Plus API (Geneates Cfg Defaults)
+        //         9. Dispose Thread
+
         /// <summary>
         /// Generate
         /// </summary>
@@ -131,7 +139,7 @@ namespace Ultra
                                                    rspPlugin,
                                                    windowWidth,
                                                    windowHeight
-                                                   )
+                                                  )
                             );
                             t.Start();
                         }
@@ -190,6 +198,7 @@ namespace Ultra
             // Launch Game
             Mupen64PlusAPI.api = new Mupen64PlusAPI();
             Mupen64PlusAPI.api.Initiate(
+                    "generate",
                     romBuffer,
                     videoPlugin,
                     audioPlugin,
@@ -218,23 +227,17 @@ namespace Ultra
         /// Cfg Exists check
         /// </summary>
         /// <remarks>
-        /// After 3 seconds Reset the "Notice: mupen64plus.cfg not found" if it exists
+        /// After 5 seconds Reset the "Notice: mupen64plus.cfg not found" if it exists
         /// </remarks>
-        public static void CfgExitsCheck()
+        private static void CfgExitsCheck()
         {
-            //int count = 0;
-            //await Task.Factory.StartNew(() =>
-            //{
-            // Sleep 5 seconds
+            // Wait 5 seconds to allow mupen64plus.cfg to be created
             Thread.Sleep(5000);
 
             if (File.Exists(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")))
             {
                 VM.MainView.CfgErrorNotice_Text = "";
             }
-            //});
-
-            //return count;
         }
 
     }
