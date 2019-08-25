@@ -931,29 +931,29 @@ namespace Ultra
         /// <summary>
         /// Generate
         /// </summary>
-        public void Generate(string key,
-                             byte[] romBuffer,
-                             string videoPlugin,
-                             string audioPlugin,
-                             string inputPlugin,
-                             string rspPlugin,
-                             int windowWidth,
-                             int windowHeight
-                            )
-        {
-            // -------------------------
-            // Initiate
-            // -------------------------
-            Initiate(key,
-                     romBuffer,
-                     videoPlugin,
-                     audioPlugin,
-                     inputPlugin,
-                     rspPlugin,
-                     windowWidth,
-                     windowHeight
-                    );
-        }
+        //public void Generate(string key,
+        //                     byte[] romBuffer,
+        //                     string videoPlugin,
+        //                     string audioPlugin,
+        //                     string inputPlugin,
+        //                     string rspPlugin,
+        //                     int windowWidth,
+        //                     int windowHeight
+        //                    )
+        //{
+        //    // -------------------------
+        //    // Initiate
+        //    // -------------------------
+        //    Initiate(key,
+        //             romBuffer,
+        //             videoPlugin,
+        //             audioPlugin,
+        //             inputPlugin,
+        //             rspPlugin,
+        //             windowWidth,
+        //             windowHeight
+        //            );
+        //}
 
         volatile bool emulator_running = false;
 
