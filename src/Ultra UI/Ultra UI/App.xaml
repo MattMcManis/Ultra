@@ -35,7 +35,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- Default Theme -->
-                <ResourceDictionary Source="Theme-Ultra.xaml"/>
+                <ResourceDictionary Source="Themes/Ultra.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

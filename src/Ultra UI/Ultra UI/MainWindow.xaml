@@ -66,7 +66,7 @@
 
     <Grid>
 
-        <Border BorderThickness="1" 
+        <Border BorderThickness="0,0,0,1" 
                 Background="Transparent"
                 BorderBrush="#FF3D3D3D" 
                 Height="26" 
@@ -85,7 +85,7 @@
                         <MenuItem Header="_Open ROM"
                               Click="OpenROM_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\open-rom.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\open-rom.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -93,7 +93,7 @@
                         <MenuItem Header="_Change State Slot"
                                   DataContext="{Binding MainView}">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\state-slot.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\state-slot.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                             <!-- Slot 0 -->
                             <MenuItem x:Name="mitmStateSlot0"
@@ -169,14 +169,14 @@
                         <MenuItem Header="_Load State File..." 
                               Click="LoadStateFile_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\load-file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\load-file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Save State File -->
                         <MenuItem Header="_Save State File..." 
                               Click="SaveStateFile_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\save-file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\save-file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -185,7 +185,7 @@
                               Click="Screenshot_MenuItem_Click"
                               InputGestureText="F12">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\screenshot.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\screenshot.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -193,7 +193,7 @@
                         <MenuItem Header="_Exit" 
                               Click="Exit_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\exit.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\exit.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -206,7 +206,7 @@
                                   InputGestureText="P"
                                   Click="Pause_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\pause.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\pause.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Mute -->
@@ -214,7 +214,7 @@
                               InputGestureText="M"
                               Click="Mute_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\mute.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\mute.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -223,7 +223,7 @@
                               InputGestureText="Esc"
                               Click="Stop_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\stop.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\stop.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Reset -->
@@ -231,7 +231,7 @@
                               InputGestureText="F9"
                               Click="Reset_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\reset.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\reset.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Soft Reset -->
@@ -239,7 +239,7 @@
                               InputGestureText="F8"
                               Click="Reset_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\soft-reset.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\soft-reset.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -248,7 +248,7 @@
                               InputGestureText="F10"
                               Click="SlowDown_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\slow-down.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\slow-down.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Speed Up -->
@@ -256,7 +256,7 @@
                               InputGestureText="F11"
                               Click="SpeedUp_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\speed-up.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\speed-up.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -268,7 +268,7 @@
                                   InputGestureText="F2"
                                   Click="Cheats_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\cheats.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\cheats.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -291,28 +291,28 @@
                         <MenuItem Header="_Video"
                               Click="Video_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\video.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\video.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Audio -->
                         <MenuItem Header="_Audio"
                               Click="Audio_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\audio.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\audio.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Controls -->
                         <MenuItem Header="_Controls"
                               Click="Controls_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\input.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\input.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- RSP -->
                         <MenuItem Header="_RSP"
                               Click="RSP_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\rsp.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\rsp.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -323,14 +323,14 @@
                         <MenuItem Header="_Edit Cfg" 
                               Click="EditCfg_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\edit.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\edit.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Backup Cfg -->
                         <MenuItem Header="_Backup Cfg" 
                               Click="BackupCfg_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\backup.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\backup.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -342,7 +342,7 @@
                         <MenuItem Header="_ROMs"
                               Click="ROMs_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\folder2.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\folder2.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -350,14 +350,14 @@
                         <MenuItem Header="_Ultra Exe"
                               Click="UltraFolder_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\ultra-exe.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\ultra-exe.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Ultra Conf Folder -->
                         <MenuItem Header="_Ultra Conf"
                               Click="UltraConfFolder_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <Separator Style="{DynamicResource SeparatorStyle}" />
@@ -365,28 +365,47 @@
                         <MenuItem Header="_Mupen Dll"
                               Click="MupenFolder_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\mupen-dll.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\mupen-dll.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Mupen Config Folder -->
                         <MenuItem Header="_Mupen Config"
                               Click="ConfigFolder_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\file.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Screenshots Folder -->
                         <MenuItem Header="_Screenshots"
                               Click="Screenshots_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\screenshot-folder.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\screenshot-folder.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Saves Folder -->
                         <MenuItem Header="_Saves"
                               Click="Saves_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\save-folder.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\save-folder.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <!-- Theme -->
+                    <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                          Header="_Theme" 
+                          Height="24">
+                         <!-- Ultra --> 
+                        <MenuItem Header="_Ultra"
+                                  Click="ThemeUltra_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\White\theme-ultra.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                         <!-- N64 --> 
+                        <MenuItem Header="_N64"
+                                  Click="ThemeN64_MenuItem_Click">
+                            <MenuItem.Icon>
+                                <Image Source="Resources\Icons\White\theme-n64.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -398,28 +417,28 @@
                         <MenuItem Header="_Website"
                                   Click="Website_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\website.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\website.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Info -->
                         <MenuItem Header="_Info"
                                   Click="Info_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\info.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\info.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Debug -->
                         <MenuItem Header="_Debug"
                                   Click="Debug_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\debug.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\debug.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Update -->
                         <MenuItem Header="_Update"
                                   Click="Update_MenuItem_Click">
                             <MenuItem.Icon>
-                                <Image Source="Resources\Icons\update.png" Width="12" Height="12" HorizontalAlignment="Left"/>
+                                <Image Source="Resources\Icons\White\update.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
@@ -451,7 +470,8 @@
                             Background="Transparent"
                             BorderBrush="#FF000000">
 
-                        <Grid Margin="0,0,0,0">
+                        <Grid Margin="0,0,0,0"
+                              Style="{DynamicResource GridStyle}">
 
                             <!-- Logo -->
                             <Image Margin="0,0,0,42" 
@@ -901,7 +921,7 @@
                         <Grid Background="Transparent">
 
                             <!-- Video ComboBox -->
-                            <Image Source="Resources\Icons\video.png" 
+                            <Image Style="{DynamicResource IconVideo}"
                                    Margin="10,13,0,14"
                                    Width="16" 
                                    Height="16" 
@@ -958,7 +978,7 @@
                         <Grid Background="Transparent">
 
                             <!-- Audio ComboBox -->
-                            <Image Source="Resources\Icons\audio.png" 
+                            <Image Style="{DynamicResource IconAudio}"
                                    Margin="10,13,0,14"
                                    Width="16" 
                                    Height="16" 
@@ -1014,7 +1034,7 @@
                         <Grid Background="Transparent">
 
                             <!-- RSP ComboBox -->
-                            <Image Source="Resources\Icons\rsp.png" 
+                            <Image Style="{DynamicResource IconRSP}"
                                    Margin="10,13,0,14"
                                    Width="16" 
                                    Height="16" 
@@ -1069,7 +1089,7 @@
                         <Grid Background="Transparent">
 
                             <!-- Input ComboBox -->
-                            <Image Source="Resources\Icons\input.png" 
+                            <Image Style="{DynamicResource IconInput}" 
                                    Margin="10,13,0,14"
                                    Width="16" 
                                    Height="16" 

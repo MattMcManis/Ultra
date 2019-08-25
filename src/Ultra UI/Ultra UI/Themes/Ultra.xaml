@@ -62,7 +62,7 @@
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <!--Background-->
-        <Setter Property="Background" Value="#FFa5a5a5" />
+        <Setter Property="Background" Value="Black" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">
@@ -82,31 +82,30 @@
     </Style>
 
     <!--/////////////////////////////////////
-        Grid
-        /////////////////////////////////////-->
-    <Style x:Key="GridStyle" TargetType="{x:Type Grid}">
-        <Setter Property="Background" Value="#FF4d4d50"/>
-    </Style>
-
-    <!--/////////////////////////////////////
         Tab Control
         /////////////////////////////////////-->
 
-    <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="#FF000099"/>
-    <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FFa5a5a5"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="#FFfff69c"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#FF000000"/>
     <LinearGradientBrush x:Key="TabItem.Selected.Border" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FFe10915" Offset="0"/>
-        <GradientStop Color="#FFf5b200" Offset="0.33"/>
-        <GradientStop Color="#FF339900" Offset="0.66"/>
-        <GradientStop Color="#FF000099" Offset="1.0"/>
+        <!-- Blue -->
+        <!--<GradientStop Color="#FF005da2" Offset="0.0"/>-->
+        <!--<GradientStop Color="#FF5f70ac" Offset="0.5"/>-->
+        <!--<GradientStop Color="#FF5f70ac" Offset="0.3"/>-->
+        <!-- Purple -->
+        <GradientStop Color="#FF5f70ac" Offset="0.5"/>
+        <!-- White -->
+        <GradientStop Color="#FFFFFFFF" Offset="1.0"/>
     </LinearGradientBrush>
     <!--<SolidColorBrush x:Key="TabItem.Selected.Border" Color="#FFFFFFFF"/>-->
-    <SolidColorBrush x:Key="TabItem.Top.Selected.Border" Color="#FFe10915"/>
+    <!--<SolidColorBrush x:Key="TabItem.Top.Selected.Border" Color="#FF005da2"/>-->
 
-    <!--<LinearGradientBrush x:Key="TabItem.Top.Selected.Border" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#FFe10915" Offset="0.0"/>
-        <GradientStop Color="#FFe10915" Offset="1.0"/>
-    </LinearGradientBrush>-->
+    <LinearGradientBrush x:Key="TabItem.Top.Selected.Border" EndPoint="0,1" StartPoint="0,0">
+        <!-- Blue -->
+        <GradientStop Color="#FF005da2" Offset="0.0"/>
+        <!-- Purple -->
+        <GradientStop Color="#FF5f70ac" Offset="1.0"/>
+    </LinearGradientBrush>
 
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
         <Setter Property="Padding" Value="2"/>
@@ -198,18 +197,18 @@
         /////////////////////////////////////-->
 
     <!-- Unselected -->
-    <SolidColorBrush x:Key="TabItem.Static.Foreground" Color="#FF000099"/>
-    <SolidColorBrush x:Key="TabItem.Static.Background" Color="#FFa5a5a5"/>
+    <SolidColorBrush x:Key="TabItem.Static.Foreground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="TabItem.Static.Background" Color="#FF121212"/>
     <!--<SolidColorBrush x:Key="TabItem.Static.Border" Color="#FF005da2"/>-->
     <LinearGradientBrush x:Key="TabItem.Static.Border" EndPoint="0,1" StartPoint="0,0">
         <!-- Blue -->
-        <GradientStop Color="#FF339900" Offset="0.0"/>
+        <GradientStop Color="#FF005da2" Offset="0.0"/>
         <!-- Purple -->
-        <GradientStop Color="#FF339900" Offset="1.0"/>
+        <GradientStop Color="#FF5f70ac" Offset="1.0"/>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="TabItem.MouseOver.Background" Color="#FFa5a5a5"/>
-    <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#FFf5b200"/>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Background" Color="#FF121212"/>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#FF5f70ac"/>
 
     <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#F0F0F0"/>
     <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="#D9D9D9"/>
@@ -410,12 +409,6 @@
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </MultiDataTrigger>
-                        <!-- Selected Tab Text -->
-                        <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="TextElement.Foreground" 
-                                    TargetName="templateRoot" 
-                                    Value="{DynamicResource TabItem.Selected.Foreground}"/>
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -426,11 +419,21 @@
     <!--/////////////////////////////////////
         Group Box
         /////////////////////////////////////-->
+    <!--<LinearGradientBrush x:Key="GroupBox.Static.Border" EndPoint="0,1" StartPoint="0,0">
+        -->
+    <!-- Blue -->
+    <!--
+        <GradientStop Color="#FF005da2" Offset="0.0"/>
+        -->
+    <!-- Purple -->
+    <!--
+        <GradientStop Color="#FF5f70ac" Offset="1.0"/>
+    </LinearGradientBrush>-->
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
     <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
         <Setter Property="BorderBrush" Value="#2DFFFFFF"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="TextElement.Foreground" Value="#FF000000"/>
+        <Setter Property="TextElement.Foreground" Value="#FFFFFFFF"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
@@ -476,7 +479,7 @@
         /////////////////////////////////////-->
 
     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="#FF000000"/>
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -507,7 +510,7 @@
     <!--/////////////////////////////////////
         Scroll Viewer
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="ScrollViewer.Static.Background" Color="#FF4c4c4f"/>
+    <SolidColorBrush x:Key="ScrollViewer.Static.Background" Color="#FF000000"/>
 
     <ControlTemplate x:Key="ScrollViewerControlTemplate" TargetType="{x:Type ScrollViewer}">
         <Grid x:Name="Grid" Background="{DynamicResource ScrollViewer.Static.Background}">
@@ -561,14 +564,14 @@
         List View
         /////////////////////////////////////-->
     <!--Enabled-->
-    <SolidColorBrush x:Key="ListView.Static.Foreground" Color="#FFdddddd"/>
+    <SolidColorBrush x:Key="ListView.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ListView.Static.Background" Color="Transparent"/>
-    <!--<ImageBrush x:Key="ListView.Static.Background" ImageSource="Resources/Images/logo-3d-185px.png" Stretch="None" AlignmentX="Center" AlignmentY="Center"/>-->
+    <!--<ImageBrush x:Key="ListView.Static.Background" ImageSource="../Resources/Images/logo-300px.png" Stretch="None" AlignmentX="Center" AlignmentY="Center" />-->
     <SolidColorBrush x:Key="ListView.Static.Border" Color="#FFACACAC"/>
     <SolidColorBrush x:Key="ListView.Selected.Foreground" Color="#FFC5C5C5"/>
     <!--Disabled-->
     <SolidColorBrush x:Key="ListView.Disabled.Foreground" Color="#FF555555"/>
-    <SolidColorBrush x:Key="ListView.Disabled.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="ListView.Disabled.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="ListView.Disabled.Border" Color="#FF2E2E2E"/>
 
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
@@ -648,7 +651,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Background" Value="#A5000000" />
                             <Setter Property="Height" Value="28"/>
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Margin" Value="0"/>
@@ -660,13 +663,12 @@
                             <Setter Property="Margin" Value="0"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="#FFf5b200"/>
-                            <Setter Property="Background" Value="#BFCBCBCB" />
+                            <Setter Property="Background" Value="#E5373737" />
                             <Setter TargetName="UpperHighlight" Property="Visibility" Value="Hidden" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Foreground" Value="#FF339900"/>
-                            <Setter Property="Background" Value="#BFDFDFDF"/>
+                            <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                            <Setter Property="Background" Value="#D8656565"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
@@ -681,15 +683,14 @@
     <!--/////////////////////////////////////
         Logo Image
         /////////////////////////////////////-->
-    <!--<ImageBrush x:Key="Logo.Static.Background" ImageSource="Resources/Images/logo-3d-185px.png" Stretch="None" AlignmentX="Center" AlignmentY="Center"/>-->
     <Style x:Key="LogoStyle" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Images/logo-3d-185px.png"/>
+        <Setter Property="Source" Value="../Resources/Images/logo-300px.png"/>
         <Setter Property="Stretch" Value="Fill"/>
-        <Setter Property="Width" Value="185"/>
-        <Setter Property="Height" Value="182"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="116"/>
     </Style>
-
+    
 
     <!--/////////////////////////////////////
         ComboBox
@@ -703,7 +704,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FFACACAC"/>
     <SolidColorBrush x:Key="ComboBox.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
@@ -711,7 +712,7 @@
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FFACACAC"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FFBFBFBF"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#FF7EB4EA"/>
@@ -721,7 +722,7 @@
     </LinearGradientBrush>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#FF555555"/>
-    <SolidColorBrush x:Key="ComboBox.Pressed.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="ComboBox.Pressed.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FFC7C7C7"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FF569DE5"/>
@@ -731,7 +732,7 @@
     </LinearGradientBrush>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FF569DE5"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
-    <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Border" Color="#FF555555"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Foreground" Color="DarkGray"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background" Color="#FFFFFFFF"/>
@@ -1053,8 +1054,8 @@
     <Style x:Key="ComboBoxStyleItem" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Template" Value="{DynamicResource ComboBoxStyle.Item.ControlTemplate}"/>
         <Setter Property="Foreground" Value="#FFFFFFFF" />
-        <Setter Property="Background" Value="#FF4d4d50" />
-        <Setter Property="BorderBrush" Value="#FF4d4d50" />
+        <Setter Property="Background" Value="#FF000000" />
+        <Setter Property="BorderBrush" Value="#FF000000" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="true">
                 <Setter Property="Background" Value="#FF1049BB" />
@@ -1458,16 +1459,16 @@
     <!--/////////////////////////////////////
         Button
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="Button.Static.Foreground" Color="#FF000000"/>
-    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFa5a5a5"/>
-    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF000099"/>
+    <SolidColorBrush x:Key="Button.Static.Foreground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FF000000"/>
+    <!--<SolidColorBrush x:Key="Button.Static.Border" Color="#FF005da2"/>-->
 
-    <!--<LinearGradientBrush x:Key="Button.Static.Border" EndPoint="0,1" StartPoint="0,0">
-        --><!-- Blue --><!--
+    <LinearGradientBrush x:Key="Button.Static.Border" EndPoint="0,1" StartPoint="0,0">
+        <!-- Blue -->
         <GradientStop Color="#FF005da2" Offset="0.0"/>
-        --><!-- Purple --><!--
+        <!-- Purple -->
         <GradientStop Color="#FF5f70ac" Offset="1.0"/>
-    </LinearGradientBrush>-->
+    </LinearGradientBrush>
 
     <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FFC7C7C7"/>
@@ -1530,7 +1531,7 @@
     <SolidColorBrush x:Key="Button.InputSDL.Disabled.Background" Color="#3FFFFFFF"/>
     <SolidColorBrush x:Key="Button.InputSDL.Disabled.Border" Color="#FF646464"/>
     <SolidColorBrush x:Key="Button.InputSDL.Disabled.Foreground" Color="#FF505050"/>
-
+    
     <Style x:Key="ToggleButtonInputSDLStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.InputSDL.Static.Background}"/>
@@ -1578,10 +1579,10 @@
           TextBox
         /////////////////////////////////////-->
     <SolidColorBrush x:Key="TextBoxStyle.Static.Foreground" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="TextBoxStyle.Static.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="TextBoxStyle.Static.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="TextBoxStyle.Static.Border" Color="#FF858585"/>
 
-    <SolidColorBrush x:Key="TextBoxStyle.Disabled.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="TextBoxStyle.Disabled.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="TextBoxStyle.Disabled.Foreground" Color="DarkGray"/>
     <SolidColorBrush x:Key="TextBoxStyle.Disabled.Border" Color="#FF555555"/>
 
@@ -1663,7 +1664,7 @@
         /////////////////////////////////////-->
     <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070"/>
-    <SolidColorBrush x:Key="RadioButton.Static.Foreground" Color="#FF000000"/>
+    <SolidColorBrush x:Key="RadioButton.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="RadioButton.Checked.Border" Color="#FF005da2"/>
     <SolidColorBrush x:Key="RadioButton.MouseOver.Background" Color="#FFF3F9FF"/>
     <SolidColorBrush x:Key="RadioButton.MouseOver.Border" Color="#FF5593FF"/>
@@ -1735,7 +1736,7 @@
         /////////////////////////////////////-->
     <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
-    <SolidColorBrush x:Key="OptionMark.Static.Foreground" Color="#FF000000"/>
+    <SolidColorBrush x:Key="OptionMark.Static.Foreground" Color="#FFFFFFFF"/>
     <Style x:Key="OptionMarkFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -1751,7 +1752,7 @@
     <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FF9E9E9E"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FF6A6A6A"/>
-    <SolidColorBrush x:Key="OptionMark.Disabled.Foreground" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="OptionMark.Disabled.Foreground" Color="#FF9E9E9E"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
     <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
     <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF5f70ac"/>
@@ -1890,7 +1891,7 @@
     <!--/////////////////////////////////////
         Menu
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="Menu.Static.Background" Color="#FF4d4d50"/>
+    <SolidColorBrush x:Key="Menu.Static.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="Menu.Static.Foreground" Color="#FFFFFFFF"/>
 
     <Style x:Key="MenuStyle" TargetType="{x:Type Menu}">
@@ -1929,7 +1930,7 @@
                     <Border x:Name="SubMenuBorder" 
                             BorderBrush="#FF999999" 
                             BorderThickness="1" 
-                            Background="#FF4d4d50" 
+                            Background="#FF000000" 
                             Padding="2">
                         <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                             <Grid RenderOptions.ClearTypeHint="Enabled">
@@ -2053,18 +2054,26 @@
             <Grid>
 
                 <Grid.ColumnDefinitions>
+                    <!-- Icon (Default Width: Auto) -->
                     <ColumnDefinition Width="Auto"
                                       SharedSizeGroup="Icon" />
+                    <!-- Text -->
                     <ColumnDefinition Width="*" />
+                    <!-- Shortcut Key -->
                     <ColumnDefinition Width="Auto"
                                       SharedSizeGroup="Shortcut" />
+                    
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
+                
                 <!-- Icon -->
                 <ContentPresenter Name="Icon"
                                   Margin="7,0,15,0"
+                                  HorizontalAlignment="Center"
                                   VerticalAlignment="Center"
                                   ContentSource="Icon" />
+
+                <!-- CheckBox -->
                 <Border Name="Check"
                         Width="13"
                         Height="13"
@@ -2082,11 +2091,13 @@
                           StrokeThickness="2"
                           Data="M 0 0 L 7 7 M 0 7 L 7 0" />
                 </Border>
+                
                 <!-- HeaderHost -->
                 <ContentPresenter Name="HeaderHost"
                                   Grid.Column="1"
                                   ContentSource="Header"
                                   RecognizesAccessKey="True" />
+                
                 <!-- InputGestureText -->
                 <TextBlock x:Name="InputGestureText"
                            Grid.Column="2"
@@ -2251,13 +2262,37 @@
     <!-- Revert Arrow Button -->
     <Style x:Key="IconReload" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Icons/reload.png"/>
+        <Setter Property="Source" Value="../Resources/Icons/White/reload.png"/>
     </Style>
 
     <!-- Folder Button -->
     <Style x:Key="IconPathFolder" TargetType="{x:Type Image}">
         <Setter Property="FlowDirection" Value="LeftToRight"/>
-        <Setter Property="Source" Value="Resources/Icons/folder.png"/>
+        <Setter Property="Source" Value="../Resources/Icons/White/folder.png"/>
+    </Style>
+
+    <!-- Video -->
+    <Style x:Key="IconVideo" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="../Resources/Icons/White/video.png"/>
+    </Style>
+
+    <!-- Audio -->
+    <Style x:Key="IconAudio" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="../Resources/Icons/White/audio.png"/>
+    </Style>
+
+    <!-- Input -->
+    <Style x:Key="IconInput" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="../Resources/Icons/White/input.png"/>
+    </Style>
+
+    <!-- RSP -->
+    <Style x:Key="IconRSP" TargetType="{x:Type Image}">
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="Source" Value="../Resources/Icons/White/rsp.png"/>
     </Style>
 
 </ResourceDictionary>

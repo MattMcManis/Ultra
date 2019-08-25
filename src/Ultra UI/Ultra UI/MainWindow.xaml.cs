@@ -115,6 +115,8 @@ namespace Ultra
         public static string mupen64plusExe;
         public static string mupen64plusDll;
 
+        // Theme
+        public static string theme { get; set; }
 
         /// <summary>
         /// Main Window
@@ -204,14 +206,19 @@ namespace Ultra
                     this.Height = height;
 
                     // -------------------------
+                    // Settings
+                    // -------------------------
+                    theme = Configure.ConigFile.conf.Read("Settings", "Theme");
+
+                    // -------------------------
                     // Paths
                     // -------------------------
 
                     // Mupen64plus Path
-                    VM.PathsView.Mupen_Text = Configure.ConigFile.conf.Read("Paths", "Mupen64Plus"); //disabled for now
+                    VM.PathsView.Mupen_Text = Configure.ConigFile.conf.Read("Paths", "Mupen64Plus");
 
                     // Config Path
-                    VM.PathsView.Config_Text = Configure.ConigFile.conf.Read("Paths", "Config"); //disabled for now
+                    VM.PathsView.Config_Text = Configure.ConigFile.conf.Read("Paths", "Config");
 
                     // Plugins Path is loaded from mupen64plus.cfg
 
@@ -237,11 +244,48 @@ namespace Ultra
             }
 
             // -------------------------
-            // Start the Mupen64Plus API
+            // Theme
             // -------------------------
-            //Mupen64PlusAPI.api = new Mupen64PlusAPI();
+            SetTheme();
         }
 
+        /// <summary>
+        /// Set Theme
+        /// </summary>
+        public void SetTheme()
+        {
+            // Change Theme Resource
+
+            // Ultra
+            if (theme == "Ultra")
+            {
+                App.Current.Resources.MergedDictionaries.Clear();
+                App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
+                {
+                    Source = new Uri("Themes/Ultra.xaml", UriKind.RelativeOrAbsolute)
+                });
+            }
+            // N64
+            else if (theme == "N64")
+            {
+                App.Current.Resources.MergedDictionaries.Clear();
+                App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
+                {
+                    Source = new Uri("Themes/N64.xaml", UriKind.RelativeOrAbsolute)
+                });
+            }
+            // Default
+            else
+            {
+                theme = "Ultra";
+
+                App.Current.Resources.MergedDictionaries.Clear();
+                App.Current.Resources.MergedDictionaries.Add(new ResourceDictionary()
+                {
+                    Source = new Uri("Themes/Ultra.xaml", UriKind.RelativeOrAbsolute)
+                });
+            }
+        }
 
         /// <summary>
         ///    Window Loaded
@@ -357,6 +401,11 @@ namespace Ultra
                         Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
 
                         // -------------------------
+                        // Settings
+                        // -------------------------
+                        Configure.ConigFile.conf.Write("Settings", "Theme", theme);
+
+                        // -------------------------
                         // Paths (Default empty. Do not add trailing slash to empty.)
                         // -------------------------
                         // Mupen64Plus
@@ -465,6 +514,7 @@ namespace Ultra
             double left = Left;
             double width = this.Width;
             double height = this.Height;
+            string selectedTheme = string.Empty;
 
             string pathsMupen64Plus = string.Empty;
             string pathsConfig = string.Empty;
@@ -474,7 +524,9 @@ namespace Ultra
             {
                 conf = new Configure.ConigFile(ultraConfFile);
 
+                // -------------------------
                 // Window
+                // -------------------------
                 //double top = 0;
                 double.TryParse(conf.Read("Main Window", "Window_Position_Top"), out top);
                 //double left;
@@ -484,12 +536,20 @@ namespace Ultra
                 //double height;
                 double.TryParse(conf.Read("Main Window", "Window_Height"), out height);
 
-                // Mupen64plus exe File
+                // -------------------------
+                // Settings
+                // -------------------------
+                selectedTheme = conf.Read("Settings", "Theme");
+
+                // -------------------------
+                // Paths
+                // -------------------------
+                // Mupen64plus
                 pathsMupen64Plus = conf.Read("Paths", "Mupen64Plus");
-                // Config Path
+                // Config
                 pathsConfig = conf.Read("Paths", "Config");
                 // Plugins Path is loaded from mupen64plus.cfg
-                // Data Path
+                //// Data Path - Disabled for now
                 //VM.PathsView.Data_Text = conf.Read("Paths", "Data");
                 // ROMs Path
                 pathsROMs = conf.Read("Paths", "ROMs");
@@ -511,9 +571,11 @@ namespace Ultra
                 this.Width != width ||
                 this.Height != height ||
 
+                theme != selectedTheme ||
+
                 VM.PathsView.Mupen_Text != pathsMupen64Plus ||
                 VM.PathsView.Config_Text != pathsConfig ||
-                //VM.PathsView.Data_Text != pathsMupen64Plus ||
+                //VM.PathsView.Data_Text != pathsMupen64Plus || // disabled for now
                 VM.PathsView.ROMs_Text != pathsROMs
                 )
             {
@@ -547,6 +609,11 @@ namespace Ultra
                         {
                             Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
                         }
+
+                        // -------------------------
+                        // Settings
+                        // -------------------------
+                        Configure.ConigFile.conf.Write("Settings", "Theme", theme);
 
                         // -------------------------
                         // Mupen64Plus Path
@@ -1814,6 +1881,26 @@ namespace Ultra
         private void RSP_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenRSPConfigureWindow();
+        }
+
+        /// <summary>
+        /// Theme Ultra - Menu Item
+        /// </summary>
+        private void ThemeUltra_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            theme = "Ultra";
+
+            SetTheme();
+        }
+
+        /// <summary>
+        /// Theme N64 - Menu Item
+        /// </summary>
+        private void ThemeN64_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            theme = "N64";
+
+            SetTheme();
         }
 
 
@@ -3170,7 +3257,6 @@ namespace Ultra
                                          actionsToWrite            // Actions to write
                                         );
         }
-
 
     }
 }

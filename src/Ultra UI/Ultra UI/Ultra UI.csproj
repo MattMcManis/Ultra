@@ -182,7 +182,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme-N64.xaml">
+    <Page Include="Themes\N64.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,7 +190,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme-Ultra.xaml">
+    <Page Include="Themes\Ultra.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,77 +223,71 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\n64-controller-layout.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\ultraui.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ultraui.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Icons\folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\reload.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\Buttons\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\save-file.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\pause.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\audio.png" />
-    <Resource Include="Resources\Icons\backup.png" />
-    <Resource Include="Resources\Icons\cheats.png" />
-    <Resource Include="Resources\Icons\debug.png" />
-    <Resource Include="Resources\Icons\edit.png" />
-    <Resource Include="Resources\Icons\file.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\folder2.png" />
-    <Resource Include="Resources\Icons\gears.png" />
-    <Resource Include="Resources\Icons\info.png" />
-    <Resource Include="Resources\Icons\input.png" />
-    <Resource Include="Resources\Icons\load-file.png" />
-    <Resource Include="Resources\Icons\open-rom.png" />
-    <Resource Include="Resources\Icons\mupen-dll.png" />
-    <Resource Include="Resources\Icons\mute.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\reset.png" />
-    <Resource Include="Resources\Icons\rsp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\screenshot.png" />
-    <Resource Include="Resources\Icons\slow-down.png" />
-    <Resource Include="Resources\Icons\soft-reset.png" />
-    <Resource Include="Resources\Icons\speed-up.png" />
-    <Resource Include="Resources\Icons\state-slot.png" />
-    <Resource Include="Resources\Icons\stop.png" />
-    <Resource Include="Resources\Icons\ultra-exe.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\update.png" />
-    <Resource Include="Resources\Icons\video.png" />
-    <Resource Include="Resources\Icons\website.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\save-folder.png" />
-    <Resource Include="Resources\Icons\screenshot-folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\exit.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\logo-300px.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\logo-3d-185px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\White\audio.png" />
+    <Resource Include="Resources\Icons\White\backup.png" />
+    <Resource Include="Resources\Icons\White\cheats.png" />
+    <Resource Include="Resources\Icons\White\debug.png" />
+    <Resource Include="Resources\Icons\White\edit.png" />
+    <Resource Include="Resources\Icons\White\exit.png" />
+    <Resource Include="Resources\Icons\White\file.png" />
+    <Resource Include="Resources\Icons\White\folder.png" />
+    <Resource Include="Resources\Icons\White\folder2.png" />
+    <Resource Include="Resources\Icons\White\gears.png" />
+    <Resource Include="Resources\Icons\White\info.png" />
+    <Resource Include="Resources\Icons\White\input.png" />
+    <Resource Include="Resources\Icons\White\load-file.png" />
+    <Resource Include="Resources\Icons\White\mupen-dll.png" />
+    <Resource Include="Resources\Icons\White\mute.png" />
+    <Resource Include="Resources\Icons\White\open-rom.png" />
+    <Resource Include="Resources\Icons\White\pause.png" />
+    <Resource Include="Resources\Icons\White\reload.png" />
+    <Resource Include="Resources\Icons\White\reset.png" />
+    <Resource Include="Resources\Icons\White\rsp.png" />
+    <Resource Include="Resources\Icons\White\save-file.png" />
+    <Resource Include="Resources\Icons\White\save-folder.png" />
+    <Resource Include="Resources\Icons\White\screenshot-folder.png" />
+    <Resource Include="Resources\Icons\White\screenshot.png" />
+    <Resource Include="Resources\Icons\White\slow-down.png" />
+    <Resource Include="Resources\Icons\White\soft-reset.png" />
+    <Resource Include="Resources\Icons\White\speed-up.png" />
+    <Resource Include="Resources\Icons\White\state-slot.png" />
+    <Resource Include="Resources\Icons\White\stop.png" />
+    <Resource Include="Resources\Icons\White\ultra-exe.png" />
+    <Resource Include="Resources\Icons\White\update.png" />
+    <Resource Include="Resources\Icons\White\video.png" />
+    <Resource Include="Resources\Icons\White\website.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Black\folder.png" />
+    <Resource Include="Resources\Icons\Black\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Black\audio.png" />
+    <Resource Include="Resources\Icons\Black\input.png" />
+    <Resource Include="Resources\Icons\Black\rsp.png" />
+    <Resource Include="Resources\Icons\Black\video.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\White\theme-n64.png" />
+    <Resource Include="Resources\Icons\White\theme-ultra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\n64-controller-layout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
