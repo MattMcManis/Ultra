@@ -553,57 +553,36 @@ namespace Ultra
         public IntPtr VideoPluginDll { get; private set; }
 
         /// <summary>
-        /// Launch - Mupen64Plus API - Ultra Modified
+        /// Mupen64Plus API
         /// </summary>
         public Mupen64PlusAPI()
         {
         }
 
-        public void Launch(byte[] romBuffer,
-                           string videoPlugin,
-                           string audioPlugin,
-                           string inputPlugin,
-                           string rspPlugin,
-                           int windowWidth,
-                           int windowHeight
-                           )
-        {
-            // -------------------------
-            // Initiate
-            // -------------------------
-            Initiate(romBuffer,
-                    videoPlugin,
-                    audioPlugin,
-                    inputPlugin,
-                    rspPlugin,
-                    windowWidth,
-                    windowHeight);
-
-            // -------------------------
-            // Start
-            // -------------------------
-            // Prepare to start the emulator in a different thread
-            //m64pEmulator = new Thread(ExecuteEmulator);
-            ExecuteEmulator();
-        }
-
         /// <summary>
-        /// Initiate - Mupen64Plus API - Ultra Modified
+        /// Initiate - Ultra Modified
         /// </summary>
-        public void Initiate(byte[] romBuffer,
-                            string videoPlugin,
-                            string audioPlugin,
-                            string inputPlugin,
-                            string rspPlugin,
-                            int windowWidth,
-                            int windowHeight
+        public void Initiate(string key,
+                             byte[] romBuffer,
+                             string videoPlugin,
+                             string audioPlugin,
+                             string inputPlugin,
+                             string rspPlugin,
+                             int windowWidth,
+                             int windowHeight
                             )
         {
+            // -------------------------
+            // Load DLL
+            // -------------------------
             SetDllDirectory(VM.PathsView.Mupen_Text);
             CoreDll = LoadLibrary("mupen64plus.dll");
             if (CoreDll == IntPtr.Zero)
                 throw new InvalidOperationException("Failed to load mupen64plus.dll");
 
+            // -------------------------
+            // Function Pointers
+            // -------------------------
             connectFunctionPointers();
 
             // --------------------------------------------------
@@ -784,15 +763,18 @@ namespace Ultra
             // -------------------------
             // Pass the ROM to the Core
             // -------------------------
-            result = m64pCoreDoCommandByteArray(m64p_command.M64CMD_ROM_OPEN, romBuffer.Length, romBuffer);
+            //if (key == "play")
+            //{
+                result = m64pCoreDoCommandByteArray(m64p_command.M64CMD_ROM_OPEN, romBuffer.Length, romBuffer);
 
-            // Get ROM Header
-            int sizeHeader = Marshal.SizeOf(typeof(m64p_rom_header));
-            result = m64pCoreDoCommandROMHeader(m64p_command.M64CMD_ROM_GET_HEADER, sizeHeader, ref _rom_header);
+                // Get ROM Header
+                int sizeHeader = Marshal.SizeOf(typeof(m64p_rom_header));
+                result = m64pCoreDoCommandROMHeader(m64p_command.M64CMD_ROM_GET_HEADER, sizeHeader, ref _rom_header);
 
-            // Get ROM Settings
-            int sizeSettings = Marshal.SizeOf(typeof(m64p_rom_settings));
-            result = m64pCoreDoCommandROMSettings(m64p_command.M64CMD_ROM_GET_SETTINGS, _rom_settings, ref sizeSettings);
+                // Get ROM Settings
+                int sizeSettings = Marshal.SizeOf(typeof(m64p_rom_settings));
+                result = m64pCoreDoCommandROMSettings(m64p_command.M64CMD_ROM_GET_SETTINGS, _rom_settings, ref sizeSettings);
+            //}
 
             // --------------------------------------------------
             // Video Section
@@ -879,13 +861,13 @@ namespace Ultra
             //IntPtr video_plugin_section = IntPtr.Zero;
 
             // Video
-            AttachPlugin(m64p_plugin_type.M64PLUGIN_GFX, videoPlugin/*"mupen64plus-video-glide64mk2.dll"*/);
+            AttachPlugin(m64p_plugin_type.M64PLUGIN_GFX, videoPlugin); //mupen64plus-video-GLideN64.dll
             // Audio
-            AttachPlugin(m64p_plugin_type.M64PLUGIN_AUDIO, audioPlugin/*"mupen64plus-audio-sdl.dll"*/);
+            AttachPlugin(m64p_plugin_type.M64PLUGIN_AUDIO, audioPlugin); //mupen64plus-audio-sdl.dll
             // Input
-            AttachPlugin(m64p_plugin_type.M64PLUGIN_INPUT, inputPlugin/*"mupen64plus-input-sdl.dll"*/);
+            AttachPlugin(m64p_plugin_type.M64PLUGIN_INPUT, inputPlugin); //mupen64plus-input-sdl.dll
             // RSP
-            AttachPlugin(m64p_plugin_type.M64PLUGIN_RSP, rspPlugin/*"mupen64plus-rsp-hle.dll"*/);
+            AttachPlugin(m64p_plugin_type.M64PLUGIN_RSP, rspPlugin); //mupen64plus-rsp-hle.dll
 
             // Generate Defaults here
 
@@ -910,6 +892,67 @@ namespace Ultra
             //// Prepare to start the emulator in a different thread
             ////m64pEmulator = new Thread(ExecuteEmulator);
             //ExecuteEmulator();
+        }
+
+
+        /// <summary>
+        /// Launch
+        /// </summary>
+        public void Launch(string key,
+                           byte[] romBuffer,
+                           string videoPlugin,
+                           string audioPlugin,
+                           string inputPlugin,
+                           string rspPlugin,
+                           int windowWidth,
+                           int windowHeight
+                          )
+        {
+            // -------------------------
+            // Initiate
+            // -------------------------
+            Initiate(key,
+                     romBuffer,
+                     videoPlugin,
+                     audioPlugin,
+                     inputPlugin,
+                     rspPlugin,
+                     windowWidth,
+                     windowHeight
+                    );
+
+            // -------------------------
+            // Start
+            // -------------------------
+            ExecuteEmulator();
+        }
+
+
+        /// <summary>
+        /// Generate
+        /// </summary>
+        public void Generate(string key,
+                             byte[] romBuffer,
+                             string videoPlugin,
+                             string audioPlugin,
+                             string inputPlugin,
+                             string rspPlugin,
+                             int windowWidth,
+                             int windowHeight
+                            )
+        {
+            // -------------------------
+            // Initiate
+            // -------------------------
+            Initiate(key,
+                     romBuffer,
+                     videoPlugin,
+                     audioPlugin,
+                     inputPlugin,
+                     rspPlugin,
+                     windowWidth,
+                     windowHeight
+                    );
         }
 
         volatile bool emulator_running = false;
