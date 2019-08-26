@@ -303,16 +303,25 @@ namespace Ultra
             // -------------------------
             // Emulator
             // -------------------------
+            // CPU
+            cboCPU.SelectionChanged += cboCPU_SelectionChanged;
             // PureInterpreter
-            cbxPureInterpreter.Checked += cbxPureInterpreter_Checked;
+            //cbxPureInterpreter.Checked += cbxPureInterpreter_Checked;
             // Cycles
             cboEmulator_Cycles.SelectionChanged += cboEmulator_Cycles_SelectionChanged;
             // Cached Interpreter
-            cbxCachedInterpreter.Checked += cbxCachedInterpreter_Checked;
-            cbxCachedInterpreter.Unchecked += cbxCachedInterpreter_Checked;
+            //cbxCachedInterpreter.Checked += cbxCachedInterpreter_Checked;
+            //cbxCachedInterpreter.Unchecked += cbxCachedInterpreter_Checked;
             // DynamicRecompiler
-            cbxDynamicRecompiler.Checked += cbxDynamicRecompiler_Checked;
-            cbxDynamicRecompiler.Unchecked += cbxDynamicRecompiler_Checked;
+            //cbxDynamicRecompiler.Checked += cbxDynamicRecompiler_Checked;
+            //cbxDynamicRecompiler.Unchecked += cbxDynamicRecompiler_Checked;
+
+            // DisableSpecRecomp
+            cbxDisableSpecRecomp.Checked += cbxDisableSpecRecomp_Checked;
+            cbxDisableSpecRecomp.Unchecked += cbxDisableSpecRecomp_Checked;
+            // RandomizeInterrupt
+            cbxRandomizeInterrupt.Checked += cbxRandomizeInterrupt_Checked;
+            cbxRandomizeInterrupt.Unchecked += cbxRandomizeInterrupt_Checked;
             // NoCompiledJump
             cbxNoCompiledJump.Checked += cbxNoCompiledJump_Checked;
             cbxNoCompiledJump.Unchecked += cbxNoCompiledJump_Checked;
@@ -2701,17 +2710,59 @@ namespace Ultra
         /// <summary>
         /// Pure Interpreter
         /// </summary>
-        private void cbxPureInterpreter_Checked(object sender, RoutedEventArgs e)
+        //private void cbxPureInterpreter_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    // Write to mupen64plus.cfg
+        //    List<Action> actionsToWrite = new List<Action>
+        //    {
+        //        new Action(() => 
+        //        {
+        //            // -------------------------
+        //            // [Core]
+        //            // -------------------------
+        //            Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "0");
+        //        }),
+        //    };
+
+        //    MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
+        //                                 "mupen64plus.cfg",        // Filename
+        //                                 actionsToWrite            // Actions to write
+        //                                );
+        //}
+        private void cboCPU_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string cpu = string.Empty;
+
+            // Pure Interpreter
+            if (VM.EmulatorView.CPU_SelectedItem == "Pure Interpreter")
+            {
+                cpu = "0";
+            }
+            // Cached Interpreter
+            else if (VM.EmulatorView.CPU_SelectedItem == "Cached Interpreter")
+            {
+                cpu = "1";
+            }
+            // Dynamic Recompiler
+            else if (VM.EmulatorView.CPU_SelectedItem == "Dynamic Recompiler")
+            {
+                cpu = "2";
+            }
+            // Safe Default
+            else
+            {
+                cpu = "2";
+            }
+
             // Write to mupen64plus.cfg
             List<Action> actionsToWrite = new List<Action>
             {
-                new Action(() => 
+                new Action(() =>
                 {
                     // -------------------------
                     // [Core]
                     // -------------------------
-                    Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "0");
+                    Configure.ConigFile.cfg.Write("Core", "R4300Emulator", cpu);
                 }),
             };
 
@@ -2724,17 +2775,70 @@ namespace Ultra
         /// <summary>
         /// Cached Interpreter
         /// </summary>
-        private void cbxCachedInterpreter_Checked(object sender, RoutedEventArgs e)
+        //private void cbxCachedInterpreter_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    // Write to mupen64plus.cfg
+        //    List<Action> actionsToWrite = new List<Action>
+        //    {
+        //        new Action(() => 
+        //        {
+        //            // -------------------------
+        //            // [Core]
+        //            // -------------------------
+        //            Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "1");
+        //        }),
+        //    };
+
+        //    MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
+        //                                 "mupen64plus.cfg",        // Filename
+        //                                 actionsToWrite            // Actions to write
+        //                                );
+        //}
+
+        /// <summary>
+        /// Dynamic Recompiler
+        /// </summary>
+        //private void cbxDynamicRecompiler_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    // Write to mupen64plus.cfg
+        //    List<Action> actionsToWrite = new List<Action>
+        //    {
+        //        new Action(() =>
+        //        {
+        //            // -------------------------
+        //            // [Core]
+        //            // -------------------------
+        //            Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "2");
+        //        }),
+        //    };
+
+        //    MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
+        //                                 "mupen64plus.cfg",        // Filename
+        //                                 actionsToWrite            // Actions to write
+        //                                );
+        //}
+
+        /// <summary>
+        /// DisableSpecRecomp
+        /// </summary>
+        private void cbxDisableSpecRecomp_Checked(object sender, RoutedEventArgs e)
         {
             // Write to mupen64plus.cfg
             List<Action> actionsToWrite = new List<Action>
             {
-                new Action(() => 
+                new Action(() =>
                 {
                     // -------------------------
                     // [Core]
                     // -------------------------
-                    Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "1");
+                    if (VM.EmulatorView.Emulator_DisableSpecRecomp_IsChecked == true)
+                    {
+                        Configure.ConigFile.cfg.Write("Core", "DisableSpecRecomp", "True");
+                    }
+                    else if (VM.EmulatorView.Emulator_DisableSpecRecomp_IsChecked == false)
+                    {
+                        Configure.ConigFile.cfg.Write("Core", "DisableSpecRecomp", "False");
+                    }
                 }),
             };
 
@@ -2745,9 +2849,9 @@ namespace Ultra
         }
 
         /// <summary>
-        /// Dynamic Recompiler
+        /// RandomizeInterrupt
         /// </summary>
-        private void cbxDynamicRecompiler_Checked(object sender, RoutedEventArgs e)
+        private void cbxRandomizeInterrupt_Checked(object sender, RoutedEventArgs e)
         {
             // Write to mupen64plus.cfg
             List<Action> actionsToWrite = new List<Action>
@@ -2757,7 +2861,14 @@ namespace Ultra
                     // -------------------------
                     // [Core]
                     // -------------------------
-                    Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "2");
+                    if (VM.EmulatorView.Emulator_RandomizeInterrupt_IsChecked == true)
+                    {
+                        Configure.ConigFile.cfg.Write("Core", "RandomizeInterrupt", "True");
+                    }
+                    else if (VM.EmulatorView.Emulator_RandomizeInterrupt_IsChecked == false)
+                    {
+                        Configure.ConigFile.cfg.Write("Core", "RandomizeInterrupt", "False");
+                    }
                 }),
             };
 
@@ -2890,8 +3001,15 @@ namespace Ultra
         }
         public void EmulatorDefaults()
         {
-            // Dynamic Recompiler
-            VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked = true;
+            // CPU
+            //VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked = true;
+            VM.EmulatorView.CPU_SelectedItem = "Dynamic Recompiler";
+
+            // DisableSpecRecomp
+            VM.EmulatorView.Emulator_DisableSpecRecomp_IsChecked = true;
+
+            // RandomizeInterrupt
+            VM.EmulatorView.Emulator_RandomizeInterrupt_IsChecked = true;
 
             // No Compiled Jump
             VM.EmulatorView.Emulator_NoCompiledJump_IsChecked = false;

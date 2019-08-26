@@ -59,6 +59,77 @@ namespace Ultra
         }
 
         // -------------------------
+        // Cycles
+        // -------------------------
+        // Items Source
+        private ObservableCollection<string> _CPU_Items = new ObservableCollection<string>
+        {
+            "Pure Interpreter",
+            "Cached Interpreter",
+            "Dynamic Recompiler",
+        };
+        public ObservableCollection<string> CPU_Items
+        {
+            get { return _CPU_Items; }
+            set
+            {
+                _CPU_Items = value;
+                OnPropertyChanged("CPU_Items");
+            }
+        }
+
+        // Selected Index
+        private int _CPU_SelectedIndex { get; set; }
+        public int CPU_SelectedIndex
+        {
+            get { return _CPU_SelectedIndex; }
+            set
+            {
+                if (_CPU_SelectedIndex == value)
+                {
+                    return;
+                }
+
+                _CPU_SelectedIndex = value;
+                OnPropertyChanged("CPU_SelectedIndex");
+            }
+        }
+
+        // Selected Item
+        private string _CPU_SelectedItem { get; set; }
+        public string CPU_SelectedItem
+        {
+            get { return _CPU_SelectedItem; }
+            set
+            {
+                if (_CPU_SelectedItem == value)
+                {
+                    return;
+                }
+
+                _CPU_SelectedItem = value;
+                OnPropertyChanged("CPU_SelectedItem");
+            }
+        }
+
+        // Controls Enable
+        private bool _CPU_IsEnabled = true;
+        public bool CPU_IsEnabled
+        {
+            get { return _CPU_IsEnabled; }
+            set
+            {
+                if (_CPU_IsEnabled == value)
+                {
+                    return;
+                }
+
+                _CPU_IsEnabled = value;
+                OnPropertyChanged("CPU_IsEnabled");
+            }
+        }
+
+        // -------------------------
         // Pure Interpreter
         // -------------------------
         // Checked
@@ -127,7 +198,7 @@ namespace Ultra
         }
 
         // -------------------------
-        // Cached Interpreter
+        // Dynamic Recompiler
         // -------------------------
         // Checked
         private bool _Emulator_DynamicRecompiler_IsChecked;
@@ -160,6 +231,73 @@ namespace Ultra
             }
         }
 
+        // -------------------------
+        // DisableSpecRecomp
+        // -------------------------
+        // Checked
+        private bool _Emulator_DisableSpecRecomp_IsChecked;
+        public bool Emulator_DisableSpecRecomp_IsChecked
+        {
+            get { return _Emulator_DisableSpecRecomp_IsChecked; }
+            set
+            {
+                if (_Emulator_DisableSpecRecomp_IsChecked != value)
+                {
+                    _Emulator_DisableSpecRecomp_IsChecked = value;
+                    OnPropertyChanged("Emulator_DisableSpecRecomp_IsChecked");
+                }
+            }
+        }
+        // Enabled
+        private bool _Emulator_DisableSpecRecomp_IsEnabled = true;
+        public bool Emulator_DisableSpecRecomp_IsEnabled
+        {
+            get { return _Emulator_DisableSpecRecomp_IsEnabled; }
+            set
+            {
+                if (_Emulator_DisableSpecRecomp_IsEnabled == value)
+                {
+                    return;
+                }
+
+                _Emulator_DisableSpecRecomp_IsEnabled = value;
+                OnPropertyChanged("Emulator_DisableSpecRecomp_IsEnabled");
+            }
+        }
+
+        // -------------------------
+        // RandomizeInterrupt
+        // -------------------------
+        // Checked
+        private bool _Emulator_RandomizeInterrupt_IsChecked;
+        public bool Emulator_RandomizeInterrupt_IsChecked
+        {
+            get { return _Emulator_RandomizeInterrupt_IsChecked; }
+            set
+            {
+                if (_Emulator_RandomizeInterrupt_IsChecked != value)
+                {
+                    _Emulator_RandomizeInterrupt_IsChecked = value;
+                    OnPropertyChanged("Emulator_RandomizeInterrupt_IsChecked");
+                }
+            }
+        }
+        // Enabled
+        private bool _Emulator_RandomizeInterrupt_IsEnabled = true;
+        public bool Emulator_RandomizeInterrupt_IsEnabled
+        {
+            get { return _Emulator_RandomizeInterrupt_IsEnabled; }
+            set
+            {
+                if (_Emulator_RandomizeInterrupt_IsEnabled == value)
+                {
+                    return;
+                }
+
+                _Emulator_RandomizeInterrupt_IsEnabled = value;
+                OnPropertyChanged("Emulator_RandomizeInterrupt_IsEnabled");
+            }
+        }
 
         // -------------------------
         // NoCompiledJump

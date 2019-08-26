@@ -87,21 +87,47 @@ namespace Ultra
                     int cpuCore = 2; // Default Dynamic Recompiler fallback
                     int.TryParse(cfg.Read("Core", "R4300Emulator").ToLower(), out cpuCore);
 
+                    //// Pure Interpreter
+                    //if (cpuCore == 0)
+                    //{
+                    //    VM.EmulatorView.Emulator_PureInterpreter_IsChecked = true;
+                    //}
+                    //// Cached Interpreter
+                    //else if (cpuCore == 1)
+                    //{
+                    //    VM.EmulatorView.Emulator_CachedInterpreter_IsChecked = true;
+                    //}
+                    //// Dynamic Recompiler
+                    //else if (cpuCore == 2)
+                    //{
+                    //    VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked = true;
+                    //}
+
                     // Pure Interpreter
                     if (cpuCore == 0)
                     {
-                        VM.EmulatorView.Emulator_PureInterpreter_IsChecked = true;
+                        VM.EmulatorView.CPU_SelectedItem = "Pure Interpreter";
                     }
                     // Cached Interpreter
                     else if (cpuCore == 1)
                     {
-                        VM.EmulatorView.Emulator_CachedInterpreter_IsChecked = true;
+                        VM.EmulatorView.CPU_SelectedItem = "Cached Interpreter";
                     }
                     // Dynamic Recompiler
                     else if (cpuCore == 2)
                     {
-                        VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked = true;
+                        VM.EmulatorView.CPU_SelectedItem = "Dynamic Recompiler";
                     }
+
+                    // DisableSpecRecomp
+                    bool disableSpecRecomp = true;
+                    bool.TryParse(cfg.Read("Core", "DisableSpecRecomp").ToLower(), out disableSpecRecomp);
+                    VM.EmulatorView.Emulator_DisableSpecRecomp_IsChecked = disableSpecRecomp;
+
+                    // RandomizeInterrupt
+                    bool randomizeInterrupt = true;
+                    bool.TryParse(cfg.Read("Core", "RandomizeInterrupt").ToLower(), out randomizeInterrupt);
+                    VM.EmulatorView.Emulator_RandomizeInterrupt_IsChecked = randomizeInterrupt;
 
                     // No Compiled Jump
                     bool noCompiledJump = false;

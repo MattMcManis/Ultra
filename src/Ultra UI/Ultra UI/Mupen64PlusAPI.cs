@@ -288,7 +288,7 @@ namespace Ultra
         ConfigOpenSection m64pConfigOpenSection;
 
         /// <summary>
-        /// Sets a parameter in the global config system
+        /// Sets an Int parameter in the global config system
         /// </summary>
         /// <param name="ConfigSectionHandle">The handle of the section to access</param>
         /// <param name="ParamName">The name of the parameter to set</param>
@@ -296,8 +296,31 @@ namespace Ultra
         /// <param name="ParamValue">A pointer to the value to use for the parameter (must be an int right now)</param>
         /// <returns></returns>
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        delegate m64p_error ConfigSetParameter(IntPtr ConfigSectionHandle, string ParamName, m64p_type ParamType, ref int ParamValue);
-        ConfigSetParameter m64pConfigSetParameter;
+        delegate m64p_error ConfigSetParameterInt(IntPtr ConfigSectionHandle, string ParamName, m64p_type ParamType, ref int ParamValue);
+        ConfigSetParameterInt m64pConfigSetParameterInt;
+
+        /// <summary>
+		/// Sets a parameter in the global config system
+		/// </summary>
+		/// <param name="ConfigSectionHandle">The handle of the section to access</param>
+		/// <param name="ParamName">The name of the parameter to set</param>
+		/// <param name="ParamType">The type of the parameter</param>
+		/// <param name="ParamValue">A pointer to the value to use for the parameter (must be a string)</param>
+		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        delegate m64p_error ConfigSetParameterStr(IntPtr ConfigSectionHandle, string ParamName, m64p_type ParamType, StringBuilder ParamValue);
+        ConfigSetParameterStr m64pConfigSetParameterStr;
+
+        /// <summary>
+        /// Sets a String parameter in the global config system
+        /// </summary>
+        /// <param name="ConfigSectionHandle">The handle of the section to access</param>
+        /// <param name="ParamName">The name of the parameter to set</param>
+        /// <param name="ParamType">The type of the parameter</param>
+        /// <param name="ParamValue">A pointer to the value to use for the parameter (must be an int right now)</param>
+        /// <returns></returns>
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        delegate m64p_error ConfigSetParameterBool(IntPtr ConfigSectionHandle, string ParamName, m64p_type ParamType, ref bool ParamValue);
+        ConfigSetParameterBool m64pConfigSetParameterBool;
 
         /// <summary>
         /// Sets a parameter in the global config system
@@ -617,13 +640,13 @@ namespace Ultra
             //if (DisableExpansionSlot)
             //{
             //    int disable = 1;
-            //    m64pConfigSetParameter(core_section, "DisableExtraMem", m64p_type.M64TYPE_INT, ref disable);
+            //    m64pConfigSetParameterInt(core_section, "DisableExtraMem", m64p_type.M64TYPE_INT, ref disable);
             //}
 
             // Set the savetype if needed
             //if (SaveType != 0)
             //{
-            //    m64pConfigSetParameter(core_section, "SaveType", m64p_type.M64TYPE_INT, ref SaveType);
+            //    m64pConfigSetParameterInt(core_section, "SaveType", m64p_type.M64TYPE_INT, ref SaveType);
             //}
 
             // -------------------------
@@ -632,73 +655,90 @@ namespace Ultra
             int CoreType = 2; // default
 
             // Pure Interpreter
-            if (VM.EmulatorView.Emulator_PureInterpreter_IsChecked == true)
+            //if (VM.EmulatorView.Emulator_PureInterpreter_IsChecked == true)
+            //{
+            //    CoreType = 0;
+            //}
+            //// Cached Interpreter
+            //else if (VM.EmulatorView.Emulator_CachedInterpreter_IsChecked == true)
+            //{
+            //    CoreType = 1;
+            //}
+            //// Dynamic Recompiler
+            //else if (VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked == true)
+            //{
+            //    CoreType = 2;
+            //}
+
+            // Pure Interpreter
+            if (VM.EmulatorView.CPU_SelectedItem == "Pure Interpreter")
             {
                 CoreType = 0;
             }
             // Cached Interpreter
-            else if (VM.EmulatorView.Emulator_CachedInterpreter_IsChecked == true)
+            else if (VM.EmulatorView.CPU_SelectedItem == "Cached Interpreter")
             {
                 CoreType = 1;
             }
             // Dynamic Recompiler
-            else if (VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked == true)
+            else if (VM.EmulatorView.CPU_SelectedItem == "Dynamic Recompiler")
             {
                 CoreType = 2;
             }
 
-            m64pConfigSetParameter(core_section, "R4300Emulator", m64p_type.M64TYPE_INT, ref CoreType);
+            m64pConfigSetParameterInt(core_section, "R4300Emulator", m64p_type.M64TYPE_INT, ref CoreType);
 
             // -------------------------
             // NoCompiledJump
             // -------------------------
-            int noCompiledJump = 0;
+            bool noCompiledJump = false;
             // Off
             if (VM.EmulatorView.Emulator_NoCompiledJump_IsChecked == false)
             {
-                noCompiledJump = 0;
+                noCompiledJump = false;
             }
             // On
             else if (VM.EmulatorView.Emulator_NoCompiledJump_IsChecked == true)
             {
-                noCompiledJump = 1;
+                noCompiledJump = true;
             }
 
-            result = m64pConfigSetParameter(core_section, "NoCompiledJump", m64p_type.M64TYPE_INT, ref noCompiledJump);
+            result = m64pConfigSetParameterBool(core_section, "NoCompiledJump", m64p_type.M64TYPE_BOOL, ref noCompiledJump);
 
             // -------------------------
             // DisableExtraMemory
             // -------------------------
-            int disableExtraMemory = 0;
+            //int disableExtraMemory = 0;
+            bool disableExtraMemory = false;
             // Off
             if (VM.EmulatorView.Emulator_DisableExtraMemory_IsChecked == false)
             {
-                disableExtraMemory = 0;
+                disableExtraMemory = false;
             }
             // On
             else if (VM.EmulatorView.Emulator_DisableExtraMemory_IsChecked == true)
             {
-                disableExtraMemory = 1;
+                disableExtraMemory = true;
             }
 
-            result = m64pConfigSetParameter(core_section, "DisableExtraMem", m64p_type.M64TYPE_INT, ref disableExtraMemory);
+            result = m64pConfigSetParameterBool(core_section, "DisableExtraMem", m64p_type.M64TYPE_BOOL, ref disableExtraMemory);
 
             // -------------------------
             // DelaySI
             // -------------------------
-            int delaySI = 0;
+            bool delaySI = false;
             // Off
             if (VM.EmulatorView.Emulator_DelaySI_IsChecked == false)
             {
-                delaySI = 0;
+                delaySI = false;
             }
             // On
             else if (VM.EmulatorView.Emulator_DelaySI_IsChecked == true)
             {
-                delaySI = 1;
+                delaySI = true;
             }
 
-            result = m64pConfigSetParameter(core_section, "DelaySI", m64p_type.M64TYPE_INT, ref delaySI);
+            result = m64pConfigSetParameterBool(core_section, "DelaySI", m64p_type.M64TYPE_BOOL, ref delaySI);
 
             // -------------------------
             // Cycles
@@ -725,13 +765,47 @@ namespace Ultra
                 cycles = 4;
             }
 
-            result = m64pConfigSetParameter(core_section, "CountPerOp", m64p_type.M64TYPE_INT, ref cycles);
+            result = m64pConfigSetParameterInt(core_section, "CountPerOp", m64p_type.M64TYPE_INT, ref cycles);
+
+            // -------------------------
+            // DisableSpecRecomp
+            // -------------------------
+            bool disableSpecRecomp = true;
+            // Off
+            if (VM.EmulatorView.Emulator_DisableSpecRecomp_IsChecked == false)
+            {
+                disableSpecRecomp = false;
+            }
+            // On
+            else if (VM.EmulatorView.Emulator_DisableSpecRecomp_IsChecked == true)
+            {
+                disableSpecRecomp = true;
+            }
+
+            result = m64pConfigSetParameterBool(core_section, "DisableSpecRecomp", m64p_type.M64TYPE_BOOL, ref disableSpecRecomp);
+
+            // -------------------------
+            // RandomizeInterrupt
+            // -------------------------
+            bool randomizeInterrupt = true;
+            // Off
+            if (VM.EmulatorView.Emulator_RandomizeInterrupt_IsChecked == false)
+            {
+                randomizeInterrupt = false;
+            }
+            // On
+            else if (VM.EmulatorView.Emulator_RandomizeInterrupt_IsChecked == true)
+            {
+                randomizeInterrupt = true;
+            }
+
+            result = m64pConfigSetParameterBool(core_section, "RandomizeInterrupt", m64p_type.M64TYPE_BOOL, ref randomizeInterrupt);
 
             // --------------------------------------------------
             // Enable Debugger
             // --------------------------------------------------
             //int enableDebugger = 1;
-            //m64pConfigSetParameter(core_section, "EnableDebugger", m64p_type.M64TYPE_INT, ref enableDebugger);
+            //m64pConfigSetParameterInt(core_section, "EnableDebugger", m64p_type.M64TYPE_INT, ref enableDebugger);
 
             // --------------------------------------------------
             // UI Console Section
@@ -787,8 +861,8 @@ namespace Ultra
             // Set Window Size
             // -------------------------
             // Set the desired width and height for mupen64plus
-            result = m64pConfigSetParameter(video_section, "ScreenWidth", m64p_type.M64TYPE_INT, ref windowWidth/*ref video_settings.Width*/);
-            result = m64pConfigSetParameter(video_section, "ScreenHeight", m64p_type.M64TYPE_INT, ref windowHeight/*ref video_settings.Height*/);
+            result = m64pConfigSetParameterInt(video_section, "ScreenWidth", m64p_type.M64TYPE_INT, ref windowWidth/*ref video_settings.Width*/);
+            result = m64pConfigSetParameterInt(video_section, "ScreenHeight", m64p_type.M64TYPE_INT, ref windowHeight/*ref video_settings.Height*/);
 
             // -------------------------
             // Set Fullscreen / Windowed
@@ -805,7 +879,7 @@ namespace Ultra
                 displayMode = 1;
             }
 
-            result = m64pConfigSetParameter(video_section, "Fullscreen", m64p_type.M64TYPE_INT, ref displayMode);
+            result = m64pConfigSetParameterInt(video_section, "Fullscreen", m64p_type.M64TYPE_BOOL, ref displayMode);
 
             // -------------------------
             // Set Vsync
@@ -822,7 +896,7 @@ namespace Ultra
                 vsync = 1;
             }
 
-            result = m64pConfigSetParameter(video_section, "VerticalSync", m64p_type.M64TYPE_INT, ref vsync);
+            result = m64pConfigSetParameterInt(video_section, "VerticalSync", m64p_type.M64TYPE_BOOL, ref vsync);
 
             // -------------------------
             // OnScreenDisplay
@@ -839,7 +913,7 @@ namespace Ultra
                 osd = 1;
             }
 
-            result = m64pConfigSetParameter(video_section, "OnScreenDisplay", m64p_type.M64TYPE_INT, ref osd);
+            result = m64pConfigSetParameterInt(video_section, "OnScreenDisplay", m64p_type.M64TYPE_INT, ref osd);
 
             //set_video_parameters(video_settings);
 
@@ -1279,7 +1353,9 @@ namespace Ultra
             m64pCoreAttachPlugin = (CoreAttachPlugin)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreAttachPlugin"), typeof(CoreAttachPlugin));
             m64pCoreDetachPlugin = (CoreDetachPlugin)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDetachPlugin"), typeof(CoreDetachPlugin));
             m64pConfigOpenSection = (ConfigOpenSection)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigOpenSection"), typeof(ConfigOpenSection));
-            m64pConfigSetParameter = (ConfigSetParameter)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetParameter"), typeof(ConfigSetParameter));
+            m64pConfigSetParameterStr = (ConfigSetParameterStr)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetParameter"), typeof(ConfigSetParameterStr));
+            m64pConfigSetParameterInt = (ConfigSetParameterInt)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetParameter"), typeof(ConfigSetParameterInt));
+            m64pConfigSetParameterBool = (ConfigSetParameterBool)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetParameter"), typeof(ConfigSetParameterBool));
             /*dont know if this even works*/m64pConfigSetPlugins = (ConfigSetPlugins)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetParameter"), typeof(ConfigSetPlugins));
             //m64pCoreSaveState = (savestates_save_bkm)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "savestates_save_bkm"), typeof(savestates_save_bkm));
             //m64pCoreLoadState = (savestates_load_bkm)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "savestates_load_bkm"), typeof(savestates_load_bkm));
@@ -1296,7 +1372,7 @@ namespace Ultra
             //m64p_decode_op = (biz_r4300_decode_op)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "biz_r4300_decode_op"), typeof(biz_r4300_decode_op));
            
             // Newer Version
-            //m64pConfigSetParameterStr = (ConfigSetParameterStr)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetParameter"), typeof(ConfigSetParameterStr));
+            //m64pConfigSetParameterIntStr = (ConfigSetParameterIntStr)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetParameterInt"), typeof(ConfigSetParameterIntStr));
             //m64pDebugSetCallbacks = (DebugSetCallbacks)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "DebugSetCallbacks"), typeof(DebugSetCallbacks));
             //m64pDebugBreakpointLookup = (DebugBreakpointLookup)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "DebugBreakpointLookup"), typeof(DebugBreakpointLookup));
             //m64pDebugBreakpointCommand = (DebugBreakpointCommand)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "DebugBreakpointCommand"), typeof(DebugBreakpointCommand));
@@ -1364,7 +1440,7 @@ namespace Ultra
             //    {
             //        value = (int)video_settings.Parameters[Parameter];
             //    }
-            //    m64pConfigSetParameter(video_plugin_section, Parameter, m64p_type.M64TYPE_INT, ref value);
+            //    m64pConfigSetParameterInt(video_plugin_section, Parameter, m64p_type.M64TYPE_INT, ref value);
             //}
         }
 

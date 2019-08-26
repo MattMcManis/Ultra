@@ -55,9 +55,6 @@
         >
 
     <Window.Resources>
-
-        
-
     </Window.Resources>
 
     <Window.DataContext>
@@ -394,14 +391,14 @@
                     <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
                           Header="_Theme" 
                           Height="24">
-                         <!-- Ultra --> 
+                        <!-- Ultra -->
                         <MenuItem Header="_Ultra"
                                   Click="ThemeUltra_MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Resources\Icons\White\theme-ultra.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                         <!-- N64 --> 
+                        <!-- N64 -->
                         <MenuItem Header="_N64"
                                   Click="ThemeN64_MenuItem_Click">
                             <MenuItem.Icon>
@@ -468,7 +465,7 @@
                     <Border Margin="0,0,0,0" 
                             BorderThickness="0" 
                             Background="Transparent"
-                            BorderBrush="#FF000000">
+                            BorderBrush="Transparent">
 
                         <Grid Margin="0,0,0,0"
                               Style="{DynamicResource GridStyle}">
@@ -491,24 +488,8 @@
                                   SelectionChanged="listViewGames_SelectionChanged"
                                   PreviewMouseDoubleClick="listViewGames_PreviewMouseDoubleClick"
                             >
-
-                                <ListView.Resources>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </Style>
-                                    <DataTemplate x:Key="Templ">
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding}"/>
-                                    </DataTemplate>
-                                    <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                                        <Setter Property="Visibility" Value="Collapsed" />
-                                    </Style>
-                                    <Style TargetType="ScrollBar">
-                                        <Setter Property="Background" Value="#FF000000"/>
-                                        <Setter Property="BorderBrush" Value="#FF323232"/>
-                                    </Style>
-                                </ListView.Resources>
-
+                                <!--<ListView.Resources>
+                                </ListView.Resources>-->
                                 <ListView.View>
                                     <GridView>
 
@@ -1206,91 +1187,32 @@
                 <Grid Background="Transparent">
 
                     <!-- CPU Core -->
-                    <GroupBox Header="CPU Core" 
+                    <GroupBox Header="CPU" 
                               Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
-                              Height="121" 
+                              Height="124" 
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
 
-                            <!-- Pure Interpreter -->
-                            <RadioButton x:Name="cbxPureInterpreter" 
-                                         Style="{DynamicResource RadioButtonStyle}"
-                                         IsChecked="{Binding Emulator_PureInterpreter_IsChecked}"
-                                         Content="Pure Interpreter"
-                                         HorizontalAlignment="Left" 
-                                         Margin="7,15,0,0"
-                                         VerticalAlignment="Top"/>
-
-                            <!-- Cached Interpreter -->
-                            <RadioButton x:Name="cbxCachedInterpreter" 
-                                         Style="{DynamicResource RadioButtonStyle}"
-                                         IsChecked="{Binding Emulator_CachedInterpreter_IsChecked}"
-                                         Content="Cached Interpreter"
-                                         HorizontalAlignment="Left" 
-                                         Margin="7,43,0,0"
-                                         VerticalAlignment="Top"/>
-
-                            <!-- Dynamic Recompiler -->
-                            <RadioButton x:Name="cbxDynamicRecompiler" 
-                                         Style="{DynamicResource RadioButtonStyle}"
-                                         IsChecked="{Binding Emulator_DynamicRecompiler_IsChecked}"
-                                         Content="Dynamic Recompiler"
-                                         HorizontalAlignment="Left" 
-                                         Margin="7,71,0,0"
-                                         VerticalAlignment="Top" />
-                        </Grid>
-
-                    </GroupBox>
-
-                    <!-- Compatibility -->
-                    <GroupBox Header="Compatibility" 
-                              Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,136,10,0" 
-                              Height="156" 
-                              VerticalAlignment="Top">
-
-                        <Grid Background="Transparent">
-
-                            <!-- No Compiled Jump -->
-                            <CheckBox x:Name="cbxNoCompiledJump" 
-                                      Style="{DynamicResource CheckBoxStyle}"
-                                      IsChecked="{Binding Emulator_NoCompiledJump_IsChecked}"
-                                      Content="No Compiled Jump"
+                            <!-- Cycles -->
+                            <ComboBox x:Name="cboCPU"
+                                      ItemsSource="{Binding CPU_Items}"
+                                      SelectedValue="{Binding CPU_SelectedItem}"
+                                      IsEnabled="{Binding CPU_IsEnabled}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      Margin="10,12,0,0"
+                                      VerticalAlignment="Top"
+                                      Height="22" 
                                       HorizontalAlignment="Left" 
-                                      Margin="7,15,0,0"
-                                      VerticalAlignment="Top" 
-                                      ToolTipService.InitialShowDelay="500" 
-                                      ToolTip="Disable compiled jump commands in dynamic recompiler (should be set to False)"/>
-
-                            <!-- Disable Extra Memory -->
-                            <CheckBox x:Name="cbxDisableExtraMemory" 
-                                      Style="{DynamicResource CheckBoxStyle}"
-                                      IsChecked="{Binding Emulator_DisableExtraMemory_IsChecked}"
-                                      Content="Disable Extra Memory"
-                                      HorizontalAlignment="Left" 
-                                      Margin="7,43,0,0"
-                                      VerticalAlignment="Top" 
-                                      ToolTipService.InitialShowDelay="500" 
-                                      ToolTip="Disable 4MB expansion RAM pack. May be necessary for some games"/>
-
-                            <!-- Delay SI -->
-                            <CheckBox x:Name="cbxDelaySI" 
-                                      Style="{DynamicResource CheckBoxStyle}"
-                                      IsChecked="{Binding Emulator_DelaySI_IsChecked}"
-                                      Content="Delay SI"
-                                      HorizontalAlignment="Left" 
-                                      Margin="7,71,0,0"
-                                      VerticalAlignment="Top" 
-                                      ToolTipService.InitialShowDelay="500" 
-                                      ToolTip="Delay interrupt after DMA SI read/write" />
+                                      Width="140" />
 
                             <!-- Cycles -->
                             <Label Content="Cycles Per Emulated Instruction" 
                                    Style="{DynamicResource LabelStyle}"
                                    HorizontalAlignment="Left" 
-                                   Margin="115,97,0,0" 
+                                   Margin="4,40,0,0" 
                                    VerticalAlignment="Top"
                                    Width="183"/>
                             <ComboBox x:Name="cboEmulator_Cycles"
@@ -1299,11 +1221,105 @@
                                       IsEnabled="{Binding Emulator_Cycles_IsEnabled}"
                                       Style="{DynamicResource ComboBoxStyle}"
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                      Margin="9,100,0,0"
+                                      Margin="9,68,0,0"
                                       VerticalAlignment="Top"
                                       Height="22" 
                                       HorizontalAlignment="Left" 
-                                      Width="100" />
+                                      Width="141" />
+
+                            <!-- Pure Interpreter -->
+                            <!--<RadioButton x:Name="cbxPureInterpreter" 
+                                         Style="{DynamicResource RadioButtonStyle}"
+                                         IsChecked="{Binding Emulator_PureInterpreter_IsChecked}"
+                                         Content="Pure Interpreter"
+                                         HorizontalAlignment="Left" 
+                                         Margin="7,15,0,0"
+                                         VerticalAlignment="Top"/>-->
+
+                            <!-- Cached Interpreter -->
+                            <!--<RadioButton x:Name="cbxCachedInterpreter" 
+                                         Style="{DynamicResource RadioButtonStyle}"
+                                         IsChecked="{Binding Emulator_CachedInterpreter_IsChecked}"
+                                         Content="Cached Interpreter"
+                                         HorizontalAlignment="Left" 
+                                         Margin="7,43,0,0"
+                                         VerticalAlignment="Top"/>-->
+
+                            <!-- Dynamic Recompiler -->
+                            <!--<RadioButton x:Name="cbxDynamicRecompiler" 
+                                         Style="{DynamicResource RadioButtonStyle}"
+                                         IsChecked="{Binding Emulator_DynamicRecompiler_IsChecked}"
+                                         Content="Dynamic Recompiler"
+                                         HorizontalAlignment="Left" 
+                                         Margin="7,71,0,0"
+                                         VerticalAlignment="Top" />-->
+                        </Grid>
+
+                    </GroupBox>
+
+                    <!-- Compatibility -->
+                    <GroupBox Header="Compatibility" 
+                              Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,139,10,0" 
+                              Height="178" 
+                              VerticalAlignment="Top">
+
+                        <Grid Background="Transparent">
+
+                            <!-- DisableSpecRecomp -->
+                            <CheckBox x:Name="cbxDisableSpecRecomp" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_DisableSpecRecomp_IsChecked}"
+                                      Content="Disable Spec Recomp"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,15,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Disable speculative precompilation in new dynarec."/>
+
+                            <!-- RandomizeInterrupt -->
+                            <CheckBox x:Name="cbxRandomizeInterrupt" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_RandomizeInterrupt_IsChecked}"
+                                      Content="Randomize Interrupt"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,43,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Randomize PI/SI Interrupt Timing."/>
+
+                            <!-- NoCompiledJump -->
+                            <CheckBox x:Name="cbxNoCompiledJump" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_NoCompiledJump_IsChecked}"
+                                      Content="No Compiled Jump"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,71,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Disable compiled jump commands in dynamic recompiler (should be set to False)."/>
+
+                            <!-- DisableExtraMemory -->
+                            <CheckBox x:Name="cbxDisableExtraMemory" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_DisableExtraMemory_IsChecked}"
+                                      Content="Disable Extra Memory"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,99,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Disable 4MB expansion RAM pack. May be necessary for some games."/>
+
+                            <!-- DelaySI -->
+                            <CheckBox x:Name="cbxDelaySI" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      IsChecked="{Binding Emulator_DelaySI_IsChecked}"
+                                      Content="Delay SI"
+                                      HorizontalAlignment="Left" 
+                                      Margin="7,127,0,0"
+                                      VerticalAlignment="Top" 
+                                      ToolTipService.InitialShowDelay="500" 
+                                      ToolTip="Delay interrupt after DMA SI read/write." />
 
                         </Grid>
 
