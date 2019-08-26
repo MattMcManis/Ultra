@@ -81,13 +81,15 @@
         </Style.Triggers>
     </Style>
 
+    
     <!--/////////////////////////////////////
         Grid
         /////////////////////////////////////-->
     <Style x:Key="GridStyle" TargetType="{x:Type Grid}">
-        <Setter Property="Background" Value="#FF5B5B5B"/>
+        <Setter Property="Background" Value="#FF4E4E51"/>
     </Style>
 
+    
     <!--/////////////////////////////////////
         Tab Control
         /////////////////////////////////////-->
@@ -428,7 +430,9 @@
         /////////////////////////////////////-->
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
     <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}">
-        <Setter Property="BorderBrush" Value="#59FFFFFF"/>
+        <Setter Property="BorderBrush" Value="#FF4E4E51"/>
+        <!--<Setter Property="BorderBrush" Value="#66FFFFFF"/>-->
+        <!--<Setter Property="Background" Value="#FF4E4E51"/>-->
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="TextElement.Foreground" Value="#FF000000"/>
         <Setter Property="Template">
@@ -561,14 +565,14 @@
         List View
         /////////////////////////////////////-->
     <!--Enabled-->
-    <SolidColorBrush x:Key="ListView.Static.Foreground" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="ListView.Static.Foreground" Color="#FFE7E7E7"/>
     <SolidColorBrush x:Key="ListView.Static.Background" Color="Transparent"/>
     <!--<ImageBrush x:Key="ListView.Static.Background" ImageSource="Resources/Images/logo-3d-185px.png" Stretch="None" AlignmentX="Center" AlignmentY="Center"/>-->
     <SolidColorBrush x:Key="ListView.Static.Border" Color="#FFACACAC"/>
     <SolidColorBrush x:Key="ListView.Selected.Foreground" Color="#FFC5C5C5"/>
     <!--Disabled-->
     <SolidColorBrush x:Key="ListView.Disabled.Foreground" Color="#FF555555"/>
-    <SolidColorBrush x:Key="ListView.Disabled.Background" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="ListView.Disabled.Background" Color="#FF4E4E51"/>
     <SolidColorBrush x:Key="ListView.Disabled.Border" Color="#FF2E2E2E"/>
 
     <Style x:Key="ListViewStyle" TargetType="{x:Type ListView}">
@@ -721,7 +725,7 @@
     </LinearGradientBrush>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Glyph" Color="#FFf5b200"/>
-    <SolidColorBrush x:Key="ComboBox.Pressed.Background" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="ComboBox.Pressed.Background" Color="#FF4E4E51"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Border" Color="#FFC7C7C7"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Border" Color="#FF569DE5"/>
@@ -731,7 +735,7 @@
     </LinearGradientBrush>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Border" Color="#FF569DE5"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Glyph" Color="#FFBFBFBF"/>
-    <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="ComboBox.Disabled.Background" Color="#FF4E4E51"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Border" Color="#FF555555"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Foreground" Color="DarkGray"/>
     <SolidColorBrush x:Key="ComboBox.Disabled.Editable.Background" Color="#FFFFFFFF"/>
@@ -1042,6 +1046,7 @@
                     <Condition Property="IsMouseOver" Value="True"/>
                     <Condition Property="IsKeyboardFocused" Value="True"/>
                 </MultiTrigger.Conditions>
+                <Setter Property="Foreground" Value="#FF000099" />
                 <Setter Property="Background" TargetName="Bd" Value="#FFBDBDBD"/>
                 <Setter Property="BorderBrush" TargetName="Bd" Value="#FFBDBDBD"/>
             </MultiTrigger>
@@ -1057,6 +1062,7 @@
         <Setter Property="BorderBrush" Value="#FFA0A0A0" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="true">
+                <Setter Property="Foreground" Value="#FF000099" />
                 <Setter Property="Background" Value="#FF1049BB" />
             </Trigger>
         </Style.Triggers>
@@ -1067,11 +1073,10 @@
     <!--/////////////////////////////////////
         ComboBox Category
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="ComboBoxCategoryHeader.Static.Foreground" Color="#FF025da2"/>
-
-    <SolidColorBrush x:Key="ComboBoxCategory.Static.Background" Color="#FF000000"/>
-    <SolidColorBrush x:Key="ComboBoxCategory.Static.Border" Color="#FFACACAC"/>
-    <SolidColorBrush x:Key="ComboBoxCategory.Static.Foreground" Color="#FFFFFFFF"/>
+    <!--<SolidColorBrush x:Key="ComboBoxCategory.Header.Static.Foreground" Color="#FF339900"/>-->
+    <SolidColorBrush x:Key="ComboBoxCategory.Static.Background" Color="#FFA0A0A0"/>
+    <SolidColorBrush x:Key="ComboBoxCategory.Static.Border" Color="#FF000099"/>
+    <SolidColorBrush x:Key="ComboBoxCategory.Static.Foreground" Color="#FF000000"/>
     <SolidColorBrush x:Key="ComboBoxCategory.Static.Editable.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBoxCategory.Static.Editable.Border" Color="#FFABADB3"/>
     <SolidColorBrush x:Key="ComboBoxCategory.Static.Editable.Button.Background" Color="Transparent"/>
@@ -1106,7 +1111,7 @@
     <SolidColorBrush x:Key="ComboBoxCategory.Disabled.Editable.Button.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBoxCategory.Static.Glyph" Color="#FF7C7C7C"/>
 
-    <SolidColorBrush x:Key="ComboBoxCategory.MouseOver.Foreground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ComboBoxCategory.MouseOver.Foreground" Color="#FF000099"/>
 
     <Style x:Key="ComboBoxCategoryToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -1358,9 +1363,9 @@
         </Border>
         <ControlTemplate.Triggers>
             <!-- Item Header -->
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource ComboBoxCategoryStyleHeader.Static.Foreground}"/>
-            </Trigger>
+            <!--<Trigger Property="IsEnabled" Value="False">
+                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource ComboBoxCategory.Header.Static.Foreground}"/>
+            </Trigger>-->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="False"/>
@@ -1424,13 +1429,13 @@
     <!-- ComboBox Category Item -->
     <Style x:Key="ComboBoxCategoryItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Template" Value="{DynamicResource ComboBoxStyle.Item.ControlTemplate}"/>
-        <Setter Property="Foreground" Value="#FFFFFFFF" />
-        <Setter Property="Background" Value="#FF000000" />
-        <Setter Property="BorderBrush" Value="#FF000000" />
+        <Setter Property="Foreground" Value="{StaticResource ComboBoxCategory.Static.Foreground}" />
+        <Setter Property="Background" Value="{StaticResource ComboBoxCategory.Static.Background}" />
+        <Setter Property="BorderBrush" Value="#FFA0A0A0" />
         <Style.Triggers>
             <!-- Selected -->
             <Trigger Property="IsSelected" Value="true">
-                <Setter Property="Foreground" Value="{StaticResource ComboBoxCategory.Static.Foreground}" />
+                <Setter Property="Foreground" Value="#FF000099" />
                 <Setter Property="Background" Value="{StaticResource ComboBoxCategory.Static.Background}" />
             </Trigger>
 
@@ -1475,7 +1480,7 @@
     <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFB8B8B8"/>
     <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FFf5b200"/>
     <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FF7D7D7D"/>
-    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FF4E4E51"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF313131"/>
 
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
@@ -1579,11 +1584,11 @@
     <!--/////////////////////////////////////
           TextBox
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="TextBoxStyle.Static.Foreground" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="TextBoxStyle.Static.Background" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="TextBoxStyle.Static.Foreground" Color="#FFE7E7E7"/>
+    <SolidColorBrush x:Key="TextBoxStyle.Static.Background" Color="#FF4E4E51"/>
     <SolidColorBrush x:Key="TextBoxStyle.Static.Border" Color="#FF858585"/>
 
-    <SolidColorBrush x:Key="TextBoxStyle.Disabled.Background" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="TextBoxStyle.Disabled.Background" Color="#FF4E4E51"/>
     <SolidColorBrush x:Key="TextBoxStyle.Disabled.Foreground" Color="DarkGray"/>
     <SolidColorBrush x:Key="TextBoxStyle.Disabled.Border" Color="#FF555555"/>
 
@@ -1591,7 +1596,7 @@
     <SolidColorBrush x:Key="TextBoxStyle.Focus.Border" Color="#FFEEEEEE"/>
 
     <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Background" Value="{StaticResource TextBoxStyle.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TextBoxStyle.Static.Border}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBoxStyle.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -1610,11 +1615,10 @@
                     <!-- TextBox Triggers -->
                     <ControlTemplate.Triggers>
                         <!-- Enabled / Disabled TextBox Colors & Opacity -->
-                        <Trigger Property="IsEnabled" Value="true">
+                        <!--<Trigger Property="IsEnabled" Value="true">
                             <Setter Property="Foreground" Value="#FFFFFFFF" />
                             <Setter Property="Background" Value="{StaticResource TextBoxStyle.Static.Background}" />
-                        </Trigger>
-
+                        </Trigger>-->
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBoxStyle.MouseOver.Border}"/>
                         </Trigger>
@@ -1664,7 +1668,7 @@
         Radio Button
         /////////////////////////////////////-->
     <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF000099"/>
     <SolidColorBrush x:Key="RadioButton.Static.Foreground" Color="#FF000000"/>
     <SolidColorBrush x:Key="RadioButton.Checked.Border" Color="#FF339900"/>
     <SolidColorBrush x:Key="RadioButton.MouseOver.Background" Color="#FFF3F9FF"/>
@@ -1736,7 +1740,7 @@
         CheckBox
         /////////////////////////////////////-->
     <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF000099"/>
     <SolidColorBrush x:Key="OptionMark.Static.Foreground" Color="#FF000000"/>
     <Style x:Key="OptionMarkFocusVisual">
         <Setter Property="Control.Template">
@@ -1753,7 +1757,7 @@
     <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FF9E9E9E"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FF6A6A6A"/>
-    <SolidColorBrush x:Key="OptionMark.Disabled.Foreground" Color="#FF5B5B5B"/>
+    <SolidColorBrush x:Key="OptionMark.Disabled.Foreground" Color="#FF4E4E51"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
     <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
     <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF000099"/>
@@ -1892,8 +1896,8 @@
     <!--/////////////////////////////////////
         Menu
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="Menu.Static.Background" Color="#FF5B5B5B"/>
-    <SolidColorBrush x:Key="Menu.Static.Foreground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="Menu.Static.Background" Color="#FF4E4E51"/>
+    <SolidColorBrush x:Key="Menu.Static.Foreground" Color="#FFE7E7E7"/>
 
     <Style x:Key="MenuStyle" TargetType="{x:Type Menu}">
         <Setter Property="Background" Value="{StaticResource Menu.Static.Background}"/>
@@ -1931,7 +1935,7 @@
                     <Border x:Name="SubMenuBorder" 
                             BorderBrush="#FF999999" 
                             BorderThickness="1" 
-                            Background="#FF5B5B5B" 
+                            Background="#FF4E4E51" 
                             Padding="2">
                         <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                             <Grid RenderOptions.ClearTypeHint="Enabled">
@@ -1999,9 +2003,9 @@
     <!--Outer menu items-->
     <Style TargetType="{x:Type MenuItem}">
         <Setter Property="Background"
-                Value="#FF5B5B5B"></Setter>
+                Value="#FF4E4E51"></Setter>
         <Setter Property="Foreground"
-                Value="#FFFFFFFF"></Setter>
+                Value="#FFE7E7E7"></Setter>
         <Style.Triggers>
             <Trigger Property="IsHighlighted"
                      Value="True">
@@ -2082,7 +2086,7 @@
                           Height="7"
                           Visibility="Hidden"
                           SnapsToDevicePixels="False"
-                          Stroke="#FFFFFFFF"
+                          Stroke="#FFE7E7E7"
                           StrokeThickness="2"
                           Data="M 0 0 L 7 7 M 0 7 L 7 0" />
                 </Border>
@@ -2137,7 +2141,7 @@
                 <Setter Property="BorderBrush" TargetName="Border" Value="Transparent" />
                 <Setter Property="BorderThickness" TargetName="Border" Value="1" />
                 <Setter Property="Foreground"
-                        Value="#FFFFFFFF" />
+                        Value="#FFE7E7E7" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -2173,7 +2177,7 @@
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
                       Data="M 0 0 L 0 7 L 4 3.5 Z"
-                      Fill="#FFFFFFFF" />
+                      Fill="#FFE7E7E7" />
                 <Popup Name="Popup"
                        Placement="Right"
                        HorizontalOffset="-4"
@@ -2183,7 +2187,7 @@
                        PopupAnimation="Fade">
                     <Border Name="SubmenuBorder"
                             SnapsToDevicePixels="True"
-                            Background="#FF5B5B5B"
+                            Background="#FF4E4E51"
                             BorderBrush="#999999"
                             BorderThickness="1">
                         <StackPanel IsItemsHost="True"
@@ -2223,7 +2227,7 @@
             <Trigger Property="IsEnabled"
                      Value="false">
                 <Setter Property="Foreground"
-                        Value="#FFFFFFFF" />
+                        Value="#FFE7E7E7" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

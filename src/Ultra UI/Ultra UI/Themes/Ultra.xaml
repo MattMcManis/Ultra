@@ -81,6 +81,15 @@
         </Style.Triggers>
     </Style>
 
+    
+    <!--/////////////////////////////////////
+        Grid
+        /////////////////////////////////////-->
+    <Style x:Key="GridStyle" TargetType="{x:Type Grid}">
+        <Setter Property="Background" Value="#FF000000"/>
+    </Style>
+    
+    
     <!--/////////////////////////////////////
         Tab Control
         /////////////////////////////////////-->
@@ -1068,7 +1077,7 @@
     <!--/////////////////////////////////////
         ComboBox Category
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="ComboBoxCategoryHeader.Static.Foreground" Color="#FF025da2"/>
+    <!--<SolidColorBrush x:Key="ComboBoxCategory.Header.Static.Foreground" Color="#FF025da2"/>-->
 
     <SolidColorBrush x:Key="ComboBoxCategory.Static.Background" Color="#FF000000"/>
     <SolidColorBrush x:Key="ComboBoxCategory.Static.Border" Color="#FFACACAC"/>
@@ -1359,9 +1368,9 @@
         </Border>
         <ControlTemplate.Triggers>
             <!-- Item Header -->
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource ComboBoxCategoryStyleHeader.Static.Foreground}"/>
-            </Trigger>
+            <!--<Trigger Property="IsEnabled" Value="False">
+                <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{StaticResource ComboBoxCategory.Header.Static.Foreground}"/>
+            </Trigger>-->
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsSelected" Value="False"/>
@@ -1425,8 +1434,8 @@
     <!-- ComboBox Category Item -->
     <Style x:Key="ComboBoxCategoryItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Template" Value="{DynamicResource ComboBoxStyle.Item.ControlTemplate}"/>
-        <Setter Property="Foreground" Value="#FFFFFFFF" />
-        <Setter Property="Background" Value="#FF000000" />
+        <Setter Property="Foreground" Value="{StaticResource ComboBoxCategory.Static.Foreground}" />
+        <Setter Property="Background" Value="{StaticResource ComboBoxCategory.Static.Background}" />
         <Setter Property="BorderBrush" Value="#FF000000" />
         <Style.Triggers>
             <!-- Selected -->
@@ -1590,7 +1599,7 @@
     <SolidColorBrush x:Key="TextBoxStyle.Focus.Border" Color="#FFEEEEEE"/>
 
     <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Background" Value="{StaticResource TextBoxStyle.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TextBoxStyle.Static.Border}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBoxStyle.Static.Foreground}"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -1609,11 +1618,10 @@
                     <!-- TextBox Triggers -->
                     <ControlTemplate.Triggers>
                         <!-- Enabled / Disabled TextBox Colors & Opacity -->
-                        <Trigger Property="IsEnabled" Value="true">
+                        <!--<Trigger Property="IsEnabled" Value="true">
                             <Setter Property="Foreground" Value="#FFFFFFFF" />
                             <Setter Property="Background" Value="{StaticResource TextBoxStyle.Static.Background}" />
-                        </Trigger>
-
+                        </Trigger>-->
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBoxStyle.MouseOver.Border}"/>
                         </Trigger>
