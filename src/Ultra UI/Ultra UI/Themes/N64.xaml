@@ -722,7 +722,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FFA0A0A0"/>
+    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="#FFACACAA"/>
     <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FF000099"/>
     <SolidColorBrush x:Key="ComboBox.Static.Foreground" Color="#FF000000"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
@@ -730,7 +730,7 @@
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FFf5b200"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FFA0A0A0"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#FFACACAA"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#FFf5b200"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#FF7EB4EA"/>
@@ -1479,7 +1479,7 @@
         Button
         /////////////////////////////////////-->
     <SolidColorBrush x:Key="Button.Static.Foreground" Color="#FF000000"/>
-    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFA0A0A0"/>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFACACAA"/>
     <SolidColorBrush x:Key="Button.Static.Border" Color="#FF000099"/>
 
     <!--<LinearGradientBrush x:Key="Button.Static.Border" EndPoint="0,1" StartPoint="0,0">
@@ -1490,7 +1490,7 @@
     </LinearGradientBrush>-->
 
     <!--<SolidColorBrush x:Key="Button.MouseOver.Foreground" Color="#FF339900"/>-->
-    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFA0A0A0"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFACACAA"/>
     <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FFf5b200"/>
     <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFB8B8B8"/>
     <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FFf5b200"/>
@@ -1754,7 +1754,7 @@
     <!--/////////////////////////////////////
         CheckBox
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFD7D7D7"/>
     <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF000099"/>
     <SolidColorBrush x:Key="OptionMark.Static.Foreground" Color="#FF000000"/>
     <Style x:Key="OptionMarkFocusVisual">
@@ -1766,7 +1766,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFF3F9FF"/>
+    <SolidColorBrush x:Key="OptionMark.MouseOver.Background" Color="#FFD7D7D7"/>
     <SolidColorBrush x:Key="OptionMark.MouseOver.Border" Color="#FFf5b200"/>
     <SolidColorBrush x:Key="OptionMark.Checked.Border" Color="#FF339900"/>
     <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
