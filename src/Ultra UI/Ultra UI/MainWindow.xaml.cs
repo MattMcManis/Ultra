@@ -1753,10 +1753,10 @@ namespace Ultra
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(0);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(0);
         }
 
         private void StateSlot1_MenuItem_Click(object sender, RoutedEventArgs e)
@@ -1764,91 +1764,90 @@ namespace Ultra
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(1);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(1);
         }
         private void StateSlot2_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(2);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(2);
         }
         private void StateSlot3_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(3);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(3);
         }
         private void StateSlot4_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(4);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(4);
         }
         private void StateSlot5_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
-                //PressKey("{5}");
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(5);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(5);
         }
         private void StateSlot6_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(6);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(6);
         }
         private void StateSlot7_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(7);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(7);
         }
         private void StateSlot8_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot();
-
-                // Stay Checked
-                SlotCheckUncheck(8);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(8);
         }
         private void StateSlot9_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.StateSlot(); // state 9 not working
-
-                // Stay Checked
-                SlotCheckUncheck(9);
             }
+
+            // Stay Checked
+            SlotCheckUncheck(9);
         }
 
         /// <summary>
