@@ -630,6 +630,22 @@
         </Setter>
     </Style>
 
+    <!-- ListView Scrollbar -->
+    <Style TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+    <DataTemplate x:Key="Templ">
+        <TextBlock HorizontalAlignment="Left" Text="{Binding}"/>
+    </DataTemplate>
+    <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+    <Style TargetType="ScrollBar">
+        <Setter Property="Background" Value="#FF000000"/>
+        <Setter Property="BorderBrush" Value="#FF323232"/>
+    </Style>
+
 
     <!--/////////////////////////////////////
         List Item

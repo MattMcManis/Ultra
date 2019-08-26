@@ -511,7 +511,7 @@
     <!--/////////////////////////////////////
         Scroll Viewer
         /////////////////////////////////////-->
-    <SolidColorBrush x:Key="ScrollViewer.Static.Background" Color="#FF4c4c4f"/>
+    <SolidColorBrush x:Key="ScrollViewer.Static.Background" Color="#FF4E4E51"/>
 
     <ControlTemplate x:Key="ScrollViewerControlTemplate" TargetType="{x:Type ScrollViewer}">
         <Grid x:Name="Grid" Background="{DynamicResource ScrollViewer.Static.Background}">
@@ -622,6 +622,21 @@
         </Setter>
     </Style>
 
+    <!-- ListView Scrollbar -->
+    <Style TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+    <DataTemplate x:Key="Templ">
+        <TextBlock HorizontalAlignment="Left" Text="{Binding}"/>
+    </DataTemplate>
+    <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Visibility" Value="Collapsed" />
+    </Style>
+    <Style TargetType="ScrollBar">
+        <Setter Property="Background" Value="#FF4E4E51"/>
+        <Setter Property="BorderBrush" Value="#FF4E4E51"/>
+    </Style>
 
     <!--/////////////////////////////////////
         List Item
