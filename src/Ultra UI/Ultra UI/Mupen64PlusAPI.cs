@@ -884,36 +884,36 @@ namespace Ultra
             // -------------------------
             // Set Vsync
             // -------------------------
-            int vsync = 0;
+            bool vsync = false;
             // Off
             if (VM.DisplayView.Display_Vsync_IsChecked == false)
             {
-                vsync = 0;
+                vsync = false;
             }
             // On
             else if (VM.DisplayView.Display_Vsync_IsChecked == true)
             {
-                vsync = 1;
+                vsync = true;
             }
 
-            result = m64pConfigSetParameterInt(video_section, "VerticalSync", m64p_type.M64TYPE_BOOL, ref vsync);
+            result = m64pConfigSetParameterBool(video_section, "VerticalSync", m64p_type.M64TYPE_BOOL, ref vsync);
 
             // -------------------------
             // OnScreenDisplay
             // -------------------------
-            int osd = 0;
+            bool osd = false;
             // Off
             if (VM.DisplayView.Display_OSD_IsChecked == false)
             {
-                osd = 0;
+                osd = false;
             }
             // On
             else if (VM.DisplayView.Display_OSD_IsChecked == true)
             {
-                osd = 1;
+                osd = true;
             }
 
-            result = m64pConfigSetParameterInt(video_section, "OnScreenDisplay", m64p_type.M64TYPE_INT, ref osd);
+            result = m64pConfigSetParameterBool(video_section, "OnScreenDisplay", m64p_type.M64TYPE_BOOL, ref osd);
 
             //set_video_parameters(video_settings);
 
