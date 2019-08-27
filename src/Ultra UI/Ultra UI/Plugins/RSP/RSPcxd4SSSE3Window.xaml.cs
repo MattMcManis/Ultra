@@ -91,7 +91,7 @@ namespace Ultra
         private static void PluginCfgReader()
         {
             // Check if Paths Config TextBox is Empty
-            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+            if (MainWindow.IsValidPath(VM.PathsView.Config_Text))
             {
                 // Check if Cfg File Exists
                 if (File.Exists(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")))

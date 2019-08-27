@@ -174,7 +174,7 @@ namespace Ultra
             //MessageBox.Show(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")); //debug
 
             // Check if Paths Config TextBox is Empty
-            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+            if (MainWindow.IsValidPath(VM.PathsView.Config_Text))
             {
                 // Check if Cfg File Exists
                 if (File.Exists(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")))
@@ -767,7 +767,7 @@ namespace Ultra
         public void ButtonCfgReader()
         {
             // Check if Paths Config TextBox is Empty
-            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+            if (MainWindow.IsValidPath(VM.PathsView.Config_Text))
             {
                 // Check if Cfg File Exists
                 if (File.Exists(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")))
@@ -887,7 +887,7 @@ namespace Ultra
             //MessageBox.Show(input); //debug
 
             // Null check to prevent .Contains() crash
-            if (!string.IsNullOrEmpty(input))
+            if (MainWindow.IsValidPath(input))
             {
                 // int.TryParse value
                 // -1 is Not an int
@@ -1952,7 +1952,8 @@ namespace Ultra
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             // Check if Paths Config TextBox is Empty
-            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text) &&
+                !string.IsNullOrWhiteSpace(VM.PathsView.Config_Text))
             {
                 // Check if Cfg File Exists
                 if (File.Exists(Path.Combine(VM.PathsView.Config_Text, "mupen64plus.cfg")))

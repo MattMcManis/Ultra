@@ -232,13 +232,13 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Soft Reset -->
-                        <MenuItem Header="_Soft Reset" 
+                        <!--<MenuItem Header="_Soft Reset" 
                               InputGestureText="F8"
                               Click="Reset_MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Resources\Icons\White\soft-reset.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
-                        </MenuItem>
+                        </MenuItem>-->
                         <Separator Style="{DynamicResource SeparatorStyle}" />
                         <!-- Slow Down -->
                         <MenuItem Header="_Slow Down"
@@ -270,16 +270,14 @@
                         </MenuItem>
                     </MenuItem>
                     <!-- View -->
-                    <!--<MenuItem Template="{DynamicResource MenuItemControlTemplate}"
+                    <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
                           Header="_View" 
                           Height="24">
-                         -->
-                    <!-- Fullscreen -->
-                    <!-- 
+                        <!--Fullscreen--> 
                         <MenuItem Header="_Fullscreen" 
                                   InputGestureText="Alt+Enter"
                                   Click="Fullscreen_MenuItem_Click"/>
-                    </MenuItem>-->
+                    </MenuItem>
                     <!-- Configure -->
                     <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
                           Header="_Configure" 

@@ -46,9 +46,9 @@ namespace Ultra
         // API
         public static Mupen64PlusAPI api = null; // mupen64plus DLL Api
 
-        bool disposed = false;
+        public bool disposed = false;
 
-        Thread m64pEmulator;
+        //public Thread m64pEmulator;
 
         AutoResetEvent m64pFrameComplete = new AutoResetEvent(false);
         ManualResetEvent m64pStartupComplete = new ManualResetEvent(false);
@@ -404,6 +404,10 @@ namespace Ultra
         CoreDoCommandPtr m64pCoreDoCommandPtr;
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        delegate m64p_error CoreDoCommandRefPtr(m64p_command Command, ref int ParamInt, IntPtr ParamPtr);
+        CoreDoCommandRefPtr m64pCoreDoCommandRefPtr;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate m64p_error CoreDoCommandStr(m64p_command Command, int ParamInt, string ParamPtr);
         CoreDoCommandStr m64pCoreDoCommandStr;
 
@@ -424,7 +428,7 @@ namespace Ultra
         CoreDoCommandCoreStateSet m64pCoreDoCommandCoreStateSet;
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        delegate m64p_error CoreDoCommandCoreStateSetVideoMode(m64p_command Command, m64p_video_mode ParamInt, ref int ParamPtr);
+        delegate m64p_error CoreDoCommandCoreStateSetVideoMode(m64p_command Command, m64p_video_mode ParamInt, IntPtr ParamPtr/* ref int ParamPtr*/);
         CoreDoCommandCoreStateSetVideoMode m64pCoreDoCommandCoreStateVideoMode;
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -570,6 +574,27 @@ namespace Ultra
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void GetRegisters(byte[] dest);
         GetRegisters m64pGetRegisters;
+
+        /// <summary>
+		/// This will be called when the debugger is initialized
+		/// </summary>
+		//[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        //public delegate void DebugInitCallback();
+        //DebugInitCallback m64pDebugInitCallback;
+
+        /// <summary>
+        /// This will be called when the debugger hits a breakpoint or executes one instruction in stepping mode
+        /// </summary>
+        //[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        //public delegate void DebugUpdateCallback(int bpt);
+        //DebugUpdateCallback m64pDebugUpdateCallback;
+
+        /// <summary>
+        ///  Sets the debug callbacks
+        /// </summary>
+        //[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        //delegate m64p_error DebugSetCallbacks(DebugInitCallback initCallback, DebugUpdateCallback updateCallback, DebugVICallback viCallback);
+        //DebugSetCallbacks m64pDebugSetCallbacks;
 
         // DLL handles
         public IntPtr CoreDll { get; private set; }
@@ -955,6 +980,17 @@ namespace Ultra
             m64pRenderCallback = new RenderCallback(FireRenderEvent);
             result = m64pCoreDoCommandRenderCallback(m64p_command.M64CMD_SET_RENDER_CALLBACK, 0, m64pRenderCallback);
 
+            //m64pFrameCallback = new FrameCallback(FireFrameFinishedEvent);
+            //result = m64pCoreDoCommandFrameCallback(m64p_command.M64CMD_SET_FRAME_CALLBACK, 0, m64pFrameCallback);
+            //m64pVICallback = new VICallback(FireVIEvent);
+            //result = m64pCoreDoCommandVICallback(m64p_command.M64CMD_SET_VI_CALLBACK, 0, m64pVICallback);
+            //m64pRenderCallback = new RenderCallback(FireRenderEvent);
+            //result = m64pCoreDoCommandRenderCallback(m64p_command.M64CMD_SET_RENDER_CALLBACK, 0, m64pRenderCallback);
+            //m64pDebugInitCallback = new DebugInitCallback(OnDebuggerInitialized);
+            //m64pDebugUpdateCallback = new DebugUpdateCallback(FireBreakpointEvent);
+            //result = m64pDebugSetCallbacks(m64pDebugInitCallback, m64pDebugUpdateCallback, null);
+
+
             // -------------------------
             // Save Config
             // -------------------------
@@ -999,6 +1035,11 @@ namespace Ultra
             // Start
             // -------------------------
             ExecuteEmulator();
+
+            //m64pEmulator = new Thread(() =>
+            //    ExecuteEmulator()
+            //);
+            
         }
 
 
@@ -1037,7 +1078,7 @@ namespace Ultra
         /// </summary>
         public void AsyncExecuteEmulator()
         {
-            m64pEmulator.Start();
+            Game.m64pEmulator.Start();
 
             // Wait for the core to boot up
             m64pStartupComplete.WaitOne();
@@ -1051,8 +1092,7 @@ namespace Ultra
         {
             emulator_running = true;
             var cb = new StartupCallback(() => m64pStartupComplete.Set());
-            m64pCoreDoCommandPtr(m64p_command.M64CMD_EXECUTE, 0,
-                Marshal.GetFunctionPointerForDelegate(cb));
+            m64pCoreDoCommandPtr(m64p_command.M64CMD_EXECUTE, 0, Marshal.GetFunctionPointerForDelegate(cb));
             emulator_running = false;
             cb.GetType();
         }
@@ -1194,9 +1234,36 @@ namespace Ultra
         /// <summary>
         /// Pause
         /// </summary>
+        private int pause = 3;
         public void Pause()
         {
-            m64pCoreDoCommandPtr(m64p_command.M64CMD_PAUSE, 0, IntPtr.Zero);
+            //m64pCoreDoCommandPtr(m64p_command.M64CMD_PAUSE, 0, IntPtr.Zero);         
+            //m64pCoreDoCommandRefPtr(m64p_command.M64CMD_PAUSE, ref pause, IntPtr.Zero);
+
+            // 1=Stopped, 2=Running, 3=Paused
+
+            // Pause
+            if (pause == 3)
+            {
+                m64pCoreDoCommandCoreStateSet(
+                    m64p_command.M64CMD_CORE_STATE_SET,
+                    m64p_core_param.M64CORE_EMU_STATE,
+                    ref pause
+                );
+
+                pause = 2;
+            }
+            // Resume
+            else if (pause == 2)
+            {
+                m64pCoreDoCommandCoreStateSet(
+                    m64p_command.M64CMD_CORE_STATE_SET,
+                    m64p_core_param.M64CORE_EMU_STATE,
+                    ref pause
+                );
+
+                pause = 3;
+            }
         }
 
         /// <summary>
@@ -1230,13 +1297,49 @@ namespace Ultra
         {
             //m64pCoreDoCommandPtr(m64p_command.M64CMD_STOP, 0, IntPtr.Zero);
             Dispose();
+
+            // Reset Dispose
+            //disposed = true;
+
+            // 1=Stopped, 2=Running, 3=Paused
+
+            //int stop = 1;
+            //m64pCoreDoCommandCoreStateSet(
+            //       m64p_command.M64CMD_CORE_STATE_SET,
+            //       m64p_core_param.M64CORE_EMU_STATE,
+            //       ref stop
+            //   );
+
+            //// Stop the core, and wait for it to end
+            //while (emulator_running)
+            //{
+            //    // Repeatedly send the stop command, because sometimes sending it just once doesn't work
+            //    m64pCoreDoCommandPtr(m64p_command.M64CMD_STOP, 0, IntPtr.Zero);
+            //}
+
+            //// Backup the saveram in case bizhawk wants to get at is after we've freed the libraries
+            ////saveram_backup = SaveSaveram();
+
+            //DetachPlugin(m64p_plugin_type.M64PLUGIN_GFX);
+            //DetachPlugin(m64p_plugin_type.M64PLUGIN_AUDIO);
+            //DetachPlugin(m64p_plugin_type.M64PLUGIN_INPUT);
+            //DetachPlugin(m64p_plugin_type.M64PLUGIN_RSP);
+
+            //m64pCoreDoCommandPtr(m64p_command.M64CMD_ROM_CLOSE, 0, IntPtr.Zero);
+            ////m64pCoreShutdown();
+            //FreeLibrary(CoreDll);
+
+            //Dispose();
+
+            //Mupen64PlusAPI.api = null;
         }
 
         /// <summary>
         /// Reset
         /// </summary>
-        public void Reset()
+        public void HardReset()
         {
+            //int reset = 1;
             // ParamInt 0 to do a soft reset, 1 to do a hard reset.
             m64pCoreDoCommandPtr(m64p_command.M64CMD_RESET, 1, IntPtr.Zero);
         }
@@ -1246,6 +1349,8 @@ namespace Ultra
         /// </summary>
         public void SoftReset()
         {
+            //int reset = 0;
+
             // ParamInt 0 to do a soft reset, 1 to do a hard reset.
             m64pCoreDoCommandPtr(m64p_command.M64CMD_RESET, 0, IntPtr.Zero);
         }
@@ -1298,31 +1403,56 @@ namespace Ultra
         /// <summary>
         /// Fullscreen
         /// </summary>
-        int mode = 3; // default fullscreen
+        int videoMode = 2; // default windowed
         public void Fullscreen()
         {
+            // 1=None (video not running), 2=Windowed, 3=Fullscreen 
+
             // Fullscreen
-            if (mode == 3)
+            if (videoMode == 3)
             {
                 m64pCoreDoCommandCoreStateSet(
                     m64p_command.M64CMD_CORE_STATE_SET,
                     m64p_core_param.M64CORE_VIDEO_MODE,
-                    ref mode
+                    ref videoMode
                 );
 
-                mode = 2;
+                videoMode = 2;
             }
             // Windowed
-            else if (mute == 2)
+            else if (videoMode == 2)
             {
                 m64pCoreDoCommandCoreStateSet(
                     m64p_command.M64CMD_CORE_STATE_SET,
                     m64p_core_param.M64CORE_VIDEO_MODE,
-                    ref mode
+                    ref videoMode
                 );
 
-                mode = 3;
-            }     
+                videoMode = 3;
+            }
+
+            //// Fullscreen
+            //if (videoMode == 3)
+            //{
+            //    m64pCoreDoCommandCoreStateVideoMode(
+            //        m64p_command.M64CMD_CORE_STATE_SET,
+            //        m64p_video_mode.M64VIDEO_FULLSCREEN,
+            //        IntPtr.Zero
+            //    );
+
+            //    videoMode = 2;
+            //}
+            //// Windowed
+            //else if (videoMode == 2)
+            //{
+            //    m64pCoreDoCommandCoreStateVideoMode(
+            //        m64p_command.M64CMD_CORE_STATE_SET,
+            //        m64p_video_mode.M64VIDEO_WINDOWED,
+            //        IntPtr.Zero
+            //    );
+
+            //    videoMode = 3;    
+            //}     
         }
 
         /// <summary>
@@ -1335,6 +1465,7 @@ namespace Ultra
             m64pCoreDoCommandByteArray = (CoreDoCommandByteArray)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandByteArray));
             m64pCoreDoCommandPtr = (CoreDoCommandPtr)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandPtr));
             // Custom
+            m64pCoreDoCommandRefPtr = (CoreDoCommandRefPtr)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandRefPtr));
             m64pCoreDoCommandStr = (CoreDoCommandStr)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandStr));
             m64pCoreDoCommandROMHeader = (CoreDoCommandROMHeader)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandROMHeader));
             m64pCoreDoCommandROMSettings = (CoreDoCommandROMSettings)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandROMSettings));
@@ -1545,29 +1676,37 @@ namespace Ultra
 
         public void Dispose()
         {
-            if (!disposed)
-            {
-                // Stop the core, and wait for it to end
-                while (emulator_running)
+            //MessageBox.Show("debug");
+            //try
+            //{
+                if (!disposed)
                 {
-                    // Repeatedly send the stop command, because sometimes sending it just once doesn't work
-                    m64pCoreDoCommandPtr(m64p_command.M64CMD_STOP, 0, IntPtr.Zero);
+                    // Stop the core, and wait for it to end
+                    while (emulator_running)
+                    {
+                        // Repeatedly send the stop command, because sometimes sending it just once doesn't work
+                        m64pCoreDoCommandPtr(m64p_command.M64CMD_STOP, 0, IntPtr.Zero);
+                    }
+
+                    // Backup the saveram in case bizhawk wants to get at is after we've freed the libraries
+                    //saveram_backup = SaveSaveram();
+
+                    DetachPlugin(m64p_plugin_type.M64PLUGIN_GFX);
+                    DetachPlugin(m64p_plugin_type.M64PLUGIN_AUDIO);
+                    DetachPlugin(m64p_plugin_type.M64PLUGIN_INPUT);
+                    DetachPlugin(m64p_plugin_type.M64PLUGIN_RSP);
+
+                    m64pCoreDoCommandPtr(m64p_command.M64CMD_ROM_CLOSE, 0, IntPtr.Zero);
+                    m64pCoreShutdown();
+                    FreeLibrary(CoreDll);
+
+                    disposed = true;
                 }
-
-                // Backup the saveram in case bizhawk wants to get at is after we've freed the libraries
-                //saveram_backup = SaveSaveram();
-
-                DetachPlugin(m64p_plugin_type.M64PLUGIN_GFX);
-                DetachPlugin(m64p_plugin_type.M64PLUGIN_AUDIO);
-                DetachPlugin(m64p_plugin_type.M64PLUGIN_INPUT);
-                DetachPlugin(m64p_plugin_type.M64PLUGIN_RSP);
-
-                m64pCoreDoCommandPtr(m64p_command.M64CMD_ROM_CLOSE, 0, IntPtr.Zero);
-                m64pCoreShutdown();
-                FreeLibrary(CoreDll);
-
-                disposed = true;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.ToString());
+            //}      
         }
 
         struct AttachedPlugin
@@ -1646,5 +1785,14 @@ namespace Ultra
         {
             m64pFrameComplete.Set();
         }
+
+
+
+        //private void OnDebuggerInitialized()
+        //{
+        //    // Default value is M64P_DBG_RUNSTATE_PAUSED
+        //    m64pDebugSetRunState(m64p_dbg_runstate.M64P_DBG_RUNSTATE_RUNNING);
+        //}
+
     }
 }

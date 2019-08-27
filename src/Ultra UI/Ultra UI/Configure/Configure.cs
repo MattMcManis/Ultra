@@ -131,6 +131,12 @@ namespace Ultra
             //
             catch
             {
+                // Check if ultra.conf has a valid path
+                if (MainWindow.IsValidPath(MainWindow.ultraConfFile) == false)
+                {
+                    return;
+                }
+
                 // Delete ultra.conf and Restart
                 // Check if ultra.conf Exists
                 if (File.Exists(MainWindow.ultraConfFile))

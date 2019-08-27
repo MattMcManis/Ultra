@@ -51,7 +51,7 @@ namespace Ultra
         public static void ScanGameFiles()
         {
             // Check if Paths ROMs TextBox is Empty
-            if (!string.IsNullOrEmpty(VM.PathsView.ROMs_Text))
+            if (MainWindow.IsValidPath(VM.PathsView.ROMs_Text))
             {
                 // Check if Directory exists
                 if (Directory.Exists(VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\"))
@@ -248,7 +248,7 @@ namespace Ultra
         public static void ScanPlugins()
         {
             // Check if Paths Plugins TextBox is Empty
-            if (!string.IsNullOrEmpty(VM.PathsView.Plugins_Text))
+            if (MainWindow.IsValidPath(VM.PathsView.Plugins_Text))
             {
                 // Check if Directory exists
                 if (Directory.Exists(VM.PathsView.Plugins_Text))

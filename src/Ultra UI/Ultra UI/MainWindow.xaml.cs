@@ -36,6 +36,8 @@ using System.Linq;
 using System.Management;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -628,7 +630,7 @@ namespace Ultra
                         // Mupen64Plus Path
                         // -------------------------
                         // Contains mupen64plus.dll
-                        if (!string.IsNullOrEmpty(VM.PathsView.Mupen_Text))
+                        if (IsValidPath(VM.PathsView.Mupen_Text))
                         {
                             Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", VM.PathsView.Mupen_Text);
                         }
@@ -641,7 +643,7 @@ namespace Ultra
                         // Config Path
                         // -------------------------
                         // Contains mupen64plus.cfg
-                        if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+                        if (IsValidPath(VM.PathsView.Config_Text))
                         {
                             Configure.ConigFile.conf.Write("Paths", "Config", VM.PathsView.Config_Text.TrimEnd('\\') + @"\");
                         }
@@ -658,7 +660,7 @@ namespace Ultra
                         // -------------------------
                         // Data Path
                         // -------------------------
-                        //if (!string.IsNullOrEmpty(VM.PathsView.Data_Text))
+                        //if (IsValidPath(VM.PathsView.Data_Text))
                         //{
                         //    Configure.ConigFile.conf.Write("Paths", "Data", VM.PathsView.Data_Text.TrimEnd('\\') + @"\");
                         //}
@@ -670,7 +672,7 @@ namespace Ultra
                         // -------------------------
                         // ROMs Path
                         // -------------------------
-                        if (!string.IsNullOrEmpty(VM.PathsView.ROMs_Text))
+                        if (IsValidPath(VM.PathsView.ROMs_Text))
                         {
                             Configure.ConigFile.conf.Write("Paths", "ROMs", VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\");
                         }
@@ -727,6 +729,36 @@ namespace Ultra
                 //MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text);
             }
         }
+
+
+        /// <summary>
+        ///    Is Valid Windows Path
+        /// </summary>
+        /// <remarks>
+        ///     Check for Invalid Characters
+        /// </remarks>
+        public static bool IsValidPath(string path)
+        {
+            if (!string.IsNullOrEmpty(path) &&
+                !string.IsNullOrWhiteSpace(path))
+            {
+                // Not Valid
+                string invalidChars = new string(Path.GetInvalidPathChars());
+                Regex regex = new Regex("[" + Regex.Escape(invalidChars) + "]");
+
+                if (regex.IsMatch(path)) { return false; };
+            }
+
+            // Empty
+            else
+            {
+                return false;
+            }
+
+            // Is Valid
+            return true;
+        }
+
 
         /// <summary>
         /// Folder Write Access Check (Method)
@@ -818,7 +850,8 @@ namespace Ultra
                 // -------------------------
                 // Split Version & Build Phase by dash
                 // -------------------------
-                if (!string.IsNullOrEmpty(parseLatestVersion))
+                if (!string.IsNullOrEmpty(parseLatestVersion) &&
+                    !string.IsNullOrWhiteSpace(parseLatestVersion))
                 {
                     try
                     {
@@ -1086,7 +1119,7 @@ namespace Ultra
         /// </summary>
         public static void ExplorePath(string path)
         {
-            if (!string.IsNullOrEmpty(path))
+            if (IsValidPath(path))
             {
                 if (Directory.Exists(path))
                 {
@@ -1183,7 +1216,7 @@ namespace Ultra
                 // -------------------------
                 // Check if Config Path is empty
                 // -------------------------
-                if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+                if (IsValidPath(VM.PathsView.Config_Text))
                 {
                     // Default Save Directory
                     string saveDir = VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + @"save\";
@@ -1294,7 +1327,6 @@ namespace Ultra
         /// </summary>
         private void Mute_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            //PressKey("{M}");
             if (Mupen64PlusAPI.api != null)
             {
                 Mupen64PlusAPI.api.Mute();
@@ -1304,13 +1336,18 @@ namespace Ultra
         /// <summary>
         /// Menu Item - Stop
         /// </summary>
+        //[SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
+        //private void KillTheThread()
+        //{
+        //    Game.m64pEmulator.Abort();
+        //}
+        public static bool stopped = false;
         private void Stop_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
-                // Stop() contains Dispose()
-                Mupen64PlusAPI.api.Stop();
-                Mupen64PlusAPI.api = null;
+                stopped = true;
+                Mupen64PlusAPI.api.Stop(); // Calls Dispose()
                 GC.Collect();
             }
         }
@@ -1320,10 +1357,20 @@ namespace Ultra
         /// </summary>
         private void Reset_MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            // API reset crashes, do it manually
             if (Mupen64PlusAPI.api != null)
             {
-                Mupen64PlusAPI.api.Reset();
+                stopped = true;
+                Mupen64PlusAPI.api.Stop();
+                GC.Collect();
             }
+
+            PlayButton();
+
+            //if (Mupen64PlusAPI.api != null)
+            //{
+            //    Mupen64PlusAPI.api.HardReset();
+            //}
         }
 
         /// <summary>
@@ -1426,7 +1473,9 @@ namespace Ultra
         /// </summary>
         private void btnGenerate_Click(object sender, RoutedEventArgs e)
         {
-            Generate.CfgDefaults(Path.Combine(VM.PathsView.Mupen_Text, "m64p_test_rom.v64"));
+            Generate.CfgDefaults(
+                Path.Combine(VM.PathsView.Mupen_Text, "m64p_test_rom.v64")
+                );
         }
 
         /// <summary>
@@ -1539,7 +1588,7 @@ namespace Ultra
         /// </summary>
         private void ROMs_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(VM.PathsView.ROMs_Text))
+            if (IsValidPath(VM.PathsView.ROMs_Text))
             {
                 ExplorePath(VM.PathsView.ROMs_Text);
             }
@@ -1576,7 +1625,7 @@ namespace Ultra
         /// </summary>
         private void MupenFolder_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(VM.PathsView.Mupen_Text))
+            if (IsValidPath(VM.PathsView.Mupen_Text))
             {
                 ExplorePath(VM.PathsView.Mupen_Text);
             }
@@ -1587,7 +1636,7 @@ namespace Ultra
         /// </summary>
         private void ConfigFolder_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+            if (IsValidPath(VM.PathsView.Config_Text))
             {
                 if (Directory.Exists(VM.PathsView.Config_Text))
                 {
@@ -1608,7 +1657,7 @@ namespace Ultra
         /// </summary>
         private void Saves_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+            if (IsValidPath(VM.PathsView.Config_Text))
             {
                 if (Directory.Exists(VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + "save"))
                 {
@@ -1629,7 +1678,7 @@ namespace Ultra
         /// </summary>
         private void Screenshots_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
+            if (IsValidPath(VM.PathsView.Config_Text))
             {
                 if (Directory.Exists(VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + "screenshot"))
                 {
@@ -2368,6 +2417,10 @@ namespace Ultra
         /// </summary>
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
+            PlayButton();
+        }
+        public void PlayButton()
+        {
             // Get Selected Item
             int index = 0;
             if (listViewGames.SelectedItems.Count > 0)
@@ -2674,7 +2727,7 @@ namespace Ultra
             // -------------------------
             // Plugins Path
             // -------------------------
-            if (!string.IsNullOrEmpty(VM.PathsView.Mupen_Text))
+            if (IsValidPath(VM.PathsView.Mupen_Text))
             {
                 // Check for 'plugins' folder
                 if (Directory.Exists(VM.PathsView.Mupen_Text.TrimEnd('\\') + @"\" + "plugins"))
@@ -2691,7 +2744,7 @@ namespace Ultra
             // -------------------------
             // Data
             // -------------------------
-            if (!string.IsNullOrEmpty(VM.PathsView.Mupen_Text.TrimEnd('\\') + @"\"))
+            if (IsValidPath(VM.PathsView.Mupen_Text))
             {
                 // Check for 'data' folder
                 if (Directory.Exists(VM.PathsView.Mupen_Text.TrimEnd('\\') + @"\" + "data"))

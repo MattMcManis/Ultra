@@ -67,9 +67,21 @@ namespace Ultra
             // Error Halts
             // -------------------------
             // Mupen64Plus DLL not set
-            if (string.IsNullOrEmpty(MainWindow.mupen64plusDll))
+            if (string.IsNullOrEmpty(MainWindow.mupen64plusDll) ||
+                string.IsNullOrWhiteSpace(MainWindow.mupen64plusDll))
             {
                 MessageBox.Show("Mupen64Plus Path not set.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+
+                return;
+            }
+
+            // Mupen64Plus DLL Path not valid
+            if (MainWindow.IsValidPath(MainWindow.mupen64plusDll) == false)
+            {
+                MessageBox.Show("Mupen64Plus Path is not valid.",
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
@@ -118,6 +130,19 @@ namespace Ultra
             if (!File.Exists(rom))
             {
                 MessageBox.Show(rom + " does not exist.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+
+                return;
+            }
+
+            // Check if ROM is valid
+            // Check if file size is 0
+            long romFileSize = new FileInfo(rom).Length;
+            if (romFileSize == 0)
+            {
+                MessageBox.Show("Not a valid ROM file.",
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
@@ -227,8 +252,17 @@ namespace Ultra
             // Mupen64Plus Initiate() will immediately close when complete
             // ROM is loaded but no game is launched
 
-            // Close Mupe64Plus
-            Mupen64PlusAPI.api.Dispose();
+            // Close Mupe64Plus Window
+            // Note: Closing does not Dispose(), you must call it manually
+            // Only dispose if exited from window
+            // and not called from the Stop button
+            if (MainWindow.stopped == false)
+            {
+                Mupen64PlusAPI.api.Dispose();
+            }
+            // Reset the Stopped trigger
+            MainWindow.stopped = false;
+            // Reset API
             Mupen64PlusAPI.api = null;
             GC.Collect();
 
