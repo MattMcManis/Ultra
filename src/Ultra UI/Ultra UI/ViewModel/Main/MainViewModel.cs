@@ -6,7 +6,7 @@ mattmcmanis@outlook.com
 
 The MIT License
 
-Copyright (C) 2019 Matt McManis
+Copyright (C) 2019-2020 Matt McManis
 
 Permission is hereby granted, free of charge, to any person obtaining a 
 copy of this software and associated documentation files (the "Software"), 
@@ -56,6 +56,9 @@ namespace Ultra
         /// </summary>
         public MainViewModel()
         {
+            Window_Width = 480;
+            Window_Height = 500;
+
             // Defaults
             StateSlot0_IsChecked = true;
         }
@@ -69,6 +72,127 @@ namespace Ultra
         public static string currentBuildPhase = "alpha";
         public static string latestBuildPhase;
         public static string[] splitVersionBuildPhase;
+
+
+        // -------------------------
+        // Window Top
+        // -------------------------
+        // Value
+        //private double _Window_Position_Top = 0;
+        //public double Window_Position_Top
+        //{
+        //    get { return _Window_Position_Top; }
+        //    set
+        //    {
+        //        if (_Window_Position_Top == value)
+        //        {
+        //            return;
+        //        }
+
+        //        _Window_Position_Top = value;
+        //        OnPropertyChanged("Window_Position_Top");
+        //    }
+        //}
+
+        // -------------------------
+        // Window Left
+        // -------------------------
+        //private double _Window_Position_Left = 0;
+        //public double Window_Position_Left
+        //{
+        //    get { return _Window_Position_Left; }
+        //    set
+        //    {
+        //        if (_Window_Position_Left == value)
+        //        {
+        //            return;
+        //        }
+
+        //        _Window_Position_Left = value;
+        //        OnPropertyChanged("Window_Position_Left");
+        //    }
+        //}
+
+        // -------------------------
+        // Window Width
+        // -------------------------
+        // Value
+        private double _Window_Width;
+        public double Window_Width
+        {
+            get { return _Window_Width; }
+            set
+            {
+                if (_Window_Width == value)
+                {
+                    return;
+                }
+
+                _Window_Width = value;
+                OnPropertyChanged("Window_Width");
+            }
+        }
+
+        // -------------------------
+        // Window Height
+        // -------------------------
+        // Value
+        private double _Window_Height;
+        public double Window_Height
+        {
+            get { return _Window_Height; }
+            set
+            {
+                if (_Window_Height == value)
+                {
+                    return;
+                }
+
+                _Window_Height = value;
+                OnPropertyChanged("Window_Height");
+            }
+        }
+
+        // -------------------------
+        // Window Maximized
+        // -------------------------
+        // Value
+        //private bool _Window_IsMaximized = true;
+        //public bool Window_IsMaximized
+        //{
+        //    get { return _Window_IsMaximized; }
+        //    set
+        //    {
+        //        if (_Window_IsMaximized == value)
+        //        {
+        //            return;
+        //        }
+
+        //        _Window_IsMaximized = value;
+        //        OnPropertyChanged("Window_IsMaximized");
+        //    }
+        //}
+
+
+        // -------------------------
+        // Window State
+        // -------------------------
+        // Value
+        //private WindowState _Window_State = WindowState.Normal;
+        //public WindowState Window_State
+        //{
+        //    get { return _Window_State; }
+        //    set
+        //    {
+        //        if (_Window_State == value)
+        //        {
+        //            return;
+        //        }
+
+        //        _Window_State = value;
+        //        OnPropertyChanged("Window_State");
+        //    }
+        //}
 
 
         // -------------------------
