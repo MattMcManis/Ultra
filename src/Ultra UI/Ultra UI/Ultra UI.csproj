@@ -90,12 +90,17 @@
     <Compile Include="DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow\Display.cs" />
+    <Compile Include="MainWindow\Emulator.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="MainWindow\Games.cs" />
     <Compile Include="Generate.cs" />
     <Compile Include="InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow\Plugins.cs" />
     <Compile Include="Mupen64PlusAPI.cs" />
+    <Compile Include="MainWindow\Paths.cs" />
     <Compile Include="Plugins\Audio\AudioSDLWindow.xaml.cs">
       <DependentUpon>AudioSDLWindow.xaml</DependentUpon>
     </Compile>
@@ -213,6 +218,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -288,6 +294,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\n64-controller-layout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\debug.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\info.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
