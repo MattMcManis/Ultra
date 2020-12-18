@@ -6,7 +6,7 @@ mattmcmanis@outlook.com
 
 The MIT License
 
-Copyright (C) 2019 Matt McManis
+Copyright (C) 2019-2020 Matt McManis
 
 Permission is hereby granted, free of charge, to any person obtaining a 
 copy of this software and associated documentation files (the "Software"), 
@@ -46,7 +46,7 @@ namespace Ultra
         //     2. Mupen64Plus Dll Check
         //     3. ROM Check
         //     4. Set Plugins   
-        //     5. PlayProcess (New Thread)
+        //     5. PlayProcess (New Task)
         //         6. Launch
         //             7. Initiate Mupen64Plus API
         //             8. Launch Game
@@ -54,7 +54,8 @@ namespace Ultra
 
         //private MainWindow mainwindow = (MainWindow)System.Windows.Application.Current.MainWindow;
 
-        public static Thread m64pEmulator; 
+        //public static Thread m64pEmulator { get; set; }
+        public static Task m64pEmulator { get; set; }
 
         /// <summary>
         /// Play
@@ -228,8 +229,20 @@ namespace Ultra
                 // Launch Game
                 // -------------------------
                 //Thread t = new Thread(() =>
-                m64pEmulator = new Thread(() =>
-                    PlayProcess(romBuffer,
+                //m64pEmulator = new Thread(() =>
+                //    PlayProcess(romBuffer,
+                //                    videoPlugin,
+                //                    audioPlugin,
+                //                    inputPlugin,
+                //                    rspPlugin,
+                //                    windowWidth,
+                //                    windowHeight
+                //                   )
+                //    );
+                //m64pEmulator.Start();
+
+
+            m64pEmulator = Task.Run(() => PlayProcess(romBuffer,
                                     videoPlugin,
                                     audioPlugin,
                                     inputPlugin,
@@ -237,17 +250,17 @@ namespace Ultra
                                     windowWidth,
                                     windowHeight
                                    )
-                    );
-                m64pEmulator.Start();
 
-                //PlayProcess(romBuffer,
-                //            videoPlugin,
-                //            audioPlugin,
-                //            inputPlugin,
-                //            rspPlugin,
-                //            windowWidth,
-                //            windowHeight
-                //           );
+            );
+
+            //PlayProcess(romBuffer,
+            //            videoPlugin,
+            //            audioPlugin,
+            //            inputPlugin,
+            //            rspPlugin,
+            //            windowWidth,
+            //            windowHeight
+            //           );
             //});
 
             //return count;
