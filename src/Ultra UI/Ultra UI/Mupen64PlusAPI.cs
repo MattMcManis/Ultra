@@ -55,16 +55,22 @@ namespace Ultra
 
         [DllImport("kernel32.dll")]
         public static extern UInt32 GetLastError();
+        //public static extern UInt64 GetLastError();
 
         // Directory other than default root
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         static extern bool SetDllDirectory(string lpPathName);
 
-        [DllImport("kernel32.dll")]
+        //[DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern IntPtr LoadLibrary(string dllToLoad);
 
         [DllImport("kernel32.dll")]
         public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
+
+        // Hook
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr SetWindowsHookEx(int hookType, UIntPtr lpfn, IntPtr hMod, ulong dwThreadId);
 
         [DllImport("kernel32.dll")]
         public static extern bool FreeLibrary(IntPtr hModule);
@@ -610,6 +616,7 @@ namespace Ultra
         /// <summary>
         /// Initiate - Ultra Modified
         /// </summary>
+        public bool init = true;
         public void Initiate(string key,
                              byte[] romBuffer,
                              string videoPlugin,
@@ -625,9 +632,25 @@ namespace Ultra
             // -------------------------
             SetDllDirectory(VM.PathsView.Mupen_Text);
             CoreDll = LoadLibrary("mupen64plus.dll");
+            //if (CoreDll == IntPtr.Zero)
+            //    throw new InvalidOperationException("Failed to load mupen64plus.dll");
             if (CoreDll == IntPtr.Zero)
-                throw new InvalidOperationException("Failed to load mupen64plus.dll");
+            {
+                var err = Marshal.GetLastWin32Error().ToString();
 
+                MessageBox.Show("Failed to load mupen64plus.dll.\r\n\r\n" + err,
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+
+                init = false;
+                return; // don't allow call connectFunctionPointers()
+            }
+            else
+            {
+                init = true;
+            }
+                
             // -------------------------
             // Function Pointers
             // -------------------------
@@ -980,17 +1003,6 @@ namespace Ultra
             m64pRenderCallback = new RenderCallback(FireRenderEvent);
             result = m64pCoreDoCommandRenderCallback(m64p_command.M64CMD_SET_RENDER_CALLBACK, 0, m64pRenderCallback);
 
-            //m64pFrameCallback = new FrameCallback(FireFrameFinishedEvent);
-            //result = m64pCoreDoCommandFrameCallback(m64p_command.M64CMD_SET_FRAME_CALLBACK, 0, m64pFrameCallback);
-            //m64pVICallback = new VICallback(FireVIEvent);
-            //result = m64pCoreDoCommandVICallback(m64p_command.M64CMD_SET_VI_CALLBACK, 0, m64pVICallback);
-            //m64pRenderCallback = new RenderCallback(FireRenderEvent);
-            //result = m64pCoreDoCommandRenderCallback(m64p_command.M64CMD_SET_RENDER_CALLBACK, 0, m64pRenderCallback);
-            //m64pDebugInitCallback = new DebugInitCallback(OnDebuggerInitialized);
-            //m64pDebugUpdateCallback = new DebugUpdateCallback(FireBreakpointEvent);
-            //result = m64pDebugSetCallbacks(m64pDebugInitCallback, m64pDebugUpdateCallback, null);
-
-
             // -------------------------
             // Save Config
             // -------------------------
@@ -1090,11 +1102,14 @@ namespace Ultra
         /// </summary>
         private void ExecuteEmulator()
         {
-            emulator_running = true;
-            var cb = new StartupCallback(() => m64pStartupComplete.Set());
-            m64pCoreDoCommandPtr(m64p_command.M64CMD_EXECUTE, 0, Marshal.GetFunctionPointerForDelegate(cb));
-            emulator_running = false;
-            cb.GetType();
+            if (init == true) // Error Check
+            {
+                emulator_running = true;
+                var cb = new StartupCallback(() => m64pStartupComplete.Set());
+                m64pCoreDoCommandPtr(m64p_command.M64CMD_EXECUTE, 0, Marshal.GetFunctionPointerForDelegate(cb));
+                emulator_running = false;
+                cb.GetType();
+            }
         }
 
         /// <summary>
@@ -1238,7 +1253,6 @@ namespace Ultra
         public void Pause()
         {
             //m64pCoreDoCommandPtr(m64p_command.M64CMD_PAUSE, 0, IntPtr.Zero);         
-            //m64pCoreDoCommandRefPtr(m64p_command.M64CMD_PAUSE, ref pause, IntPtr.Zero);
 
             // 1=Stopped, 2=Running, 3=Paused
 
@@ -1295,43 +1309,7 @@ namespace Ultra
         /// </summary>
         public void Stop()
         {
-            //m64pCoreDoCommandPtr(m64p_command.M64CMD_STOP, 0, IntPtr.Zero);
             Dispose();
-
-            // Reset Dispose
-            //disposed = true;
-
-            // 1=Stopped, 2=Running, 3=Paused
-
-            //int stop = 1;
-            //m64pCoreDoCommandCoreStateSet(
-            //       m64p_command.M64CMD_CORE_STATE_SET,
-            //       m64p_core_param.M64CORE_EMU_STATE,
-            //       ref stop
-            //   );
-
-            //// Stop the core, and wait for it to end
-            //while (emulator_running)
-            //{
-            //    // Repeatedly send the stop command, because sometimes sending it just once doesn't work
-            //    m64pCoreDoCommandPtr(m64p_command.M64CMD_STOP, 0, IntPtr.Zero);
-            //}
-
-            //// Backup the saveram in case bizhawk wants to get at is after we've freed the libraries
-            ////saveram_backup = SaveSaveram();
-
-            //DetachPlugin(m64p_plugin_type.M64PLUGIN_GFX);
-            //DetachPlugin(m64p_plugin_type.M64PLUGIN_AUDIO);
-            //DetachPlugin(m64p_plugin_type.M64PLUGIN_INPUT);
-            //DetachPlugin(m64p_plugin_type.M64PLUGIN_RSP);
-
-            //m64pCoreDoCommandPtr(m64p_command.M64CMD_ROM_CLOSE, 0, IntPtr.Zero);
-            ////m64pCoreShutdown();
-            //FreeLibrary(CoreDll);
-
-            //Dispose();
-
-            //Mupen64PlusAPI.api = null;
         }
 
         /// <summary>
@@ -1676,9 +1654,11 @@ namespace Ultra
 
         public void Dispose()
         {
-            //MessageBox.Show("debug");
-            //try
-            //{
+            if (init == true)
+            {
+                //MessageBox.Show("debug");
+                //try
+                //{
                 if (!disposed)
                 {
                     // Stop the core, and wait for it to end
@@ -1702,11 +1682,12 @@ namespace Ultra
 
                     disposed = true;
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.ToString());
-            //}      
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.ToString());
+                //}   
+            }   
         }
 
         struct AttachedPlugin
