@@ -6,7 +6,7 @@ mattmcmanis@outlook.com
 
 The MIT License
 
-Copyright (C) 2019 Matt McManis
+Copyright (C) 2019-2020 Matt McManis
 
 Permission is hereby granted, free of charge, to any person obtaining a 
 copy of this software and associated documentation files (the "Software"), 
@@ -56,7 +56,7 @@ namespace Ultra
             InitializeComponent();
 
             MinWidth = 650;
-            MinHeight = 500;
+            MinHeight = 505;
 
             // Load Control Values
             PluginCfgReader();
@@ -202,35 +202,38 @@ namespace Ultra
                         // Aspect Ratio
                         // # Screen aspect ratio (0=stretch, 1=force 4:3, 2=force 16:9, 3=adjust)
                         string aspectRatio = cfg.Read("Video-GLideN64", "AspectRatio");
-                        if (aspectRatio == "0")
+                        switch (aspectRatio)
                         {
-                            VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Stretch";
-                        }
-                        else if (aspectRatio == "1")
-                        {
-                            VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Force 4:3";
-                        }
-                        else if (aspectRatio == "2")
-                        {
-                            VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Force 16:9";
-                        }
-                        else if (aspectRatio == "3")
-                        {
-                            VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Adjust";
+                            case "0":
+                                VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Stretch";
+                                break;
+
+                            case "1":
+                                VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Force 4:3";
+                                break;
+
+                            case "2":
+                                VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Force 16:9";
+                                break;
+
+                            case "3":
+                                VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem = "Adjust";
+                                break;
                         }
 
                         // Bilinear Mode
                         // # Bilinear filtering mode (0=N64 3point, 1=standard)
                         bool bilinearMode = true;
                         bool.TryParse(cfg.Read("Video-GLideN64", "bilinearMode").ToLower(), out bilinearMode);
+                        switch (bilinearMode)
+                        {
+                            case false:
+                                VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem = "N64 3-Point";
+                                break;
 
-                        if (bilinearMode == false)
-                        {
-                            VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem = "N64 3-Point";
-                        }
-                        else if (bilinearMode == true)
-                        {
-                            VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem = "Standard";
+                            case true:
+                                VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem = "Standard";
+                                break;
                         }
 
                         // Max Anisotropy
@@ -294,20 +297,19 @@ namespace Ultra
                         // CorrectTexrectCoords
                         // # Make texrect coordinates continuous to avoid black lines between them. (0=Off, 1=Auto, 2=Force)
                         string correctTexrectCoords = cfg.Read("Video-GLideN64", "CorrectTexrectCoords");
-                        // 0
-                        if (correctTexrectCoords == "0")
+                        switch (correctTexrectCoords)
                         {
-                            VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked = false;
-                        }
-                        // 2
-                        else if (correctTexrectCoords == "2")
-                        {
-                            VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked = true;
-                        }
-                        // 1
-                        else
-                        {
-                            VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked = false;
+                            case "0":
+                                VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked = false;
+                                break;
+
+                            case "2":
+                                VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked = true;
+                                break;
+
+                            //default:
+                            //    VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked = false;
+                            //    break;
                         }
 
                         // EnableShadersStorage
@@ -396,22 +398,25 @@ namespace Ultra
                         // EnableCopyColorToRDRAM
                         // # Enable color buffer copy to RDRAM (0=do not copy, 1=copy in sync mode, 2=Double Buffer, 3=Triple Buffer)
                         string enableCopyColorToRDRAM = cfg.Read("Video-GLideN64", "EnableCopyColorToRDRAM");
-                        if (enableCopyColorToRDRAM == "0")
+                        switch (enableCopyColorToRDRAM)
                         {
-                            VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Do Not Copy";
+                            case "0":
+                                VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Do Not Copy";
+                                break;
+
+                            case "1":
+                                VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Copy in Sync Mode";
+                                break;
+
+                            case "2":
+                                VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Double Buffer";
+                                break;
+
+                            case "3":
+                                VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Triple Buffer";
+                                break;
                         }
-                        else if (enableCopyColorToRDRAM == "1")
-                        {
-                            VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Copy in Sync Mode";
-                        }
-                        else if (enableCopyColorToRDRAM == "2")
-                        {
-                            VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Double Buffer";
-                        }
-                        else if (enableCopyColorToRDRAM == "3")
-                        {
-                            VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_SelectedItem = "Triple Buffer";
-                        }
+
                         //bool enableCopyColorToRDRAM = true;
                         //bool.TryParse(cfg.Read("Video-GLideN64", "EnableCopyColorToRDRAM").ToLower(), out enableCopyColorToRDRAM);
                         //VM.Plugins_Video_GLideN64_View.EnableCopyColorToRDRAM_IsChecked = enableCopyColorToRDRAM;
@@ -419,18 +424,21 @@ namespace Ultra
                         // EnableCopyDepthToRDRAM
                         // # Enable depth buffer copy to RDRAM  (0=do not copy, 1=copy from video memory, 2=use software render)
                         string enableCopyDepthToRDRAM = cfg.Read("Video-GLideN64", "EnableCopyDepthToRDRAM");
-                        if (enableCopyDepthToRDRAM == "0")
+                        switch (enableCopyDepthToRDRAM)
                         {
-                            VM.Plugins_Video_GLideN64_View.EnableCopyDepthToRDRAM_SelectedItem = "Do Not Copy";
+                            case "0":
+                                VM.Plugins_Video_GLideN64_View.EnableCopyDepthToRDRAM_SelectedItem = "Do Not Copy";
+                                break;
+
+                            case "1":
+                                VM.Plugins_Video_GLideN64_View.EnableCopyDepthToRDRAM_SelectedItem = "Copy From Video Memory";
+                                break;
+
+                            case "2":
+                                VM.Plugins_Video_GLideN64_View.EnableCopyDepthToRDRAM_SelectedItem = "Use Software Render";
+                                break;
                         }
-                        else if (enableCopyDepthToRDRAM == "1")
-                        {
-                            VM.Plugins_Video_GLideN64_View.EnableCopyDepthToRDRAM_SelectedItem = "Copy From Video Memory";
-                        }
-                        else if (enableCopyDepthToRDRAM == "2")
-                        {
-                            VM.Plugins_Video_GLideN64_View.EnableCopyDepthToRDRAM_SelectedItem = "Use Software Render";
-                        }
+
                         //bool enableCopyDepthToRDRAM = true;
                         //bool.TryParse(cfg.Read("Video-GLideN64", "EnableCopyDepthToRDRAM").ToLower(), out enableCopyDepthToRDRAM);
                         //VM.Plugins_Video_GLideN64_View.EnableCopyDepthToRDRAM_IsChecked = enableCopyDepthToRDRAM;
@@ -467,90 +475,93 @@ namespace Ultra
 
                         // Tx Filter Mode
                         string txFilterMode = cfg.Read("Video-GLideN64", "txFilterMode");
-                        if (txFilterMode == "0")
+                        switch (txFilterMode)
                         {
-                            VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "None";
-                        }
-                        else if (txFilterMode == "1")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 1";
-                        }
-                        else if (txFilterMode == "2")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 2";
-                        }
-                        else if (txFilterMode == "3")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 3";
-                        }
-                        else if (txFilterMode == "4")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 4";
-                        }
-                        else if (txFilterMode == "5")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Sharp 1";
-                        }
-                        else if (txFilterMode == "6")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Sharp 2";
+                            case "0":
+                                VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "None";
+                                break;
+
+                            case "1":
+                                VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 1";
+                                break;
+
+                            case "2":
+                                VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 2";
+                                break;
+
+                            case "3":
+                                VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 3";
+                                break;
+
+                            case "4":
+                                VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Smooth 4";
+                                break;
+
+                            case "5":
+                                VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Sharp 1";
+                                break;
+
+                            case "6":
+                                VM.Plugins_Video_GLideN64_View.TxFilterMode_SelectedItem = "Sharp 2";
+                                break;
                         }
 
                         // Tx Enhancement Mode
                         // # Texture Enhancement (0=none, 1=store as is, 2=X2, 3=X2SAI, 4=HQ2X, 5=HQ2XS, 6=LQ2X, 7=LQ2XS, 8=HQ4X, 9=2xBRZ, 10=3xBRZ, 11=4xBRZ, 12=5xBRZ)
                         string txEnhancementMode = cfg.Read("Video-GLideN64", "txEnhancementMode");
+                        switch (txEnhancementMode)
+                        {
+                            case "0":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "None";
+                                break;
 
-                        if (txEnhancementMode == "0")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "None";
-                        }
-                        else if (txEnhancementMode == "1")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "Store";
-                        }
-                        else if (txEnhancementMode == "2")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "X2";
-                        }
-                        else if (txEnhancementMode == "3")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "X2SAI";
-                        }
-                        else if (txEnhancementMode == "4")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "HQ2X";
-                        }
-                        else if (txEnhancementMode == "5")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "HQ2XS";
-                        }
-                        else if (txEnhancementMode == "6")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "LQ2X";
-                        }
-                        else if (txEnhancementMode == "7")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "LQ2XS";
-                        }
-                        else if (txEnhancementMode == "8")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "HQ4X";
-                        }
-                        else if (txEnhancementMode == "9")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "2xBRZ";
-                        }
-                        else if (txEnhancementMode == "10")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "3xBRZ";
-                        }
-                        else if (txEnhancementMode == "11")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "4xBRZ";
-                        }
-                        else if (txEnhancementMode == "12")
-                        {
-                            VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "5xBRZ";
+                            case "1":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "Store";
+                                break;
+
+                            case "2":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "X2";
+                                break;
+
+                            case "3":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "X2SAI";
+                                break;
+
+                            case "4":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "HQ2X";
+                                break;
+
+                            case "5":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "HQ2XS";
+                                break;
+
+                            case "6":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "LQ2X";
+                                break;
+
+                            case "7":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "LQ2XS";
+                                break;
+
+                            case "8":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "HQ4X";
+                                break;
+
+                            case "9":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "2xBRZ";
+                                break;
+
+                            case "10":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "3xBRZ";
+                                break;
+
+                            case "11":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "4xBRZ";
+                                break;
+
+                            case "12":
+                                VM.Plugins_Video_GLideN64_View.TxEnhancementMode_SelectedItem = "5xBRZ";
+                                break;
                         }
 
                         // TxFilterIgnoreBG
@@ -688,32 +699,36 @@ namespace Ultra
 
                         // AspectRatio
                         // # Screen aspect ratio (0=stretch, 1=force 4:3, 2=force 16:9, 3=adjust)
-                        if (VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem == "Stretch")
+                        switch (VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem)
                         {
-                            cfg.Write("Video-GLideN64", "AspectRatio", "0");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem == "Force 4:3")
-                        {
-                            cfg.Write("Video-GLideN64", "AspectRatio", "1");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem == "Force 16:9")
-                        {
-                            cfg.Write("Video-GLideN64", "AspectRatio", "2");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.AspectRatio_SelectedItem == "Adjust")
-                        {
-                            cfg.Write("Video-GLideN64", "AspectRatio", "3");
+                            case "Stretch":
+                                cfg.Write("Video-GLideN64", "AspectRatio", "0");
+                                break;
+
+                            case "Force 4:3":
+                                cfg.Write("Video-GLideN64", "AspectRatio", "1");
+                                break;
+
+                            case "Force 16:9":
+                                cfg.Write("Video-GLideN64", "AspectRatio", "2");
+                                break;
+
+                            case "Adjust":
+                                cfg.Write("Video-GLideN64", "AspectRatio", "3");
+                                break;
                         }
 
                         // BilinearMode
                         // # Bilinear filtering mode (0=N64 3point, 1=standard)
-                        if (VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem == "N64 3-Point")
+                        switch (VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem)
                         {
-                            cfg.Write("Video-GLideN64", "bilinearMode", "False");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem == "Standard")
-                        {
-                            cfg.Write("Video-GLideN64", "bilinearMode", "True");
+                            case "N64 3-Point":
+                                cfg.Write("Video-GLideN64", "bilinearMode", "False");
+                                break;
+
+                            case "Standard":
+                                cfg.Write("Video-GLideN64", "bilinearMode", "True");
+                                break;
                         }
 
                         // MaxAnisotropy
@@ -729,35 +744,40 @@ namespace Ultra
                         //}
 
                         // ShowFPS
-                        if (VM.Plugins_Video_GLideN64_View.ShowFPS_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.ShowFPS_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "ShowFPS", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.ShowFPS_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "ShowFPS", "False");
+                            case true:
+                                cfg.Write("Video-GLideN64", "ShowFPS", "True");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "ShowFPS", "False");
+                                break;
                         }
 
                         // ShowVIS
-                        if (VM.Plugins_Video_GLideN64_View.ShowVIS_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.ShowVIS_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "ShowVIS", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.ShowVIS_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "ShowVIS", "False");
+                            case true:
+                                cfg.Write("Video-GLideN64", "ShowVIS", "True");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "ShowVIS", "False");
+                                break;
                         }
 
                         // FXAA
-                        if (VM.Plugins_Video_GLideN64_View.FXAA_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.FXAA_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "FXAA", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.FXAA_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "FXAA", "False");
-                        }
+                            case true:
+                                cfg.Write("Video-GLideN64", "FXAA", "True");
+                                break;
 
+                            case false:
+                                cfg.Write("Video-GLideN64", "FXAA", "False");
+                                break;
+                        }
 
                         // -------------------------
                         // Render
@@ -771,60 +791,79 @@ namespace Ultra
                         //{
                         //    cfg.Write("Video-GLideN64", "EnableFog", "False");
                         //}
+                        // EnableHalosRemoval
+                        switch (VM.Plugins_Video_GLideN64_View.EnableHalosRemoval_IsChecked)
+                        {
+                            case true:
+                                cfg.Write("Video-GLideN64", "EnableHalosRemoval", "True");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "EnableHalosRemoval", "False");
+                                break;
+                        }
+
 
                         // EnableNoise
-                        if (VM.Plugins_Video_GLideN64_View.EnableNoise_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.EnableNoise_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "EnableNoise", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.EnableNoise_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "EnableNoise", "False");
+                            case true:
+                                cfg.Write("Video-GLideN64", "EnableNoise", "True");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "EnableNoise", "False");
+                                break;
                         }
 
                         // EnableLOD
-                        if (VM.Plugins_Video_GLideN64_View.EnableLOD_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.EnableLOD_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "EnableLOD", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.EnableLOD_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "EnableLOD", "False");
+                            case true:
+                                cfg.Write("Video-GLideN64", "EnableLOD", "True");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "EnableLOD", "False");
+                                break;
                         }
 
                         // EnableHWLighting
-                        if (VM.Plugins_Video_GLideN64_View.EnableHWLighting_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.EnableHWLighting_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "EnableHWLighting", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.EnableHWLighting_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "EnableHWLighting", "False");
+                            case true:
+                                cfg.Write("Video-GLideN64", "EnableHWLighting", "True");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "EnableHWLighting", "False");
+                                break;
                         }
 
                         // CorrectTexrectCoords
                         // # Make texrect coordinates continuous to avoid black lines between them. (0=Off, 1=Auto, 2=Force)
-                        // 2
-                        if (VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "CorrectTexrectCoords", "2");
-                        }
-                        // 0
-                        else if (VM.Plugins_Video_GLideN64_View.CorrectTexrectCoords_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "CorrectTexrectCoords", "0");
+                            case true:
+                                cfg.Write("Video-GLideN64", "CorrectTexrectCoords", "2");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "CorrectTexrectCoords", "0");
+                                break;
                         }
 
                         // EnableShadersStorage
-                        if (VM.Plugins_Video_GLideN64_View.EnableShadersStorage_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.EnableShadersStorage_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "EnableShadersStorage", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.EnableShadersStorage_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "EnableShadersStorage", "False");
-                        }
+                            case true:
+                                cfg.Write("Video-GLideN64", "EnableShadersStorage", "True");
+                                break;
 
+                            case false:
+                                cfg.Write("Video-GLideN64", "EnableShadersStorage", "False");
+                                break;
+                        }
 
                         // -------------------------
                         // Bloom
@@ -871,13 +910,15 @@ namespace Ultra
                         // Other
                         // -------------------------
                         // EnableFBEmulation
-                        if (VM.Plugins_Video_GLideN64_View.EnableFBEmulation_IsChecked == true)
+                        switch (VM.Plugins_Video_GLideN64_View.EnableFBEmulation_IsChecked)
                         {
-                            cfg.Write("Video-GLideN64", "EnableFBEmulation", "True");
-                        }
-                        else if (VM.Plugins_Video_GLideN64_View.EnableFBEmulation_IsChecked == false)
-                        {
-                            cfg.Write("Video-GLideN64", "EnableFBEmulation", "False");
+                            case true:
+                                cfg.Write("Video-GLideN64", "EnableFBEmulation", "True");
+                                break;
+
+                            case false:
+                                cfg.Write("Video-GLideN64", "EnableFBEmulation", "False");
+                                break;
                         }
 
                         // DisableFBInfo
