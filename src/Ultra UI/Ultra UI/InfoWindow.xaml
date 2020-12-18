@@ -6,7 +6,7 @@
 
     The MIT License
 
-    Copyright (C) 2019 Matt McManis
+    Copyright (C) 2019-2020 Matt McManis
 
     Permission is hereby granted, free of charge, to any person obtaining a 
     copy of this software and associated documentation files (the "Software"), 
@@ -50,7 +50,7 @@
         Width="550" 
         Height="413"
         
-        Style="{DynamicResource WindowStyle}"
+        Style="{DynamicResource WindowStyle}" Icon="Resources/Icons/info.ico"
         >
 
     <Window.Resources>
