@@ -1,13 +1,13 @@
 ﻿/* ----------------------------------------------------------------------
 Ultra UI
-Copyright (C) 2019 Matt McManis
+Copyright (C) 2019-2020 Matt McManis
 https://github.com/MattMcManis/Ultra
 https://ultraui.github.io
 mattmcmanis@outlook.com
 
 The MIT License
 
-Copyright (C) 2019 Matt McManis
+Copyright (C) 2019-2020 Matt McManis
 
 Permission is hereby granted, free of charge, to any person obtaining a 
 copy of this software and associated documentation files (the "Software"), 
@@ -372,6 +372,19 @@ namespace Ultra
                                     );
                             }
                         }
+                        else
+                        {
+                            VM.PluginsView.Video_Items.Add(
+                                new PluginsViewModel.Video()
+                                {
+                                    FullPath = string.Empty,
+                                    Directory = string.Empty,
+                                    Name = "Plugin Not Found"
+                                }
+                            );
+
+                            VM.PluginsView.Video_SelectedItem = "Plugin Not Found";
+                        }
                     }
                     // Error
                     catch
@@ -402,6 +415,19 @@ namespace Ultra
                                         }
                                     );
                             }
+                        }
+                        else
+                        {
+                            VM.PluginsView.Audio_Items.Add(
+                                new PluginsViewModel.Audio()
+                                {
+                                    FullPath = string.Empty,
+                                    Directory = string.Empty,
+                                    Name = "Plugin Not Found"
+                                }
+                            );
+
+                            VM.PluginsView.Audio_SelectedItem = "Plugin Not Found";
                         }
                     }
                     // Error
@@ -434,6 +460,19 @@ namespace Ultra
                                     );
                             }
                         }
+                        else
+                        {
+                            VM.PluginsView.Input_Items.Add(
+                                new PluginsViewModel.Input()
+                                {
+                                    FullPath = string.Empty,
+                                    Directory = string.Empty,
+                                    Name = "Plugin Not Found"
+                                }
+                            );
+
+                            VM.PluginsView.Input_SelectedItem = "Plugin Not Found";
+                        }
                     }
                     // Error
                     catch
@@ -464,6 +503,19 @@ namespace Ultra
                                         }
                                     );
                             }
+                        }
+                        else
+                        {
+                            VM.PluginsView.RSP_Items.Add(
+                                new PluginsViewModel.RSP()
+                                {
+                                    FullPath = string.Empty,
+                                    Directory = string.Empty,
+                                    Name = "Plugin Not Found"
+                                }
+                            );
+
+                            VM.PluginsView.RSP_SelectedItem = "Plugin Not Found";
                         }
                     }
                     // Error
