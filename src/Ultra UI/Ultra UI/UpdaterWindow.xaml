@@ -1,13 +1,13 @@
 ﻿<!-- 
     Ultra UI
-    Copyright (C) 2019 Matt McManis
+    Copyright (C) 2019-2020 Matt McManis
     https://github.com/MattMcManis/Ultra
     https://ultraui.github.io
     mattmcmanis@outlook.com
 
     The MIT License
 
-    Copyright (C) 2019 Matt McManis
+    Copyright (C) 2019-2020 Matt McManis
 
     Permission is hereby granted, free of charge, to any person obtaining a 
     copy of this software and associated documentation files (the "Software"), 
@@ -47,7 +47,7 @@
         Height="200"
         Width="400"
         
-        Style="{DynamicResource WindowStyle}">
+        Style="{DynamicResource WindowStyle}" Icon="ultraui.ico">
 
     <Grid>
 
