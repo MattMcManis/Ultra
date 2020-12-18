@@ -6,7 +6,7 @@
 
     The MIT License
 
-    Copyright (C) 2019 Matt McManis
+    Copyright (C) 2019-2020 Matt McManis
 
     Permission is hereby granted, free of charge, to any person obtaining a 
     copy of this software and associated documentation files (the "Software"), 
@@ -66,18 +66,19 @@
         <Border BorderThickness="0,0,0,1" 
                 Background="Transparent"
                 BorderBrush="#FF3D3D3D" 
-                Height="26" 
+                Height="28" 
                 VerticalAlignment="Top">
 
             <DockPanel>
 
                 <Menu DockPanel.Dock="Top" 
                       Style="{DynamicResource MenuStyle}"
-                      Height="24">
+                      Height="28">
                     <!-- File -->
                     <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
                           Header="_File" 
-                          Height="24">
+                          Height="28"
+                          >
                         <!-- Open ROM -->
                         <MenuItem Header="_Open ROM"
                               Click="OpenROM_MenuItem_Click">
@@ -273,7 +274,7 @@
                     <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
                           Header="_View" 
                           Height="24">
-                        <!--Fullscreen--> 
+                        <!--Fullscreen-->
                         <MenuItem Header="_Fullscreen" 
                                   InputGestureText="Alt+Enter"
                                   Click="Fullscreen_MenuItem_Click"/>
@@ -446,13 +447,15 @@
 
         <!--Tab Control-->
         <TabControl x:Name="tabControl" 
-                    Margin="10,38,10,10" 
+                    Margin="10,40,10,10" 
                     Style="{DynamicResource TabControlStyle}"
                     >
 
             <!-- Games Tab -->
             <TabItem Header="Games" 
                      Width="85"
+                     Height="24"
+                     VerticalAlignment="Top"
                      DataContext="{Binding MainView}"
                      Style="{DynamicResource TabItemStyle}"
                      >
@@ -513,12 +516,12 @@
                             Margin="0,0,97,10" 
                             HorizontalAlignment="Right"
                             Width="30" 
-                            Height="22" 
+                            Height="24" 
                             VerticalAlignment="Bottom" 
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Rebuild Games List" 
                             Click="btnRebuildList_Click">
-                        <Image Margin="0,-1,0,0" 
+                        <Image Margin="0,0,0,0" 
                                Width="16" 
                                Height="16" 
                                Stretch="Uniform"
@@ -534,7 +537,7 @@
                             Margin="0,0,10,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24" 
                             VerticalAlignment="Bottom"
                             Click="btnPlay_Click">
                         <TextBlock Text="Play"
@@ -556,28 +559,48 @@
             <!-- Paths -->
             <TabItem Header="Paths" 
                      Width="85"
+                     Height="24"
+                     VerticalAlignment="Top"
                      DataContext="{Binding PathsView}"
                      Style="{DynamicResource TabItemStyle}">
 
                 <Grid Background="Transparent">
 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
                     <!-- Mupen -->
-                    <GroupBox Header="Mupen64Plus" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
-                              Height="65" 
-                              VerticalAlignment="Top">
+                              Height="70" 
+                              VerticalAlignment="Top"
+                              Grid.Column="0"
+                              Grid.Row="0"
+                              >
+
+                        <GroupBox.Header>
+                            <TextBlock Text="Mupen64Plus"
+                                       Height="17" />
+                        </GroupBox.Header>
 
                         <Grid Background="Transparent">
 
                             <Button x:Name="btnBrowseMupenPath" 
                                     Style="{DynamicResource ButtonStyle}"
-                                    
                                     Cursor="Hand"
                                     HorizontalAlignment="Left" 
                                     Margin="10,10,0,0"
                                     VerticalAlignment="Top" 
-                                    Height="23"
+                                    Height="24"
                                     Width="75" 
                                     Click="btnBrowsePathMupen_Click">
                                 <TextBlock Text="Browse"
@@ -587,7 +610,7 @@
                             <TextBox x:Name="tbxPathMupen"
                                      
                                      Style="{DynamicResource TextBoxStyle}" 
-                                     Height="23"
+                                     Height="24"
                                      Margin="90,10,37,0" 
                                      Padding="2, 2, 0, 2" 
                                      TextWrapping="NoWrap"
@@ -606,7 +629,7 @@
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
                                     Width="22" 
-                                    Height="23" 
+                                    Height="24"
                                     VerticalAlignment="Top">
                                 <Image Style="{DynamicResource IconPathFolder}" 
                                        Width="11" 
@@ -621,11 +644,19 @@
                     </GroupBox>
 
                     <!-- Config -->
-                    <GroupBox Header="Config" 
-                              Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,80,10,0" 
-                              Height="65" 
-                              VerticalAlignment="Top">
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,7,10,0" 
+                              Height="70" 
+                              VerticalAlignment="Top"
+                              Grid.Column="0"
+                              Grid.Row="1"
+                              >
+
+                        <GroupBox.Header>
+                            <TextBlock Text="Config"
+                                       Height="17" />
+                        </GroupBox.Header>
+
                         <Grid Background="Transparent">
 
                             <Button x:Name="btnBrowsePathConfig" 
@@ -634,7 +665,7 @@
                                     HorizontalAlignment="Left" 
                                     Margin="10,10,0,0"
                                     VerticalAlignment="Top" 
-                                    Height="23"
+                                    Height="24"
                                     Width="75" 
                                     IsEnabled="False"
                                     Click="btnBrowsePathConfig_Click">
@@ -644,7 +675,7 @@
                             <!-- Config TextBox -->
                             <TextBox x:Name="tbxPathConfig"
                                      Style="{DynamicResource TextBoxStyle}" 
-                                     Height="23"
+                                     Height="24"
                                      Margin="90,10,37,0" 
                                      Padding="2, 2, 0, 2" 
                                      TextWrapping="NoWrap"
@@ -664,7 +695,7 @@
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
                                     Width="22" 
-                                    Height="23" 
+                                    Height="24"
                                     VerticalAlignment="Top">
                                 <Image Style="{DynamicResource IconPathFolder}" 
                                        Width="11" 
@@ -679,11 +710,19 @@
                     </GroupBox>
 
                     <!-- Plugins -->
-                    <GroupBox Header="Plugins" 
-                              Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,150,10,0" 
-                              Height="65" 
-                              VerticalAlignment="Top">
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,7,10,0" 
+                              Height="70" 
+                              VerticalAlignment="Top"
+                              Grid.Column="0"
+                              Grid.Row="2"
+                              >
+
+                        <GroupBox.Header>
+                            <TextBlock Text="Plugins"
+                                       Height="17" />
+                        </GroupBox.Header>
+
                         <Grid Background="Transparent">
 
                             <!-- Plugins Browse -->
@@ -693,7 +732,7 @@
                                     HorizontalAlignment="Left" 
                                     Margin="10,10,0,0"
                                     VerticalAlignment="Top" 
-                                    Height="23"
+                                    Height="24"
                                     Width="75" 
                                     Click="btnBrowsePathPlugins_Click">
                                 <TextBlock Text="Browse"
@@ -702,7 +741,7 @@
                             <!-- Plugins TextBox -->
                             <TextBox x:Name="tbxPathPlugins"
                                      Style="{DynamicResource TextBoxStyle}" 
-                                     Height="23"
+                                     Height="24"
                                      Margin="90,10,37,0"                        
                                      Padding="2, 2, 0, 2" 
                                      TextWrapping="NoWrap"
@@ -721,7 +760,7 @@
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
                                     Width="22" 
-                                    Height="23" 
+                                    Height="24" 
                                     VerticalAlignment="Top">
                                 <Image Style="{DynamicResource IconPathFolder}" 
                                        Width="11" 
@@ -792,11 +831,19 @@
                     </GroupBox>-->
 
                     <!-- ROMs -->
-                    <GroupBox Header="ROMs" 
-                              Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,220,10,0" 
-                              Height="65" 
-                              VerticalAlignment="Top">
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
+                              Margin="10,7,10,0" 
+                              Height="70" 
+                              VerticalAlignment="Top"
+                              Grid.Column="0"
+                              Grid.Row="3"
+                              >
+
+                        <GroupBox.Header>
+                            <TextBlock Text="ROMs"
+                                       Height="17" />
+                        </GroupBox.Header>
+
                         <Grid Background="Transparent">
 
                             <!-- ROMs Browse -->
@@ -806,7 +853,7 @@
                                     HorizontalAlignment="Left" 
                                     Margin="10,10,0,0"
                                     VerticalAlignment="Top" 
-                                    Height="23"
+                                    Height="24"
                                     Width="75" 
                                     Click="btnBrowsePathROMs_Click">
                                 <TextBlock Text="Browse"
@@ -815,7 +862,7 @@
                             <!-- ROMs TextBox -->
                             <TextBox x:Name="tbxPathROMs"
                                      Style="{DynamicResource TextBoxStyle}" 
-                                     Height="23"
+                                     Height="24"
                                      Margin="90,10,37,0" 
                                      Padding="2, 2, 0, 2" 
                                      TextWrapping="NoWrap"
@@ -834,7 +881,7 @@
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
                                     Width="22" 
-                                    Height="23" 
+                                    Height="24"
                                     VerticalAlignment="Top">
                                 <Image Style="{DynamicResource IconPathFolder}" 
                                        Width="11" 
@@ -855,7 +902,9 @@
                             Margin="0,0,97,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24" 
+                            Grid.Column="0"
+                            Grid.Row="4"
                             VerticalAlignment="Bottom" 
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Load Defaults for All Tabs" 
@@ -871,7 +920,9 @@
                             Margin="0,0,10,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24" 
+                            Grid.Column="0"
+                            Grid.Row="4"
                             VerticalAlignment="Bottom"
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Load Defaults for this Tab" 
@@ -886,15 +937,31 @@
             <!-- Plugins -->
             <TabItem Header="Plugins" 
                      Width="85"
+                     Height="24"
+                     VerticalAlignment="Top"
                      Style="{DynamicResource TabItemStyle}">
 
                 <Grid Background="Transparent">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
                     <!-- Video -->
                     <GroupBox Header="Video"
                               Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
-                              Height="65" 
+                              Height="70" 
+                              Grid.Column="0"
+                              Grid.Row="0"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -915,7 +982,7 @@
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
                                       Margin="38,10,97,0"
                                       VerticalAlignment="Top" 
-                                      Height="22">
+                                      Height="24">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -936,7 +1003,7 @@
                                     Margin="0,10,10,0" 
                                     HorizontalAlignment="Right"
                                     Width="80" 
-                                    Height="22" 
+                                    Height="24"
                                     VerticalAlignment="Top" 
                                     Click="btnPlugin_Video_Configure_Click">
                                 <TextBlock Text="Configure"
@@ -950,8 +1017,10 @@
                     <!-- Audio -->
                     <GroupBox Header="Audio" 
                               Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,80,10,0" 
-                              Height="65" 
+                              Margin="10,7,10,0" 
+                              Height="70" 
+                              Grid.Column="0"
+                              Grid.Row="1"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -972,7 +1041,7 @@
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
                                       Margin="38,10,97,0"
                                       VerticalAlignment="Top" 
-                                      Height="22">
+                                      Height="24">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -993,7 +1062,7 @@
                                     Margin="0,10,10,0" 
                                     HorizontalAlignment="Right"
                                     Width="80" 
-                                    Height="22"
+                                    Height="24"
                                     VerticalAlignment="Top" 
                                     Click="btnPlugin_Audio_Configure_Click">
                                 <TextBlock Text="Configure"
@@ -1006,8 +1075,10 @@
                     <!-- RSP -->
                     <GroupBox Header="RSP" 
                               Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,220,10,0" 
-                              Height="65" 
+                              Margin="10,7,10,0" 
+                              Height="70" 
+                              Grid.Column="0"
+                              Grid.Row="3"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -1028,7 +1099,7 @@
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
                                       Margin="38,10,97,0"
                                       VerticalAlignment="Top" 
-                                      Height="22">
+                                      Height="24">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -1049,7 +1120,7 @@
                                     Margin="0,10,10,0" 
                                     HorizontalAlignment="Right"
                                     Width="80" 
-                                    Height="22" 
+                                    Height="24"
                                     VerticalAlignment="Top" 
                                     Click="btnPlugin_RSP_Configure_Click">
                                 <TextBlock Text="Configure"
@@ -1061,8 +1132,10 @@
                     <!-- Input -->
                     <GroupBox Header="Input" 
                               Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,150,10,0" 
-                              Height="65" 
+                              Margin="10,7,10,0" 
+                              Height="70" 
+                              Grid.Column="0"
+                              Grid.Row="2"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -1083,7 +1156,7 @@
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
                                       Margin="38,10,97,0"
                                       VerticalAlignment="Top" 
-                                      Height="22">
+                                      Height="24">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -1104,7 +1177,7 @@
                                     Margin="0,10,10,0" 
                                     HorizontalAlignment="Right"
                                     Width="80" 
-                                    Height="22" 
+                                    Height="24"
                                     VerticalAlignment="Top" 
                                     Click="btnPlugin_Input_Configure_Click">
                                 <TextBlock Text="Configure"
@@ -1121,7 +1194,9 @@
                             Margin="0,0,184,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24"
+                            Grid.Column="0"
+                            Grid.Row="4"
                             VerticalAlignment="Bottom"
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Generate selected plugin default values in mupen64plus.cfg" 
@@ -1137,7 +1212,9 @@
                             Margin="0,0,97,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24"
+                            Grid.Column="0"
+                            Grid.Row="4"
                             VerticalAlignment="Bottom"
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Reload Plugins from Path" 
@@ -1153,7 +1230,9 @@
                             Margin="0,0,10,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24"
+                            Grid.Column="0"
+                            Grid.Row="4"
                             VerticalAlignment="Bottom" 
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Load Defaults for this Tab" 
@@ -1179,16 +1258,30 @@
             <!-- Emulator -->
             <TabItem Header="Emulator" 
                      Width="85"
+                     Height="24"
+                     VerticalAlignment="Top"
                      DataContext="{Binding EmulatorView}"
                      Style="{DynamicResource TabItemStyle}">
 
                 <Grid Background="Transparent">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
                     <!-- CPU Core -->
                     <GroupBox Header="CPU" 
                               Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
                               Height="124" 
+                              Grid.Column="0"
+                              Grid.Row="0"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -1258,8 +1351,10 @@
                     <!-- Compatibility -->
                     <GroupBox Header="Compatibility" 
                               Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,139,10,0" 
+                              Margin="10,7,10,0" 
                               Height="178" 
+                              Grid.Column="0"
+                              Grid.Row="1"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -1330,7 +1425,9 @@
                             Margin="0,0,10,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24"
+                            Grid.Column="0"
+                            Grid.Row="2"
                             VerticalAlignment="Bottom" 
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Load Defaults for this Tab" 
@@ -1345,17 +1442,31 @@
             <!-- Screen -->
             <TabItem Header="Display" 
                      Width="85"
+                     Height="24"
+                     VerticalAlignment="Top"
                      DataContext="{Binding DisplayView}"
                      Style="{DynamicResource TabItemStyle}"
                      >
 
                 <Grid Background="Transparent">
 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
                     <!-- Video -->
                     <GroupBox Header="Video" 
                               Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
                               Height="133" 
+                              Grid.Column="0"
+                              Grid.Row="0"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -1448,8 +1559,10 @@
                     <!-- Screen -->
                     <GroupBox Header="Screen" 
                               Style="{DynamicResource GroupBoxStyle}"
-                              Margin="10,148,10,0" 
+                              Margin="10,7,10,0" 
                               Height="110" 
+                              Grid.Column="0"
+                              Grid.Row="1"
                               VerticalAlignment="Top">
 
                         <Grid Background="Transparent">
@@ -1484,7 +1597,9 @@
                             Margin="0,0,10,10" 
                             HorizontalAlignment="Right"
                             Width="80" 
-                            Height="22" 
+                            Height="24"
+                            Grid.Column="0"
+                            Grid.Row="2"
                             VerticalAlignment="Bottom" 
                             ToolTipService.InitialShowDelay="100" 
                             ToolTip="Load Defaults for this Tab" 
