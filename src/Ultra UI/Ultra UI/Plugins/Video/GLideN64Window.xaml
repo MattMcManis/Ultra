@@ -6,7 +6,7 @@
 
     The MIT License
 
-    Copyright (C) 2019 Matt McManis
+    Copyright (C) 2019-2020 Matt McManis
 
     Permission is hereby granted, free of charge, to any person obtaining a 
     copy of this software and associated documentation files (the "Software"), 
@@ -49,7 +49,7 @@
         Title="Video Plugin - GLideN64 - Public Release 4.0"
         
         Width="650"
-        Height="500"
+        Height="505"
         
         Style="{DynamicResource WindowStyle}"
         >
@@ -74,12 +74,13 @@
 
         <!--Tab Control-->
         <TabControl x:Name="tabControl" 
-                    Margin="10,10,10,51" 
+                    Margin="10,10,10,53" 
                     Style="{DynamicResource TabControlStyle}">
 
             <!-- General-->
             <TabItem Header="General" 
                      Width="85"
+                     Height="25"
                      Style="{DynamicResource TabItemStyle}">
 
                 <Grid Margin="0,0,0,0" 
@@ -1145,8 +1146,8 @@
         <Button x:Name="btnDefaults" 
                 Style="{DynamicResource ButtonStyle}"
                 Cursor="Hand"
-                Margin="14,0,0,15" 
-                Height="22"
+                Margin="14,0,0,13" 
+                Height="24"
                 VerticalAlignment="Bottom"
                 Click="btnDefaults_Click"
                 HorizontalAlignment="Left" 
@@ -1159,8 +1160,8 @@
         <Button x:Name="btnSave" 
                 Style="{DynamicResource ButtonStyle}"
                 Cursor="Hand"
-                Margin="0,0,99,15" 
-                Height="22"
+                Margin="0,0,99,13" 
+                Height="24"
                 VerticalAlignment="Bottom"
                 Click="btnSave_Click" HorizontalAlignment="Right" Width="80">
             <TextBlock Text="Save"
@@ -1181,8 +1182,8 @@
         <Button x:Name="btnClose" 
                 Style="{DynamicResource ButtonStyle}"
                 Cursor="Hand"
-                Margin="0,0,14,15" 
-                Height="22"
+                Margin="0,0,14,13" 
+                Height="24"
                 VerticalAlignment="Bottom"
                 Click="btnClose_Click" HorizontalAlignment="Right" Width="80">
             <TextBlock Text="Close"
