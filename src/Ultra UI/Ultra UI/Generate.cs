@@ -178,6 +178,11 @@ namespace Ultra
             //MessageBox.Show(video); //debug
 
             // -------------------------
+            // Set Cheats 
+            // -------------------------
+            //string cheats = string.Join(",", EmulatorViewModel.cheatIDs);
+
+            // -------------------------
             // Set Window Resolution
             // -------------------------
             int windowWidth = 0;
