@@ -586,6 +586,11 @@ namespace Ultra
         public delegate void GetRegisters(byte[] dest);
         GetRegisters m64pGetRegisters;
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        //delegate m64p_error CoreAddCheat(const char* CheatName, m64p_cheat_code *CodeList, int NumCodes);
+        delegate m64p_error CoreAddCheat(string CheatName, string[] CodeList, int NumCodes);
+        CoreAddCheat m64pCoreAddCheat;
+
         /// <summary>
 		/// This will be called when the debugger is initialized
 		/// </summary>
@@ -675,7 +680,7 @@ namespace Ultra
                 null,       // DebugCallback 
                 "",         // Context2 
                 IntPtr.Zero // StateCallback
-                );
+            );
 
             // -------------------------
             // Save Slot
@@ -980,6 +985,11 @@ namespace Ultra
             AttachPlugin(m64p_plugin_type.M64PLUGIN_INPUT, inputPlugin); //mupen64plus-input-sdl.dll
             // RSP
             AttachPlugin(m64p_plugin_type.M64PLUGIN_RSP, rspPlugin); //mupen64plus-rsp-hle.dll
+
+            // --------------------------------------------------
+            // Add Cheats
+            // --------------------------------------------------
+            //m64pCoreAddCheat("", null, 0);
 
             // Generate Defaults here
 
@@ -1444,6 +1454,7 @@ namespace Ultra
             m64pConfigSetDefaultFloat = (ConfigSetDefaultFloat)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetDefaultFloat"), typeof(ConfigSetDefaultFloat));
             m64pConfigSetDefaultString = (ConfigSetDefaultString)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSetDefaultString"), typeof(ConfigSetDefaultString));
             m64pConfigSaveFile = (ConfigSaveFile)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "ConfigSaveFile"), typeof(ConfigSaveFile));
+            m64pCoreAddCheat = (CoreAddCheat)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreAddCheat"), typeof(CoreAddCheat));
             // End Custom
             m64pCoreDoCommandRefInt = (CoreDoCommandRefInt)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandRefInt));
             m64pCoreDoCommandFrameCallback = (CoreDoCommandFrameCallback)Marshal.GetDelegateForFunctionPointer(GetProcAddress(CoreDll, "CoreDoCommand"), typeof(CoreDoCommandFrameCallback));
