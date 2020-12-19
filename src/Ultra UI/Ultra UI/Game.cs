@@ -36,6 +36,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
+using ViewModel;
 
 namespace Ultra
 {
