@@ -262,13 +262,13 @@
                               IsCheckable="True"/>
                     <Separator Style="{DynamicResource SeparatorStyle}" />-->
                         <!-- Cheats -->
-                        <MenuItem Header="_Cheats"
+                        <!--<MenuItem Header="_Cheats"
                                   InputGestureText="F2"
                                   Click="Cheats_MenuItem_Click">
                             <MenuItem.Icon>
                                 <Image Source="Resources\Icons\White\cheats.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
-                        </MenuItem>
+                        </MenuItem>-->
                     </MenuItem>
                     <!-- View -->
                     <MenuItem Template="{DynamicResource MenuItemControlTemplate}"
@@ -452,13 +452,20 @@
                     >
 
             <!-- Games Tab -->
-            <TabItem Header="Games" 
-                     Width="85"
+            <TabItem Width="85"
                      Height="24"
                      VerticalAlignment="Top"
                      DataContext="{Binding MainView}"
                      Style="{DynamicResource TabItemStyle}"
                      >
+
+                <TabItem.Header>
+                    <TextBlock Text="Games"
+                               Margin="0,2,0,0" 
+                               Height="22"
+                               Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
+                </TabItem.Header>
+                
                 <Grid Margin="0,0,0,0">
 
                     <!-- Refresh List -->
@@ -496,10 +503,11 @@
 
                                         <!-- Game Name Column -->
                                         <GridViewColumn HeaderTemplate="{StaticResource Templ}" 
-                                                    HeaderContainerStyle="{StaticResource HeaderStyle}"
-                                                    DisplayMemberBinding="{Binding Name}"
-                                                    Width="Auto" 
-                                                    Header="" />
+                                                        HeaderContainerStyle="{StaticResource HeaderStyle}"
+                                                        DisplayMemberBinding="{Binding Name}"
+                                                        Width="Auto" 
+                                                        Header="" 
+                                                        />
 
                                     </GridView>
                                 </ListView.View>
@@ -557,12 +565,18 @@
             </TabItem>
 
             <!-- Paths -->
-            <TabItem Header="Paths" 
-                     Width="85"
+            <TabItem Width="85"
                      Height="24"
                      VerticalAlignment="Top"
                      DataContext="{Binding PathsView}"
                      Style="{DynamicResource TabItemStyle}">
+
+                <TabItem.Header>
+                    <TextBlock Text="Paths"
+                               Margin="0,2,0,0" 
+                               Height="22" 
+                               Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
+                </TabItem.Header>
 
                 <Grid Background="Transparent">
 
@@ -589,7 +603,12 @@
 
                         <GroupBox.Header>
                             <TextBlock Text="Mupen64Plus"
-                                       Height="17" />
+                                       Height="17"
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       ToolTipService.InitialShowDelay="100"
+                                       ToolTipService.ShowOnDisabled="True"
+                                       ToolTip="mupen64plus.dll folder."
+                                       />
                         </GroupBox.Header>
 
                         <Grid Background="Transparent">
@@ -608,7 +627,6 @@
                             </Button>
                             <!-- Mupen TextBox -->
                             <TextBox x:Name="tbxPathMupen"
-                                     
                                      Style="{DynamicResource TextBoxStyle}" 
                                      Height="24"
                                      Margin="90,10,37,0" 
@@ -616,7 +634,11 @@
                                      TextWrapping="NoWrap"
                                      MaxLines="1" 
                                      Text="{Binding Mupen_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                     VerticalAlignment="Top"/>
+                                     VerticalAlignment="Top"
+                                     ToolTipService.InitialShowDelay="200"
+                                     ToolTipService.ShowOnDisabled="True"
+                                     ToolTip="mupen64plus.dll folder."
+                                     />
 
                             <!-- Open Mupen64Plus Exe Path -->
                             <Button x:Name="btnOpenMupen64PlusExePath" 
@@ -624,7 +646,7 @@
                                     Margin="0,10,10,0"
                                     Cursor="Hand"
                                     Click="btnOpenMupen64PlusExePath_Click"
-                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.InitialShowDelay="200"
                                     ToolTipService.ShowOnDisabled="True"
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
@@ -654,7 +676,12 @@
 
                         <GroupBox.Header>
                             <TextBlock Text="Config"
-                                       Height="17" />
+                                       Height="17" 
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       ToolTipService.InitialShowDelay="100"
+                                       ToolTipService.ShowOnDisabled="True"
+                                       ToolTip="mupen64plus.cfg folder."
+                                       />
                         </GroupBox.Header>
 
                         <Grid Background="Transparent">
@@ -682,7 +709,11 @@
                                      MaxLines="1" 
                                      IsEnabled="False"
                                      Text="{Binding Config_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                     VerticalAlignment="Top"/>
+                                     VerticalAlignment="Top"
+                                     ToolTipService.InitialShowDelay="200"
+                                     ToolTipService.ShowOnDisabled="True"
+                                     ToolTip="mupen64plus.cfg folder."
+                                     />
 
                             <!-- Open Config Path -->
                             <Button x:Name="btnOpenConfigPath" 
@@ -690,7 +721,7 @@
                                     Margin="0,10,10,0"
                                     Cursor="Hand"
                                     Click="btnOpenConfigPath_Click"
-                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.InitialShowDelay="200"
                                     ToolTipService.ShowOnDisabled="True"
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
@@ -720,7 +751,12 @@
 
                         <GroupBox.Header>
                             <TextBlock Text="Plugins"
-                                       Height="17" />
+                                       Height="17" 
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       ToolTipService.InitialShowDelay="100"
+                                       ToolTipService.ShowOnDisabled="True"
+                                       ToolTip="Plugin dll's folder."
+                                       />
                         </GroupBox.Header>
 
                         <Grid Background="Transparent">
@@ -736,7 +772,8 @@
                                     Width="75" 
                                     Click="btnBrowsePathPlugins_Click">
                                 <TextBlock Text="Browse"
-                                           Margin="0,-1,0,0"/>
+                                           Margin="0,-1,0,0"
+                                           />
                             </Button>
                             <!-- Plugins TextBox -->
                             <TextBox x:Name="tbxPathPlugins"
@@ -747,7 +784,11 @@
                                      TextWrapping="NoWrap"
                                      MaxLines="1"                                                
                                      Text="{Binding Plugins_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                     VerticalAlignment="Top"/>
+                                     VerticalAlignment="Top"
+                                     ToolTipService.InitialShowDelay="200"
+                                     ToolTipService.ShowOnDisabled="True"
+                                     ToolTip="Plugin dll's folder."
+                                     />
 
                             <!-- Open Plugins Path -->
                             <Button x:Name="btnOpenPluginsPath" 
@@ -755,7 +796,7 @@
                                     Margin="0,10,10,0"
                                     Cursor="Hand"
                                     Click="btnOpenPluginsPath_Click"
-                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.InitialShowDelay="200"
                                     ToolTipService.ShowOnDisabled="True"
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
@@ -811,7 +852,7 @@
                                     Margin="0,10,10,0"
                                     Cursor="Hand"
                                     Click="btnOpenDataPath_Click"
-                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.InitialShowDelay="200"
                                     ToolTipService.ShowOnDisabled="True"
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
@@ -841,7 +882,12 @@
 
                         <GroupBox.Header>
                             <TextBlock Text="ROMs"
-                                       Height="17" />
+                                       Height="17" 
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       ToolTipService.InitialShowDelay="100"
+                                       ToolTipService.ShowOnDisabled="True"
+                                       ToolTip="Main ROMs folder, subfolder's .n64/.v64 files will be detected."
+                                       />
                         </GroupBox.Header>
 
                         <Grid Background="Transparent">
@@ -868,7 +914,11 @@
                                      TextWrapping="NoWrap"
                                      MaxLines="1" 
                                      Text="{Binding ROMs_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                     VerticalAlignment="Top"/>
+                                     VerticalAlignment="Top"
+                                     ToolTipService.InitialShowDelay="200"
+                                     ToolTipService.ShowOnDisabled="True"
+                                     ToolTip="Main ROMs folder, subfolder's .n64/.v64 files will be detected."
+                                     />
 
                             <!-- Open ROMs Path -->
                             <Button x:Name="btnOpenROMsPath" 
@@ -876,7 +926,7 @@
                                     Margin="0,10,10,0"
                                     Cursor="Hand"
                                     Click="btnOpenROMsPath_Click"
-                                    ToolTipService.InitialShowDelay="300"
+                                    ToolTipService.InitialShowDelay="200"
                                     ToolTipService.ShowOnDisabled="True"
                                     ToolTip="Open location"
                                     HorizontalAlignment="Right"
@@ -935,11 +985,17 @@
             </TabItem>
 
             <!-- Plugins -->
-            <TabItem Header="Plugins" 
-                     Width="85"
+            <TabItem Width="85"
                      Height="24"
                      VerticalAlignment="Top"
                      Style="{DynamicResource TabItemStyle}">
+
+                <TabItem.Header>
+                    <TextBlock Text="Plugins"
+                               Margin="0,2,0,0" 
+                               Height="22" 
+                               Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
+                </TabItem.Header>
 
                 <Grid Background="Transparent">
 
@@ -956,19 +1012,25 @@
                     </Grid.RowDefinitions>
 
                     <!-- Video -->
-                    <GroupBox Header="Video"
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
                               Height="70" 
                               Grid.Column="0"
                               Grid.Row="0"
                               VerticalAlignment="Top">
 
+                        <GroupBox.Header>
+                            <TextBlock Text="Video"
+                                       Height="17"
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
+
                         <Grid Background="Transparent">
 
                             <!-- Video ComboBox -->
                             <Image Style="{DynamicResource IconVideo}"
-                                   Margin="10,13,0,14"
+                                   Margin="10,13,0,17"
                                    Width="16" 
                                    Height="16" 
                                    HorizontalAlignment="Left" />
@@ -980,7 +1042,7 @@
                                       IsEnabled="{Binding Video_IsEnabled}"
                                       Style="{DynamicResource ComboBoxStyle}"
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                      Margin="38,10,97,0"
+                                      Margin="42,10,97,0"
                                       VerticalAlignment="Top" 
                                       Height="24">
                                 <ComboBox.ItemTemplate>
@@ -1015,19 +1077,25 @@
 
 
                     <!-- Audio -->
-                    <GroupBox Header="Audio" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,7,10,0" 
                               Height="70" 
                               Grid.Column="0"
                               Grid.Row="1"
                               VerticalAlignment="Top">
 
+                        <GroupBox.Header>
+                            <TextBlock Text="Audio"
+                                       Height="17"
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
+
                         <Grid Background="Transparent">
 
                             <!-- Audio ComboBox -->
                             <Image Style="{DynamicResource IconAudio}"
-                                   Margin="10,13,0,14"
+                                   Margin="10,14,0,16"
                                    Width="16" 
                                    Height="16" 
                                    HorizontalAlignment="Left" />
@@ -1039,7 +1107,7 @@
                                       IsEnabled="{Binding Audio_IsEnabled}"
                                       Style="{DynamicResource ComboBoxStyle}"
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                      Margin="38,10,97,0"
+                                      Margin="42,10,97,0"
                                       VerticalAlignment="Top" 
                                       Height="24">
                                 <ComboBox.ItemTemplate>
@@ -1073,19 +1141,25 @@
                     </GroupBox>
 
                     <!-- RSP -->
-                    <GroupBox Header="RSP" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,7,10,0" 
                               Height="70" 
                               Grid.Column="0"
                               Grid.Row="3"
                               VerticalAlignment="Top">
 
+                        <GroupBox.Header>
+                            <TextBlock Text="RSP"
+                                       Height="17" 
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
+
                         <Grid Background="Transparent">
 
                             <!-- RSP ComboBox -->
                             <Image Style="{DynamicResource IconRSP}"
-                                   Margin="10,13,0,14"
+                                   Margin="10,14,0,16"
                                    Width="16" 
                                    Height="16" 
                                    HorizontalAlignment="Left" />
@@ -1097,7 +1171,7 @@
                                       IsEnabled="{Binding RSP_IsEnabled}"
                                       Style="{DynamicResource ComboBoxStyle}"
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                      Margin="38,10,97,0"
+                                      Margin="42,10,97,0"
                                       VerticalAlignment="Top" 
                                       Height="24">
                                 <ComboBox.ItemTemplate>
@@ -1130,19 +1204,25 @@
                     </GroupBox>
 
                     <!-- Input -->
-                    <GroupBox Header="Input" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,7,10,0" 
                               Height="70" 
                               Grid.Column="0"
                               Grid.Row="2"
                               VerticalAlignment="Top">
 
+                        <GroupBox.Header>
+                            <TextBlock Text="Input"
+                                       Height="17" 
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
+
                         <Grid Background="Transparent">
 
                             <!-- Input ComboBox -->
                             <Image Style="{DynamicResource IconInput}" 
-                                   Margin="10,13,0,14"
+                                   Margin="10,14,0,16"
                                    Width="16" 
                                    Height="16" 
                                    HorizontalAlignment="Left" />
@@ -1154,7 +1234,7 @@
                                       IsEnabled="{Binding Input_IsEnabled}"
                                       Style="{DynamicResource ComboBoxStyle}"
                                       ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                      Margin="38,10,97,0"
+                                      Margin="42,10,97,0"
                                       VerticalAlignment="Top" 
                                       Height="24">
                                 <ComboBox.ItemTemplate>
@@ -1256,12 +1336,18 @@
             </TabItem>
 
             <!-- Emulator -->
-            <TabItem Header="Emulator" 
-                     Width="85"
+            <TabItem Width="85"
                      Height="24"
                      VerticalAlignment="Top"
                      DataContext="{Binding EmulatorView}"
                      Style="{DynamicResource TabItemStyle}">
+
+                <TabItem.Header>
+                    <TextBlock Text="Emulator"
+                               Margin="0,2,0,0" 
+                               Height="22" 
+                               Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
+                </TabItem.Header>
 
                 <Grid Background="Transparent">
 
@@ -1276,13 +1362,19 @@
                     </Grid.RowDefinitions>
 
                     <!-- CPU Core -->
-                    <GroupBox Header="CPU" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
                               Height="124" 
                               Grid.Column="0"
                               Grid.Row="0"
                               VerticalAlignment="Top">
+
+                        <GroupBox.Header>
+                            <TextBlock Text="CPU"
+                                       Height="17"
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
 
                         <Grid Background="Transparent">
 
@@ -1349,13 +1441,19 @@
                     </GroupBox>
 
                     <!-- Compatibility -->
-                    <GroupBox Header="Compatibility" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,7,10,0" 
                               Height="178" 
                               Grid.Column="0"
                               Grid.Row="1"
                               VerticalAlignment="Top">
+
+                        <GroupBox.Header>
+                            <TextBlock Text="Compatibility"
+                                       Height="17"
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
 
                         <Grid Background="Transparent">
 
@@ -1440,13 +1538,19 @@
             </TabItem>
 
             <!-- Screen -->
-            <TabItem Header="Display" 
-                     Width="85"
+            <TabItem Width="85"
                      Height="24"
                      VerticalAlignment="Top"
                      DataContext="{Binding DisplayView}"
                      Style="{DynamicResource TabItemStyle}"
                      >
+
+                <TabItem.Header>
+                    <TextBlock Text="Display"
+                               Margin="0,2,0,0" 
+                               Height="22" 
+                               Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
+                </TabItem.Header>
 
                 <Grid Background="Transparent">
 
@@ -1461,13 +1565,19 @@
                     </Grid.RowDefinitions>
 
                     <!-- Video -->
-                    <GroupBox Header="Video" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,10,0" 
                               Height="133" 
                               Grid.Column="0"
                               Grid.Row="0"
                               VerticalAlignment="Top">
+
+                        <GroupBox.Header>
+                            <TextBlock Text="Video"
+                                       Height="17"
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
 
                         <Grid Background="Transparent">
 
@@ -1502,7 +1612,7 @@
                                       SelectedValuePath="Name"
                                       SelectedValue="{Binding Display_Resolution_SelectedItem}"
                                       IsEnabled="{Binding Display_Resolution_IsEnabled}"
-                                      Style="{DynamicResource ComboBoxCategoryStyle}"
+                                      Style="{DynamicResource ComboBoxStyle}"
                                       ItemContainerStyle="{DynamicResource ComboBoxCategoryItemStyle}"
                                       Margin="74,46,0,0"
                                       VerticalAlignment="Top"
@@ -1557,13 +1667,19 @@
                     </GroupBox>
 
                     <!-- Screen -->
-                    <GroupBox Header="Screen" 
-                              Style="{DynamicResource GroupBoxStyle}"
+                    <GroupBox Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,7,10,0" 
                               Height="110" 
                               Grid.Column="0"
                               Grid.Row="1"
                               VerticalAlignment="Top">
+
+                        <GroupBox.Header>
+                            <TextBlock Text="Screen"
+                                       Height="17"
+                                       Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
+                                       />
+                        </GroupBox.Header>
 
                         <Grid Background="Transparent">
 
