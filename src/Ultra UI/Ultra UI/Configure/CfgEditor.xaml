@@ -81,14 +81,16 @@
 
         <Button x:Name="btnSave"
                 Style="{DynamicResource ButtonStyle}"
-                Content="Save" 
                 Cursor="Hand"
                 Margin="0,0,10,10"
                 HorizontalAlignment="Right" 
                 Width="75" 
-                Height="22" 
+                Height="24" 
                 VerticalAlignment="Bottom" 
-                Click="btnSave_Click"/>
+                Click="btnSave_Click">
+            <TextBlock Text="Save"
+                       Margin="0,-2,0,0"/>
+        </Button>
 
     </Grid>
 </Window>
