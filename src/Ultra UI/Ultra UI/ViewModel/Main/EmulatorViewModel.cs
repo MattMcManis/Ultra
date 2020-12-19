@@ -475,5 +475,92 @@ namespace ViewModel
             }
         }
 
+
+        // -------------------------
+        // Cheats
+        // -------------------------
+        public static List<int> cheatIDs = new List<int>();
+
+        //// Items Source
+        //private ObservableCollection<string> _Cheats_ListView_Items = new ObservableCollection<string>();
+        //public ObservableCollection<string> Cheats_ListView_Items
+        //{
+        //    get { return _Cheats_ListView_Items; }
+        //    set
+        //    {
+        //        _Cheats_ListView_Items = value;
+        //        OnPropertyChanged("Cheats_ListView_Items");
+        //    }
+        //}
+        // Items Source
+        private List<string> _Cheats_ListView_Items = new List<string>();
+        public List<string> Cheats_ListView_Items
+        {
+            get { return _Cheats_ListView_Items; }
+            set
+            {
+                _Cheats_ListView_Items = value;
+                OnPropertyChanged("Cheats_ListView_Items");
+            }
+        }
+        // Selected Items
+        private List<string> _Cheats_ListView_SelectedItems = new List<string>();
+        public List<string> Cheats_ListView_SelectedItems
+        {
+            get { return _Cheats_ListView_SelectedItems; }
+            set
+            {
+                _Cheats_ListView_SelectedItems = value;
+                OnPropertyChanged("Cheats_ListView_SelectedItems");
+            }
+        }
+        // Selected Index
+        private int _Cheats_ListView_SelectedIndex { get; set; }
+        public int Cheats_ListView_SelectedIndex
+        {
+            get { return _Cheats_ListView_SelectedIndex; }
+            set
+            {
+                if (_Cheats_ListView_SelectedIndex == value)
+                {
+                    return;
+                }
+
+                _Cheats_ListView_SelectedIndex = value;
+                OnPropertyChanged("Cheats_ListView_SelectedIndex");
+            }
+        }
+        private double _Cheats_ListView_Opacity { get; set; }
+        public double Cheats_ListView_Opacity
+        {
+            get { return _Cheats_ListView_Opacity; }
+            set
+            {
+                if (_Cheats_ListView_Opacity == value)
+                {
+                    return;
+                }
+
+                _Cheats_ListView_Opacity = value;
+                OnPropertyChanged("Cheats_ListView_Opacity");
+            }
+        }
+        // Controls Enable
+        public bool _Cheats_ListView_IsEnabled = true;
+        public bool Cheats_ListView_IsEnabled
+        {
+            get { return _Cheats_ListView_IsEnabled; }
+            set
+            {
+                if (_Cheats_ListView_IsEnabled == value)
+                {
+                    return;
+                }
+
+                _Cheats_ListView_IsEnabled = value;
+                OnPropertyChanged("Cheats_ListView_IsEnabled");
+            }
+        }
+
     }
 }
