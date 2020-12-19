@@ -42,6 +42,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ViewModel;
 
 namespace Ultra
 {
@@ -177,12 +178,6 @@ namespace Ultra
                     double.TryParse(Configure.ConigFile.conf.Read("Main Window", "Window_Position_Left"), out left);
                     this.Left = left;
 
-                    // Center
-                    if (top == 0 && left == 0)
-                    {
-                        this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                    }
-
                     // Window Maximized
                     bool mainwindow_WindowState_Maximized;
                     bool.TryParse(Configure.ConigFile.conf.Read("Main Window", "WindowState_Maximized").ToLower(), out mainwindow_WindowState_Maximized);
@@ -246,6 +241,16 @@ namespace Ultra
             }
 
             // -------------------------
+            // Window Position Center
+            // -------------------------
+            if ((this.Top.ToString() == "NaN" && this.Left.ToString() == "NaN") ||
+                (this.Top == 0 && this.Top == 0)
+               )
+            {
+                WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+
+            // -------------------------
             // Theme
             // -------------------------
             SetTheme();
@@ -289,7 +294,7 @@ namespace Ultra
         }
 
         /// <summary>
-        ///    Window Loaded
+        /// Window Loaded
         /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -480,7 +485,6 @@ namespace Ultra
                         Mupen64PlusAPI.api.Stop();
                         System.Windows.Forms.Application.ExitThread();
                         Application.Current.Shutdown();
-                        //Environment.Exit(0);
                         break;
                     // Cancel
                     case MessageBoxResult.No:
@@ -495,7 +499,6 @@ namespace Ultra
                 SaveConfOnExit();
                 System.Windows.Forms.Application.ExitThread();
                 Application.Current.Shutdown();
-                //Environment.Exit(0);
             }
             // Unknown
             else
@@ -504,7 +507,6 @@ namespace Ultra
                 SaveConfOnExit();
                 System.Windows.Forms.Application.ExitThread();
                 Application.Current.Shutdown();
-                //Environment.Exit(0);
             }
         }
 
@@ -523,49 +525,182 @@ namespace Ultra
             //WriteUltraConf(appDataRoamingDir + @"Ultra UI\");
             Configure.ConigFile conf = null;
 
-            double top = Top;
-            double left = Left;
-            double width = this.Width;
-            double height = this.Height;
-            string selectedTheme = string.Empty;
+            //double top = Top;
+            //double left = Left;
+            //double width = this.Width;
+            //double height = this.Height;
+            //string selectedTheme = string.Empty;
 
-            string pathsMupen64Plus = string.Empty;
-            string pathsConfig = string.Empty;
-            string pathsROMs = string.Empty;
+            //string pathsMupen64Plus = string.Empty;
+            //string pathsConfig = string.Empty;
+            //string pathsROMs = string.Empty;
 
             try
             {
                 conf = new Configure.ConigFile(ultraConfFile);
 
+                //// -------------------------
+                //// Window
+                //// -------------------------
+                ////double top = 0;
+                //double.TryParse(conf.Read("Main Window", "Window_Position_Top"), out top);
+                ////double left;
+                //double.TryParse(conf.Read("Main Window", "Window_Position_Left"), out left);
+                ////double width;
+                //double.TryParse(conf.Read("Main Window", "Window_Width"), out width);
+                ////double height;
+                //double.TryParse(conf.Read("Main Window", "Window_Height"), out height);
                 // -------------------------
                 // Window
                 // -------------------------
-                //double top = 0;
+                double top;
                 double.TryParse(conf.Read("Main Window", "Window_Position_Top"), out top);
-                //double left;
+                double left;
                 double.TryParse(conf.Read("Main Window", "Window_Position_Left"), out left);
-                //double width;
+                double width;
                 double.TryParse(conf.Read("Main Window", "Window_Width"), out width);
-                //double height;
+                double height;
                 double.TryParse(conf.Read("Main Window", "Window_Height"), out height);
 
                 // -------------------------
                 // Settings
                 // -------------------------
-                selectedTheme = conf.Read("Settings", "Theme");
+                string selectedTheme = conf.Read("Settings", "Theme");
 
                 // -------------------------
                 // Paths
                 // -------------------------
                 // Mupen64plus
-                pathsMupen64Plus = conf.Read("Paths", "Mupen64Plus");
+                string pathsMupen64Plus = conf.Read("Paths", "Mupen64Plus");
                 // Config
-                pathsConfig = conf.Read("Paths", "Config");
+                string pathsConfig = conf.Read("Paths", "Config");
                 // Plugins Path is loaded from mupen64plus.cfg
                 //// Data Path - Disabled for now
                 //VM.PathsView.Data_Text = conf.Read("Paths", "Data");
                 // ROMs Path
-                pathsROMs = conf.Read("Paths", "ROMs");
+                string pathsROMs = conf.Read("Paths", "ROMs");
+
+                // -------------------------
+                // Save only if changes have been made
+                // -------------------------
+                if (// Main Window
+                    this.Top != top ||
+                    this.Left != left ||
+                    this.Width != width ||
+                    this.Height != height ||
+
+                    theme != selectedTheme ||
+
+                    VM.PathsView.Mupen_Text != pathsMupen64Plus ||
+                    VM.PathsView.Config_Text != pathsConfig ||
+                    //VM.PathsView.Data_Text != pathsMupen64Plus || // disabled for now
+                    VM.PathsView.ROMs_Text != pathsROMs
+                    )
+                {
+                    // -------------------------
+                    // ultra.conf actions to write
+                    // -------------------------
+                    List<Action> actionsToWrite = new List<Action>
+                    {
+                        // -------------------------
+                        // Main Window
+                        // -------------------------
+                        new Action(() =>
+                        {
+                            // -------------------------
+                            // Main Window
+                            // -------------------------
+                            // Window Position Top
+                            Configure.ConigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
+                            // Window Position Left
+                            Configure.ConigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
+                            // Window Width
+                            Configure.ConigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
+                            // Window Height
+                            Configure.ConigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
+                            // Window Maximized
+                            if (this.WindowState == WindowState.Maximized)
+                            {
+                                Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "true");
+                            }
+                            else
+                            {
+                                Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
+                            }
+
+                            // -------------------------
+                            // Settings
+                            // -------------------------
+                            Configure.ConigFile.conf.Write("Settings", "Theme", theme);
+
+                            // -------------------------
+                            // Mupen64Plus Path
+                            // -------------------------
+                            // Contains mupen64plus.dll
+                            if (IsValidPath(VM.PathsView.Mupen_Text))
+                            {
+                                Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", VM.PathsView.Mupen_Text);
+                            }
+                            else
+                            {
+                                Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", "");
+                            }
+
+                            // -------------------------
+                            // Config Path
+                            // -------------------------
+                            // Contains mupen64plus.cfg
+                            if (IsValidPath(VM.PathsView.Config_Text))
+                            {
+                                Configure.ConigFile.conf.Write("Paths", "Config", VM.PathsView.Config_Text.TrimEnd('\\') + @"\");
+                            }
+                            else
+                            {
+                                Configure.ConigFile.conf.Write("Paths", "Config", "");
+                            }
+
+                            // -------------------------
+                            // Plugins
+                            // -------------------------
+                            // This is Read/Saved to mupen64plus.cfg, not ultra.conf.
+
+                            // -------------------------
+                            // Data Path
+                            // -------------------------
+                            //if (IsValidPath(VM.PathsView.Data_Text))
+                            //{
+                            //    Configure.ConigFile.conf.Write("Paths", "Data", VM.PathsView.Data_Text.TrimEnd('\\') + @"\");
+                            //}
+                            //else
+                            //{
+                            //    Configure.ConigFile.conf.Write("Paths", "Data", "");
+                            //}
+
+                            // -------------------------
+                            // ROMs Path
+                            // -------------------------
+                            if (IsValidPath(VM.PathsView.ROMs_Text))
+                            {
+                                Configure.ConigFile.conf.Write("Paths", "ROMs", VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\");
+                            }
+                            else
+                            {
+                                Configure.ConigFile.conf.Write("Paths", "ROMs", "");
+                            }
+                        }),
+
+                        //new Action(() => { ; }),
+                    };
+
+                    // -------------------------
+                    // Save Config
+                    // -------------------------
+                    Configure.WriteUltraConf(ultraConfDir,     // Directory: %AppData%\Ultra UI\
+                                             "ultra.conf",  // Filename
+                                             actionsToWrite // Actions to write
+                                            );
+                    //Configure.WriteUltraConf(this/*, ultraConfFile*/);
+                }
             }
             catch
             {
@@ -574,136 +709,6 @@ namespace Ultra
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
             }
-
-            // -------------------------
-            // Save only if changes have been made
-            // -------------------------
-            if (// Main Window
-                this.Top != top ||
-                this.Left != left ||
-                this.Width != width ||
-                this.Height != height ||
-
-                theme != selectedTheme ||
-
-                VM.PathsView.Mupen_Text != pathsMupen64Plus ||
-                VM.PathsView.Config_Text != pathsConfig ||
-                //VM.PathsView.Data_Text != pathsMupen64Plus || // disabled for now
-                VM.PathsView.ROMs_Text != pathsROMs
-                )
-            {
-                // -------------------------
-                // ultra.conf actions to write
-                // -------------------------
-                List<Action> actionsToWrite = new List<Action>
-                {
-                    // -------------------------
-                    // Main Window
-                    // -------------------------
-                    new Action(() =>
-                    {
-                        // -------------------------
-                        // Main Window
-                        // -------------------------
-                        // Window Position Top
-                        Configure.ConigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
-                        // Window Position Left
-                        Configure.ConigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
-                        // Window Width
-                        Configure.ConigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
-                        // Window Height
-                        Configure.ConigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
-                        // Window Maximized
-                        if (this.WindowState == WindowState.Maximized)
-                        {
-                            Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "true");
-                        }
-                        else
-                        {
-                            Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
-                        }
-
-                        // -------------------------
-                        // Settings
-                        // -------------------------
-                        Configure.ConigFile.conf.Write("Settings", "Theme", theme);
-
-                        // -------------------------
-                        // Mupen64Plus Path
-                        // -------------------------
-                        // Contains mupen64plus.dll
-                        if (IsValidPath(VM.PathsView.Mupen_Text))
-                        {
-                            Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", VM.PathsView.Mupen_Text);
-                        }
-                        else
-                        {
-                            Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", "");
-                        }
-
-                        // -------------------------
-                        // Config Path
-                        // -------------------------
-                        // Contains mupen64plus.cfg
-                        if (IsValidPath(VM.PathsView.Config_Text))
-                        {
-                            Configure.ConigFile.conf.Write("Paths", "Config", VM.PathsView.Config_Text.TrimEnd('\\') + @"\");
-                        }
-                        else
-                        {
-                            Configure.ConigFile.conf.Write("Paths", "Config", "");
-                        }
-
-                        // -------------------------
-                        // Plugins
-                        // -------------------------
-                        // This is Read/Saved to mupen64plus.cfg, not ultra.conf.
-
-                        // -------------------------
-                        // Data Path
-                        // -------------------------
-                        //if (IsValidPath(VM.PathsView.Data_Text))
-                        //{
-                        //    Configure.ConigFile.conf.Write("Paths", "Data", VM.PathsView.Data_Text.TrimEnd('\\') + @"\");
-                        //}
-                        //else
-                        //{
-                        //    Configure.ConigFile.conf.Write("Paths", "Data", "");
-                        //}
-
-                        // -------------------------
-                        // ROMs Path
-                        // -------------------------
-                        if (IsValidPath(VM.PathsView.ROMs_Text))
-                        {
-                            Configure.ConigFile.conf.Write("Paths", "ROMs", VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\");
-                        }
-                        else
-                        {
-                            Configure.ConigFile.conf.Write("Paths", "ROMs", "");
-                        }
-                    }),
-
-                    //new Action(() => { ; }),
-                };
-
-                // -------------------------
-                // Save Config
-                // -------------------------
-                Configure.WriteUltraConf(ultraConfDir,     // Directory: %AppData%\Ultra UI\
-                                         "ultra.conf",  // Filename
-                                         actionsToWrite // Actions to write
-                                        );
-                //Configure.WriteUltraConf(this/*, ultraConfFile*/);
-            }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Could not create ultra.conf",
-            //                    "Error",
-            //                    MessageBoxButton.OK,
-            //                    MessageBoxImage.Error);
-            //}
 
             // -------------------------
             // Save Plugins Path to mupen64plus.cfg
@@ -724,9 +729,9 @@ namespace Ultra
 
                 // Write Actions
                 MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
-                                              "mupen64plus.cfg",       // Filename
-                                              actionsToWrite           // Actions to write
-                                             );
+                                             "mupen64plus.cfg",        // Filename
+                                             actionsToWrite            // Actions to write
+                                            );
 
                 //MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text);
             }
@@ -734,10 +739,10 @@ namespace Ultra
 
 
         /// <summary>
-        ///    Is Valid Windows Path
+        /// Is Valid Windows Path
         /// </summary>
         /// <remarks>
-        ///     Check for Invalid Characters
+        ///  Check for Invalid Characters
         /// </remarks>
         public static bool IsValidPath(string path)
         {
@@ -780,7 +785,7 @@ namespace Ultra
 
 
         /// <summary>
-        ///    File Renamer (Method)
+        /// Save File Renamer (Method)
         /// </summary>
         public static String SaveFileRenamer(string directory, string fileName, string ext)
         {
@@ -807,172 +812,9 @@ namespace Ultra
             return outputNewFileName;
         }
 
-        /// <summary>
-        ///    Menu Item - Update
-        /// </summary>
-        public static UpdateWindow updatewindow;
-        private Boolean IsUpdateWindowOpened = false;
-        private void Update_MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            // -------------------------
-            // Proceed if Internet Connection
-            // -------------------------
-            if (UpdateWindow.CheckForInternetConnection() == true)
-            {
-                ServicePointManager.Expect100Continue = true;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-                WebClient wc = new WebClient();
-                wc.Headers.Add(HttpRequestHeader.UserAgent, "Ultra (https://github.com/MattMcManis/Ultra) " + " v" + MainViewModel.currentVersion + "-" + MainViewModel.currentBuildPhase + " Update Check");
-                wc.Headers.Add("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-                wc.Headers.Add("accept-language", "en-US,en;q=0.9");
-                wc.Headers.Add("dnt", "1");
-                wc.Headers.Add("upgrade-insecure-requests", "1");
-                //wc.Headers.Add("accept-encoding", "gzip, deflate, br"); //error
-
-                // -------------------------
-                // Parse GitHub .version file
-                // -------------------------
-                string parseLatestVersion = string.Empty;
-
-                try
-                {
-                    parseLatestVersion = wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Ultra/master/.version");
-                }
-                catch
-                {
-                    MessageBox.Show("GitHub version file not found.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Exclamation);
-
-                    return;
-                }
-
-                // -------------------------
-                // Split Version & Build Phase by dash
-                // -------------------------
-                if (!string.IsNullOrEmpty(parseLatestVersion) &&
-                    !string.IsNullOrWhiteSpace(parseLatestVersion))
-                {
-                    try
-                    {
-                        // Split Version and Build Phase
-                        MainViewModel.splitVersionBuildPhase = Convert.ToString(parseLatestVersion).Split('-');
-
-                        // Set Version Number
-                        MainViewModel.latestVersion = new Version(MainViewModel.splitVersionBuildPhase[0]); //number
-                        MainViewModel.latestBuildPhase = MainViewModel.splitVersionBuildPhase[1]; //alpha
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Problem reading version.",
-                                        "Error",
-                                        MessageBoxButton.OK,
-                                        MessageBoxImage.Error);
-
-                        return;
-                    }
-
-                    // Debug
-                    //MessageBox.Show(Convert.ToString(latestVersion));
-                    //MessageBox.Show(latestBuildPhase);
-
-                    // -------------------------
-                    // Check if Ultra is the Latest Version
-                    // -------------------------
-                    // Update Available
-                    if (MainViewModel.latestVersion > MainViewModel.currentVersion)
-                    {
-                        // Yes/No Dialog Confirmation
-                        //
-                        MessageBoxResult result = MessageBox.Show("v" + Convert.ToString(MainViewModel.latestVersion) + "-" + MainViewModel.latestBuildPhase + "\n\nDownload Update?",
-                                                                  "Update Available",
-                                                                  MessageBoxButton.YesNo
-                                                                  );
-                        switch (result)
-                        {
-                            case MessageBoxResult.Yes:
-                                // Check if Window is already open
-                                if (IsUpdateWindowOpened) return;
-
-                                // Start Window
-                                updatewindow = new UpdateWindow();
-
-                                // Keep in Front
-                                updatewindow.Owner = Window.GetWindow(this);
-
-                                // Only allow 1 Window instance
-                                updatewindow.ContentRendered += delegate { IsUpdateWindowOpened = true; };
-                                updatewindow.Closed += delegate { IsUpdateWindowOpened = false; };
-
-                                // Position Relative to MainWindow
-                                // Keep from going off screen
-                                updatewindow.Left = Math.Max((Left + (Width - updatewindow.Width) / 2), Left);
-                                updatewindow.Top = Math.Max((Top + (Height - updatewindow.Height) / 2), Top);
-
-                                // Open Window
-                                updatewindow.Show();
-                                break;
-                            case MessageBoxResult.No:
-                                break;
-                        }
-                    }
-
-                    // Update Not Available
-                    //
-                    else if (MainViewModel.latestVersion <= MainViewModel.currentVersion)
-                    {
-                        MessageBox.Show("This version is up to date.",
-                                        "Notice",
-                                        MessageBoxButton.OK,
-                                        MessageBoxImage.Information);
-
-                        return;
-                    }
-
-                    // Unknown
-                    //
-                    else // null
-                    {
-                        MessageBox.Show("Could not find download. Try updating manually.",
-                                        "Error",
-                                        MessageBoxButton.OK,
-                                        MessageBoxImage.Error);
-
-                        return;
-                    }
-                }
-
-                // Version is Null
-                //
-                else
-                {
-                    MessageBox.Show("GitHub version file returned empty.",
-                                    "Error",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
-
-                    return;
-                }
-            }
-
-            // No Internet Connection
-            //
-            else
-            {
-                MessageBox.Show("Could not detect Internet Connection.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
-
-                return;
-            }
-        }
-
 
         /// <summary>
-        ///    File Renamer (Method)
+        /// Cfg File Renamer (Method)
         /// </summary>
         public static String CfgFileRenamer(string outputDir, string filename)
         {
