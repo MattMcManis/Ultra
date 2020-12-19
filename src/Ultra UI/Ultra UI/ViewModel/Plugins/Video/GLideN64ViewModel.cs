@@ -37,7 +37,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ultra
+namespace ViewModel
 {
     public class Plugins_Video_GLideN64_ViewModel : INotifyPropertyChanged
     {
