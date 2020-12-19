@@ -267,7 +267,7 @@
                 HorizontalAlignment="Right"
                 Width="80"
                 Click="btnDefaults_Click" 
-                Height="22" 
+                Height="24" 
                 VerticalAlignment="Top">
             <TextBlock Text="Defaults"
                        Margin="0,-2,0,0"/>
@@ -277,11 +277,11 @@
         <Button x:Name="btnSave" 
                 Style="{DynamicResource ButtonStyle}"
                 Cursor="Hand"
-                Margin="0,227,20,0" 
+                Margin="0,225,20,0" 
                 HorizontalAlignment="Right"
                 Width="80"
                 Click="btnSave_Click" 
-                Height="22"
+                Height="24"
                 VerticalAlignment="Top">
             <TextBlock Text="Save"
                        Margin="0,-2,0,0"/>
@@ -305,7 +305,7 @@
                 HorizontalAlignment="Right"
                 Width="80"
                 Click="btnClose_Click" 
-                Height="22" 
+                Height="24" 
                 VerticalAlignment="Top">
             <TextBlock Text="Close"
                         Margin="0,-2,0,0"/>
