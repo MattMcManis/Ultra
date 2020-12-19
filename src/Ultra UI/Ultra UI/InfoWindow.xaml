@@ -35,7 +35,7 @@
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
         xmlns:my="clr-namespace:Ultra"
-        xmlns:local="clr-namespace:Ultra"
+        xmlns:local="clr-namespace:ViewModel"
         xmlns:settings="clr-namespace:Ultra.Properties"
         mc:Ignorable="d"
         
