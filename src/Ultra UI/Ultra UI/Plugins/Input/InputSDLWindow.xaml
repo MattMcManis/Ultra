@@ -736,7 +736,7 @@
                 HorizontalAlignment="Right"
                 Width="80"
                 Click="btnDefaults_Click" 
-                Height="22" 
+                Height="24" 
                 VerticalAlignment="Top">
             <TextBlock Text="Defaults"
                        Margin="0,-2,0,0"/>
@@ -745,14 +745,16 @@
         <!-- Save -->
         <Button x:Name="btnSave" 
                 Style="{DynamicResource ButtonStyle}"
-                Content="Save" 
                 Cursor="Hand"
-                Margin="0,0,14,44" 
+                Margin="0,0,14,47" 
                 HorizontalAlignment="Right"
                 Width="80"
                 Click="btnSave_Click" 
-                Height="22"
-                VerticalAlignment="Bottom"/>
+                Height="24"
+                VerticalAlignment="Bottom">
+            <TextBlock Text="Save"
+                       Margin="0,-2,0,0"/>
+        </Button>
         <Label x:Name="lblSave"
                Style="{DynamicResource LabelStyle}"
                DataContext="{Binding Plugins_Input_InputSDL_View}"
@@ -766,14 +768,16 @@
         <!-- Close -->
         <Button x:Name="btnClose" 
                 Style="{DynamicResource ButtonStyle}"
-                Content="Close" 
                 Cursor="Hand"
                 Margin="0,0,14,17" 
                 HorizontalAlignment="Right"
                 Width="80"
                 Click="btnClose_Click" 
-                Height="22"
-                VerticalAlignment="Bottom"/>
+                Height="24"
+                VerticalAlignment="Bottom">
+            <TextBlock Text="Close"
+                       Margin="0,-2,0,0"/>
+        </Button>
 
         <!-- Analog Deadzone -->
         <Label Content="Analog Deadzone"
