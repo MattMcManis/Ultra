@@ -36,6 +36,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows;
+using ViewModel;
 // Disable XML Comment warnings
 #pragma warning disable 1591
 #pragma warning disable 1587
@@ -218,7 +219,7 @@ namespace Ultra
                 Process.Start("powershell.exe", arguments);
 
                 // Close Ultra before updating exe
-                Environment.Exit(0);
+                Application.Current.Shutdown();
             });
 
 
