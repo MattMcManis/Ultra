@@ -99,6 +99,7 @@
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow\Plugins.cs" />
+    <Compile Include="MainWindow\Updater.cs" />
     <Compile Include="Mupen64PlusAPI.cs" />
     <Compile Include="MainWindow\Paths.cs" />
     <Compile Include="Plugins\Audio\AudioSDLWindow.xaml.cs">
