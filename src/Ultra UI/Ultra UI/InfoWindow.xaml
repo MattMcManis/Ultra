@@ -50,7 +50,8 @@
         Width="550" 
         Height="413"
         
-        Style="{DynamicResource WindowStyle}" Icon="Resources/Icons/info.ico"
+        Style="{DynamicResource WindowStyle}" 
+        Icon="Resources/Icons/info.ico"
         >
 
     <Window.Resources>
