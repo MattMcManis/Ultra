@@ -41,7 +41,7 @@ namespace Ultra
 {
     public class Configure
     {
-        public static string theme;
+        //public static string theme;
 
         /// <summary>
         /// Config File Reader
@@ -168,7 +168,7 @@ namespace Ultra
                         case MessageBoxResult.No:
                             // Force Shutdown
                             System.Windows.Forms.Application.ExitThread();
-                            Environment.Exit(0);
+                            Application.Current.Shutdown();
                             return;
                     }
                 }
@@ -190,9 +190,9 @@ namespace Ultra
         /// Write ultra.conf
         /// </summary>
         public static void WriteUltraConf(string directory, 
-                                           string filename,
-                                           List<Action> actionsToWrite
-                                           )
+                                          string filename,
+                                          List<Action> actionsToWrite
+                                          )
         {
             // -------------------------
             // Check if Directory Exists
