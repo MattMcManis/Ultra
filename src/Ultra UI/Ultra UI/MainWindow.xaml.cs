@@ -1253,13 +1253,32 @@ namespace Ultra
         /// <summary>
         /// Menu Item - Cheats
         /// </summary>
+        public static CheatsWindow cheatsWindow;
+        private Boolean IsCheatsOpened = false;
         private void Cheats_MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (Mupen64PlusAPI.api != null)
-            {
+            //if (Mupen64PlusAPI.api != null)
+            //{
                 //PressKey("{F2}");
-            }
+                //OpenCheatsWindow();
+            //}
         }
+        public void OpenCheatsWindow()
+        {
+            // Check if Window is already open
+            if (IsCheatsOpened) return;
+
+            // Start Window
+            cheatsWindow = new CheatsWindow();
+
+            // Only allow 1 Window instance
+            cheatsWindow.ContentRendered += delegate { IsCheatsOpened = true; };
+            cheatsWindow.Closed += delegate { IsCheatsOpened = false; };
+
+            // Open Window
+            cheatsWindow.Show();
+        }
+
 
         /// <summary>
         /// Menu Item - Reload Plugins
