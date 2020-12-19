@@ -30,6 +30,7 @@ DEALINGS IN THE SOFTWARE.
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using ViewModel;
 
 namespace Ultra
 {
