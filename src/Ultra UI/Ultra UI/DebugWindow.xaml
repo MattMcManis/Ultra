@@ -50,7 +50,8 @@
         Width="640" 
         Height="480"
         
-        Style="{DynamicResource WindowStyle}" Icon="Resources/Icons/debug.ico"
+        Style="{DynamicResource WindowStyle}" 
+        Icon="Resources/Icons/debug.ico"
         >
 
     <Window.Resources>
