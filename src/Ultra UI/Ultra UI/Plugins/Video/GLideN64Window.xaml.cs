@@ -43,6 +43,7 @@ using System.Windows.Media;
 using System.Drawing.Text;
 using System.Windows.Media.Imaging;
 using System.Collections.ObjectModel;
+using ViewModel;
 
 namespace Ultra
 {
