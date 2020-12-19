@@ -38,6 +38,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using ViewModel;
+// Disable XML Comment warnings
+#pragma warning disable 1591
+#pragma warning disable 1587
+#pragma warning disable 1570
 
 namespace Ultra
 {
@@ -702,36 +707,19 @@ namespace Ultra
             // -------------------------
             int CoreType = 2; // default
 
-            // Pure Interpreter
-            //if (VM.EmulatorView.Emulator_PureInterpreter_IsChecked == true)
-            //{
-            //    CoreType = 0;
-            //}
-            //// Cached Interpreter
-            //else if (VM.EmulatorView.Emulator_CachedInterpreter_IsChecked == true)
-            //{
-            //    CoreType = 1;
-            //}
-            //// Dynamic Recompiler
-            //else if (VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked == true)
-            //{
-            //    CoreType = 2;
-            //}
+            switch (VM.EmulatorView.CPU_SelectedItem)
+            {
+                case "Pure Interpreter":
+                    CoreType = 0;
+                    break;
 
-            // Pure Interpreter
-            if (VM.EmulatorView.CPU_SelectedItem == "Pure Interpreter")
-            {
-                CoreType = 0;
-            }
-            // Cached Interpreter
-            else if (VM.EmulatorView.CPU_SelectedItem == "Cached Interpreter")
-            {
-                CoreType = 1;
-            }
-            // Dynamic Recompiler
-            else if (VM.EmulatorView.CPU_SelectedItem == "Dynamic Recompiler")
-            {
-                CoreType = 2;
+                case "Cached Interpreter":
+                    CoreType = 1;
+                    break;
+
+                case "Dynamic Recompiler":
+                    CoreType = 2;
+                    break;
             }
 
             m64pConfigSetParameterInt(core_section, "R4300Emulator", m64p_type.M64TYPE_INT, ref CoreType);
@@ -792,25 +780,27 @@ namespace Ultra
             // Cycles
             // -------------------------
             int cycles = 0; // default
-            if (VM.EmulatorView.Emulator_Cycles_SelectedItem == "0")
+            switch (VM.EmulatorView.Emulator_Cycles_SelectedItem)
             {
-                cycles = 0;
-            }
-            else if (VM.EmulatorView.Emulator_Cycles_SelectedItem == "1")
-            {
-                cycles = 1;
-            }
-            else if (VM.EmulatorView.Emulator_Cycles_SelectedItem == "2")
-            {
-                cycles = 2;
-            }
-            else if (VM.EmulatorView.Emulator_Cycles_SelectedItem == "3")
-            {
-                cycles = 3;
-            }
-            else if (VM.EmulatorView.Emulator_Cycles_SelectedItem == "4")
-            {
-                cycles = 4;
+                case "0":
+                    cycles = 0;
+                    break;
+
+                case "1":
+                    cycles = 1;
+                    break;
+
+                case "2":
+                    cycles = 2;
+                    break;
+
+                case "3":
+                    cycles = 3;
+                    break;
+
+                case "4":
+                    cycles = 4;
+                    break;
             }
 
             result = m64pConfigSetParameterInt(core_section, "CountPerOp", m64p_type.M64TYPE_INT, ref cycles);
@@ -1499,40 +1489,43 @@ namespace Ultra
         {
             IntPtr video_plugin_section = IntPtr.Zero;
 
-            // GLideN64
-            if (VM.PluginsView.Video_SelectedItem == "mupen64plus-video-GLideN64.dll")
+            switch (VM.PluginsView.Video_SelectedItem)
             {
-                m64pConfigOpenSection("Video-GLideN64", ref video_plugin_section);
+                // GLideN64
+                case "mupen64plus-video-GLideN64.dll":
+                    m64pConfigOpenSection("Video-GLideN64", ref video_plugin_section);
+                    break;
+
+                // Glide64mk2
+                case "mupen64plus-video-glide64mk2.dll":
+                    m64pConfigOpenSection("Video-Glide64mk2", ref video_plugin_section);
+                    break;
+
+                // Glide64
+                case "mupen64plus-video-glide64.dll":
+                    m64pConfigOpenSection("Video-Glide64", ref video_plugin_section);
+                    break;
+
+                // Rice
+                case "mupen64plus-video-rice.dll":
+                    m64pConfigOpenSection("Video-Rice", ref video_plugin_section);
+                    break;
+
+                // z64
+                case "mupen64plus-video-z64.dll":
+                    m64pConfigOpenSection("Video-z64", ref video_plugin_section);
+                    break;
+
+                // Arachnoid
+                case "mupen64plus-video-arachnoid.dll":
+                    m64pConfigOpenSection("Video-Arachnoid", ref video_plugin_section);
+                    break;
+
+                // Halt
+                default:
+                    return;
             }
-            // Glide64mk2
-            else if (VM.PluginsView.Video_SelectedItem == "mupen64plus-video-glide64mk2.dll")
-            {
-                m64pConfigOpenSection("Video-Glide64mk2", ref video_plugin_section);
-            }
-            // Glide64
-            else if (VM.PluginsView.Video_SelectedItem == "mupen64plus-video-glide64.dll")
-            {
-                m64pConfigOpenSection("Video-Glide64", ref video_plugin_section);
-            }
-            // Rice
-            else if (VM.PluginsView.Video_SelectedItem == "mupen64plus-video-rice.dll")
-            {
-                m64pConfigOpenSection("Video-Rice", ref video_plugin_section);
-            }
-            // z64
-            else if (VM.PluginsView.Video_SelectedItem == "mupen64plus-video-z64.dll")
-            {
-                m64pConfigOpenSection("Video-z64", ref video_plugin_section);
-            }
-            // Arachnoid
-            else if (VM.PluginsView.Video_SelectedItem == "mupen64plus-video-arachnoid.dll")
-            {
-                m64pConfigOpenSection("Video-Arachnoid", ref video_plugin_section);
-            }
-            else
-            {
-                return;
-            }
+            
 
             //foreach (string Parameter in video_settings.Parameters.Keys)
             //{
@@ -1766,8 +1759,6 @@ namespace Ultra
         {
             m64pFrameComplete.Set();
         }
-
-
 
         //private void OnDebuggerInitialized()
         //{
