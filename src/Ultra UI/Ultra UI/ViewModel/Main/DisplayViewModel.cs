@@ -35,7 +35,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ultra
+namespace ViewModel
 {
     public class DisplayViewModel : INotifyPropertyChanged
     {
