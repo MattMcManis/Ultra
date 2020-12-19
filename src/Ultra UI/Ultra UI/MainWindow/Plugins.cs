@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ViewModel;
 
 namespace Ultra
 {
@@ -173,7 +174,7 @@ namespace Ultra
         }
 
         /// <summary>
-        ///    Plugin RSP - Button
+        /// Plugin RSP - Button
         /// </summary>
         private void btnPlugin_RSP_Configure_Click(object sender, RoutedEventArgs e)
         {
@@ -181,7 +182,7 @@ namespace Ultra
         }
 
         /// <summary>
-        ///    Open RSP Configure Window
+        /// Open RSP Configure Window
         /// </summary>
         public void OpenRSPConfigureWindow()
         {
@@ -280,7 +281,7 @@ namespace Ultra
 
 
         /// <summary>
-        ///    Plugin Input - Button
+        /// Plugin Input - Button
         /// </summary>
         private void btnPlugin_Input_Configure_Click(object sender, RoutedEventArgs e)
         {
@@ -288,7 +289,7 @@ namespace Ultra
         }
 
         /// <summary>
-        ///    Open Input Configure Window
+        /// Open Input Configure Window
         /// </summary>
         public void OpenInputConfigureWindow()
         {
