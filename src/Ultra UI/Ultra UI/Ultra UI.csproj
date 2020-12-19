@@ -87,6 +87,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CheatsWindow.xaml.cs">
+      <DependentUpon>CheatsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DebugWindow.xaml.cs">
       <DependentUpon>DebugWindow.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,10 @@
     <Compile Include="ViewModel\Main\PluginsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\Main\MainViewModel.cs" />
+    <Page Include="CheatsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DebugWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
