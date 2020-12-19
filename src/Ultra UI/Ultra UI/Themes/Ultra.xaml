@@ -426,6 +426,16 @@
 
 
     <!--/////////////////////////////////////
+        Tab Item Header TextBox
+        /////////////////////////////////////-->
+    <Style x:Key="TabItemHeaderTextBoxStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+    
+    
+    <!--/////////////////////////////////////
         Group Box
         /////////////////////////////////////-->
     <!--<LinearGradientBrush x:Key="GroupBox.Static.Border" EndPoint="0,1" StartPoint="0,0">
@@ -480,6 +490,15 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!--/////////////////////////////////////
+        Group Box Header TextBox 
+        /////////////////////////////////////-->
+    <Style x:Key="GroupBoxHeaderTextBoxStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+        <Setter Property="FontWeight" Value="Normal"/>
     </Style>
 
 
