@@ -139,7 +139,7 @@
                 Click="btnDefaults_Click" 
                 HorizontalAlignment="Left" 
                 Width="80" 
-                Height="22" 
+                Height="24" 
                 VerticalAlignment="Bottom">
             <TextBlock Text="Defaults"
                        Margin="0,-2,0,0"/>
@@ -152,7 +152,7 @@
                 Margin="0,0,102,15" 
                 HorizontalAlignment="Right"
                 Width="80" 
-                Height="22"
+                Height="24"
                 VerticalAlignment="Bottom" 
                 Click="btnSave_Click">
             <TextBlock Text="Save"
@@ -177,7 +177,7 @@
                 HorizontalAlignment="Right"
                 Width="80"
                 Click="btnClose_Click" 
-                Height="22" 
+                Height="24" 
                 VerticalAlignment="Bottom">
             <TextBlock Text="Close"
                         Margin="0,-2,0,0"/>
