@@ -453,15 +453,14 @@
 
             <!-- Games Tab -->
             <TabItem Width="85"
-                     Height="23"
-                     VerticalAlignment="Top"
                      DataContext="{Binding MainView}"
                      Style="{DynamicResource TabItemStyle}"
                      >
 
                 <TabItem.Header>
                     <TextBlock Text="Games" 
-                               Height="17"
+                               Height="19"
+                               Margin="0,2,0,0" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -572,15 +571,13 @@
 
             <!-- Paths -->
             <TabItem Width="85"
-                     Height="23"
-                     VerticalAlignment="Top"
                      DataContext="{Binding PathsView}"
                      Style="{DynamicResource TabItemStyle}">
 
                 <TabItem.Header>
                     <TextBlock Text="Paths"
-                               Margin="0,1,0,0" 
-                               Height="17"
+                               Height="19"
+                               Margin="0,2,0,0" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -992,14 +989,12 @@
 
             <!-- Plugins -->
             <TabItem Width="85"
-                     Height="23"
-                     VerticalAlignment="Top"
                      Style="{DynamicResource TabItemStyle}">
 
                 <TabItem.Header>
                     <TextBlock Text="Plugins"
-                               Margin="0,1,0,0" 
-                              Height="17"
+                               Height="19"
+                               Margin="0,2,0,0" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -1343,15 +1338,13 @@
 
             <!-- Emulator -->
             <TabItem Width="85"
-                     Height="23"
-                     VerticalAlignment="Top"
                      DataContext="{Binding EmulatorView}"
                      Style="{DynamicResource TabItemStyle}">
 
                 <TabItem.Header>
                     <TextBlock Text="Emulator"
-                               Margin="0,1,0,0" 
-                               Height="17" 
+                               Height="19"
+                               Margin="0,2,0,0" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -1545,16 +1538,14 @@
 
             <!-- Screen -->
             <TabItem Width="85"
-                     Height="23"
-                     VerticalAlignment="Top"
                      DataContext="{Binding DisplayView}"
                      Style="{DynamicResource TabItemStyle}"
                      >
 
                 <TabItem.Header>
                     <TextBlock Text="Display"
-                               Margin="0,1,0,0" 
-                               Height="17" 
+                               Height="19"
+                               Margin="0,2,0,0" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
