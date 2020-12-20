@@ -181,5 +181,93 @@ namespace Ultra
                 return;
             }
         }
+
+
+        /// <summary>
+        /// Update Available Check
+        /// </summary>
+        public static async Task<int> UpdateAvailableCheck()
+        {
+            int count = 0;
+            if (VM.MainView.UpdateAutoCheck_IsChecked == true)
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    ServicePointManager.Expect100Continue = true;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+                    WebClient wc = new WebClient();
+                    wc.Headers.Add(HttpRequestHeader.UserAgent, "Ultra (https://github.com/MattMcManis/Ultra)" + " v" + MainViewModel.currentVersion + "-" + MainViewModel.currentBuildPhase + " Update Check");
+                    wc.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+                    wc.Headers.Add("Accept-Language", "en-US,en;q=0.9");
+                    wc.Headers.Add("dnt", "1");
+                    wc.Headers.Add("Upgrade-Insecure-Requests", "1");
+                    //wc.Headers.Add("accept-encoding", "gzip, deflate, br"); //error
+
+                    // -------------------------
+                    // Parse GitHub .version file
+                    // -------------------------
+                    string parseLatestVersion = string.Empty;
+
+                    try
+                    {
+                        parseLatestVersion = wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Ultra/master/.version");
+                    }
+                    catch
+                    {
+                        return;
+                    }
+
+                    // -------------------------
+                    // Split Version & Build Phase by dash
+                    // -------------------------
+                    if (!string.IsNullOrWhiteSpace(parseLatestVersion)) //null check
+                    {
+                        try
+                        {
+                            // Split Version and Build Phase
+                            MainViewModel.splitVersionBuildPhase = Convert.ToString(parseLatestVersion).Split('-');
+
+                            // Set Version Number
+                            MainViewModel.latestVersion = new Version(MainViewModel.splitVersionBuildPhase[0]); //number
+                            MainViewModel.latestBuildPhase = MainViewModel.splitVersionBuildPhase[1]; //alpha
+                        }
+                        catch
+                        {
+                            return;
+                        }
+
+                        // Check if Ultra is the Latest Version
+                        // Update Available
+                        if (MainViewModel.latestVersion > MainViewModel.currentVersion)
+                        {
+                            VM.MainView.TitleVersion = VM.MainView.TitleVersion + " ~ Update Available: " + "(" + Convert.ToString(MainViewModel.latestVersion) + "-" + MainViewModel.latestBuildPhase + ")";
+                        }
+                        // Update Not Available
+                        else if (MainViewModel.latestVersion <= MainViewModel.currentVersion)
+                        {
+                            return;
+                        }
+                    }
+                });
+            }
+
+            return count;
+        }
+
+
+        /// <summary>
+        /// Update Available Checkbox
+        /// </summary>
+        private void cbxUpdateAutoCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            VM.MainView.UpdateAutoCheck_IsChecked = true;
+        }
+
+        private void cbxUpdateAutoCheck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            VM.MainView.UpdateAutoCheck_IsChecked = false;
+        }
+
     }
 }
