@@ -55,6 +55,9 @@ namespace Ultra
         public CheatsWindow(/*string args*/)
         {
             InitializeComponent();
+
+            // Set Theme Icon
+            MainWindow.SetThemeIcon(this);
         }
 
         /// <summary>
