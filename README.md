@@ -48,7 +48,7 @@ API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 https://github.com/MattMcManis/Ultra/releases
 
 #### Requires
-* Windows
+* Windows 8, 8.1, 10
 * [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 * [Mupen64Plus](https://github.com/mupen64plus/mupen64plus-core/releases)
 * [GLideN64 Public Release 4.0](https://github.com/gonetz/GLideN64/releases/tag/Public_Release_4_0)
