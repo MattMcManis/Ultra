@@ -71,7 +71,7 @@ Or manually set your `Mupen64Plus` and `Plugin` Paths.
 
 3. **Configure Graphics, Audio, Controls**
     * The `Plugin Configure Windows`, such as `GLideN64`, will not have the values loaded from `mupen64plus.cfg` yet.
-    * In the `Plugins` Tab, press the `Generate` button to generate the selected plugin default values.
+    * In the `Plugins` tab, press the `Generate` button to generate the selected plugin default values.
     * When you open a `Plugin Configure Window` the controls will now be loaded with the defaults.
     * Play a game with your selected settings.
 
@@ -94,6 +94,12 @@ Or manually set your `Mupen64Plus` and `Plugin` Paths.
 * [Third Party Plugins](https://mupen64plus.org/wiki/index.php/ThirdPartyPlugins)
 * [Recommended Plugin Setups](http://emulation.gametechwiki.com/index.php/Mupen64Plus#Recommended_plugin_setups)
 * [Game Compatibility](https://mupen64plus.org/wiki/index.php/GameCompatibility)
+
+&nbsp;
+
+## Resources
+
+https://github.com/MattMcManis/Ultra/wiki/Resources
 
 &nbsp;
 
