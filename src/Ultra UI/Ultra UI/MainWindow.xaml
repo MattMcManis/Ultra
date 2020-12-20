@@ -497,8 +497,8 @@
                               Style="{DynamicResource GridStyle}">
                             
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="50*"/>
-                                <RowDefinition Height="6*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="45"/>
                             </Grid.RowDefinitions>
 
                             <!-- Logo -->
