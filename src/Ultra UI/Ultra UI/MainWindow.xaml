@@ -468,13 +468,14 @@
 
                     <!-- Refresh List -->
 
-                    <Border Margin="0,3,0,0" 
+                    <Border Margin="0,0,0,0" 
                             BorderThickness="0" 
                             Background="Transparent"
                             BorderBrush="Transparent">
 
                         <Grid Margin="0,0,0,0"
                               Style="{DynamicResource GridStyle}">
+                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50*"/>
                                 <RowDefinition Height="6*"/>
@@ -489,17 +490,16 @@
 
                             <!-- Games List -->
                             <ListView Margin="0,0,0,0" 
-                                  Padding="6,10,6,6"
-                                  Name="listViewGames" 
-                                  VerticalAlignment="Top"
-                                  IsSynchronizedWithCurrentItem="False"
-                                  SelectionMode="Single"
-                                  RenderOptions.ClearTypeHint="Enabled"
-                                  RenderOptions.BitmapScalingMode="Fant"
-                                  Style="{DynamicResource ListViewStyle}" 
-                                  ItemsSource="{Binding Games_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                  SelectionChanged="listViewGames_SelectionChanged"
-                                  PreviewMouseDoubleClick="listViewGames_PreviewMouseDoubleClick"
+                                      Padding="6,6,6,6"
+                                      Name="listViewGames" 
+                                      IsSynchronizedWithCurrentItem="False"
+                                      SelectionMode="Single"
+                                      RenderOptions.ClearTypeHint="Enabled"
+                                      RenderOptions.BitmapScalingMode="Fant"
+                                      Style="{DynamicResource ListViewStyle}" 
+                                      ItemsSource="{Binding Games_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectionChanged="listViewGames_SelectionChanged"
+                                      PreviewMouseDoubleClick="listViewGames_PreviewMouseDoubleClick"
                             >
                                 <!--<ListView.Resources>
                                 </ListView.Resources>-->
