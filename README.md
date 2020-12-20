@@ -38,7 +38,7 @@ API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 
 **What it currently can't do:**
 * Gamepad Remap Custom Buttons
-* No Plugin Configuration Menus for `Glide64`, `Glide64mk2`, `Rice`, `z64` yet.
+* No Plugin Configuration Menus for `Glide64`, `Glide64mk2`, `Rice`, `z64`, `cxd4` yet.
 * Cheats
 
 &nbsp;
