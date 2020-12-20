@@ -459,8 +459,8 @@
 
                 <TabItem.Header>
                     <TextBlock Text="Games" 
-                               Height="19"
-                               Margin="0,2,0,0" 
+                               Height="18"
+                               Margin="0,1,0,0" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -576,8 +576,8 @@
 
                 <TabItem.Header>
                     <TextBlock Text="Paths"
-                               Height="19"
-                               Margin="0,2,0,0" 
+                               Height="18"
+                               Margin="0,1,0,0"
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -993,8 +993,8 @@
 
                 <TabItem.Header>
                     <TextBlock Text="Plugins"
-                               Height="19"
-                               Margin="0,2,0,0" 
+                               Height="18"
+                               Margin="0,1,0,0"
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -1343,8 +1343,8 @@
 
                 <TabItem.Header>
                     <TextBlock Text="Emulator"
-                               Height="19"
-                               Margin="0,2,0,0" 
+                               Height="18"
+                               Margin="0,1,0,0" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -1544,8 +1544,8 @@
 
                 <TabItem.Header>
                     <TextBlock Text="Display"
-                               Height="19"
-                               Margin="0,2,0,0" 
+                               Height="18"
+                               Margin="0,1,0,0"
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
