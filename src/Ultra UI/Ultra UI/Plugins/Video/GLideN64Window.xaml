@@ -51,7 +51,7 @@
         Width="650"
         Height="505"
         
-        Style="{DynamicResource WindowStyle}"
+        Style="{DynamicResource WindowStyle}" 
         >
 
     <Window.Resources>

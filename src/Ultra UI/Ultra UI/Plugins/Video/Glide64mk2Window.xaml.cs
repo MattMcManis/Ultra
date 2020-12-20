@@ -52,6 +52,9 @@ namespace Ultra
         public Glide64mk2Window()
         {
             InitializeComponent();
+
+            // Set Theme Icon
+            MainWindow.SetThemeIcon(this);
         }
 
         /// <summary>

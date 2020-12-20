@@ -63,6 +63,9 @@ namespace Ultra
         {
             InitializeComponent();
 
+            // Set Theme Icon
+            MainWindow.SetThemeIcon(this);
+
             // Start Download as soon as Update Window opens
             StartDownload();
         }

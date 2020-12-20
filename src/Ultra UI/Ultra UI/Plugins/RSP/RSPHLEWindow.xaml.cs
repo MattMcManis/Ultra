@@ -43,6 +43,9 @@ namespace Ultra
         {
             InitializeComponent();
 
+            // Set Theme Icon
+            MainWindow.SetThemeIcon(this);
+
             // Load Control Values
             PluginCfgReader();
         }

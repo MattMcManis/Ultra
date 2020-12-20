@@ -62,6 +62,9 @@ namespace Ultra
             // Load Control Values
             PluginCfgReader();
 
+            // Set Theme Icon
+            MainWindow.SetThemeIcon(this);
+
             // -------------------------
             // Load Fonts
             // -------------------------
