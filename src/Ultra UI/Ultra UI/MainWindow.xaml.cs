@@ -144,6 +144,13 @@ namespace Ultra
             // -------------------------
             VM.MainView.TitleVersion = "Ultra ~ Mupen64Plus (" + Convert.ToString(MainViewModel.currentVersion) + "-" + MainViewModel.currentBuildPhase + ")";
 
+            // --------------------------------------------------
+            // Control Defaults
+            // --------------------------------------------------
+            // Tooltip Duration
+            ToolTipService.ShowDurationProperty.OverrideMetadata(
+                typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue));
+
             // -------------------------
             // Set Paths
             // -------------------------
@@ -695,11 +702,10 @@ namespace Ultra
                     // -------------------------
                     // Save Config
                     // -------------------------
-                    Configure.WriteUltraConf(ultraConfDir,     // Directory: %AppData%\Ultra UI\
+                    Configure.WriteUltraConf(ultraConfDir,  // Directory: %AppData%\Ultra UI\
                                              "ultra.conf",  // Filename
                                              actionsToWrite // Actions to write
                                             );
-                    //Configure.WriteUltraConf(this/*, ultraConfFile*/);
                 }
             }
             catch
