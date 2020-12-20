@@ -100,7 +100,7 @@ namespace Ultra
         /// </summary>
         public static void ReadUltraConf(string directory,
                                          string filename,
-                                         List<Action> actionsToRead/*MainWindow mainwindow*/)
+                                         List<Action> actionsToRead)
         {
             // Failed Imports
             List<string> listFailedImports = new List<string>();
