@@ -122,6 +122,21 @@ namespace Ultra
         // Theme
         public static string theme { get; set; }
 
+        // Config Read/Write Checks
+        // When MainWindow initializes, conf.Read populates these global variables with imported values.
+        // When MainWindow exits, conf.Write checks these variables to see if any changes have been made before writing to glow.conf.
+        // This prevents writing to glow.conf every time at exit unless necessary.
+        private static double top_Read { get; set; }
+        private static double left_Read { get; set; }
+        private static double width_Read { get; set; }
+        private static double height_Read { get; set; }
+        //private static bool maximized_Read { get; set; }
+        private static string mupen_Text_Read { get; set; }
+        private static string config_Text_Read { get; set; }
+        private static string roms_Text_Read { get; set; }
+        private static string theme_Read { get; set; }
+        private static bool updateAutoCheck_IsChecked_Read { get; set; }
+
         /// <summary>
         /// Main Window
         /// </summary>
@@ -180,11 +195,13 @@ namespace Ultra
                     double top;
                     double.TryParse(Configure.ConigFile.conf.Read("Main Window", "Window_Position_Top"), out top);
                     this.Top = top;
+                    top_Read = top;
 
                     // Window Position Left
                     double left;
                     double.TryParse(Configure.ConigFile.conf.Read("Main Window", "Window_Position_Left"), out left);
                     this.Left = left;
+                    left_Read = left;
 
                     // Window Maximized
                     bool mainwindow_WindowState_Maximized;
@@ -204,30 +221,43 @@ namespace Ultra
                     double width;
                     double.TryParse(Configure.ConigFile.conf.Read("Main Window", "Window_Width"), out width);
                     this.Width = width;
+                    width_Read= width;
 
                     // Window Height
                     double height;
                     double.TryParse(Configure.ConigFile.conf.Read("Main Window", "Window_Height"), out height);
                     this.Height = height;
+                    height_Read = height;
 
                     // -------------------------
                     // Settings
                     // -------------------------
-                    bool updateAutoCheck_IsChecked;
+                    bool updateAutoCheck_IsChecked = true;
                     bool.TryParse(Configure.ConigFile.conf.Read("Settings", "UpdateAutoCheck_IsChecked").ToLower(), out updateAutoCheck_IsChecked);
                     VM.MainView.UpdateAutoCheck_IsChecked = updateAutoCheck_IsChecked;
+                    updateAutoCheck_IsChecked_Read = updateAutoCheck_IsChecked;
 
                     theme = Configure.ConigFile.conf.Read("Settings", "Theme");
+                    theme_Read = theme;
 
                     // -------------------------
                     // Paths
                     // -------------------------
-
                     // Mupen64plus Path
-                    VM.PathsView.Mupen_Text = Configure.ConigFile.conf.Read("Paths", "Mupen64Plus");
+                    string mupen_Text = Configure.ConigFile.conf.Read("Paths", "Mupen64Plus");
+                    if (!string.IsNullOrWhiteSpace(mupen_Text))
+                    {
+                        VM.PathsView.Mupen_Text = mupen_Text;
+                    }
+                    mupen_Text_Read = mupen_Text;
 
                     // Config Path
-                    VM.PathsView.Config_Text = Configure.ConigFile.conf.Read("Paths", "Config");
+                    string config_Text = Configure.ConigFile.conf.Read("Paths", "Config");
+                    if (!string.IsNullOrWhiteSpace(config_Text))
+                    {
+                        VM.PathsView.Config_Text = config_Text;
+                    }
+                    config_Text_Read = config_Text;
 
                     // Plugins Path is loaded from mupen64plus.cfg
 
@@ -235,7 +265,12 @@ namespace Ultra
                     //VM.PathsView.Data_Text = Configure.ConigFile.conf.Read("Paths", "Data"); //disabled for now
 
                     // ROMs Path
-                    VM.PathsView.ROMs_Text = Configure.ConigFile.conf.Read("Paths", "ROMs");
+                    string roms_Text = Configure.ConigFile.conf.Read("Paths", "ROMs");
+                    if (!string.IsNullOrWhiteSpace(roms_Text))
+                    {
+                        VM.PathsView.ROMs_Text = roms_Text;
+                    }
+                    roms_Text_Read = roms_Text;
                 }),
             };
 
@@ -568,200 +603,133 @@ namespace Ultra
             // Save ultra.conf
             // -------------------------
             // do not use VM.PathsView.Config_Text, ultra.conf uses it's own %AppData% folder
-            //WriteUltraConf(appDataRoamingDir + @"Ultra UI\");
-            Configure.ConigFile conf = null;
+            Configure.ConigFile conf = new Configure.ConigFile(ultraConfFile);
 
-            //double top = Top;
-            //double left = Left;
-            //double width = this.Width;
-            //double height = this.Height;
-            //string selectedTheme = string.Empty;
+            // -------------------------
+            // Save only if changes have been made
+            // -------------------------
+            if (// Main Window
+                this.Top != top_Read ||
+                this.Left != left_Read ||
+                this.Width != width_Read ||
+                this.Height != height_Read ||
+                theme != theme_Read ||
+                VM.MainView.UpdateAutoCheck_IsChecked != updateAutoCheck_IsChecked_Read ||
 
-            //string pathsMupen64Plus = string.Empty;
-            //string pathsConfig = string.Empty;
-            //string pathsROMs = string.Empty;
-
-            try
-            {
-                conf = new Configure.ConigFile(ultraConfFile);
-
-                //// -------------------------
-                //// Window
-                //// -------------------------
-                ////double top = 0;
-                //double.TryParse(conf.Read("Main Window", "Window_Position_Top"), out top);
-                ////double left;
-                //double.TryParse(conf.Read("Main Window", "Window_Position_Left"), out left);
-                ////double width;
-                //double.TryParse(conf.Read("Main Window", "Window_Width"), out width);
-                ////double height;
-                //double.TryParse(conf.Read("Main Window", "Window_Height"), out height);
-                // -------------------------
-                // Window
-                // -------------------------
-                double top;
-                double.TryParse(conf.Read("Main Window", "Window_Position_Top"), out top);
-                double left;
-                double.TryParse(conf.Read("Main Window", "Window_Position_Left"), out left);
-                double width;
-                double.TryParse(conf.Read("Main Window", "Window_Width"), out width);
-                double height;
-                double.TryParse(conf.Read("Main Window", "Window_Height"), out height);
-
-                // -------------------------
-                // Settings
-                // -------------------------
-                // Updater
-                bool updateAutoCheck_IsChecked = true;
-                bool.TryParse(Configure.ConigFile.conf.Read("Settings", "UpdateAutoCheck_IsChecked").ToLower(), out updateAutoCheck_IsChecked);
-
-                // Theme
-                string selectedTheme = conf.Read("Settings", "Theme");
-
-                // -------------------------
                 // Paths
+                VM.PathsView.Mupen_Text != mupen_Text_Read ||
+                VM.PathsView.Config_Text != config_Text_Read ||
+                //VM.PathsView.Data_Text != data_Text_Read ||
+                VM.PathsView.ROMs_Text != roms_Text_Read
+                )
+            {
                 // -------------------------
-                // Mupen64plus
-                string pathsMupen64Plus = conf.Read("Paths", "Mupen64Plus");
-                // Config
-                string pathsConfig = conf.Read("Paths", "Config");
-                // Plugins Path is loaded from mupen64plus.cfg
-                //// Data Path - Disabled for now
-                //VM.PathsView.Data_Text = conf.Read("Paths", "Data");
-                // ROMs Path
-                string pathsROMs = conf.Read("Paths", "ROMs");
-
+                // ultra.conf actions to write
                 // -------------------------
-                // Save only if changes have been made
-                // -------------------------
-                if (// Main Window
-                    this.Top != top ||
-                    this.Left != left ||
-                    this.Width != width ||
-                    this.Height != height ||
-
-                    VM.MainView.UpdateAutoCheck_IsChecked != updateAutoCheck_IsChecked ||
-                    theme != selectedTheme ||
-
-                    VM.PathsView.Mupen_Text != pathsMupen64Plus ||
-                    VM.PathsView.Config_Text != pathsConfig ||
-                    //VM.PathsView.Data_Text != pathsMupen64Plus || // disabled for now
-                    VM.PathsView.ROMs_Text != pathsROMs
-                    )
+                List<Action> actionsToWrite = new List<Action>
                 {
                     // -------------------------
-                    // ultra.conf actions to write
+                    // Main Window
                     // -------------------------
-                    List<Action> actionsToWrite = new List<Action>
+                    new Action(() =>
                     {
                         // -------------------------
                         // Main Window
                         // -------------------------
-                        new Action(() =>
+                        // Window Position Top
+                        Configure.ConigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
+                        // Window Position Left
+                        Configure.ConigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
+                        // Window Width
+                        Configure.ConigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
+                        // Window Height
+                        Configure.ConigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
+                        // Window Maximized
+                        if (this.WindowState == WindowState.Maximized)
                         {
-                            // -------------------------
-                            // Main Window
-                            // -------------------------
-                            // Window Position Top
-                            Configure.ConigFile.conf.Write("Main Window", "Window_Position_Top", this.Top.ToString());
-                            // Window Position Left
-                            Configure.ConigFile.conf.Write("Main Window", "Window_Position_Left", this.Left.ToString());
-                            // Window Width
-                            Configure.ConigFile.conf.Write("Main Window", "Window_Width", this.Width.ToString());
-                            // Window Height
-                            Configure.ConigFile.conf.Write("Main Window", "Window_Height", this.Height.ToString());
-                            // Window Maximized
-                            if (this.WindowState == WindowState.Maximized)
-                            {
-                                Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "true");
-                            }
-                            else
-                            {
-                                Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
-                            }
+                            Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "true");
+                        }
+                        else
+                        {
+                            Configure.ConigFile.conf.Write("Main Window", "WindowState_Maximized", "false");
+                        }
 
-                            // -------------------------
-                            // Settings
-                            // -------------------------
-                            // Updater
-                            Configure.ConigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.MainView.UpdateAutoCheck_IsChecked.ToString());
-                            // Theme
-                            Configure.ConigFile.conf.Write("Settings", "Theme", theme);
+                        // -------------------------
+                        // Settings
+                        // -------------------------
+                        // Updater
+                        Configure.ConigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.MainView.UpdateAutoCheck_IsChecked.ToString());
+                        // Theme
+                        Configure.ConigFile.conf.Write("Settings", "Theme", theme);
 
-                            // -------------------------
-                            // Mupen64Plus Path
-                            // -------------------------
-                            // Contains mupen64plus.dll
-                            if (IsValidPath(VM.PathsView.Mupen_Text))
-                            {
-                                Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", VM.PathsView.Mupen_Text);
-                            }
-                            else
-                            {
-                                Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", "");
-                            }
+                        // -------------------------
+                        // Mupen64Plus Path
+                        // -------------------------
+                        // Contains mupen64plus.dll
+                        if (IsValidPath(VM.PathsView.Mupen_Text))
+                        {
+                            Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", VM.PathsView.Mupen_Text);
+                        }
+                        else
+                        {
+                            Configure.ConigFile.conf.Write("Paths", "Mupen64Plus", "");
+                        }
 
-                            // -------------------------
-                            // Config Path
-                            // -------------------------
-                            // Contains mupen64plus.cfg
-                            if (IsValidPath(VM.PathsView.Config_Text))
-                            {
-                                Configure.ConigFile.conf.Write("Paths", "Config", VM.PathsView.Config_Text.TrimEnd('\\') + @"\");
-                            }
-                            else
-                            {
-                                Configure.ConigFile.conf.Write("Paths", "Config", "");
-                            }
+                        // -------------------------
+                        // Config Path
+                        // -------------------------
+                        // Contains mupen64plus.cfg
+                        if (IsValidPath(VM.PathsView.Config_Text))
+                        {
+                            Configure.ConigFile.conf.Write("Paths", "Config", VM.PathsView.Config_Text.TrimEnd('\\') + @"\");
+                        }
+                        else
+                        {
+                            Configure.ConigFile.conf.Write("Paths", "Config", "");
+                        }
 
-                            // -------------------------
-                            // Plugins
-                            // -------------------------
-                            // This is Read/Saved to mupen64plus.cfg, not ultra.conf.
+                        // -------------------------
+                        // Plugins
+                        // -------------------------
+                        // This is Read/Saved to mupen64plus.cfg, not ultra.conf.
 
-                            // -------------------------
-                            // Data Path
-                            // -------------------------
-                            //if (IsValidPath(VM.PathsView.Data_Text))
-                            //{
-                            //    Configure.ConigFile.conf.Write("Paths", "Data", VM.PathsView.Data_Text.TrimEnd('\\') + @"\");
-                            //}
-                            //else
-                            //{
-                            //    Configure.ConigFile.conf.Write("Paths", "Data", "");
-                            //}
+                        // -------------------------
+                        // Data Path
+                        // -------------------------
+                        //if (IsValidPath(VM.PathsView.Data_Text))
+                        //{
+                        //    Configure.ConigFile.conf.Write("Paths", "Data", VM.PathsView.Data_Text.TrimEnd('\\') + @"\");
+                        //}
+                        //else
+                        //{
+                        //    Configure.ConigFile.conf.Write("Paths", "Data", "");
+                        //}
 
-                            // -------------------------
-                            // ROMs Path
-                            // -------------------------
-                            if (IsValidPath(VM.PathsView.ROMs_Text))
-                            {
-                                Configure.ConigFile.conf.Write("Paths", "ROMs", VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\");
-                            }
-                            else
-                            {
-                                Configure.ConigFile.conf.Write("Paths", "ROMs", "");
-                            }
-                        }),
+                        // -------------------------
+                        // ROMs Path
+                        // -------------------------
+                        if (IsValidPath(VM.PathsView.ROMs_Text))
+                        {
+                            Configure.ConigFile.conf.Write("Paths", "ROMs", VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\");
+                        }
+                        else
+                        {
+                            Configure.ConigFile.conf.Write("Paths", "ROMs", "");
+                        }
+                    }),
 
-                        //new Action(() => { ; }),
-                    };
+                    //new Action(() => { ; }),
+                };
 
-                    // -------------------------
-                    // Save Config
-                    // -------------------------
-                    Configure.WriteUltraConf(ultraConfDir,  // Directory: %AppData%\Ultra UI\
-                                             "ultra.conf",  // Filename
-                                             actionsToWrite // Actions to write
-                                            );
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Could not read ultra.conf on exit.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
+                // -------------------------
+                // Save Config
+                // -------------------------
+                Configure.WriteUltraConf(ultraConfDir,  // Directory: %AppData%\Ultra UI\
+                                            "ultra.conf",  // Filename
+                                            actionsToWrite // Actions to write
+                                        );
+
+                //MessageBox.Show("Saved"); //debug
             }
 
             // -------------------------
