@@ -60,6 +60,7 @@ namespace ViewModel
             Window_Height = 500;
 
             // Defaults
+            UpdateAutoCheck_IsChecked = true;
             StateSlot0_IsChecked = true;
         }
 
@@ -210,6 +211,78 @@ namespace ViewModel
                     _TitleVersion = value;
                     OnPropertyChanged("TitleVersion");
                 }
+            }
+        }
+
+
+        //// -------------------------
+        //// Window Icon
+        //// -------------------------
+        //// Text
+        //private string _WindowIcon;
+        //public string WindowIcon
+        //{
+        //    get { return _WindowIcon; }
+        //    set
+        //    {
+        //        if (value != _WindowIcon)
+        //        {
+        //            _WindowIcon = value;
+        //            OnPropertyChanged("WindowIcon");
+        //        }
+        //    }
+        //}
+
+
+        // -------------------------
+        // Update Auto Check - Toggle
+        // -------------------------
+        // Checked
+        private bool _UpdateAutoCheck_IsChecked;
+        public bool UpdateAutoCheck_IsChecked
+        {
+            get { return _UpdateAutoCheck_IsChecked; }
+            set
+            {
+                if (_UpdateAutoCheck_IsChecked != value)
+                {
+                    _UpdateAutoCheck_IsChecked = value;
+                    OnPropertyChanged("UpdateAutoCheck_IsChecked");
+                }
+            }
+        }
+
+        // Text
+        private string _UpdateAutoCheck_Text = "On";
+        public string UpdateAutoCheck_Text
+        {
+            get { return _UpdateAutoCheck_Text; }
+            set
+            {
+                if (_UpdateAutoCheck_Text == value)
+                {
+                    return;
+                }
+
+                _UpdateAutoCheck_Text = value;
+                OnPropertyChanged("UpdateAutoCheck_Text");
+            }
+        }
+
+        // Enabled
+        private bool _UpdateAutoCheck_IsEnabled = true;
+        public bool UpdateAutoCheck_IsEnabled
+        {
+            get { return _UpdateAutoCheck_IsEnabled; }
+            set
+            {
+                if (_UpdateAutoCheck_IsEnabled == value)
+                {
+                    return;
+                }
+
+                _UpdateAutoCheck_IsEnabled = value;
+                OnPropertyChanged("UpdateAutoCheck_IsEnabled");
             }
         }
 
