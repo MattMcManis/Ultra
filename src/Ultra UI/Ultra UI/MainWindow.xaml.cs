@@ -42,6 +42,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using ViewModel;
 
 namespace Ultra
@@ -212,6 +213,10 @@ namespace Ultra
                     // -------------------------
                     // Settings
                     // -------------------------
+                    bool updateAutoCheck_IsChecked;
+                    bool.TryParse(Configure.ConigFile.conf.Read("Settings", "UpdateAutoCheck_IsChecked").ToLower(), out updateAutoCheck_IsChecked);
+                    VM.MainView.UpdateAutoCheck_IsChecked = updateAutoCheck_IsChecked;
+
                     theme = Configure.ConigFile.conf.Read("Settings", "Theme");
 
                     // -------------------------
@@ -278,6 +283,9 @@ namespace Ultra
                     {
                         Source = new Uri("Themes/Ultra.xaml", UriKind.RelativeOrAbsolute)
                     });
+
+                    //VM.MainView.WindowIcon = "Resources/Icons/ultraui.ico";
+                    SetThemeIcon(this);
                     break;
 
                 case "N64":
@@ -286,6 +294,9 @@ namespace Ultra
                     {
                         Source = new Uri("Themes/N64.xaml", UriKind.RelativeOrAbsolute)
                     });
+
+                    //VM.MainView.WindowIcon = "Resources/Icons/u3d.ico";
+                    SetThemeIcon(this);
                     break;
 
                 default:
@@ -296,6 +307,25 @@ namespace Ultra
                     {
                         Source = new Uri("Themes/Ultra.xaml", UriKind.RelativeOrAbsolute)
                     });
+
+                    //VM.MainView.WindowIcon = "Resources/Icons/ultraui.ico";
+                    SetThemeIcon(this);
+                    break;
+            }
+        }
+
+        public static void SetThemeIcon(Window window)
+        {
+            switch (MainWindow.theme)
+            {
+                case "Ultra":
+                    Uri iconUri = new Uri("pack://application:,,,/Ultra;component/Resources/Icons/ultraui.ico");
+                    window.Icon = BitmapFrame.Create(iconUri);
+                    break;
+
+                case "N64":
+                    Uri iconUri2 = new Uri("pack://application:,,,/Ultra;component/Resources/Icons/u3d.ico");
+                    window.Icon = BitmapFrame.Create(iconUri2);
                     break;
             }
         }
@@ -425,6 +455,10 @@ namespace Ultra
                         // -------------------------
                         // Settings
                         // -------------------------
+                        // Updater
+                        Configure.ConigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.MainView.UpdateAutoCheck_IsChecked.ToString());
+
+                        // Theme
                         Configure.ConigFile.conf.Write("Settings", "Theme", theme);
 
                         // -------------------------
@@ -455,6 +489,11 @@ namespace Ultra
                                          actionsToWrite // Actions to write
                                         );
             }
+
+            // -------------------------
+            // Check for Available Updates
+            // -------------------------
+            Task<int> task = UpdateAvailableCheck();
         }
 
 
@@ -572,6 +611,11 @@ namespace Ultra
                 // -------------------------
                 // Settings
                 // -------------------------
+                // Updater
+                bool updateAutoCheck_IsChecked = true;
+                bool.TryParse(Configure.ConigFile.conf.Read("Settings", "UpdateAutoCheck_IsChecked").ToLower(), out updateAutoCheck_IsChecked);
+
+                // Theme
                 string selectedTheme = conf.Read("Settings", "Theme");
 
                 // -------------------------
@@ -596,6 +640,7 @@ namespace Ultra
                     this.Width != width ||
                     this.Height != height ||
 
+                    VM.MainView.UpdateAutoCheck_IsChecked != updateAutoCheck_IsChecked ||
                     theme != selectedTheme ||
 
                     VM.PathsView.Mupen_Text != pathsMupen64Plus ||
@@ -638,6 +683,9 @@ namespace Ultra
                             // -------------------------
                             // Settings
                             // -------------------------
+                            // Updater
+                            Configure.ConigFile.conf.Write("Settings", "UpdateAutoCheck_IsChecked", VM.MainView.UpdateAutoCheck_IsChecked.ToString());
+                            // Theme
                             Configure.ConigFile.conf.Write("Settings", "Theme", theme);
 
                             // -------------------------
