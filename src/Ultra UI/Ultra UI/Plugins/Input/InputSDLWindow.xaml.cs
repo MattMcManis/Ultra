@@ -70,6 +70,9 @@ namespace Ultra
             //MaxHeight = 600;
             MinWidth = 600;
             MinHeight = 600;
+
+            // Set Theme Icon
+            MainWindow.SetThemeIcon(this);
         }
 
         /// <summary>
