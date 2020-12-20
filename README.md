@@ -59,21 +59,21 @@ https://github.com/MattMcManis/Ultra/releases
 
 > Notice: This program will write to your existing `mupen64plus.cfg`, keep a backup before running.
 
-1. **Files**
+1. **Place Files**
     * Put `Ultra.exe` in the `Mupen64Plus` folder that contains the `mupen64plus.dll`.
 
-2. **Set the Paths & Defaults**
+2. **Set Paths & Defaults**
     * Run `Ultra.exe`
     * In the `Paths Tab`, press the `Defaults All` button to automatically set the paths and controls.  
 Or manually set your `Mupen64Plus` and `Plugin` Paths.
     * Set your `ROMs` Path.
-    * In the `Games Tab`, press the `Rebuild Button` &#10226; to generate the list of games.
+    * In the `Games Tab`, press the `Rebuild` arrow button &#10226; to generate the list of games.
 
-3. **Configure the Graphics, Audio, Controls**
+3. **Configure Graphics, Audio, Controls**
     * The `Plugin Configure Windows`, such as `GLideN64`, will not have the values loaded from `mupen64plus.cfg` yet.
     * In the `Plugins Tab`, press the `Generate` button to generate the selected plugin default values.
     * When you open a `Plugin Configure Window` the controls will now be loaded with the defaults.
-    * Play a game with your desired settings.
+    * Play a game with your selected settings.
 
 ### Paths
 
