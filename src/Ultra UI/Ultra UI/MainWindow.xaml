@@ -1347,11 +1347,14 @@
                            Content="{Binding PluginsErrorNotice_Text}"
                            Style="{DynamicResource LabelStyle}" 
                            HorizontalContentAlignment="Right"
-                           Margin="0,0,10,44" 
+                           Margin="0,0,10,39" 
                            Height="28" 
                            VerticalAlignment="Bottom" 
                            HorizontalAlignment="Right" 
-                           Width="227"/>
+                           Width="227"
+                           Grid.Column="0"
+                           Grid.Row="4"
+                           />
 
                 </Grid>
             </TabItem>
