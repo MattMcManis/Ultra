@@ -1,6 +1,6 @@
 ![https://github.com/MattMcManis/Ultra](https://raw.githubusercontent.com/MattMcManis/Ultra/master/images/logo-ultra-ui-web.png)
 
-# Ultra UI
+# Ultra
 Mupen64Plus N64 Emulator Frontend for Windows
 
 * [Overview](#overview)
