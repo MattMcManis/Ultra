@@ -57,7 +57,7 @@ https://github.com/MattMcManis/Ultra/releases
 
 ## Setup
 
-> Notice: This program will write to your existing `mupen64plus.cfg`, keep a backup before running.
+> Notice: This program will write to your existing `mupen64plus.cfg`, make a backup before running.
 
 1. **Place Files**
     * Put `Ultra.exe` in the `Mupen64Plus` folder that contains the `mupen64plus.dll`.
