@@ -51,7 +51,6 @@
         Height="500" 
         
         Style="{DynamicResource WindowStyle}" 
-        Icon="Resources/Icons/ultraui.ico"
         >
 
     <Window.Resources>
@@ -431,11 +430,32 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <!-- Update -->
-                        <MenuItem Header="_Update"
-                                  Click="Update_MenuItem_Click">
+                        <MenuItem Header="_Update">
                             <MenuItem.Icon>
                                 <Image Source="Resources\Icons\White\update.png" Width="12" Height="12" HorizontalAlignment="Left"/>
                             </MenuItem.Icon>
+                            <MenuItem Header="_Download" 
+                                      Height="22"
+                                      HorizontalAlignment="Left"
+                                      Margin="-15,0,-38,0"
+                                      Click="Update_MenuItem_Click" />
+                            <CheckBox x:Name="cbxUpdateAutoCheck"
+                                      IsChecked="{Binding MainView.UpdateAutoCheck_IsChecked}"
+                                      HorizontalAlignment="Left"
+                                      Margin="-15,0,-38,0"
+                                      VerticalAlignment="Top"
+                                      Height="20"
+                                      Width="95"
+                                      Checked="cbxUpdateAutoCheck_Checked"
+                                      Unchecked="cbxUpdateAutoCheck_Unchecked"
+                                      ToolTipService.InitialShowDelay="500"
+                                      ToolTipService.ShowOnDisabled="True"
+                                      ToolTip="Auto-check for updates at startup."
+                                      Style="{DynamicResource CheckBoxStyle}">
+                                <TextBlock Style="{DynamicResource TextBlockStyle}"
+                                           Text="Auto-check"
+                                           Margin="0,0,0,0" />
+                            </CheckBox>
                         </MenuItem>
                     </MenuItem>
                 </Menu>
