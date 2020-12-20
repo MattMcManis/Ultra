@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Ultra UI")]
-[assembly: AssemblyCopyright("Copyright © MattMcManis 2019-2020")]
+[assembly: AssemblyCopyright("© MattMcManis 2019-2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
