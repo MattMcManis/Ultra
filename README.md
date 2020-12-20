@@ -60,19 +60,32 @@ https://github.com/MattMcManis/Ultra/releases
 > Notice: This program will write to your existing [mupen64plus.cfg](https://mupen64plus.org/wiki/index.php/FileLocations#Windows_Vista_and_Newer), make a backup before running.
 
 1. **Place Files**
-    * Put `Ultra.exe` in the `Mupen64Plus` folder that contains the `mupen64plus.dll`.
+    * Put `Ultra.exe` in the `Mupen64Plus` folder that contains the `mupen64plus.dll`.  
+    
+    [Screenshot 1](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Ultra%20Setup/01.png)
 
 2. **Set Paths & Defaults**
     * Run `Ultra.exe`
     * In the `Paths` tab, press the `Defaults All` button to automatically set the paths and controls.  
-Or manually set your `Mupen64Plus` and `Plugin` Paths.
-    * Set your `ROMs` Path.
-    * In the `Games` tab, press the `Rebuild` arrow button &#10226; to generate the list of games.
+      Or manually set your `Mupen64Plus` and `Plugin` Paths.   
+    [Screenshot 2](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Ultra%20Setup/02.png)
+    
+    * Set your `ROMs` Path (`.n64`/`.v64`/`.z64` files in subfolders will be detected).
 
 3. **Configure Graphics, Audio, Controls**
     * The `Plugin Configure Windows`, such as `GLideN64`, will not have the values loaded from `mupen64plus.cfg` yet.
     * In the `Plugins` tab, press the `Generate` button to generate the selected plugin default values.
+    
+    [Screenshot 3](https://github.com/MattMcManis/Ultra/blob/master/docs/Ultra%20Setup/03.png)  
+    [Screenshot 4](https://github.com/MattMcManis/Ultra/blob/master/docs/Ultra%20Setup/04.png)
+    
     * When you open a `Plugin Configure Window` the controls will now be loaded with the defaults.
+    
+4. **Play Game**
+    * In the `Games` tab, press the `Rebuild` arrow button &#10226; to generate the list of games.
+    
+    [Screenshot 5](https://github.com/MattMcManis/Ultra/blob/master/docs/Ultra%20Setup/06.png)  
+    [Screenshot 6](https://github.com/MattMcManis/Ultra/blob/master/docs/Ultra%20Setup/07.png)
     * Play a game with your selected settings.
 
 ### Paths
