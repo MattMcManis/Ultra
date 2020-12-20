@@ -460,33 +460,39 @@
                      >
 
                 <TabItem.Header>
-                    <TextBlock Text="Games"
-                               Margin="0,1,0,0" 
-                               Height="22"
+                    <TextBlock Text="Games" 
+                               Height="17"
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
-                
+
                 <Grid Margin="0,0,0,0">
 
                     <!-- Refresh List -->
 
-                    <Border Margin="0,0,0,0" 
+                    <Border Margin="0,3,0,0" 
                             BorderThickness="0" 
                             Background="Transparent"
                             BorderBrush="Transparent">
 
                         <Grid Margin="0,0,0,0"
                               Style="{DynamicResource GridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="6*"/>
+                            </Grid.RowDefinitions>
 
                             <!-- Logo -->
-                            <Image Margin="0,0,0,42" 
+                            <Image Margin="0" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
                                    Style="{DynamicResource LogoStyle}" >
                             </Image>
 
                             <!-- Games List -->
-                            <ListView Margin="0,0,0,42" 
+                            <ListView Margin="0,0,0,0" 
                                   Padding="6,10,6,6"
                                   Name="listViewGames" 
+                                  VerticalAlignment="Top"
                                   IsSynchronizedWithCurrentItem="False"
                                   SelectionMode="Single"
                                   RenderOptions.ClearTypeHint="Enabled"
@@ -574,7 +580,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Paths"
                                Margin="0,1,0,0" 
-                               Height="22" 
+                               Height="17"
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -886,7 +892,7 @@
                                        Style="{DynamicResource GroupBoxHeaderTextBoxStyle}"
                                        ToolTipService.InitialShowDelay="100"
                                        ToolTipService.ShowOnDisabled="True"
-                                       ToolTip="Main ROMs folder, subfolder's .n64/.v64 files will be detected."
+                                       ToolTip="Main ROMs folder, subfolder's .n64/.v64/.z64 files will be detected."
                                        />
                         </GroupBox.Header>
 
@@ -917,7 +923,7 @@
                                      VerticalAlignment="Top"
                                      ToolTipService.InitialShowDelay="200"
                                      ToolTipService.ShowOnDisabled="True"
-                                     ToolTip="Main ROMs folder, subfolder's .n64/.v64 files will be detected."
+                                     ToolTip="Main ROMs folder, subfolder's .n64/.v64/.z64 files will be detected."
                                      />
 
                             <!-- Open ROMs Path -->
@@ -993,7 +999,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Plugins"
                                Margin="0,1,0,0" 
-                               Height="22" 
+                              Height="17"
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -1345,7 +1351,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Emulator"
                                Margin="0,1,0,0" 
-                               Height="22" 
+                               Height="17" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
@@ -1548,7 +1554,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Display"
                                Margin="0,1,0,0" 
-                               Height="22" 
+                               Height="17" 
                                Style="{DynamicResource TabItemHeaderTextBoxStyle}" />
                 </TabItem.Header>
 
