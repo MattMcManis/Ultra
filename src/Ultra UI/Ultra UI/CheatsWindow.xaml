@@ -51,7 +51,6 @@
         Height="413"
         
         Style="{DynamicResource WindowStyle}"
-        Icon="Resources/Icons/ultraui.ico"
         >
 
     <Window.Resources>
