@@ -1692,7 +1692,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="#FF272727"/>
+                <Setter Property="Foreground" Value="#FFE7E7E7"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -1776,7 +1776,7 @@
         /////////////////////////////////////-->
     <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFD7D7D7"/>
     <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF000099"/>
-    <SolidColorBrush x:Key="OptionMark.Static.Foreground" Color="#FF000000"/>
+    <SolidColorBrush x:Key="OptionMark.Static.Foreground" Color="#FFE7E7E7"/>
     <Style x:Key="OptionMarkFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -1792,7 +1792,7 @@
     <SolidColorBrush x:Key="OptionMark.MouseOver.Glyph" Color="#FF212121"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Background" Color="#FF9E9E9E"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Border" Color="#FF6A6A6A"/>
-    <SolidColorBrush x:Key="OptionMark.Disabled.Foreground" Color="#FF4E4E51"/>
+    <SolidColorBrush x:Key="OptionMark.Disabled.Foreground" Color="#FFE7E7E7"/>
     <SolidColorBrush x:Key="OptionMark.Disabled.Glyph" Color="#FF707070"/>
     <SolidColorBrush x:Key="OptionMark.Pressed.Background" Color="#FFD9ECFF"/>
     <SolidColorBrush x:Key="OptionMark.Pressed.Border" Color="#FF000099"/>
