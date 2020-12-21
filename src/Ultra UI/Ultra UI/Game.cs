@@ -167,6 +167,34 @@ namespace Ultra
                     return;
                 }
 
+                // Check if selected Display resolution is bigger than screen's resolution
+                int selectedResolutionWidth = 0;
+                int selectedResolutionHeight = 0;
+                if (!string.IsNullOrEmpty(VM.DisplayView.Display_Resolution_SelectedItem))
+                {
+                    List<string> resolution = new List<string>();
+                    resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
+
+                    int.TryParse(resolution[0], out selectedResolutionWidth);
+                    int.TryParse(resolution[1], out selectedResolutionHeight);
+                }
+
+                int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+                int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+
+                if (selectedResolutionWidth > screenWidth ||
+                    selectedResolutionHeight > screenHeight)
+                {
+                    MessageBox.Show("The selected Display resolution " + selectedResolutionWidth  + "x" + selectedResolutionHeight + 
+                                    " is greater than your Screen's resolution " + screenWidth + "x" + screenHeight + 
+                                    ". Video Plugin will crash.",
+                                    "Notice",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+
+                    return;
+                }
+
                 // -------------------------
                 // Load ROM into memory
                 // -------------------------
@@ -203,10 +231,10 @@ namespace Ultra
                     List<string> resolution = new List<string>();
                     resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
 
-                    windowWidth = 0;
+                    //windowWidth = 0;
                     int.TryParse(resolution[0], out windowWidth);
 
-                    windowHeight = 0;
+                    //windowHeight = 0;
                     int.TryParse(resolution[1], out windowHeight);
                 }
                 // Safe Defaults
