@@ -1,0 +1,187 @@
+﻿<!-- 
+    Ultra UI
+    https://github.com/MattMcManis/Ultra
+    https://ultraui.github.io
+    mattmcmanis@outlook.com
+
+    The MIT License
+
+    Copyright (C) 2019-2020 Matt McManis
+
+    Permission is hereby granted, free of charge, to any person obtaining a 
+    copy of this software and associated documentation files (the "Software"), 
+    to deal in the Software without restriction, including without limitation 
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+    and/or sell copies of the Software, and to permit persons to whom the 
+    Software is furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in 
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+    DEALINGS IN THE SOFTWARE.
+-->
+<Window x:Class="Ultra.RSPcxd4Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:my="clr-namespace:Ultra"
+        xmlns:local="clr-namespace:ViewModel"
+        xmlns:settings="clr-namespace:Ultra.Properties"
+        mc:Ignorable="d"
+        
+        Loaded="Window_Loaded" 
+        Unloaded="Window_Unloaded" 
+        Closing="Window_Closing"  
+        
+        RenderOptions.BitmapScalingMode="Fant"
+        UseLayoutRounding="True"
+        ResizeMode="NoResize"
+        
+        Title="RSP Plugin - cxd4 "
+        
+        Width="500"
+        Height="300"
+        
+        Style="{DynamicResource WindowStyle}"
+        >
+
+    <Window.Resources>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:VM/>
+    </Window.DataContext>
+
+    <Grid>
+
+        <!-- Version -->
+        <Label Content="Version"
+               Style="{DynamicResource LabelStyle}"
+               HorizontalAlignment="Left"
+               Margin="15,10,0,0" 
+               VerticalAlignment="Top" 
+               Width="150"/>
+        <TextBox x:Name="cboVersion" 
+                 Style="{DynamicResource TextBoxStyle}" 
+                 DataContext="{Binding Plugins_RSP_cxd4_View}"
+                 Text="{Binding Version_Text}"
+                 IsEnabled="False"
+                 HorizontalAlignment="Left" 
+                 Margin="20,36,0,0" 
+                 Padding="2,2,0,2" 
+                 VerticalAlignment="Top" 
+                 Height="22"
+                 Width="120"/>
+
+        <!-- DisplayListToGraphicsPlugin -->
+        <CheckBox x:Name="cboDisplayListToGraphicsPlugin" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_RSP_cxd4_View}"
+                  IsChecked="{Binding DisplayListToGraphicsPlugin_IsChecked}"
+                  IsEnabled="{Binding DisplayListToGraphicsPlugin_IsEnabled}"
+                  Content="Display List To Graphics Plugin"
+                  HorizontalAlignment="Left" 
+                  Margin="20,73,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="194"/>
+
+        <!-- AudioListToAudioPlugin -->
+        <CheckBox x:Name="cboAudioListToAudioPlugin" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_RSP_cxd4_View}"
+                  IsChecked="{Binding AudioListToAudioPlugin_IsChecked}"
+                  IsEnabled="{Binding AudioListToAudioPlugin_IsEnabled}"
+                  Content="Audio List To Audio Plugin"
+                  HorizontalAlignment="Left" 
+                  Margin="20,100,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="194"/>
+
+        <!-- WaitForCPUHost -->
+        <CheckBox x:Name="cboWaitForCPUHost" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_RSP_cxd4_View}"
+                  IsChecked="{Binding WaitForCPUHost_IsChecked}"
+                  IsEnabled="{Binding WaitForCPUHost_IsEnabled}"
+                  Content="Wait For CPU Host"
+                  HorizontalAlignment="Left" 
+                  Margin="20,127,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="194"/>
+
+        <!-- SupportCPUSemaphoreLock -->
+        <CheckBox x:Name="cboSupportCPUSemaphoreLock" 
+                  Style="{DynamicResource CheckBoxStyle}"
+                  DataContext="{Binding Plugins_RSP_cxd4_View}"
+                  IsChecked="{Binding SupportCPUSemaphoreLock_IsChecked}"
+                  IsEnabled="{Binding SupportCPUSemaphoreLock_IsEnabled}"
+                  Content="Support CPU Semaphore Lock"
+                  HorizontalAlignment="Left" 
+                  Margin="20,154,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="194"/>
+
+        <!-- Defaults -->
+        <Button x:Name="btnDefaults" 
+                Style="{DynamicResource ButtonStyle}"
+                Cursor="Hand"
+                Margin="20,0,0,15"
+                Click="btnDefaults_Click" 
+                HorizontalAlignment="Left" 
+                Width="80" 
+                Height="24" 
+                VerticalAlignment="Bottom">
+            <TextBlock Text="Defaults"
+                       Margin="0,-2,0,0"/>
+        </Button>
+
+        <!-- Save -->
+        <Button x:Name="btnSave" 
+                Style="{DynamicResource ButtonStyle}"
+                Cursor="Hand"
+                Margin="0,0,102,15" 
+                HorizontalAlignment="Right"
+                Width="80" 
+                Height="24"
+                VerticalAlignment="Bottom" 
+                Click="btnSave_Click">
+            <TextBlock Text="Save"
+                       Margin="0,-2,0,0"/>
+        </Button>
+        <Label x:Name="lblSave"
+               Style="{DynamicResource LabelStyle}"
+               DataContext="{Binding Plugins_RSP_cxd4_View}"
+               Content="{Binding Save_Text}" 
+               Margin="0,0,184,16" 
+               HorizontalAlignment="Right"
+               HorizontalContentAlignment="Right"
+               Width="50" 
+               Height="23" 
+               VerticalAlignment="Bottom"/>
+
+        <!-- Close -->
+        <Button x:Name="btnClose" 
+                Style="{DynamicResource ButtonStyle}"
+                Cursor="Hand"
+                Margin="0,0,15,15" 
+                HorizontalAlignment="Right"
+                Width="80"
+                Click="btnClose_Click" 
+                Height="24" 
+                VerticalAlignment="Bottom">
+            <TextBlock Text="Close"
+                        Margin="0,-2,0,0"/>
+        </Button>
+
+    </Grid>
+</Window>
