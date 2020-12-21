@@ -89,6 +89,7 @@ namespace ViewModel
         // -------------------------
         // GLideN64
         public static Plugins_Video_GLideN64_ViewModel Plugins_Video_GLideN64_View { get; set; } = new Plugins_Video_GLideN64_ViewModel();
+        public static Plugins_Video_AngrylionPlus_ViewModel Plugins_Video_AngrylionPlus_View { get; set; } = new Plugins_Video_AngrylionPlus_ViewModel();
 
         // -------------------------
         // Audio
@@ -107,6 +108,8 @@ namespace ViewModel
         // -------------------------
         // RSP HLE
         public static Plugins_RSP_RSPHLE_ViewModel Plugins_RSP_RSPHLE_View { get; set; } = new Plugins_RSP_RSPHLE_ViewModel();
+        // cxd4
+        public static Plugins_RSP_cxd4_ViewModel Plugins_RSP_cxd4_View { get; set; } = new Plugins_RSP_cxd4_ViewModel();
         // cxd4 SSSE3
         public static Plugins_RSP_cxd4SSSE3_ViewModel Plugins_RSP_cxd4SSSE3_View { get; set; } = new Plugins_RSP_cxd4SSSE3_ViewModel();
 
