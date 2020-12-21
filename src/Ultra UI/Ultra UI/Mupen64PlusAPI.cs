@@ -654,6 +654,10 @@ namespace Ultra
                                 MessageBoxImage.Error);
 
                 init = false;
+
+                // Reset the Stopped trigger
+                MainWindow.stopped = true;
+
                 return; // don't allow call connectFunctionPointers()
             }
             else
@@ -1712,7 +1716,20 @@ namespace Ultra
             AttachedPlugin plugin;
             plugin.dllHandle = LoadLibrary(PluginName);
             if (plugin.dllHandle == IntPtr.Zero)
-                throw new InvalidOperationException(string.Format("Failed to load plugin {0}, error code: 0x{1:X}", PluginName, GetLastError()));
+            {
+                var err = Marshal.GetLastWin32Error().ToString();
+
+                MessageBox.Show("Failed to load plugin " + Path.GetFileName(PluginName) + ".\r\n\r\n" + err,
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+
+                init = false;
+
+                return IntPtr.Zero;
+
+                //throw new InvalidOperationException(string.Format("Failed to load plugin {0}, error code: 0x{1:X}", PluginName, GetLastError()));
+            }
 
             plugin.dllStartup = (PluginStartup)Marshal.GetDelegateForFunctionPointer(GetProcAddress(plugin.dllHandle, "PluginStartup"), typeof(PluginStartup));
             plugin.dllShutdown = (PluginShutdown)Marshal.GetDelegateForFunctionPointer(GetProcAddress(plugin.dllHandle, "PluginShutdown"), typeof(PluginShutdown));
@@ -1722,7 +1739,17 @@ namespace Ultra
             if (result != m64p_error.M64ERR_SUCCESS)
             {
                 FreeLibrary(plugin.dllHandle);
-                throw new InvalidOperationException(string.Format("Error during attaching plugin {0}", PluginName));
+                //throw new InvalidOperationException(string.Format("Error during attaching plugin {0}", PluginName));
+                var err = Marshal.GetLastWin32Error().ToString();
+
+                MessageBox.Show("Error during attaching plugin " + Path.GetFileName(PluginName) + ".\r\n\r\n" + err,
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+
+                init = false;
+
+                return IntPtr.Zero;
             }
 
             plugins.Add(type, plugin);
