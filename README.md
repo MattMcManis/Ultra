@@ -28,7 +28,7 @@ API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 * Game Launcher
 * Navigate options quickly with tabs
 * Edit Mupen64Plus Config
-* Plugin Configuration Menus for `GLideN64`, `Audio SDL`, `Input SDL`, `RSP HLE`, & `cxd4-ssse3`.
+* Plugin Configuration Menus for `GLideN64`, `Angrylion Plus`, `Audio SDL`, `Input SDL`, `RSP HLE`, `cdx4`, & `cxd4-ssse3`.
 * Shortcuts to common folders
 * Quick Load & Save State `st0-9`
 * Load Save File `.m64p`/`.pj` format
