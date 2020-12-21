@@ -45,6 +45,9 @@ namespace Ultra
             InitializeComponent();
 
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            // Set Theme Icon
+            MainWindow.SetThemeIcon(this);
         }
 
         /// <summary>
