@@ -47,7 +47,7 @@ namespace Ultra
     /// <summary>
     /// Interaction logic for Glide64mk2.xaml
     /// </summary>
-    public partial class Glide64mk2Window : Window
+    public partial class Glide64mk2Window : Window, MainWindow.IPluginWindow
     {
         public Glide64mk2Window()
         {

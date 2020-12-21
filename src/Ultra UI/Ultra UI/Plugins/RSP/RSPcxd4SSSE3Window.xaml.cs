@@ -48,7 +48,7 @@ namespace Ultra
     /// <summary>
     /// Interaction logic for RSPcxd4SSSE3.xaml
     /// </summary>
-    public partial class RSPcxd4SSSE3Window : Window
+    public partial class RSPcxd4SSSE3Window : Window, MainWindow.IPluginWindow
     {
         public RSPcxd4SSSE3Window()
         {

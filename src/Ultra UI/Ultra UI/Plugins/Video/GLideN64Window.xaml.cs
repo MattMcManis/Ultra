@@ -50,7 +50,7 @@ namespace Ultra
     /// <summary>
     /// Interaction logic for GLideN64Window.xaml
     /// </summary>
-    public partial class GLideN64Window : Window
+    public partial class GLideN64Window : Window, MainWindow.IPluginWindow
     {
         public GLideN64Window()
         {

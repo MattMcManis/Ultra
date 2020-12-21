@@ -37,7 +37,7 @@ namespace Ultra
     /// <summary>
     /// Interaction logic for AudioSDLWindow.xaml
     /// </summary>
-    public partial class AudioSDLWindow : Window
+    public partial class AudioSDLWindow : Window, MainWindow.IPluginWindow
     {
         public AudioSDLWindow()
         {

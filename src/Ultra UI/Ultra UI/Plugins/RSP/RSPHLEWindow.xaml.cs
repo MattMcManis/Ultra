@@ -37,7 +37,7 @@ namespace Ultra
     /// <summary>
     /// Interaction logic for RSPHLEWindow.xaml
     /// </summary>
-    public partial class RSPHLEWindow : Window
+    public partial class RSPHLEWindow : Window, MainWindow.IPluginWindow
     {
         public RSPHLEWindow()
         {

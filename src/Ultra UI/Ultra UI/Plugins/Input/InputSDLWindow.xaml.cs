@@ -42,7 +42,7 @@ namespace Ultra
     /// <summary>
     /// Interaction logic for Input.xaml
     /// </summary>
-    public partial class InputSDLWindow : Window
+    public partial class InputSDLWindow : Window, MainWindow.IPluginWindow
     {
         // Startup
         // Read Cfg
