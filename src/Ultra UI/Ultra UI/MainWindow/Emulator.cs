@@ -1,4 +1,33 @@
-﻿using System;
+﻿/* ----------------------------------------------------------------------
+Ultra UI
+https://github.com/MattMcManis/Ultra
+https://ultraui.github.io
+mattmcmanis@outlook.com
+
+The MIT License
+
+Copyright (C) 2019-2020 Matt McManis
+
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:
+    
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE.
+---------------------------------------------------------------------- */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -22,25 +51,6 @@ namespace Ultra
         /// <summary>
         /// Pure Interpreter
         /// </summary>
-        //private void cbxPureInterpreter_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    // Write to mupen64plus.cfg
-        //    List<Action> actionsToWrite = new List<Action>
-        //    {
-        //        new Action(() => 
-        //        {
-        //            // -------------------------
-        //            // [Core]
-        //            // -------------------------
-        //            Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "0");
-        //        }),
-        //    };
-
-        //    MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
-        //                                 "mupen64plus.cfg",        // Filename
-        //                                 actionsToWrite            // Actions to write
-        //                                );
-        //}
         private void cboCPU_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string cpu = string.Empty;
@@ -83,53 +93,7 @@ namespace Ultra
         }
 
         /// <summary>
-        /// Cached Interpreter
-        /// </summary>
-        //private void cbxCachedInterpreter_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    // Write to mupen64plus.cfg
-        //    List<Action> actionsToWrite = new List<Action>
-        //    {
-        //        new Action(() => 
-        //        {
-        //            // -------------------------
-        //            // [Core]
-        //            // -------------------------
-        //            Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "1");
-        //        }),
-        //    };
-
-        //    MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
-        //                                 "mupen64plus.cfg",        // Filename
-        //                                 actionsToWrite            // Actions to write
-        //                                );
-        //}
-
-        /// <summary>
-        /// Dynamic Recompiler
-        /// </summary>
-        //private void cbxDynamicRecompiler_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    // Write to mupen64plus.cfg
-        //    List<Action> actionsToWrite = new List<Action>
-        //    {
-        //        new Action(() =>
-        //        {
-        //            // -------------------------
-        //            // [Core]
-        //            // -------------------------
-        //            Configure.ConigFile.cfg.Write("Core", "R4300Emulator", "2");
-        //        }),
-        //    };
-
-        //    MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
-        //                                 "mupen64plus.cfg",        // Filename
-        //                                 actionsToWrite            // Actions to write
-        //                                );
-        //}
-
-        /// <summary>
-        /// DisableSpecRecomp
+        /// Disable Spec Recomp
         /// </summary>
         private void cbxDisableSpecRecomp_Checked(object sender, RoutedEventArgs e)
         {
@@ -159,7 +123,7 @@ namespace Ultra
         }
 
         /// <summary>
-        /// RandomizeInterrupt
+        /// Randomize Interrupt
         /// </summary>
         private void cbxRandomizeInterrupt_Checked(object sender, RoutedEventArgs e)
         {
