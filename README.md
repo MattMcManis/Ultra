@@ -102,11 +102,18 @@ Requires
   `C:\Users\<username>\AppData\Roaming\Mupen64Plus\screenshot\`
 
 
-### Plugin Combinations
+### Tips
 
-For best results:
-* `GLideN64` + `RSP HLE`
-* `Angrylion Plus` + `CXD4`
+**Plugin Combinations for best results**
+
+- `GLideN64` + `RSP HLE`
+- `Angrylion Plus` + `CXD4` (Requires powerful PC)
+
+**Resolution**
+
+- If `Windowed`, select 4:3 aspect ratio to avoid black bars on sides.
+- If `Fullscreen`, select your monitors actual aspect ratio, such as 16:9, or else 4:3 will stretch to fit your screen.
+- If you want an extended view, select a 16:9 resolution, and in the Plugin select `Aspect Ratio Force 16:9` or `Widescreen`.
 
 &nbsp;
 
