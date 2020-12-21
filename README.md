@@ -111,9 +111,9 @@ Requires
 
 **Resolution**
 
-- If `Windowed`, select 4:3 aspect ratio to avoid black bars on sides.
-- If `Fullscreen`, select your monitors actual aspect ratio, such as 16:9, or else 4:3 will stretch to fit your screen.
-- If you want an extended view, select a 16:9 resolution, and in the Plugin select `Aspect Ratio Force 16:9` or `Widescreen`.
+- If `Windowed`, select `4:3` aspect ratio to avoid black bars on sides.
+- If `Fullscreen`, select your monitors actual aspect ratio, such as `16:9`, or else `4:3` will stretch to fit your screen.
+- If you want an extended view, select a `16:9` resolution, and in the Plugin select `Aspect Ratio Force 16:9` or `Widescreen`.
 
 &nbsp;
 
