@@ -69,7 +69,7 @@
         <TextBox x:Name="tbxCfg"
                  Style="{DynamicResource TextBoxStyle}" 
                  Margin="10,10,10,43" 
-                 Padding="7"
+                 Padding="15"
                  FontSize="13"
                  Text="{Binding MainView.Cfg_Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  RenderOptions.ClearTypeHint="Enabled"
