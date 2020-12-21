@@ -227,15 +227,14 @@ namespace Ultra
 
                         // Bilinear Mode
                         // # Bilinear filtering mode (0=N64 3point, 1=standard)
-                        bool bilinearMode = true;
-                        bool.TryParse(cfg.Read("Video-GLideN64", "bilinearMode").ToLower(), out bilinearMode);
+                        string bilinearMode = cfg.Read("Video-GLideN64", "BilinearMode");
                         switch (bilinearMode)
                         {
-                            case false:
+                            case "0":
                                 VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem = "N64 3-Point";
                                 break;
 
-                            case true:
+                            case "1":
                                 VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem = "Standard";
                                 break;
                         }
@@ -727,11 +726,11 @@ namespace Ultra
                         switch (VM.Plugins_Video_GLideN64_View.BilinearMode_SelectedItem)
                         {
                             case "N64 3-Point":
-                                cfg.Write("Video-GLideN64", "bilinearMode", "False");
+                                cfg.Write("Video-GLideN64", "BilinearMode", "0");
                                 break;
 
                             case "Standard":
-                                cfg.Write("Video-GLideN64", "bilinearMode", "True");
+                                cfg.Write("Video-GLideN64", "BilinearMode", "1");
                                 break;
                         }
 
