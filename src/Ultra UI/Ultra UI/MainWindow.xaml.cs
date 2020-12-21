@@ -32,17 +32,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Management;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Permissions;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 using ViewModel;
 
 namespace Ultra
@@ -166,6 +161,9 @@ namespace Ultra
             // Tooltip Duration
             ToolTipService.ShowDurationProperty.OverrideMetadata(
                 typeof(DependencyObject), new FrameworkPropertyMetadata(Int32.MaxValue));
+
+            //SystemEvents.DisplaySettingsChanged +=
+            //    new EventHandler(SystemEvents_DisplaySettingsChanged);
 
             // -------------------------
             // Set Paths
@@ -302,6 +300,21 @@ namespace Ultra
             // -------------------------
             SetTheme();
         }
+
+        /// <summary>
+        /// Display Settings
+        /// </summary>
+        /// <remarks>
+        /// Get the Screen Resolution
+        /// </remarks>
+        //public static int screenWidth { get; set; }
+        //public static int screenHeight { get; set; }
+        //public void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
+        //{
+        //    screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+        //    screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+        //}
+
 
         /// <summary>
         /// Set Theme
@@ -727,8 +740,8 @@ namespace Ultra
                 // Save Config
                 // -------------------------
                 Configure.WriteUltraConf(ultraConfDir,  // Directory: %AppData%\Ultra UI\
-                                            "ultra.conf",  // Filename
-                                            actionsToWrite // Actions to write
+                                         "ultra.conf",  // Filename
+                                          actionsToWrite // Actions to write
                                         );
 
                 //MessageBox.Show("Saved"); //debug
