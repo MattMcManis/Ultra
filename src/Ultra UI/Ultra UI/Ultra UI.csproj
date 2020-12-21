@@ -114,11 +114,17 @@
     <Compile Include="Plugins\Input\InputSDLWindow.xaml.cs">
       <DependentUpon>InputSDLWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Plugins\RSP\RSPcxd4.xaml.cs">
+      <DependentUpon>RSPcxd4.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\RSP\RSPcxd4SSSE3Window.xaml.cs">
       <DependentUpon>RSPcxd4SSSE3Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\RSP\RSPHLEWindow.xaml.cs">
       <DependentUpon>RSPHLEWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Video\AngrylionPlusWindow.xaml.cs">
+      <DependentUpon>AngrylionPlusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Plugins\Video\GLideN64Window.xaml.cs">
       <DependentUpon>GLideN64Window.xaml</DependentUpon>
@@ -137,8 +143,10 @@
     <Compile Include="ViewModel\Main\DisplayViewModel.cs" />
     <Compile Include="ViewModel\Plugins\Audio\AudioSDLViewModel.cs" />
     <Compile Include="ViewModel\Plugins\Input\InputSDLViewModel.cs" />
+    <Compile Include="ViewModel\Plugins\RSP\cdx4ViewModel.cs" />
     <Compile Include="ViewModel\Plugins\RSP\cdx4SSSE3ViewModel.cs" />
     <Compile Include="ViewModel\Plugins\RSP\RSPHLEViewModel.cs" />
+    <Compile Include="ViewModel\Plugins\Video\AngrylionPlusViewModel.cs" />
     <Compile Include="ViewModel\Plugins\Video\GLideN64ViewModel.cs" />
     <Compile Include="ViewModel\Main\PluginsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
@@ -167,6 +175,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Plugins\RSP\RSPcxd4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Plugins\RSP\RSPcxd4SSSE3Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +202,10 @@
     <Page Include="Plugins\RSP\RSPHLEWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Video\AngrylionPlusWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Plugins\Video\GLideN64Window.xaml">
       <SubType>Designer</SubType>
