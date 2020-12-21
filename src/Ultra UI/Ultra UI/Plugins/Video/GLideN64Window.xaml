@@ -757,7 +757,7 @@
                                HorizontalAlignment="Left"
                                Margin="5,5,0,0" 
                                VerticalAlignment="Top" 
-                               Width="130" 
+                               Width="145" 
                                Grid.Row="2"/>
                             <ComboBox x:Name="cboTxEnhancementMode" 
                                   Style="{DynamicResource ComboBoxStyle}"
