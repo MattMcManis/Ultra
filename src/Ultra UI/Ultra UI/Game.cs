@@ -219,7 +219,9 @@ namespace Ultra
                 // -------------------------
                 // Reset the Label Notice
                 // -------------------------
-                var task = Task.Factory.StartNew(new Action(CfgExitsCheck));
+                //var task = Task.Factory.StartNew(new Action(CfgExitsCheck));
+                //var task = Task.Run(new Action(CfgExitsCheck));
+                Task.Run(() => CfgExitsCheck());
 
                 // -------------------------
                 // Enable Menu Items
@@ -243,14 +245,14 @@ namespace Ultra
                 //m64pEmulator.Start();
 
 
-            m64pEmulator = Task.Run(() => PlayProcess(romBuffer,
-                                    videoPlugin,
-                                    audioPlugin,
-                                    inputPlugin,
-                                    rspPlugin,
-                                    windowWidth,
-                                    windowHeight
-                                   )
+                m64pEmulator = Task.Run(() => PlayProcess(romBuffer,
+                                        videoPlugin,
+                                        audioPlugin,
+                                        inputPlugin,
+                                        rspPlugin,
+                                        windowWidth,
+                                        windowHeight
+                                       )
 
             );
 
