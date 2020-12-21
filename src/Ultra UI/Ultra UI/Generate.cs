@@ -209,35 +209,46 @@ namespace Ultra
             // -------------------------
             // Reset the Label Notice
             // -------------------------
-            var task = Task.Factory.StartNew(new Action(CfgExitsCheck));
+            //var task = Task.Run(new Action(CfgExitsCheck));
+            Task.Run(() => CfgExitsCheck());
 
             // -------------------------
             // Launch Game
             // -------------------------
-            Thread t = new Thread(() =>
-                CfgDefaultsProcess(romBuffer,
-                                   videoPlugin,
-                                   audioPlugin,
-                                   inputPlugin,
-                                   rspPlugin,
-                                   windowWidth,
-                                   windowHeight
-                                  )
+
+            Task.Run(() => CfgDefaultsProcess(romBuffer,
+                                              videoPlugin,
+                                              audioPlugin,
+                                              inputPlugin,
+                                              rspPlugin,
+                                              windowWidth,
+                                              windowHeight
+                                            )
             );
-            t.Start();
+            //Thread t = new Thread(() =>
+            //    CfgDefaultsProcess(romBuffer,
+            //                       videoPlugin,
+            //                       audioPlugin,
+            //                       inputPlugin,
+            //                       rspPlugin,
+            //                       windowWidth,
+            //                       windowHeight
+            //                      )
+            //);
+            //t.Start();
         }
 
         /// <summary>
         /// Play Process
         /// </summary>
         public static void CfgDefaultsProcess(byte[] romBuffer,
-                                       string videoPlugin,
-                                       string audioPlugin,
-                                       string inputPlugin,
-                                       string rspPlugin,
-                                       int windowWidth,
-                                       int windowHeight
-                                       )
+                                              string videoPlugin,
+                                              string audioPlugin,
+                                              string inputPlugin,
+                                              string rspPlugin,
+                                              int windowWidth,
+                                              int windowHeight
+                                              )
         {
             // Label Notice
             VM.PluginsView.PluginsErrorNotice_Text = "Generating...";
