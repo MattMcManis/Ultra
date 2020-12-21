@@ -112,7 +112,6 @@ namespace ViewModel
             // 16:10
             new Resolution() { Name = "16:10",     Category = true  },
             new Resolution() { Name = "3840x2400", Category = false },
-            new Resolution() { Name = "1440x900",  Category = false },
             new Resolution() { Name = "2560x1600", Category = false },
             new Resolution() { Name = "1920x1200", Category = false },
             new Resolution() { Name = "1680x1050", Category = false },
@@ -120,6 +119,7 @@ namespace ViewModel
             new Resolution() { Name = "1280x800",  Category = false },
             new Resolution() { Name = "960x600",   Category = false },
             new Resolution() { Name = "640x400",   Category = false },
+            new Resolution() { Name = "320x200",   Category = false },
         };
         public ObservableCollection<Resolution> Display_Resolution_Items
         {
