@@ -444,6 +444,8 @@ namespace Ultra
             // -------------------------
             MupenCfg.ReadMupen64PlusCfg();
 
+            //Task<int> initPlugins = Parse.InitPluginsAsync();
+            //int count = await task;
             // -------------------------
             // Scan Plugins
             // -------------------------
@@ -528,7 +530,7 @@ namespace Ultra
             // -------------------------
             // Check for Available Updates
             // -------------------------
-            Task<int> task = UpdateAvailableCheck();
+            Task<int> updates = UpdateAvailableCheck();
         }
 
 
