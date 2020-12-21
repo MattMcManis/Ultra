@@ -451,7 +451,7 @@
                                       ToolTipService.InitialShowDelay="500"
                                       ToolTipService.ShowOnDisabled="True"
                                       ToolTip="Auto-check for updates at startup."
-                                      Style="{DynamicResource CheckBoxStyle}">
+                                      Style="{DynamicResource CheckBoxStyle2}">
                                 <TextBlock Style="{DynamicResource TextBlockStyle}"
                                            Text="Auto-check"
                                            Margin="0,0,0,0" />
@@ -579,7 +579,7 @@
 
                     <!-- Config Error Notice -->
                     <Label Content="{Binding CfgErrorNotice_Text}"
-                           Style="{DynamicResource LabelStyle}"
+                           Style="{DynamicResource LabelStyle2}" 
                            HorizontalAlignment="Left" 
                            Margin="7,0,0,6" 
                            Width="227" 
