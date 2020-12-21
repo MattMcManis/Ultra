@@ -1,4 +1,33 @@
-﻿using System;
+﻿/* ----------------------------------------------------------------------
+Ultra UI
+https://github.com/MattMcManis/Ultra
+https://ultraui.github.io
+mattmcmanis@outlook.com
+
+The MIT License
+
+Copyright (C) 2019-2020 Matt McManis
+
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:
+    
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE.
+---------------------------------------------------------------------- */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +39,69 @@ namespace Ultra
 {
     public partial class MainWindow : Window
     {
+        private static Dictionary<string, IPluginWindow> _window;
+
+        private static void InitializeWindows()
+        {
+            _window = new Dictionary<string, IPluginWindow>
+            {
+                // Video
+                { "GLideN64",   new GLideN64Window() },
+                { "Glide64mk2",   new Glide64mk2Window() },
+                { "Angrylion Plus",   new AngrylionPlusWindow() },
+
+                // Audio
+                { "Audio SDL",   new AudioSDLWindow() },
+
+                // Input
+                { "Input SDL",   new InputSDLWindow() },
+
+                // RSP
+                { "RSPHLE",   new RSPHLEWindow() },
+                { "cxd4",   new RSPcxd4Window() },
+                { "cxd4 SSSE3",   new RSPcxd4SSSE3Window() },
+            };
+        }
+
+        public interface IPluginWindow
+        {
+        }
+
+        // Plugin Window
+        //public static PluginWindow pluginWindow;
+        private static Boolean IsPluginWindowOpened = false;
+        public void OpenPluginWindow(Window pluginWindow, string pluginName)
+        {
+            // Check if Window is already open
+            if (IsPluginWindowOpened) return;
+
+            // Start Window
+            pluginWindow = (Window)_window[pluginName];
+
+            // Only allow 1 Window instance
+            pluginWindow.ContentRendered += delegate { IsPluginWindowOpened = true; };
+            pluginWindow.Closed += delegate { IsPluginWindowOpened = false; };
+
+            // Position Relative to MainWindow
+            // MainWindow Smaller
+            if (pluginWindow.Width > Width)
+            {
+                pluginWindow.Left = Left - ((pluginWindow.Width - Width) / 2);
+            }
+            // MainWindow Larger
+            else
+            {
+                pluginWindow.Left = Math.Max((Left + (Width - pluginWindow.Width) / 2), Left);
+            }
+
+            pluginWindow.Top = Math.Max((Top + (Height - pluginWindow.Height) / 2), Top);
+
+            // Open Window
+            pluginWindow.Show();
+        }
+
+
+
         /// <summary>
         /// Plugin Video - Button
         /// </summary>
@@ -23,90 +115,36 @@ namespace Ultra
         /// </summary>
         public void OpenVideoConfigureWindow()
         {
-            // -------------------------
+            InitializeWindows();
+
             // Open
-            // -------------------------
-            if (VM.PluginsView.Video_SelectedItem == "mupen64plus-video-GLideN64.dll")
+            switch (VM.PluginsView.Video_SelectedItem)
             {
-                OpenGLideN64Window();
-            }
-            // -------------------------
-            // Deny
-            // -------------------------
-            else
-            {
-                MessageBox.Show("Cannot currently configure " + VM.PluginsView.Video_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
+                // GLideN64
+                case "mupen64plus-video-GLideN64.dll":
+                    OpenPluginWindow((Window)_window["GLideN64"], "GLideN64");
+                    break;
+
+                // Glide64mk2
+                //case "mupen64plus-video-glide64mk2.dll":
+                //    OpenPluginWindow((Window)_window["Glide64mk2"], "Glide64mk2");
+                //    break;
+
+                // Angrylion Plus
+                case "mupen64plus-video-angrylion-plus.dll":
+                    OpenPluginWindow((Window)_window["Angrylion Plus"], "Angrylion Plus");
+                    break;
+
+                // Unknown
+                default:
+                    MessageBox.Show("Cannot currently configure " + VM.PluginsView.Video_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
+                    break;
             }
         }
 
-        // GLideN64
-        public static GLideN64Window gliden64Window;
-        private Boolean IsGLideN64WindowOpened = false;
-        public void OpenGLideN64Window()
-        {
-            // Check if Window is already open
-            if (IsGLideN64WindowOpened) return;
-
-            // Start Window
-            gliden64Window = new GLideN64Window();
-
-            // Only allow 1 Window instance
-            gliden64Window.ContentRendered += delegate { IsGLideN64WindowOpened = true; };
-            gliden64Window.Closed += delegate { IsGLideN64WindowOpened = false; };
-
-            // Position Relative to MainWindow
-            // MainWindow Smaller
-            if (gliden64Window.Width > Width)
-            {
-                gliden64Window.Left = Left - ((gliden64Window.Width - Width) / 2);
-            }
-            // MainWindow Larger
-            else
-            {
-                gliden64Window.Left = Math.Max((Left + (Width - gliden64Window.Width) / 2), Left);
-            }
-
-            gliden64Window.Top = Math.Max((Top + (Height - gliden64Window.Height) / 2), Top);
-
-            // Open Window
-            gliden64Window.Show();
-        }
-
-        // Glide64mk2
-        public static Glide64mk2Window glide64mk2Window;
-        private Boolean IsGlide64mk2WindowOpened = false;
-        public void OpenGlide64mk2Window()
-        {
-            // Check if Window is already open
-            if (IsGlide64mk2WindowOpened) return;
-
-            // Start Window
-            glide64mk2Window = new Glide64mk2Window();
-
-            // Only allow 1 Window instance
-            glide64mk2Window.ContentRendered += delegate { IsGlide64mk2WindowOpened = true; };
-            glide64mk2Window.Closed += delegate { IsGlide64mk2WindowOpened = false; };
-
-            // Position Relative to MainWindow
-            // MainWindow Smaller
-            if (glide64mk2Window.Width > Width)
-            {
-                glide64mk2Window.Left = Left - ((glide64mk2Window.Width - Width) / 2);
-            }
-            // MainWindow Larger
-            else
-            {
-                glide64mk2Window.Left = Math.Max((Left + (Width - glide64mk2Window.Width) / 2), Left);
-            }
-
-            glide64mk2Window.Top = Math.Max((Top + (Height - glide64mk2Window.Height) / 2), Top);
-
-            // Open Window
-            glide64mk2Window.Show();
-        }
 
         /// <summary>
         /// Plugin Audio - Button
@@ -121,57 +159,26 @@ namespace Ultra
         /// </summary>
         public void OpenAudioConfigureWindow()
         {
-            // -------------------------
+            InitializeWindows();
+
             // Open
-            // -------------------------
-            if (VM.PluginsView.Audio_SelectedItem == "mupen64plus-audio-sdl.dll")
+            switch (VM.PluginsView.Audio_SelectedItem)
             {
-                OpenAudioSDLWindow();
-            }
-            // -------------------------
-            // Deny
-            // -------------------------
-            else
-            {
-                MessageBox.Show("Cannot currently configure " + VM.PluginsView.Audio_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
-                                "Notice",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Information);
+                // Audio SDL
+                case "mupen64plus-audio-sdl.dll":
+                    OpenPluginWindow((Window)_window["Audio SDL"], "Audio SDL");
+                    break;
+
+                // Unknown
+                default:
+                    MessageBox.Show("Cannot currently configure " + VM.PluginsView.Audio_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
+                                    "Notice",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information);
+                    break;
             }
         }
 
-        // Audio SDL
-        public static AudioSDLWindow audioSDLWindow;
-        private Boolean IsAudioSDLWindowOpened = false;
-        public void OpenAudioSDLWindow()
-        {
-            // Check if Window is already open
-            if (IsAudioSDLWindowOpened) return;
-
-            // Start Window
-            audioSDLWindow = new AudioSDLWindow();
-
-            // Only allow 1 Window instance
-            audioSDLWindow.ContentRendered += delegate { IsAudioSDLWindowOpened = true; };
-            audioSDLWindow.Closed += delegate { IsAudioSDLWindowOpened = false; };
-
-            // Position Relative to MainWindow
-            // MainWindow Smaller
-            if (audioSDLWindow.Width > Width)
-            {
-                audioSDLWindow.Left = Left - ((audioSDLWindow.Width - Width) / 2);
-            }
-            // MainWindow Larger
-            else
-            {
-                audioSDLWindow.Left = Math.Max((Left + (Width - audioSDLWindow.Width) / 2), Left);
-            }
-
-            audioSDLWindow.Top = Math.Max((Top + (Height - audioSDLWindow.Height) / 2), Top);
-
-            // Open Window
-            audioSDLWindow.Show();
-        }
 
         /// <summary>
         /// Plugin RSP - Button
@@ -186,20 +193,27 @@ namespace Ultra
         /// </summary>
         public void OpenRSPConfigureWindow()
         {
+            InitializeWindows();
+
             // Open
             switch (VM.PluginsView.RSP_SelectedItem)
             {
                 // RSP HLE
                 case "mupen64plus-rsp-hle.dll":
-                    OpenRSPHLEWindow();
+                    OpenPluginWindow((Window)_window["RSPHLE"], "RSPHLE");
+                    break;
+
+                // cxd4
+                case "mupen64plus-rsp-cxd4.dll":
+                    OpenPluginWindow((Window)_window["cxd4"], "cxd4");
                     break;
 
                 // cxd4 SSSE3
                 case "mupen64plus-rsp-cxd4-ssse3.dll":
-                    OpenRSPcxd4SSSE3Window();
+                    OpenPluginWindow((Window)_window["cxd4 SSSE3"], "cxd4 SSSE3");
                     break;
 
-                // Deny
+                // Unknown
                 default:
                     MessageBox.Show("Cannot currently configure " + VM.PluginsView.RSP_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
                                "Notice",
@@ -207,76 +221,6 @@ namespace Ultra
                                MessageBoxImage.Information);
                     break;
             }
-        }
-
-        /// <summary>
-        /// RSPHLE Window
-        /// </summary>
-        public static RSPHLEWindow rsphleWindow;
-        private Boolean IsRSPHLEWindowOpened = false;
-        public void OpenRSPHLEWindow()
-        {
-            // Check if Window is already open
-            if (IsRSPHLEWindowOpened) return;
-
-            // Start Window
-            rsphleWindow = new RSPHLEWindow();
-
-            // Only allow 1 Window instance
-            rsphleWindow.ContentRendered += delegate { IsRSPHLEWindowOpened = true; };
-            rsphleWindow.Closed += delegate { IsRSPHLEWindowOpened = false; };
-
-            // Position Relative to MainWindow
-            // MainWindow Smaller
-            if (rsphleWindow.Width > Width)
-            {
-                rsphleWindow.Left = Left - ((rsphleWindow.Width - Width) / 2);
-            }
-            // MainWindow Larger
-            else
-            {
-                rsphleWindow.Left = Math.Max((Left + (Width - rsphleWindow.Width) / 2), Left);
-            }
-
-            rsphleWindow.Top = Math.Max((Top + (Height - rsphleWindow.Height) / 2), Top);
-
-            // Open Window
-            rsphleWindow.Show();
-        }
-
-        /// <summary>
-        /// RSP cxd4 SSSE3 Window
-        /// </summary>
-        public static RSPcxd4SSSE3Window cxd4SSSE3;
-        private Boolean IsRSPcxd4SSSE3WindowOpened = false;
-        public void OpenRSPcxd4SSSE3Window()
-        {
-            // Check if Window is already open
-            if (IsRSPcxd4SSSE3WindowOpened) return;
-
-            // Start Window
-            cxd4SSSE3 = new RSPcxd4SSSE3Window();
-
-            // Only allow 1 Window instance
-            cxd4SSSE3.ContentRendered += delegate { IsRSPcxd4SSSE3WindowOpened = true; };
-            cxd4SSSE3.Closed += delegate { IsRSPcxd4SSSE3WindowOpened = false; };
-
-            // Position Relative to MainWindow
-            // MainWindow Smaller
-            if (cxd4SSSE3.Width > Width)
-            {
-                cxd4SSSE3.Left = Left - ((cxd4SSSE3.Width - Width) / 2);
-            }
-            // MainWindow Larger
-            else
-            {
-                cxd4SSSE3.Left = Math.Max((Left + (Width - cxd4SSSE3.Width) / 2), Left);
-            }
-
-            cxd4SSSE3.Top = Math.Max((Top + (Height - cxd4SSSE3.Height) / 2), Top);
-
-            // Open Window
-            cxd4SSSE3.Show();
         }
 
 
@@ -293,55 +237,24 @@ namespace Ultra
         /// </summary>
         public void OpenInputConfigureWindow()
         {
-            // -------------------------
+            InitializeWindows();
+
             // Open
-            // -------------------------
-            if (VM.PluginsView.Input_SelectedItem == "mupen64plus-input-sdl.dll")
+            switch (VM.PluginsView.Input_SelectedItem)
             {
-                OpenInputWindow();
+                // Input SDL
+                case "mupen64plus-input-sdl.dll":
+                    OpenPluginWindow((Window)_window["Input SDL"], "Input SDL");
+                    break;
+
+                // Unknown
+                default:
+                    MessageBox.Show("Cannot currently configure " + VM.PluginsView.Input_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
+                                    "Notice",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information);
+                    break;
             }
-            // -------------------------
-            // Deny
-            // -------------------------
-            else
-            {
-                MessageBox.Show("Cannot currently configure " + VM.PluginsView.Input_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
-                                "Notice",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Information);
-            }
-        }
-
-        public static InputSDLWindow inputSDLWindow;
-        private Boolean IsInputSDLWindowOpened = false;
-        public void OpenInputWindow()
-        {
-            // Check if Window is already open
-            if (IsInputSDLWindowOpened) return;
-
-            // Start Window
-            inputSDLWindow = new InputSDLWindow();
-
-            // Only allow 1 Window instance
-            inputSDLWindow.ContentRendered += delegate { IsInputSDLWindowOpened = true; };
-            inputSDLWindow.Closed += delegate { IsInputSDLWindowOpened = false; };
-
-            // Position Relative to MainWindow
-            // MainWindow Smaller
-            if (inputSDLWindow.Width > Width)
-            {
-                inputSDLWindow.Left = Left - ((inputSDLWindow.Width - Width) / 2);
-            }
-            // MainWindow Larger
-            else
-            {
-                inputSDLWindow.Left = Math.Max((Left + (Width - inputSDLWindow.Width) / 2), Left);
-            }
-
-            inputSDLWindow.Top = Math.Max((Top + (Height - inputSDLWindow.Height) / 2), Top);
-
-            // Open Window
-            inputSDLWindow.Show();
         }
 
 
@@ -383,6 +296,11 @@ namespace Ultra
                 else if (videoPluginNames.Contains("mupen64plus-video-rice.dll"))
                 {
                     VM.PluginsView.Video_SelectedItem = "mupen64plus-video-rice.dll";
+                }
+                // Angrylion Plus
+                else if (videoPluginNames.Contains("mupen64plus-video-angrylion-plus.dll"))
+                {
+                    VM.PluginsView.Video_SelectedItem = "mupen64plus-video-angrylion-plus.dll";
                 }
                 // z64
                 else if (videoPluginNames.Contains("mupen64plus-video-z64.dll"))
@@ -454,20 +372,20 @@ namespace Ultra
                 {
                     VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-hle.dll";
                 }
-                // cxd4 SSSE3
-                else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4-ssse3.dll"))
+                // cxd4
+                else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4.dll"))
                 {
-                    VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4-ssse3.dll";
+                    VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4.dll";
                 }
                 // cxd4 SSE2
                 else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4-sse2.dll"))
                 {
                     VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4-sse2.dll";
                 }
-                // cxd4
-                else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4.dll"))
+                // cxd4 SSSE3
+                else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4-ssse3.dll"))
                 {
-                    VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4.dll";
+                    VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4-ssse3.dll";
                 }
                 // z64
                 else if (rspPluginNames.Contains("mupen64plus-rsp-z64.dll"))
@@ -502,7 +420,7 @@ namespace Ultra
                         // -------------------------
                         // [UI-Console]
                         // -------------------------
-                        Configure.ConigFile.cfg.Write("UI-Console", "VideoPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.Video_SelectedItem)/*VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + VM.PluginsView.Video_SelectedItem*/ + "\"");
+                        Configure.ConigFile.cfg.Write("UI-Console", "VideoPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.Video_SelectedItem) + "\"");
                     }
                 }),
             };
@@ -528,7 +446,7 @@ namespace Ultra
                         // -------------------------
                         // [UI-Console]
                         // -------------------------
-                        Configure.ConigFile.cfg.Write("UI-Console", "AudioPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.Audio_SelectedItem)/*VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + VM.PluginsView.Audio_SelectedItem*/ + "\"");
+                        Configure.ConigFile.cfg.Write("UI-Console", "AudioPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.Audio_SelectedItem) + "\"");
                     }
                 }),
             };
@@ -554,7 +472,7 @@ namespace Ultra
                         // -------------------------
                         // [UI-Console]
                         // -------------------------
-                        Configure.ConigFile.cfg.Write("UI-Console", "InputPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.Input_SelectedItem)/*VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + VM.PluginsView.Audio_SelectedItem*/ + "\"");
+                        Configure.ConigFile.cfg.Write("UI-Console", "InputPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.Input_SelectedItem) + "\"");
                     }
                 }),
             };
@@ -580,7 +498,7 @@ namespace Ultra
                         // -------------------------
                         // [UI-Console]
                         // -------------------------
-                        Configure.ConigFile.cfg.Write("UI-Console", "RspPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.RSP_SelectedItem)/*VM.PathsView.Config_Text.TrimEnd('\\') + @"\" + VM.PluginsView.Audio_SelectedItem*/ + "\"");
+                        Configure.ConigFile.cfg.Write("UI-Console", "RspPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.RSP_SelectedItem) + "\"");
                     }
                 }),
             };
