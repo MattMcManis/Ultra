@@ -7,7 +7,7 @@ Mupen64Plus N64 Emulator Frontend for Windows
 * [Features](#features)
 * [Downloads](#downloads)
 * [Setup](#setup)
-* [Troubleshooting](#troubleshooting)
+* [Resources](#resources)
 * [Build](#build)
 
 &nbsp;
@@ -28,7 +28,7 @@ API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 * Game Launcher
 * Navigate options quickly with tabs
 * Edit Mupen64Plus Config
-* Plugin Configuration Menus for `GLideN64`, `Angrylion Plus`, `Audio SDL`, `Input SDL`, `RSP HLE`, `cdx4`, & `cxd4-ssse3`.
+* Plugin Configuration Menus for `GLideN64`, `Angrylion Plus`, `Audio SDL`, `Input SDL`, `RSP HLE`, `cdx4`/`ssse3`.
 * Shortcuts to common folders
 * Quick Load & Save State `st0-9`
 * Load Save File `.m64p`/`.pj` format
@@ -44,14 +44,18 @@ API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 &nbsp;
 
 ## Downloads
-#### Releases
-https://github.com/MattMcManis/Ultra/releases
+#### Ultra
+[Ultra + Mupen64plus Latest Release](https://github.com/MattMcManis/Ultra/releases)
 
-#### Requires
+Requires
 * Windows 8, 8.1, 10
 * [Microsoft .NET Framework 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 * [Mupen64Plus](https://github.com/mupen64plus/mupen64plus-core/releases)
 * [GLideN64 Public Release 4.0](https://github.com/gonetz/GLideN64/releases/tag/Public_Release_4_0)
+
+#### Mupen64Plus
+[Latest Release](https://github.com/mupen64plus/mupen64plus-core/releases)
+
 
 &nbsp;
 
@@ -88,35 +92,33 @@ https://github.com/MattMcManis/Ultra/releases
 
 ### Paths
 
-* Ultra UI Config `C:\Users\<username>\AppData\Roaming\Ultra UI\ultra.conf`
-* Mupen64Plus Config `C:\Users\<username>\AppData\Roaming\Mupen64Plus\mupen64plus.cfg`
-* Saves `C:\Users\<username>\AppData\Roaming\Mupen64Plus\save\`
-* Screenshots `C:\Users\<username>\AppData\Roaming\Mupen64Plus\screenshot\`
+* Ultra UI Config  
+  `C:\Users\<username>\AppData\Roaming\Ultra UI\ultra.conf`
+* Mupen64Plus Config  
+  `C:\Users\<username>\AppData\Roaming\Mupen64Plus\mupen64plus.cfg`
+* Saves  
+  `C:\Users\<username>\AppData\Roaming\Mupen64Plus\save\`
+* Screenshots  
+  `C:\Users\<username>\AppData\Roaming\Mupen64Plus\screenshot\`
 
 &nbsp;
 
-## Wiki
 
+## Resources
+
+**Ultra Wiki**
+* [Resources](https://github.com/MattMcManis/Ultra/wiki/Resources)  
+* [Troubleshooting](https://github.com/MattMcManis/Ultra/wiki/Troubleshooting)
+
+**Mupen64Plus Wiki**
 * [Mupen64Plus](https://mupen64plus.org/wiki/index.php/Mupen64Plus)
 * [Console Usage](https://mupen64plus.org/wiki/index.php/UIConsoleUsage)
 * [File Locations](https://mupen64plus.org/wiki/index.php/FileLocations)
 * [Keyboard Setup](https://mupen64plus.org/wiki/index.php/KeyboardSetup)
 * [Controller Setup](https://mupen64plus.org/wiki/index.php/ControllerSetup)
-* [Third Party Plugins](https://mupen64plus.org/wiki/index.php/ThirdPartyPlugins)
-* [Recommended Plugin Setups](http://emulation.gametechwiki.com/index.php/Mupen64Plus#Recommended_plugin_setups)
+* [Third Party Plugins](https://mupen64plus.org/wiki/index.php/ThirdPartyPlugins) 
+* [Recommended Plugin Setups](http://emulation.gametechwiki.com/index.php/Mupen64Plus#Recommended_plugin_setups) 
 * [Game Compatibility](https://mupen64plus.org/wiki/index.php/GameCompatibility)
-
-&nbsp;
-
-## Resources
-
-https://github.com/MattMcManis/Ultra/wiki/Resources
-
-&nbsp;
-
-## Troubleshooting
-
-[Troubleshooting Wiki](https://github.com/MattMcManis/Ultra/wiki/Troubleshooting)
 
 &nbsp;
 
