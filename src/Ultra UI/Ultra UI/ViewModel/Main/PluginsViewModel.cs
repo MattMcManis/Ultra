@@ -56,7 +56,7 @@ namespace ViewModel
         /// </summary>
         public PluginsViewModel()
         {
-
+            //Video_SelectedIndex = 0;
         }
 
         // --------------------------------------------------
@@ -132,7 +132,7 @@ namespace ViewModel
 
         // Selected Item
         private string _Video_SelectedItem { get; set; }
-        public string Video_SelectedItem
+        public string Video_SelectedItem 
         {
             get { return _Video_SelectedItem; }
             set
