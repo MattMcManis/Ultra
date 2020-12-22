@@ -64,237 +64,199 @@ namespace Ultra
         /// <remarks>
         /// Runs Threaded Launch() method
         /// </remarks>
-        //public static async void Play(string rom)
-        //{
-        //    Task<int> task = PlayAsync(rom);
-        //    int count = await task;
-        //}
         public static void Play(string rom)
-        //public static async Task<int> PlayAsync(string rom)
         {
-            //int count = 0;
-            //await Task.Factory.StartNew(() =>
-            //{
-                // -------------------------
-                // Set Mupen64Plus dll 
-                // -------------------------
-                MainWindow.mupen64plusDll = MainWindow.SetMupen64PlusDll();
+            // -------------------------
+            // Set Mupen64Plus dll 
+            // -------------------------
+            MainWindow.mupen64plusDll = MainWindow.SetMupen64PlusDll();
 
-                // -------------------------
-                // Error Halts
-                // -------------------------
-                // Mupen64Plus DLL not set
-                if (string.IsNullOrEmpty(MainWindow.mupen64plusDll) ||
-                    string.IsNullOrWhiteSpace(MainWindow.mupen64plusDll))
-                {
-                    MessageBox.Show("Mupen64Plus Path not set.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            // -------------------------
+            // Error Halts
+            // -------------------------
+            // Mupen64Plus DLL not set
+            if (string.IsNullOrEmpty(MainWindow.mupen64plusDll) ||
+                string.IsNullOrWhiteSpace(MainWindow.mupen64plusDll))
+            {
+                MessageBox.Show("Mupen64Plus Path not set.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // Mupen64Plus DLL Path not valid
-                if (MainWindow.IsValidPath(MainWindow.mupen64plusDll) == false)
-                {
-                    MessageBox.Show("Mupen64Plus Path is not valid.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            // Mupen64Plus DLL Path not valid
+            if (MainWindow.IsValidPath(MainWindow.mupen64plusDll) == false)
+            {
+                MessageBox.Show("Mupen64Plus Path is not valid.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // Mupen64Plus DLL does not exist
-                if (!File.Exists(MainWindow.mupen64plusDll))
-                {
-                    MessageBox.Show("Could not find " + MainWindow.mupen64plusDll,
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            // Mupen64Plus DLL does not exist
+            if (!File.Exists(MainWindow.mupen64plusDll))
+            {
+                MessageBox.Show("Could not find " + MainWindow.mupen64plusDll,
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // Check if Plugins are set
-                if (string.IsNullOrEmpty(VM.PluginsView.Video_SelectedItem) ||
-                    string.IsNullOrEmpty(VM.PluginsView.Audio_SelectedItem) ||
-                    string.IsNullOrEmpty(VM.PluginsView.Input_SelectedItem) ||
-                    string.IsNullOrEmpty(VM.PluginsView.RSP_SelectedItem)
-                    )
-                {
-                    MessageBox.Show("Not all Plugins are set.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            // Check if Plugins are set
+            if (string.IsNullOrEmpty(VM.PluginsView.Video_SelectedItem) ||
+                string.IsNullOrEmpty(VM.PluginsView.Audio_SelectedItem) ||
+                string.IsNullOrEmpty(VM.PluginsView.Input_SelectedItem) ||
+                string.IsNullOrEmpty(VM.PluginsView.RSP_SelectedItem)
+                )
+            {
+                MessageBox.Show("Not all Plugins are set.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // Check if ROM exists
-                // String Empty
-                if (string.IsNullOrEmpty(rom))
-                {
-                    MessageBox.Show("ROM is empty",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            // Check if ROM exists
+            // String Empty
+            if (string.IsNullOrEmpty(rom))
+            {
+                MessageBox.Show("ROM is empty",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
-                // Does not exist
-                if (!File.Exists(rom))
-                {
-                    MessageBox.Show(rom + " does not exist.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+                return;
+            }
+            // Does not exist
+            if (!File.Exists(rom))
+            {
+                MessageBox.Show(rom + " does not exist.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // Check if ROM is valid
-                // Check if file size is 0
-                long romFileSize = new FileInfo(rom).Length;
-                if (romFileSize == 0)
-                {
-                    MessageBox.Show("Not a valid ROM file.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            // Check if ROM is valid
+            // Check if file size is 0
+            long romFileSize = new FileInfo(rom).Length;
+            if (romFileSize == 0)
+            {
+                MessageBox.Show("Not a valid ROM file.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // Check if selected Display resolution is bigger than screen's resolution
-                int selectedResolutionWidth = 0;
-                int selectedResolutionHeight = 0;
-                if (!string.IsNullOrEmpty(VM.DisplayView.Display_Resolution_SelectedItem))
-                {
-                    List<string> resolution = new List<string>();
-                    resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
+            // Check if selected Display resolution is bigger than screen's resolution
+            int selectedResolutionWidth = 0;
+            int selectedResolutionHeight = 0;
+            if (!string.IsNullOrEmpty(VM.DisplayView.Display_Resolution_SelectedItem))
+            {
+                List<string> resolution = new List<string>();
+                resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
 
-                    int.TryParse(resolution[0], out selectedResolutionWidth);
-                    int.TryParse(resolution[1], out selectedResolutionHeight);
-                }
+                int.TryParse(resolution[0], out selectedResolutionWidth);
+                int.TryParse(resolution[1], out selectedResolutionHeight);
+            }
 
-                int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-                int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+            int screenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
 
-                if (selectedResolutionWidth > screenWidth ||
-                    selectedResolutionHeight > screenHeight)
-                {
-                    MessageBox.Show("The selected Display resolution " + selectedResolutionWidth  + "x" + selectedResolutionHeight + 
-                                    " is greater than your Screen's resolution " + screenWidth + "x" + screenHeight + 
-                                    ". Video Plugin will crash.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            if (selectedResolutionWidth > screenWidth ||
+                selectedResolutionHeight > screenHeight)
+            {
+                MessageBox.Show("The selected Display resolution " + selectedResolutionWidth  + "x" + selectedResolutionHeight + 
+                                " is greater than your Screen's resolution " + screenWidth + "x" + screenHeight + 
+                                ". Video Plugin will crash.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // -------------------------
-                // Load ROM into memory
-                // -------------------------
-                byte[] romBuffer = File.ReadAllBytes(rom);
+            // -------------------------
+            // Load ROM into memory
+            // -------------------------
+            byte[] romBuffer = File.ReadAllBytes(rom);
 
-                // Check if ROM is empty
-                if (romBuffer == null || romBuffer.Length == 0)
-                {
-                    MessageBox.Show("Problem reading ROM.",
-                                    "Notice",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Warning);
+            // Check if ROM is empty
+            if (romBuffer == null || romBuffer.Length == 0)
+            {
+                MessageBox.Show("Problem reading ROM.",
+                                "Notice",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
 
-                    return;
-                }
+                return;
+            }
 
-                // -------------------------
-                // Set Plugins 
-                // -------------------------
-                // (Must be here, after Import Mupen64PlusCfg, which loads Plugins Path)
-                string videoPlugin = VM.PluginsView.Video_Items.FirstOrDefault(item => item.Name == VM.PluginsView.Video_SelectedItem)?.FullPath;
-                string audioPlugin = VM.PluginsView.Audio_Items.FirstOrDefault(item => item.Name == VM.PluginsView.Audio_SelectedItem)?.FullPath;
-                string inputPlugin = VM.PluginsView.Input_Items.FirstOrDefault(item => item.Name == VM.PluginsView.Input_SelectedItem)?.FullPath;
-                string rspPlugin = VM.PluginsView.RSP_Items.FirstOrDefault(item => item.Name == VM.PluginsView.RSP_SelectedItem)?.FullPath;
-                //MessageBox.Show(video); //debug
+            // -------------------------
+            // Set Plugins 
+            // -------------------------
+            // (Must be here, after Import Mupen64PlusCfg, which loads Plugins Path)
+            string videoPlugin = VM.PluginsView.Video_Items.FirstOrDefault(item => item.Name == VM.PluginsView.Video_SelectedItem)?.FullPath;
+            string audioPlugin = VM.PluginsView.Audio_Items.FirstOrDefault(item => item.Name == VM.PluginsView.Audio_SelectedItem)?.FullPath;
+            string inputPlugin = VM.PluginsView.Input_Items.FirstOrDefault(item => item.Name == VM.PluginsView.Input_SelectedItem)?.FullPath;
+            string rspPlugin = VM.PluginsView.RSP_Items.FirstOrDefault(item => item.Name == VM.PluginsView.RSP_SelectedItem)?.FullPath;
+            //MessageBox.Show(video); //debug
 
-                // -------------------------
-                // Set Window Resolution
-                // -------------------------
-                int windowWidth = 0;
-                int windowHeight = 0;
-                if (!string.IsNullOrEmpty(VM.DisplayView.Display_Resolution_SelectedItem))
-                {
-                    List<string> resolution = new List<string>();
-                    resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
+            // -------------------------
+            // Set Window Resolution
+            // -------------------------
+            int windowWidth = 0;
+            int windowHeight = 0;
+            if (!string.IsNullOrEmpty(VM.DisplayView.Display_Resolution_SelectedItem))
+            {
+                List<string> resolution = new List<string>();
+                resolution = VM.DisplayView.Display_Resolution_SelectedItem.Split('x').ToList();
 
-                    //windowWidth = 0;
-                    int.TryParse(resolution[0], out windowWidth);
+                //windowWidth = 0;
+                int.TryParse(resolution[0], out windowWidth);
 
-                    //windowHeight = 0;
-                    int.TryParse(resolution[1], out windowHeight);
-                }
-                // Safe Defaults
-                else
-                {
-                    windowWidth = 960;
-                    windowHeight = 720;
-                }
+                //windowHeight = 0;
+                int.TryParse(resolution[1], out windowHeight);
+            }
+            // Safe Defaults
+            else
+            {
+                windowWidth = 960;
+                windowHeight = 720;
+            }
 
-                // -------------------------
-                // Reset the Label Notice
-                // -------------------------
-                //var task = Task.Factory.StartNew(new Action(CfgExitsCheck));
-                //var task = Task.Run(new Action(CfgExitsCheck));
-                Task.Run(() => CfgExitsCheck());
+            // -------------------------
+            // Reset the Label Notice
+            // -------------------------
+            Task.Run(() => CfgExitsCheck());
 
-                // -------------------------
-                // Enable Menu Items
-                // -------------------------
-                MainWindow.EnableMenuItems();
+            // -------------------------
+            // Enable Menu Items
+            // -------------------------
+            MainWindow.EnableMenuItems();
 
-                // -------------------------
-                // Launch Game
-                // -------------------------
-                //Thread t = new Thread(() =>
-                //m64pEmulator = new Thread(() =>
-                //    PlayProcess(romBuffer,
-                //                    videoPlugin,
-                //                    audioPlugin,
-                //                    inputPlugin,
-                //                    rspPlugin,
-                //                    windowWidth,
-                //                    windowHeight
-                //                   )
-                //    );
-                //m64pEmulator.Start();
-
-
-                m64pEmulator = Task.Run(() => PlayProcess(romBuffer,
-                                        videoPlugin,
-                                        audioPlugin,
-                                        inputPlugin,
-                                        rspPlugin,
-                                        windowWidth,
-                                        windowHeight
-                                       )
-
+            // -------------------------
+            // Launch Game
+            // -------------------------
+            m64pEmulator = Task.Run(() => PlayProcess(romBuffer,
+                                                      videoPlugin,
+                                                      audioPlugin,
+                                                      inputPlugin,
+                                                      rspPlugin,
+                                                      windowWidth,
+                                                      windowHeight
+                                                     )
             );
-
-            //PlayProcess(romBuffer,
-            //            videoPlugin,
-            //            audioPlugin,
-            //            inputPlugin,
-            //            rspPlugin,
-            //            windowWidth,
-            //            windowHeight
-            //           );
-            //});
-
-            //return count;
         }
 
         /// <summary>
@@ -322,21 +284,19 @@ namespace Ultra
                     windowHeight
             );
 
-            //Mupen64PlusAPI.api.AsyncExecuteEmulator();
-
             // Waits until Launch() Mupen64Plus exits
 
             // Close Mupe64Plus Window
             // Note: Closing does not Dispose(), you must call it manually
             // Only dispose if exited from window
             // and not called from the Stop button
-            if (MainWindow.stopped == false)
+            if (MainWindow.stopper == false)
             {
                 Mupen64PlusAPI.api.Dispose();
             }
 
-            // Reset the Stopped trigger
-            MainWindow.stopped = false;
+            // Reset the Stopper trigger
+            MainWindow.stopper = false;
 
             // Reset API
             Mupen64PlusAPI.api = null; 
