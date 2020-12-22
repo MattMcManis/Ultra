@@ -48,7 +48,7 @@
         
         Title="Video Plugin - Angrylion Plus"
         
-        Width="425"
+        Width="432"
         Height="310"
         
         Style="{DynamicResource WindowStyle}" 
@@ -170,7 +170,7 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                
+
 
                 <!-- ViMode -->
                 <Label Content="VI Mode"
@@ -251,7 +251,7 @@
         <Button x:Name="btnDefaults" 
                 Style="{DynamicResource ButtonStyle}"
                 Cursor="Hand"
-                Margin="14,0,0,13" 
+                Margin="15,0,0,13" 
                 Height="24"
                 VerticalAlignment="Bottom"
                 Click="btnDefaults_Click"
@@ -265,7 +265,7 @@
         <Button x:Name="btnSave" 
                 Style="{DynamicResource ButtonStyle}"
                 Cursor="Hand"
-                Margin="0,0,99,13" 
+                Margin="0,0,110,13" 
                 Height="24"
                 VerticalAlignment="Bottom"
                 Click="btnSave_Click" HorizontalAlignment="Right" Width="80">
@@ -276,7 +276,7 @@
                        Style="{DynamicResource LabelStyle}"
                        DataContext="{Binding Plugins_Video_AngrylionPlus_View}"
                        Content="{Binding Save_Text}" 
-                       Margin="0,0,179,16" 
+                       Margin="0,0,192,16" 
                        HorizontalAlignment="Right"
                        HorizontalContentAlignment="Right"
                        Width="50" 
@@ -287,7 +287,7 @@
         <Button x:Name="btnClose" 
                 Style="{DynamicResource ButtonStyle}"
                 Cursor="Hand"
-                Margin="0,0,14,13" 
+                Margin="0,0,25,13" 
                 Height="24"
                 VerticalAlignment="Bottom"
                 Click="btnClose_Click" HorizontalAlignment="Right" Width="80">
