@@ -59,7 +59,7 @@ namespace Ultra
         {
             InitializeComponent();
 
-            MinWidth = 425;
+            MinWidth = 432;
             MinHeight = 310;
 
             // Load Control Values
