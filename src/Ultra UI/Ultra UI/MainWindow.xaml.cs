@@ -445,6 +445,7 @@ namespace Ultra
             // Plugin
             // -------------------------
             // Video
+            //cboPlugin_Video.SelectedIndex = VM.PluginsView.Video_SelectedIndex;
             cboPlugin_Video.SelectionChanged += cboPlugin_Video_SelectionChanged;
             // Audio
             cboPlugin_Audio.SelectionChanged += cboPlugin_Audio_SelectionChanged;
