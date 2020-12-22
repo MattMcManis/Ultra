@@ -58,8 +58,9 @@ namespace Ultra
 
                 // RSP
                 { "RSPHLE",   new RSPHLEWindow() },
-                { "cxd4",   new RSPcxd4Window() },
-                { "cxd4 SSSE3",   new RSPcxd4SSSE3Window() },
+                { "CXD4",   new RSPcxd4Window() },
+                { "CXD4 SSE2",   new RSPcxd4SSE2Window() },
+                { "CXD4 SSSE3",   new RSPcxd4SSSE3Window() },
             };
         }
 
@@ -137,7 +138,7 @@ namespace Ultra
 
                 // Unknown
                 default:
-                    MessageBox.Show("Cannot currently configure " + VM.PluginsView.Video_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
+                    MessageBox.Show("Cannot configure " + VM.PluginsView.Video_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
@@ -171,7 +172,7 @@ namespace Ultra
 
                 // Unknown
                 default:
-                    MessageBox.Show("Cannot currently configure " + VM.PluginsView.Audio_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
+                    MessageBox.Show("Cannot configure " + VM.PluginsView.Audio_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
                                     "Notice",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Information);
@@ -203,19 +204,24 @@ namespace Ultra
                     OpenPluginWindow((Window)_window["RSPHLE"], "RSPHLE");
                     break;
 
-                // cxd4
+                // CXD4
                 case "mupen64plus-rsp-cxd4.dll":
-                    OpenPluginWindow((Window)_window["cxd4"], "cxd4");
+                    OpenPluginWindow((Window)_window["CXD4"], "CXD4");
                     break;
 
-                // cxd4 SSSE3
+                // CXD4 SSE2
+                case "mupen64plus-rsp-cxd4-sse2.dll":
+                    OpenPluginWindow((Window)_window["CXD4 SSE2"], "CXD4 SSE2");
+                    break;
+
+                // CXD4 SSSE3
                 case "mupen64plus-rsp-cxd4-ssse3.dll":
-                    OpenPluginWindow((Window)_window["cxd4 SSSE3"], "cxd4 SSSE3");
+                    OpenPluginWindow((Window)_window["CXD4 SSSE3"], "CXD4 SSSE3");
                     break;
 
                 // Unknown
                 default:
-                    MessageBox.Show("Cannot currently configure " + VM.PluginsView.RSP_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
+                    MessageBox.Show("Cannot configure " + VM.PluginsView.RSP_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
                                "Notice",
                                MessageBoxButton.OK,
                                MessageBoxImage.Information);
@@ -249,7 +255,7 @@ namespace Ultra
 
                 // Unknown
                 default:
-                    MessageBox.Show("Cannot currently configure " + VM.PluginsView.Input_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
+                    MessageBox.Show("Cannot configure " + VM.PluginsView.Input_SelectedItem + " at this time.\n\nPlease edit mupen64plus.cfg manually.",
                                     "Notice",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Information);
@@ -372,17 +378,17 @@ namespace Ultra
                 {
                     VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-hle.dll";
                 }
-                // cxd4
+                // CXD4
                 else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4.dll"))
                 {
                     VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4.dll";
                 }
-                // cxd4 SSE2
+                // CXD4 SSE2
                 else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4-sse2.dll"))
                 {
                     VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4-sse2.dll";
                 }
-                // cxd4 SSSE3
+                // CXD4 SSSE3
                 else if (rspPluginNames.Contains("mupen64plus-rsp-cxd4-ssse3.dll"))
                 {
                     VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-cxd4-ssse3.dll";
@@ -430,6 +436,29 @@ namespace Ultra
                                          actionsToWrite            // Actions to write
                                         );
         }
+
+        //public static void Plugin_Video_SelectionChanged()
+        //{
+        //    // Write to mupen64plus.cfg
+        //    List<Action> actionsToWrite = new List<Action>
+        //    {
+        //        new Action(() =>
+        //        {
+        //            if (!string.IsNullOrEmpty(VM.PluginsView.Video_SelectedItem))
+        //            {
+        //                // -------------------------
+        //                // [UI-Console]
+        //                // -------------------------
+        //                Configure.ConigFile.cfg.Write("UI-Console", "VideoPlugin", "\"" + Path.Combine(VM.PathsView.Config_Text, VM.PluginsView.Video_SelectedItem) + "\"");
+        //            }
+        //        }),
+        //    };
+
+        //    MupenCfg.WriteMupen64PlusCfg(VM.PathsView.Config_Text, // Directory: %AppData%\Mupen64Plus\
+        //                                 "mupen64plus.cfg",        // Filename
+        //                                 actionsToWrite            // Actions to write
+        //                                );
+        //}
 
         /// <summary>
         /// Plugin - Audio
