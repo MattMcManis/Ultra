@@ -108,9 +108,11 @@ namespace ViewModel
         // -------------------------
         // RSP HLE
         public static Plugins_RSP_RSPHLE_ViewModel Plugins_RSP_RSPHLE_View { get; set; } = new Plugins_RSP_RSPHLE_ViewModel();
-        // cxd4
+        // CXD4
         public static Plugins_RSP_cxd4_ViewModel Plugins_RSP_cxd4_View { get; set; } = new Plugins_RSP_cxd4_ViewModel();
-        // cxd4 SSSE3
+        // CXD4 SSE2
+        public static Plugins_RSP_cxd4SSE2_ViewModel Plugins_RSP_cxd4SSE2_View { get; set; } = new Plugins_RSP_cxd4SSE2_ViewModel();
+        // CXD4 SSSE3
         public static Plugins_RSP_cxd4SSSE3_ViewModel Plugins_RSP_cxd4SSSE3_View { get; set; } = new Plugins_RSP_cxd4SSSE3_ViewModel();
 
     }
