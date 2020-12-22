@@ -84,7 +84,7 @@ Requires
       [Screenshot 4](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Ultra%20Setup/04.png)
     
 4. **Play Game**
-    * In the `Games` tab, press the `Rebuild` arrow button &#10226; to generate the list of games.  
+    * In the `Games` tab, press the `Rebuild` &#10226; arrow button to generate the list of games.  
       [Screenshot 5](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Ultra%20Setup/06.png)  
 
     * Play a game with your selected settings.  
@@ -114,6 +114,7 @@ Requires
 - If `Windowed`, select `4:3` aspect ratio to avoid black bars on sides.
 - If `Fullscreen`, select your monitors actual aspect ratio, such as `16:9`, or else `4:3` will stretch to fit your screen.
 - If you want an extended view, select a `16:9` resolution, and in the Plugin select `Aspect Ratio Force 16:9` or `Widescreen`.
+- If game is slow, select a smaller resolution.
 
 &nbsp;
 
