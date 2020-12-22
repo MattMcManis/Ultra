@@ -57,7 +57,7 @@ namespace Ultra
             InitializeComponent();
 
             MinWidth = 650;
-            MinHeight = 505;
+            MinHeight = 525;
 
             // Load Control Values
             PluginCfgReader();
