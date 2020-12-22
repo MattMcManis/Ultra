@@ -209,7 +209,6 @@ namespace Ultra
             // -------------------------
             // Reset the Label Notice
             // -------------------------
-            //var task = Task.Run(new Action(CfgExitsCheck));
             Task.Run(() => CfgExitsCheck());
 
             // -------------------------
@@ -225,17 +224,6 @@ namespace Ultra
                                               windowHeight
                                             )
             );
-            //Thread t = new Thread(() =>
-            //    CfgDefaultsProcess(romBuffer,
-            //                       videoPlugin,
-            //                       audioPlugin,
-            //                       inputPlugin,
-            //                       rspPlugin,
-            //                       windowWidth,
-            //                       windowHeight
-            //                      )
-            //);
-            //t.Start();
         }
 
         /// <summary>
@@ -273,12 +261,12 @@ namespace Ultra
             // Note: Closing does not Dispose(), you must call it manually
             // Only dispose if exited from window
             // and not called from the Stop button
-            if (MainWindow.stopped == false)
+            if (MainWindow.stopper == false)
             {
                 Mupen64PlusAPI.api.Dispose();
             }
-            // Reset the Stopped trigger
-            MainWindow.stopped = false;
+            // Reset the Stopper trigger
+            MainWindow.stopper = false;
             // Reset API
             Mupen64PlusAPI.api = null;
             GC.Collect();
