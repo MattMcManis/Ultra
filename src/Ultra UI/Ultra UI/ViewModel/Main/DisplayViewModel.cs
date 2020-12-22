@@ -57,6 +57,12 @@ namespace ViewModel
         {
             //Display_View_SelectedItem = "Windowed";
             //Display_Resolution_SelectedItem = "960x720";
+            Display_Resolution_IsEnabled = true;
+            Display_View_IsEnabled = true;
+            Display_Vsync_IsEnabled = true;
+            Display_VideoExtension_IsEnabled = true;
+            Display_Screensaver_IsEnabled = false;
+            Display_OSD_IsEnabled = true;
         }
 
 
@@ -160,7 +166,7 @@ namespace ViewModel
         //}
 
         // Selected Index
-        private int _Display_Resolution_SelectedIndex { get; set; }
+        private int _Display_Resolution_SelectedIndex;
         public int Display_Resolution_SelectedIndex
         {
             get { return _Display_Resolution_SelectedIndex; }
@@ -177,7 +183,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Display_Resolution_SelectedItem { get; set; }
+        private string _Display_Resolution_SelectedItem;
         public string Display_Resolution_SelectedItem
         {
             get { return _Display_Resolution_SelectedItem; }
@@ -194,7 +200,7 @@ namespace ViewModel
         }
 
         // Controls Enable
-        private bool _Display_Resolution_IsEnabled = true;
+        private bool _Display_Resolution_IsEnabled;
         public bool Display_Resolution_IsEnabled
         {
             get { return _Display_Resolution_IsEnabled; }
@@ -230,7 +236,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Display_View_SelectedIndex { get; set; }
+        private int _Display_View_SelectedIndex;
         public int Display_View_SelectedIndex
         {
             get { return _Display_View_SelectedIndex; }
@@ -247,7 +253,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Display_View_SelectedItem { get; set; }
+        private string _Display_View_SelectedItem;
         public string Display_View_SelectedItem
         {
             get { return _Display_View_SelectedItem; }
@@ -264,7 +270,7 @@ namespace ViewModel
         }
 
         // Controls Enable
-        private bool _Display_View_IsEnabled = true;
+        private bool _Display_View_IsEnabled;
         public bool Display_View_IsEnabled
         {
             get { return _Display_View_IsEnabled; }
@@ -298,7 +304,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Display_Vsync_IsEnabled = true;
+        private bool _Display_Vsync_IsEnabled;
         public bool Display_Vsync_IsEnabled
         {
             get { return _Display_Vsync_IsEnabled; }
@@ -332,7 +338,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Display_VideoExtension_IsEnabled = true;
+        private bool _Display_VideoExtension_IsEnabled;
         public bool Display_VideoExtension_IsEnabled
         {
             get { return _Display_VideoExtension_IsEnabled; }
@@ -366,19 +372,19 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Emulator_OSD_IsEnabled = true;
-        public bool Emulator_OSD_IsEnabled
+        private bool _Display_OSD_IsEnabled;
+        public bool Display_OSD_IsEnabled
         {
-            get { return _Emulator_OSD_IsEnabled; }
+            get { return _Display_OSD_IsEnabled; }
             set
             {
-                if (_Emulator_OSD_IsEnabled == value)
+                if (_Display_OSD_IsEnabled == value)
                 {
                     return;
                 }
 
-                _Emulator_OSD_IsEnabled = value;
-                OnPropertyChanged("Emulator_OSD_IsEnabled");
+                _Display_OSD_IsEnabled = value;
+                OnPropertyChanged("Display_OSD_IsEnabled");
             }
         }
 
@@ -400,7 +406,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Display_Screensaver_IsEnabled = true;
+        private bool _Display_Screensaver_IsEnabled;
         public bool Display_Screensaver_IsEnabled
         {
             get { return _Display_Screensaver_IsEnabled; }

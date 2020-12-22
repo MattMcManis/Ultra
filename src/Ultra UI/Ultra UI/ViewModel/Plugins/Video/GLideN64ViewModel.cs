@@ -57,6 +57,24 @@ namespace ViewModel
         /// </summary>
         public Plugins_Video_GLideN64_ViewModel()
         {
+            //Window_Width = 650;
+            //Window_Height = 535;
+
+            Version_IsEnabled = false;
+            Version_Text = string.Empty;
+
+            BloomThresholdLevel_Text = string.Empty;
+            BlurAmount_Text = string.Empty;
+            BlurStrength_Text = string.Empty;
+            CacheSize_Text = string.Empty;
+            TxCacheSize_Text = string.Empty;
+            TxPath_Text = string.Empty;
+            TxCachePath_Text = string.Empty;
+            TxDumpPath_Text = string.Empty;
+            FontSize_Text = string.Empty;
+            FontColor_Text = string.Empty;
+            Save_Text = string.Empty;
+
             //// Load Fonts
             //installedFonts = Directory
             //                .EnumerateFiles(@"C:\Windows\Fonts\")
@@ -66,7 +84,46 @@ namespace ViewModel
             //Fonts_Items = new ObservableCollection<string>(installedFonts);
         }
 
-       
+        // -------------------------
+        // Window Width
+        // -------------------------
+        // Value
+        private double _Window_Width;
+        public double Window_Width
+        {
+            get { return _Window_Width; }
+            set
+            {
+                if (_Window_Width == value)
+                {
+                    return;
+                }
+
+                _Window_Width = value;
+                OnPropertyChanged("Window_Width");
+            }
+        }
+
+        // -------------------------
+        // Window Height
+        // -------------------------
+        // Value
+        private double _Window_Height;
+        public double Window_Height
+        {
+            get { return _Window_Height; }
+            set
+            {
+                if (_Window_Height == value)
+                {
+                    return;
+                }
+
+                _Window_Height = value;
+                OnPropertyChanged("Window_Height");
+            }
+        }
+
         // ----------------------------------------------------------------------------------------------------
         // ----------------------------------------------------------------------------------------------------
         /// <summary>
@@ -79,7 +136,7 @@ namespace ViewModel
         // Version
         // --------------------------------------------------
         // Text
-        private string _Version_Text = string.Empty;
+        private string _Version_Text;
         public string Version_Text
         {
             get { return _Version_Text; }
@@ -95,7 +152,7 @@ namespace ViewModel
             }
         }
         // Controls Enable
-        private bool _Version_IsEnabled = false;
+        private bool _Version_IsEnabled;
         public bool Version_IsEnabled
         {
             get { return _Version_IsEnabled; }
@@ -134,7 +191,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _MultiSampling_SelectedIndex { get; set; }
+        private int _MultiSampling_SelectedIndex;
         public int MultiSampling_SelectedIndex
         {
             get { return _MultiSampling_SelectedIndex; }
@@ -151,7 +208,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _MultiSampling_SelectedItem { get; set; }
+        private string _MultiSampling_SelectedItem;
         public string MultiSampling_SelectedItem
         {
             get { return _MultiSampling_SelectedItem; }
@@ -206,7 +263,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _AspectRatio_SelectedIndex { get; set; }
+        private int _AspectRatio_SelectedIndex;
         public int AspectRatio_SelectedIndex
         {
             get { return _AspectRatio_SelectedIndex; }
@@ -223,7 +280,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _AspectRatio_SelectedItem { get; set; }
+        private string _AspectRatio_SelectedItem;
         public string AspectRatio_SelectedItem
         {
             get { return _AspectRatio_SelectedItem; }
@@ -276,7 +333,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _BilinearMode_SelectedIndex { get; set; }
+        private int _BilinearMode_SelectedIndex;
         public int BilinearMode_SelectedIndex
         {
             get { return _BilinearMode_SelectedIndex; }
@@ -293,7 +350,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _BilinearMode_SelectedItem { get; set; }
+        private string _BilinearMode_SelectedItem;
         public string BilinearMode_SelectedItem
         {
             get { return _BilinearMode_SelectedItem; }
@@ -351,7 +408,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _MaxAnisotropy_SelectedIndex { get; set; }
+        private int _MaxAnisotropy_SelectedIndex;
         public int MaxAnisotropy_SelectedIndex
         {
             get { return _MaxAnisotropy_SelectedIndex; }
@@ -368,7 +425,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _MaxAnisotropy_SelectedItem { get; set; }
+        private string _MaxAnisotropy_SelectedItem;
         public string MaxAnisotropy_SelectedItem
         {
             get { return _MaxAnisotropy_SelectedItem; }
@@ -748,7 +805,7 @@ namespace ViewModel
         // BloomThresholdLevel
         // --------------------------------------------------
         // Text
-        private string _BloomThresholdLevel_Text = string.Empty;
+        private string _BloomThresholdLevel_Text;
         public string BloomThresholdLevel_Text
         {
             get { return _BloomThresholdLevel_Text; }
@@ -801,7 +858,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _BloomBlendMode_SelectedIndex { get; set; }
+        private int _BloomBlendMode_SelectedIndex;
         public int BloomBlendMode_SelectedIndex
         {
             get { return _BloomBlendMode_SelectedIndex; }
@@ -818,7 +875,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _BloomBlendMode_SelectedItem { get; set; }
+        private string _BloomBlendMode_SelectedItem;
         public string BloomBlendMode_SelectedItem
         {
             get { return _BloomBlendMode_SelectedItem; }
@@ -855,7 +912,7 @@ namespace ViewModel
         // Blur Amount
         // --------------------------------------------------
         // Text
-        private string _BlurAmount_Text = string.Empty;
+        private string _BlurAmount_Text;
         public string BlurAmount_Text
         {
             get { return _BlurAmount_Text; }
@@ -891,7 +948,7 @@ namespace ViewModel
         // BlurStrength
         // --------------------------------------------------
         // Text
-        private string _BlurStrength_Text = string.Empty;
+        private string _BlurStrength_Text;
         public string BlurStrength_Text
         {
             get { return _BlurStrength_Text; }
@@ -1183,7 +1240,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _EnableCopyColorToRDRAM_SelectedIndex { get; set; }
+        private int _EnableCopyColorToRDRAM_SelectedIndex;
         public int EnableCopyColorToRDRAM_SelectedIndex
         {
             get { return _EnableCopyColorToRDRAM_SelectedIndex; }
@@ -1200,7 +1257,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _EnableCopyColorToRDRAM_SelectedItem { get; set; }
+        private string _EnableCopyColorToRDRAM_SelectedItem;
         public string EnableCopyColorToRDRAM_SelectedItem
         {
             get { return _EnableCopyColorToRDRAM_SelectedItem; }
@@ -1284,7 +1341,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _EnableCopyDepthToRDRAM_SelectedIndex { get; set; }
+        private int _EnableCopyDepthToRDRAM_SelectedIndex;
         public int EnableCopyDepthToRDRAM_SelectedIndex
         {
             get { return _EnableCopyDepthToRDRAM_SelectedIndex; }
@@ -1301,7 +1358,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _EnableCopyDepthToRDRAM_SelectedItem { get; set; }
+        private string _EnableCopyDepthToRDRAM_SelectedItem;
         public string EnableCopyDepthToRDRAM_SelectedItem
         {
             get { return _EnableCopyDepthToRDRAM_SelectedItem; }
@@ -1470,7 +1527,7 @@ namespace ViewModel
         // CacheSize
         // --------------------------------------------------
         // Text
-        private string _CacheSize_Text = string.Empty;
+        private string _CacheSize_Text;
         public string CacheSize_Text
         {
             get { return _CacheSize_Text; }
@@ -1506,7 +1563,7 @@ namespace ViewModel
         // TxCacheSize
         // --------------------------------------------------
         // Text
-        private string _TxCacheSize_Text = string.Empty;
+        private string _TxCacheSize_Text;
         public string TxCacheSize_Text
         {
             get { return _TxCacheSize_Text; }
@@ -1563,7 +1620,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _TxFilterMode_SelectedIndex { get; set; }
+        private int _TxFilterMode_SelectedIndex;
         public int TxFilterMode_SelectedIndex
         {
             get { return _TxFilterMode_SelectedIndex; }
@@ -1580,7 +1637,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _TxFilterMode_SelectedItem { get; set; }
+        private string _TxFilterMode_SelectedItem;
         public string TxFilterMode_SelectedItem
         {
             get { return _TxFilterMode_SelectedItem; }
@@ -1645,7 +1702,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _TxEnhancementMode_SelectedIndex { get; set; }
+        private int _TxEnhancementMode_SelectedIndex;
         public int TxEnhancementMode_SelectedIndex
         {
             get { return _TxEnhancementMode_SelectedIndex; }
@@ -1662,7 +1719,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _TxEnhancementMode_SelectedItem { get; set; }
+        private string _TxEnhancementMode_SelectedItem;
         public string TxEnhancementMode_SelectedItem
         {
             get { return _TxEnhancementMode_SelectedItem; }
@@ -2005,7 +2062,7 @@ namespace ViewModel
         // TxPath
         // --------------------------------------------------
         // Text
-        private string _TxPath_Text = string.Empty;
+        private string _TxPath_Text;
         public string TxPath_Text
         {
             get { return _TxPath_Text; }
@@ -2041,7 +2098,7 @@ namespace ViewModel
         // TxCachePath
         // --------------------------------------------------
         // Text
-        private string _TxCachePath_Text = string.Empty;
+        private string _TxCachePath_Text;
         public string TxCachePath_Text
         {
             get { return _TxCachePath_Text; }
@@ -2077,7 +2134,7 @@ namespace ViewModel
         // TxDumpPath
         // --------------------------------------------------
         // Text
-        private string _TxDumpPath_Text = string.Empty;
+        private string _TxDumpPath_Text;
         public string TxDumpPath_Text
         {
             get { return _TxDumpPath_Text; }
@@ -2162,7 +2219,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Fonts_SelectedIndex { get; set; }
+        private int _Fonts_SelectedIndex;
         public int Fonts_SelectedIndex
         {
             get { return _Fonts_SelectedIndex; }
@@ -2179,7 +2236,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Fonts_SelectedItem { get; set; }
+        private string _Fonts_SelectedItem;
         public string Fonts_SelectedItem
         {
             get { return _Fonts_SelectedItem; }
@@ -2216,7 +2273,7 @@ namespace ViewModel
         // FontSize
         // --------------------------------------------------
         // Text
-        private string _FontSize_Text = string.Empty;
+        private string _FontSize_Text;
         public string FontSize_Text
         {
             get { return _FontSize_Text; }
@@ -2252,7 +2309,7 @@ namespace ViewModel
         // FontColor
         // --------------------------------------------------
         // Text
-        private string _FontColor_Text = string.Empty;
+        private string _FontColor_Text;
         public string FontColor_Text
         {
             get { return _FontColor_Text; }
@@ -2288,7 +2345,7 @@ namespace ViewModel
         // Save
         // --------------------------------------------------
         // Text
-        private string _Save_Text = string.Empty;
+        private string _Save_Text;
         public string Save_Text
         {
             get { return _Save_Text; }

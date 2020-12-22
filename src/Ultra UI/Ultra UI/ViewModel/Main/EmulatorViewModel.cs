@@ -55,7 +55,17 @@ namespace ViewModel
         /// </summary>
         public EmulatorViewModel()
         {
+            //Emulator_PureInterpreter_IsEnabled = false;
+            //Emulator_CachedInterpreter_IsEnabled = false;
+            //Emulator_DynamicRecompiler_IsEnabled = false;
 
+            Emulator_DisableSpecRecomp_IsEnabled = true;
+            Emulator_RandomizeInterrupt_IsEnabled = true;
+            Emulator_NoCompiledJump_IsEnabled = false;
+            Emulator_DisableExtraMemory_IsEnabled = false;
+            Emulator_DelaySI_IsEnabled = true;
+            Emulator_Cycles_IsEnabled = true;
+            Cheats_ListView_IsEnabled = true;
         }
 
         // -------------------------
@@ -79,7 +89,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _CPU_SelectedIndex { get; set; }
+        private int _CPU_SelectedIndex;
         public int CPU_SelectedIndex
         {
             get { return _CPU_SelectedIndex; }
@@ -96,7 +106,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _CPU_SelectedItem { get; set; }
+        private string _CPU_SelectedItem;
         public string CPU_SelectedItem
         {
             get { return _CPU_SelectedItem; }
@@ -133,103 +143,103 @@ namespace ViewModel
         // Pure Interpreter
         // -------------------------
         // Checked
-        private bool _Emulator_PureInterpreter_IsChecked;
-        public bool Emulator_PureInterpreter_IsChecked
-        {
-            get { return _Emulator_PureInterpreter_IsChecked; }
-            set
-            {
-                if (_Emulator_PureInterpreter_IsChecked != value)
-                {
-                    _Emulator_PureInterpreter_IsChecked = value;
-                    OnPropertyChanged("Emulator_PureInterpreter_IsChecked");
-                }
-            }
-        }
-        // Enabled
-        private bool _Emulator_PureInterpreter_IsEnabled = false;
-        public bool Emulator_PureInterpreter_IsEnabled
-        {
-            get { return _Emulator_PureInterpreter_IsEnabled; }
-            set
-            {
-                if (_Emulator_PureInterpreter_IsEnabled == value)
-                {
-                    return;
-                }
+        //private bool _Emulator_PureInterpreter_IsChecked;
+        //public bool Emulator_PureInterpreter_IsChecked
+        //{
+        //    get { return _Emulator_PureInterpreter_IsChecked; }
+        //    set
+        //    {
+        //        if (_Emulator_PureInterpreter_IsChecked != value)
+        //        {
+        //            _Emulator_PureInterpreter_IsChecked = value;
+        //            OnPropertyChanged("Emulator_PureInterpreter_IsChecked");
+        //        }
+        //    }
+        //}
+        //// Enabled
+        //private bool _Emulator_PureInterpreter_IsEnabled;
+        //public bool Emulator_PureInterpreter_IsEnabled
+        //{
+        //    get { return _Emulator_PureInterpreter_IsEnabled; }
+        //    set
+        //    {
+        //        if (_Emulator_PureInterpreter_IsEnabled == value)
+        //        {
+        //            return;
+        //        }
 
-                _Emulator_PureInterpreter_IsEnabled = value;
-                OnPropertyChanged("Emulator_PureInterpreter_IsEnabled");
-            }
-        }
+        //        _Emulator_PureInterpreter_IsEnabled = value;
+        //        OnPropertyChanged("Emulator_PureInterpreter_IsEnabled");
+        //    }
+        //}
 
         // -------------------------
         // Cached Interpreter
         // -------------------------
         // Checked
-        private bool _Emulator_CachedInterpreter_IsChecked;
-        public bool Emulator_CachedInterpreter_IsChecked
-        {
-            get { return _Emulator_CachedInterpreter_IsChecked; }
-            set
-            {
-                if (_Emulator_CachedInterpreter_IsChecked != value)
-                {
-                    _Emulator_CachedInterpreter_IsChecked = value;
-                    OnPropertyChanged("Emulator_CachedInterpreter_IsChecked");
-                }
-            }
-        }
-        // Enabled
-        private bool _Emulator_CachedInterpreter_IsEnabled = false;
-        public bool Emulator_CachedInterpreter_IsEnabled
-        {
-            get { return _Emulator_CachedInterpreter_IsEnabled; }
-            set
-            {
-                if (_Emulator_CachedInterpreter_IsEnabled == value)
-                {
-                    return;
-                }
+        //private bool _Emulator_CachedInterpreter_IsChecked;
+        //public bool Emulator_CachedInterpreter_IsChecked
+        //{
+        //    get { return _Emulator_CachedInterpreter_IsChecked; }
+        //    set
+        //    {
+        //        if (_Emulator_CachedInterpreter_IsChecked != value)
+        //        {
+        //            _Emulator_CachedInterpreter_IsChecked = value;
+        //            OnPropertyChanged("Emulator_CachedInterpreter_IsChecked");
+        //        }
+        //    }
+        //}
+        //// Enabled
+        //private bool _Emulator_CachedInterpreter_IsEnabled;
+        //public bool Emulator_CachedInterpreter_IsEnabled
+        //{
+        //    get { return _Emulator_CachedInterpreter_IsEnabled; }
+        //    set
+        //    {
+        //        if (_Emulator_CachedInterpreter_IsEnabled == value)
+        //        {
+        //            return;
+        //        }
 
-                _Emulator_CachedInterpreter_IsEnabled = value;
-                OnPropertyChanged("Emulator_CachedInterpreter_IsEnabled");
-            }
-        }
+        //        _Emulator_CachedInterpreter_IsEnabled = value;
+        //        OnPropertyChanged("Emulator_CachedInterpreter_IsEnabled");
+        //    }
+        //}
 
         // -------------------------
         // Dynamic Recompiler
         // -------------------------
         // Checked
-        private bool _Emulator_DynamicRecompiler_IsChecked;
-        public bool Emulator_DynamicRecompiler_IsChecked
-        {
-            get { return _Emulator_DynamicRecompiler_IsChecked; }
-            set
-            {
-                if (_Emulator_DynamicRecompiler_IsChecked != value)
-                {
-                    _Emulator_DynamicRecompiler_IsChecked = value;
-                    OnPropertyChanged("Emulator_DynamicRecompiler_IsChecked");
-                }
-            }
-        }
-        // Enabled
-        private bool _Emulator_DynamicRecompiler_IsEnabled = false;
-        public bool Emulator_DynamicRecompiler_IsEnabled
-        {
-            get { return _Emulator_DynamicRecompiler_IsEnabled; }
-            set
-            {
-                if (_Emulator_DynamicRecompiler_IsEnabled == value)
-                {
-                    return;
-                }
+        //private bool _Emulator_DynamicRecompiler_IsChecked;
+        //public bool Emulator_DynamicRecompiler_IsChecked
+        //{
+        //    get { return _Emulator_DynamicRecompiler_IsChecked; }
+        //    set
+        //    {
+        //        if (_Emulator_DynamicRecompiler_IsChecked != value)
+        //        {
+        //            _Emulator_DynamicRecompiler_IsChecked = value;
+        //            OnPropertyChanged("Emulator_DynamicRecompiler_IsChecked");
+        //        }
+        //    }
+        //}
+        //// Enabled
+        //private bool _Emulator_DynamicRecompiler_IsEnabled;
+        //public bool Emulator_DynamicRecompiler_IsEnabled
+        //{
+        //    get { return _Emulator_DynamicRecompiler_IsEnabled; }
+        //    set
+        //    {
+        //        if (_Emulator_DynamicRecompiler_IsEnabled == value)
+        //        {
+        //            return;
+        //        }
 
-                _Emulator_DynamicRecompiler_IsEnabled = value;
-                OnPropertyChanged("Emulator_DynamicRecompiler_IsEnabled");
-            }
-        }
+        //        _Emulator_DynamicRecompiler_IsEnabled = value;
+        //        OnPropertyChanged("Emulator_DynamicRecompiler_IsEnabled");
+        //    }
+        //}
 
         // -------------------------
         // DisableSpecRecomp
@@ -249,7 +259,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Emulator_DisableSpecRecomp_IsEnabled = true;
+        private bool _Emulator_DisableSpecRecomp_IsEnabled;
         public bool Emulator_DisableSpecRecomp_IsEnabled
         {
             get { return _Emulator_DisableSpecRecomp_IsEnabled; }
@@ -283,7 +293,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Emulator_RandomizeInterrupt_IsEnabled = true;
+        private bool _Emulator_RandomizeInterrupt_IsEnabled;
         public bool Emulator_RandomizeInterrupt_IsEnabled
         {
             get { return _Emulator_RandomizeInterrupt_IsEnabled; }
@@ -317,7 +327,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Emulator_NoCompiledJump_IsEnabled = false;
+        private bool _Emulator_NoCompiledJump_IsEnabled;
         public bool Emulator_NoCompiledJump_IsEnabled
         {
             get { return _Emulator_NoCompiledJump_IsEnabled; }
@@ -351,7 +361,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Emulator_DisableExtraMemory_IsEnabled = false;
+        private bool _Emulator_DisableExtraMemory_IsEnabled;
         public bool Emulator_DisableExtraMemory_IsEnabled
         {
             get { return _Emulator_DisableExtraMemory_IsEnabled; }
@@ -385,7 +395,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _Emulator_DelaySI_IsEnabled = true;
+        private bool _Emulator_DelaySI_IsEnabled;
         public bool Emulator_DelaySI_IsEnabled
         {
             get { return _Emulator_DelaySI_IsEnabled; }
@@ -425,7 +435,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Emulator_Cycles_SelectedIndex { get; set; }
+        private int _Emulator_Cycles_SelectedIndex;
         public int Emulator_Cycles_SelectedIndex
         {
             get { return _Emulator_Cycles_SelectedIndex; }
@@ -442,7 +452,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Emulator_Cycles_SelectedItem { get; set; }
+        private string _Emulator_Cycles_SelectedItem;
         public string Emulator_Cycles_SelectedItem
         {
             get { return _Emulator_Cycles_SelectedItem; }
@@ -459,7 +469,7 @@ namespace ViewModel
         }
 
         // Controls Enable
-        private bool _Emulator_Cycles_IsEnabled = true;
+        private bool _Emulator_Cycles_IsEnabled;
         public bool Emulator_Cycles_IsEnabled
         {
             get { return _Emulator_Cycles_IsEnabled; }
@@ -515,7 +525,7 @@ namespace ViewModel
             }
         }
         // Selected Index
-        private int _Cheats_ListView_SelectedIndex { get; set; }
+        private int _Cheats_ListView_SelectedIndex;
         public int Cheats_ListView_SelectedIndex
         {
             get { return _Cheats_ListView_SelectedIndex; }
@@ -530,7 +540,7 @@ namespace ViewModel
                 OnPropertyChanged("Cheats_ListView_SelectedIndex");
             }
         }
-        private double _Cheats_ListView_Opacity { get; set; }
+        private double _Cheats_ListView_Opacity;
         public double Cheats_ListView_Opacity
         {
             get { return _Cheats_ListView_Opacity; }
@@ -546,7 +556,7 @@ namespace ViewModel
             }
         }
         // Controls Enable
-        public bool _Cheats_ListView_IsEnabled = true;
+        public bool _Cheats_ListView_IsEnabled;
         public bool Cheats_ListView_IsEnabled
         {
             get { return _Cheats_ListView_IsEnabled; }

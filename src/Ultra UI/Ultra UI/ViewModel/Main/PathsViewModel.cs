@@ -54,7 +54,11 @@ namespace ViewModel
         /// </summary>
         public PathsViewModel()
         {
-            
+            Mupen_Text = string.Empty;
+            Plugins_Text = string.Empty;
+            Data_Text = string.Empty;
+            Config_Text = string.Empty;
+            ROMs_Text = string.Empty;
         }
 
 
@@ -62,7 +66,7 @@ namespace ViewModel
         // Mupen64Plus Folder - TextBox
         // --------------------------------------------------
         // Text
-        private string _Mupen_Text = string.Empty;
+        private string _Mupen_Text;
         public string Mupen_Text
         {
             get { return _Mupen_Text; }
@@ -82,7 +86,7 @@ namespace ViewModel
         // Path Config - TextBox
         // --------------------------------------------------
         // Text
-        private string _Config_Text = string.Empty;
+        private string _Config_Text;
         public string Config_Text
         {
             get { return _Config_Text; }
@@ -102,7 +106,7 @@ namespace ViewModel
         // Path Plugins - TextBox
         // --------------------------------------------------
         // Text
-        private string _Plugins_Text = string.Empty;
+        private string _Plugins_Text;
         public string Plugins_Text
         {
             get { return _Plugins_Text; }
@@ -122,7 +126,7 @@ namespace ViewModel
         // Path Data - TextBox
         // --------------------------------------------------
         // Text
-        private string _Data_Text = string.Empty;
+        private string _Data_Text;
         public string Data_Text
         {
             get { return _Data_Text; }
@@ -142,7 +146,7 @@ namespace ViewModel
         // Path ROMs - TextBox
         // --------------------------------------------------
         // Text
-        private string _ROMs_Text = string.Empty;
+        private string _ROMs_Text;
         public string ROMs_Text
         {
             get { return _ROMs_Text; }

@@ -1121,7 +1121,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Controller_SelectedIndex { get; set; }
+        private int _Controller_SelectedIndex;
         public int Controller_SelectedIndex
         {
             get { return _Controller_SelectedIndex; }
@@ -1138,7 +1138,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Controller_SelectedItem { get; set; }
+        private string _Controller_SelectedItem;
         public string Controller_SelectedItem
         {
             get { return _Controller_SelectedItem; }
@@ -1262,7 +1262,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Plugin_SelectedIndex { get; set; }
+        private int _Plugin_SelectedIndex;
         public int Plugin_SelectedIndex
         {
             get { return _Plugin_SelectedIndex; }
@@ -1279,7 +1279,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Plugin_SelectedItem { get; set; }
+        private string _Plugin_SelectedItem;
         public string Plugin_SelectedItem
         {
             get { return _Plugin_SelectedItem; }
@@ -1332,7 +1332,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Device_SelectedIndex { get; set; }
+        private int _Device_SelectedIndex;
         public int Device_SelectedIndex
         {
             get { return _Device_SelectedIndex; }
@@ -1349,7 +1349,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Device_SelectedItem { get; set; }
+        private string _Device_SelectedItem;
         public string Device_SelectedItem
         {
             get { return _Device_SelectedItem; }
@@ -1402,7 +1402,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Mode_SelectedIndex { get; set; }
+        private int _Mode_SelectedIndex;
         public int Mode_SelectedIndex
         {
             get { return _Mode_SelectedIndex; }
@@ -1419,7 +1419,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Mode_SelectedItem { get; set; }
+        private string _Mode_SelectedItem;
         public string Mode_SelectedItem
         {
             get { return _Mode_SelectedItem; }

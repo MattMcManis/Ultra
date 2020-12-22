@@ -156,7 +156,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _NumWorkers_SelectedIndex { get; set; }
+        private int _NumWorkers_SelectedIndex;
         public int NumWorkers_SelectedIndex
         {
             get { return _NumWorkers_SelectedIndex; }
@@ -173,7 +173,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _NumWorkers_SelectedItem { get; set; }
+        private string _NumWorkers_SelectedItem;
         public string NumWorkers_SelectedItem
         {
             get { return _NumWorkers_SelectedItem; }
@@ -228,7 +228,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _ViMode_SelectedIndex { get; set; }
+        private int _ViMode_SelectedIndex;
         public int ViMode_SelectedIndex
         {
             get { return _ViMode_SelectedIndex; }
@@ -245,7 +245,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _ViMode_SelectedItem { get; set; }
+        private string _ViMode_SelectedItem;
         public string ViMode_SelectedItem
         {
             get { return _ViMode_SelectedItem; }
@@ -298,7 +298,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _ViInterpolation_SelectedIndex { get; set; }
+        private int _ViInterpolation_SelectedIndex;
         public int ViInterpolation_SelectedIndex
         {
             get { return _ViInterpolation_SelectedIndex; }
@@ -315,7 +315,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _ViInterpolation_SelectedItem { get; set; }
+        private string _ViInterpolation_SelectedItem;
         public string ViInterpolation_SelectedItem
         {
             get { return _ViInterpolation_SelectedItem; }
@@ -438,7 +438,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _DpCompat_SelectedIndex { get; set; }
+        private int _DpCompat_SelectedIndex;
         public int DpCompat_SelectedIndex
         {
             get { return _DpCompat_SelectedIndex; }
@@ -455,7 +455,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _DpCompat_SelectedItem { get; set; }
+        private string _DpCompat_SelectedItem;
         public string DpCompat_SelectedItem
         {
             get { return _DpCompat_SelectedItem; }

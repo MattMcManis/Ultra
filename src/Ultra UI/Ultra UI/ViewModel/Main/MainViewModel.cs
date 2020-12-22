@@ -60,8 +60,23 @@ namespace ViewModel
             Window_Height = 500;
 
             // Defaults
+            Info_Text = string.Empty;
+            Debug_Text = string.Empty;
+            CfgErrorNotice_Text = string.Empty;
+
             UpdateAutoCheck_IsChecked = true;
+            UpdateAutoCheck_IsEnabled = true;
+
             StateSlot0_IsChecked = true;
+            StateSlot1_IsChecked = false;
+            StateSlot2_IsChecked = false;
+            StateSlot3_IsChecked = false;
+            StateSlot4_IsChecked = false;
+            StateSlot5_IsChecked = false;
+            StateSlot6_IsChecked = false;
+            StateSlot7_IsChecked = false;
+            StateSlot8_IsChecked = false;
+            StateSlot9_IsChecked = false;
         }
 
 
@@ -158,7 +173,7 @@ namespace ViewModel
         // Window Maximized
         // -------------------------
         // Value
-        //private bool _Window_IsMaximized = true;
+        //private bool _Window_IsMaximized;
         //public bool Window_IsMaximized
         //{
         //    get { return _Window_IsMaximized; }
@@ -253,24 +268,24 @@ namespace ViewModel
         }
 
         // Text
-        private string _UpdateAutoCheck_Text = "On";
-        public string UpdateAutoCheck_Text
-        {
-            get { return _UpdateAutoCheck_Text; }
-            set
-            {
-                if (_UpdateAutoCheck_Text == value)
-                {
-                    return;
-                }
+        //private string _UpdateAutoCheck_Text;
+        //public string UpdateAutoCheck_Text
+        //{
+        //    get { return _UpdateAutoCheck_Text; }
+        //    set
+        //    {
+        //        if (_UpdateAutoCheck_Text == value)
+        //        {
+        //            return;
+        //        }
 
-                _UpdateAutoCheck_Text = value;
-                OnPropertyChanged("UpdateAutoCheck_Text");
-            }
-        }
+        //        _UpdateAutoCheck_Text = value;
+        //        OnPropertyChanged("UpdateAutoCheck_Text");
+        //    }
+        //}
 
         // Enabled
-        private bool _UpdateAutoCheck_IsEnabled = true;
+        private bool _UpdateAutoCheck_IsEnabled;
         public bool UpdateAutoCheck_IsEnabled
         {
             get { return _UpdateAutoCheck_IsEnabled; }
@@ -291,7 +306,7 @@ namespace ViewModel
         // Info
         // --------------------------------------------------
         // Text
-        private string _Info_Text = string.Empty;
+        private string _Info_Text;
         public string Info_Text
         {
             get { return _Info_Text; }
@@ -311,7 +326,7 @@ namespace ViewModel
         // Debug
         // --------------------------------------------------
         // Text
-        private string _Debug_Text = string.Empty;
+        private string _Debug_Text;
         public string Debug_Text
         {
             get { return _Debug_Text; }
@@ -331,7 +346,7 @@ namespace ViewModel
         // Cfg Missing Notice
         // --------------------------------------------------
         // Text
-        private string _CfgErrorNotice_Text = string.Empty;
+        private string _CfgErrorNotice_Text;
         public string CfgErrorNotice_Text
         {
             get { return _CfgErrorNotice_Text; }
@@ -384,7 +399,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Games_SelectedIndex { get; set; }
+        private int _Games_SelectedIndex;
         public int Games_SelectedIndex
         {
             get { return _Games_SelectedIndex; }
@@ -401,7 +416,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Games_SelectedItem { get; set; }
+        private string _Games_SelectedItem;
         public string Games_SelectedItem
         {
             get { return _Games_SelectedItem; }
@@ -454,7 +469,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot0_IsEnabled = true;
+        private bool _StateSlot0_IsEnabled;
         public bool StateSlot0_IsEnabled
         {
             get { return _StateSlot0_IsEnabled; }
@@ -488,7 +503,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot1_IsEnabled = true;
+        private bool _StateSlot1_IsEnabled;
         public bool StateSlot1_IsEnabled
         {
             get { return _StateSlot1_IsEnabled; }
@@ -522,7 +537,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot2_IsEnabled = true;
+        private bool _StateSlot2_IsEnabled;
         public bool StateSlot2_IsEnabled
         {
             get { return _StateSlot2_IsEnabled; }
@@ -556,7 +571,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot3_IsEnabled = true;
+        private bool _StateSlot3_IsEnabled;
         public bool StateSlot3_IsEnabled
         {
             get { return _StateSlot3_IsEnabled; }
@@ -590,7 +605,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot4_IsEnabled = true;
+        private bool _StateSlot4_IsEnabled;
         public bool StateSlot4_IsEnabled
         {
             get { return _StateSlot4_IsEnabled; }
@@ -624,7 +639,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot5_IsEnabled = true;
+        private bool _StateSlot5_IsEnabled;
         public bool StateSlot5_IsEnabled
         {
             get { return _StateSlot5_IsEnabled; }
@@ -658,7 +673,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot6_IsEnabled = true;
+        private bool _StateSlot6_IsEnabled;
         public bool StateSlot6_IsEnabled
         {
             get { return _StateSlot6_IsEnabled; }
@@ -692,7 +707,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot7_IsEnabled = true;
+        private bool _StateSlot7_IsEnabled;
         public bool StateSlot7_IsEnabled
         {
             get { return _StateSlot7_IsEnabled; }
@@ -726,7 +741,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot8_IsEnabled = true;
+        private bool _StateSlot8_IsEnabled;
         public bool StateSlot8_IsEnabled
         {
             get { return _StateSlot8_IsEnabled; }
@@ -760,7 +775,7 @@ namespace ViewModel
             }
         }
         // Enabled
-        private bool _StateSlot9_IsEnabled = true;
+        private bool _StateSlot9_IsEnabled;
         public bool StateSlot9_IsEnabled
         {
             get { return _StateSlot9_IsEnabled; }

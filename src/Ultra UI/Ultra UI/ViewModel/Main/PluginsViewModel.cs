@@ -35,6 +35,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Ultra;
 
 namespace ViewModel
 {
@@ -57,6 +58,12 @@ namespace ViewModel
         public PluginsViewModel()
         {
             //Video_SelectedIndex = 0;
+            Video_IsEnabled = true;
+            Audio_IsEnabled = true;
+            Input_IsEnabled = true;
+            RSP_IsEnabled = true;
+
+            PluginsErrorNotice_Text = string.Empty;
         }
 
         // --------------------------------------------------
@@ -114,7 +121,7 @@ namespace ViewModel
         //}
 
         // Selected Index
-        private int _Video_SelectedIndex { get; set; }
+        private int _Video_SelectedIndex;
         public int Video_SelectedIndex
         {
             get { return _Video_SelectedIndex; }
@@ -127,11 +134,13 @@ namespace ViewModel
 
                 _Video_SelectedIndex = value;
                 OnPropertyChanged("Video_SelectedIndex");
+
+                //MainWindow.Plugin_Video_SelectionChanged();
             }
         }
 
         // Selected Item
-        private string _Video_SelectedItem { get; set; }
+        private string _Video_SelectedItem;
         public string Video_SelectedItem 
         {
             get { return _Video_SelectedItem; }
@@ -148,7 +157,7 @@ namespace ViewModel
         }
 
         // Controls Enable
-        private bool _Video_IsEnabled = true;
+        private bool _Video_IsEnabled;
         public bool Video_IsEnabled
         {
             get { return _Video_IsEnabled; }
@@ -199,7 +208,7 @@ namespace ViewModel
         //}
 
         // Selected Index
-        private int _Audio_SelectedIndex { get; set; }
+        private int _Audio_SelectedIndex;
         public int Audio_SelectedIndex
         {
             get { return _Audio_SelectedIndex; }
@@ -216,7 +225,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Audio_SelectedItem { get; set; }
+        private string _Audio_SelectedItem;
         public string Audio_SelectedItem
         {
             get { return _Audio_SelectedItem; }
@@ -233,7 +242,7 @@ namespace ViewModel
         }
 
         // Controls Enable
-        private bool _Audio_IsEnabled = true;
+        private bool _Audio_IsEnabled;
         public bool Audio_IsEnabled
         {
             get { return _Audio_IsEnabled; }
@@ -284,7 +293,7 @@ namespace ViewModel
         //}
 
         // Selected Index
-        private int _Input_SelectedIndex { get; set; }
+        private int _Input_SelectedIndex;
         public int Input_SelectedIndex
         {
             get { return _Input_SelectedIndex; }
@@ -301,7 +310,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Input_SelectedItem { get; set; }
+        private string _Input_SelectedItem;
         public string Input_SelectedItem
         {
             get { return _Input_SelectedItem; }
@@ -318,7 +327,7 @@ namespace ViewModel
         }
 
         // Controls Enable
-        private bool _Input_IsEnabled = true;
+        private bool _Input_IsEnabled;
         public bool Input_IsEnabled
         {
             get { return _Input_IsEnabled; }
@@ -369,7 +378,7 @@ namespace ViewModel
         //}
 
         // Selected Index
-        private int _RSP_SelectedIndex { get; set; }
+        private int _RSP_SelectedIndex;
         public int RSP_SelectedIndex
         {
             get { return _RSP_SelectedIndex; }
@@ -386,7 +395,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _RSP_SelectedItem { get; set; }
+        private string _RSP_SelectedItem;
         public string RSP_SelectedItem
         {
             get { return _RSP_SelectedItem; }
@@ -403,7 +412,7 @@ namespace ViewModel
         }
 
         // Controls Enable
-        private bool _RSP_IsEnabled = true;
+        private bool _RSP_IsEnabled;
         public bool RSP_IsEnabled
         {
             get { return _RSP_IsEnabled; }

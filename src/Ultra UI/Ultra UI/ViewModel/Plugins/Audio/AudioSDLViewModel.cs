@@ -307,7 +307,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _Resample_SelectedIndex { get; set; }
+        private int _Resample_SelectedIndex;
         public int Resample_SelectedIndex
         {
             get { return _Resample_SelectedIndex; }
@@ -324,7 +324,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _Resample_SelectedItem { get; set; }
+        private string _Resample_SelectedItem;
         public string Resample_SelectedItem
         {
             get { return _Resample_SelectedItem; }
@@ -377,7 +377,7 @@ namespace ViewModel
         }
 
         // Selected Index
-        private int _VolumeControlType_SelectedIndex { get; set; }
+        private int _VolumeControlType_SelectedIndex;
         public int VolumeControlType_SelectedIndex
         {
             get { return _VolumeControlType_SelectedIndex; }
@@ -394,7 +394,7 @@ namespace ViewModel
         }
 
         // Selected Item
-        private string _VolumeControlType_SelectedItem { get; set; }
+        private string _VolumeControlType_SelectedItem;
         public string VolumeControlType_SelectedItem
         {
             get { return _VolumeControlType_SelectedItem; }
