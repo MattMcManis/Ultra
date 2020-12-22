@@ -759,8 +759,8 @@
                Style="{DynamicResource LabelStyle}"
                DataContext="{Binding Plugins_Input_InputSDL_View}"
                Content="{Binding Save_Text}" 
-               Margin="0,12,95,0"
-               VerticalAlignment="Top" 
+               Margin="0,0,97,47"
+               VerticalAlignment="Bottom" 
                HorizontalAlignment="Right"
                HorizontalContentAlignment="Right"
                Width="50"/>
