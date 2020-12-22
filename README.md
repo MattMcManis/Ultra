@@ -28,7 +28,7 @@ API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 * Game Launcher
 * Navigate options quickly with tabs
 * Edit Mupen64Plus Config
-* Plugin Configuration Menus for `GLideN64`, `Angrylion Plus`, `Audio SDL`, `Input SDL`, `RSP HLE`, `CXD4`/`SSSE3`.
+* Plugin Configuration Menus for `GLideN64`, `Angrylion Plus`, `Audio SDL`, `Input SDL`, `RSP HLE`, `CXD4`.
 * Shortcuts to common folders
 * Quick Load & Save State `st0-9`
 * Load Save File `.m64p`/`.pj` format
@@ -38,7 +38,7 @@ API system by [BizHawk](https://github.com/TASVideos/BizHawk).
 
 **What it currently can't do:**
 * Gamepad Remap Custom Buttons
-* No Plugin Configuration Menus for `Glide64`, `Glide64mk2`, `Rice`, `z64`, `CXD4` yet.
+* No Plugin Configuration Menus for `Glide64`, `Glide64mk2`, `Rice`, `Arachnoid`, `z64` yet.
 * Cheats
 
 &nbsp;
