@@ -212,7 +212,7 @@ namespace Ultra
         /// <summary>
         ///  Load Plugins from mupen64plus.cfg
         /// </summary>
-        public static void LoadPlugins()
+        public static void LoadPlugins(MainWindow mainwindow)
         {
             // Start Cfg File Read
             Configure.ConigFile cfg = null;
@@ -233,98 +233,162 @@ namespace Ultra
                         // -------------------------
                         // Video
                         // -------------------------
+                        List<string> videoPluginNames = VM.PluginsView.Video_Items.Select(item => item.Name).ToList();
                         string videoPlugin = Path.GetFileName(cfg.Read("UI-Console", "VideoPlugin"));
                         //MessageBox.Show(videoPlugin); //debug
+
                         // Selected
                         if (!string.IsNullOrWhiteSpace(videoPlugin))
                         {
-                            VM.PluginsView.Video_SelectedItem = videoPlugin;
-                        }
-                        // Missing Fallback
-                        else
-                        {
                             // Default
-                            if (videoPlugin == "mupen64plus-video-GLideN64.dll")
+                            if (videoPluginNames.Contains(videoPlugin))
                             {
-                                VM.PluginsView.Video_SelectedItem = "mupen64plus-video-GLideN64.dll";
+                                VM.PluginsView.Video_SelectedItem = videoPlugin; 
                             }
-                            // First Available
+                            // Missing Fallback
                             else
                             {
-                                VM.PluginsView.Video_SelectedIndex = -1;
+                                //MessageBox.Show("Missing Fallback"); //debug
+                                // Default
+                                if (videoPluginNames.Contains("mupen64plus-video-GLideN64.dll"))
+                                {
+                                    //MessageBox.Show("Default"); //debug
+                                    VM.PluginsView.Video_SelectedItem = "mupen64plus-video-GLideN64.dll";
+                                }
+                                // Missing
+                                else
+                                {
+                                    //MessageBox.Show("Missing"); //debug
+                                    //VM.PluginsView.Video_SelectedIndex = 0;
+                                    mainwindow.cboPlugin_Video.SelectedIndex = 0;
+                                }
                             }
+                        }
+                        // Null Fallback
+                        else
+                        {
+                            //VM.PluginsView.Video_SelectedIndex = 0;
+                            mainwindow.cboPlugin_Video.SelectedIndex = 0;
                         }
 
                         // -------------------------
                         // Audio
                         // -------------------------
+                        List<string> audioPluginNames = VM.PluginsView.Audio_Items.Select(item => item.Name).ToList();
                         string audioPlugin = Path.GetFileName(cfg.Read("UI-Console", "AudioPlugin"));
+
                         // Selected
                         if (!string.IsNullOrWhiteSpace(audioPlugin))
                         {
-                            VM.PluginsView.Audio_SelectedItem = audioPlugin;
-                        }
-                        // Missing Fallback
-                        else
-                        {
                             // Default
-                            if (audioPlugin == "mupen64plus-audio-sdl.dll")
+                            if (audioPluginNames.Contains(audioPlugin))
                             {
-                                VM.PluginsView.Audio_SelectedItem = "mupen64plus-audio-sdl.dll";
+                                VM.PluginsView.Audio_SelectedItem = audioPlugin;
                             }
-                            // First Available
+                            // Missing Fallback
                             else
                             {
-                                VM.PluginsView.Audio_SelectedIndex = -1;
+                                //MessageBox.Show("Missing Fallback"); //debug
+                                // Default
+                                if (audioPluginNames.Contains("mupen64plus-audio-sdl.dll"))
+                                {
+                                    //MessageBox.Show("Default"); //debug
+                                    VM.PluginsView.Audio_SelectedItem = "mupen64plus-audio-sdl.dll";
+                                }
+                                // Missing
+                                else
+                                {
+                                    //MessageBox.Show("Missing"); //debug
+                                    //VM.PluginsView.Audio_SelectedIndex = 0;
+                                    mainwindow.cboPlugin_Audio.SelectedIndex = 0;
+                                }
                             }
+                        }
+                        // Null Fallback
+                        else
+                        {
+                            //VM.PluginsView.Audio_SelectedIndex = 0;
+                            mainwindow.cboPlugin_Audio.SelectedIndex = 0;
                         }
 
                         // -------------------------
                         // RSP
                         // -------------------------
-                        string rspPlugin = Path.GetFileName(cfg.Read("UI-Console", "RspPlugin"));
+                        List<string> rspPluginNames = VM.PluginsView.RSP_Items.Select(item => item.Name).ToList();
+                        string rspPlugin = Path.GetFileName(cfg.Read("UI-Console", "RSPPlugin"));
+
                         // Selected
                         if (!string.IsNullOrWhiteSpace(rspPlugin))
                         {
-                            VM.PluginsView.RSP_SelectedItem = rspPlugin;
-                        }
-                        // Missing Fallback
-                        else
-                        {
                             // Default
-                            if (rspPlugin == "mupen64plus-rsp-hle.dll")
+                            if (rspPluginNames.Contains(rspPlugin))
                             {
-                                VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-hle.dll";
+                                VM.PluginsView.RSP_SelectedItem = rspPlugin;
                             }
-                            // First Available
+                            // Missing Fallback
                             else
                             {
-                                VM.PluginsView.RSP_SelectedIndex = -1;
+                                //MessageBox.Show("Missing Fallback"); //debug
+                                // Default
+                                if (rspPluginNames.Contains("mupen64plus-rsp-hle.dll"))
+                                {
+                                    //MessageBox.Show("Default"); //debug
+                                    VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-hle.dll";
+                                }
+                                // Missing
+                                else
+                                {
+                                    //MessageBox.Show("Missing"); //debug
+                                    //VM.PluginsView.RSP_SelectedIndex = 0;
+                                    mainwindow.cboPlugin_RSP.SelectedIndex = 0;
+                                }
                             }
+                        }
+                        // Null Fallback
+                        else
+                        {
+                            //VM.PluginsView.RSP_SelectedIndex = 0;
+                            mainwindow.cboPlugin_RSP.SelectedIndex = 0;
                         }
 
                         // -------------------------
                         // Input
                         // -------------------------
+                        List<string> inputPluginNames = VM.PluginsView.Input_Items.Select(item => item.Name).ToList();
                         string inputPlugin = Path.GetFileName(cfg.Read("UI-Console", "InputPlugin"));
+
                         // Selected
                         if (!string.IsNullOrWhiteSpace(inputPlugin))
                         {
-                            VM.PluginsView.Input_SelectedItem = inputPlugin;
-                        }
-                        // Missing Fallback
-                        else
-                        {
                             // Default
-                            if (inputPlugin == "mupen64plus-input-sdl.dll")
+                            if (inputPluginNames.Contains(inputPlugin))
                             {
-                                VM.PluginsView.Input_SelectedItem = "mupen64plus-input-sdl.dll";
+                                VM.PluginsView.Input_SelectedItem = inputPlugin;
                             }
-                            // First Available
+                            // Missing Fallback
                             else
                             {
-                                VM.PluginsView.Input_SelectedIndex = -1;
+                                //MessageBox.Show("Missing Fallback"); //debug
+                                // Default
+                                if (inputPluginNames.Contains("mupen64plus-input-sdl.dll"))
+                                {
+                                    //MessageBox.Show("Default"); //debug
+                                    VM.PluginsView.Input_SelectedItem = "mupen64plus-input-sdl.dll";
+                                }
+                                // Missing
+                                else
+                                {
+                                    //MessageBox.Show("Missing"); //debug
+                                    //VM.PluginsView.Input_SelectedIndex = 0;
+                                    mainwindow.cboPlugin_Input.SelectedIndex = 0;
+                                }
                             }
+                        }
+                        // Null Fallback
+                        else
+                        {
+                            //VM.PluginsView.Input_SelectedIndex = 0;
+                            mainwindow.cboPlugin_Input.SelectedIndex = 0;
                         }
                     }
                     // Error
