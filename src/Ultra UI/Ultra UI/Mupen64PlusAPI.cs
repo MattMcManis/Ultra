@@ -656,7 +656,7 @@ namespace Ultra
                 init = false;
 
                 // Reset the Stopped trigger
-                MainWindow.stopped = true;
+                MainWindow.stopped = false;
 
                 return; // don't allow call connectFunctionPointers()
             }
@@ -1725,7 +1725,7 @@ namespace Ultra
                                 MessageBoxImage.Error);
 
                 init = false;
-
+                MainWindow.stopped = false;
                 return IntPtr.Zero;
 
                 //throw new InvalidOperationException(string.Format("Failed to load plugin {0}, error code: 0x{1:X}", PluginName, GetLastError()));
@@ -1748,7 +1748,7 @@ namespace Ultra
                                 MessageBoxImage.Error);
 
                 init = false;
-
+                MainWindow.stopped = false;
                 return IntPtr.Zero;
             }
 
