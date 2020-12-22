@@ -79,6 +79,13 @@ namespace Ultra
                                     MessageBoxImage.Error);
                 }
 
+
+                // -------------------------
+                // Plugins
+                // -------------------------
+                // LoadPlugins() in MainWindow.Window_Loaded() after ScanPlugins()
+
+
                 // -------------------------
                 // Emulator
                 // -------------------------
@@ -87,37 +94,22 @@ namespace Ultra
                     // CPU Core
                     int cpuCore = 2; // Default Dynamic Recompiler fallback
                     int.TryParse(cfg.Read("Core", "R4300Emulator").ToLower(), out cpuCore);
+                    switch (cpuCore)
+                    {
+                        // Pure Interpreter
+                        case 0:
+                            VM.EmulatorView.CPU_SelectedItem = "Pure Interpreter";
+                            break;
 
-                    //// Pure Interpreter
-                    //if (cpuCore == 0)
-                    //{
-                    //    VM.EmulatorView.Emulator_PureInterpreter_IsChecked = true;
-                    //}
-                    //// Cached Interpreter
-                    //else if (cpuCore == 1)
-                    //{
-                    //    VM.EmulatorView.Emulator_CachedInterpreter_IsChecked = true;
-                    //}
-                    //// Dynamic Recompiler
-                    //else if (cpuCore == 2)
-                    //{
-                    //    VM.EmulatorView.Emulator_DynamicRecompiler_IsChecked = true;
-                    //}
+                        // Cached Interpreter
+                        case 1:
+                            VM.EmulatorView.CPU_SelectedItem = "Cached Interpreter";
+                            break;
 
-                    // Pure Interpreter
-                    if (cpuCore == 0)
-                    {
-                        VM.EmulatorView.CPU_SelectedItem = "Pure Interpreter";
-                    }
-                    // Cached Interpreter
-                    else if (cpuCore == 1)
-                    {
-                        VM.EmulatorView.CPU_SelectedItem = "Cached Interpreter";
-                    }
-                    // Dynamic Recompiler
-                    else if (cpuCore == 2)
-                    {
-                        VM.EmulatorView.CPU_SelectedItem = "Dynamic Recompiler";
+                        // Dynamic Recompiler
+                        case 2:
+                            VM.EmulatorView.CPU_SelectedItem = "Dynamic Recompiler";
+                            break;
                     }
 
                     // DisableSpecRecomp
@@ -174,15 +166,17 @@ namespace Ultra
                     // View
                     bool fullscreen = true;
                     bool.TryParse(cfg.Read("Video-General", "Fullscreen").ToLower(), out fullscreen);
-                    // Fullscreen
-                    if (fullscreen == true)
+                    switch (fullscreen)
                     {
-                        VM.DisplayView.Display_View_SelectedItem = "Fullscreen";
-                    }
-                    // Windowed
-                    else if (fullscreen == false)
-                    {
-                        VM.DisplayView.Display_View_SelectedItem = "Windowed";
+                        // Fullscreen
+                        case true:
+                            VM.DisplayView.Display_View_SelectedItem = "Fullscreen";
+                            break;
+
+                        // Windowed
+                        case false:
+                            VM.DisplayView.Display_View_SelectedItem = "Windowed";
+                            break;
                     }
 
                     // OSD
@@ -205,7 +199,6 @@ namespace Ultra
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Error);
                 }
-
             }
             // Missing
             else
@@ -237,17 +230,102 @@ namespace Ultra
                         // Get the .dll file paths from the cfg [UI-Console] plugins section
                         // Select those file names in the Plugin ComboBoxes
 
+                        // -------------------------
                         // Video
-                        VM.PluginsView.Video_SelectedItem = Path.GetFileName(cfg.Read("UI-Console", "VideoPlugin"));
+                        // -------------------------
+                        string videoPlugin = Path.GetFileName(cfg.Read("UI-Console", "VideoPlugin"));
+                        //MessageBox.Show(videoPlugin); //debug
+                        // Selected
+                        if (!string.IsNullOrWhiteSpace(videoPlugin))
+                        {
+                            VM.PluginsView.Video_SelectedItem = videoPlugin;
+                        }
+                        // Missing Fallback
+                        else
+                        {
+                            // Default
+                            if (videoPlugin == "mupen64plus-video-GLideN64.dll")
+                            {
+                                VM.PluginsView.Video_SelectedItem = "mupen64plus-video-GLideN64.dll";
+                            }
+                            // First Available
+                            else
+                            {
+                                VM.PluginsView.Video_SelectedIndex = -1;
+                            }
+                        }
 
+                        // -------------------------
                         // Audio
-                        VM.PluginsView.Audio_SelectedItem = Path.GetFileName(cfg.Read("UI-Console", "AudioPlugin"));
+                        // -------------------------
+                        string audioPlugin = Path.GetFileName(cfg.Read("UI-Console", "AudioPlugin"));
+                        // Selected
+                        if (!string.IsNullOrWhiteSpace(audioPlugin))
+                        {
+                            VM.PluginsView.Audio_SelectedItem = audioPlugin;
+                        }
+                        // Missing Fallback
+                        else
+                        {
+                            // Default
+                            if (audioPlugin == "mupen64plus-audio-sdl.dll")
+                            {
+                                VM.PluginsView.Audio_SelectedItem = "mupen64plus-audio-sdl.dll";
+                            }
+                            // First Available
+                            else
+                            {
+                                VM.PluginsView.Audio_SelectedIndex = -1;
+                            }
+                        }
 
+                        // -------------------------
                         // RSP
-                        VM.PluginsView.RSP_SelectedItem = Path.GetFileName(cfg.Read("UI-Console", "RspPlugin"));
+                        // -------------------------
+                        string rspPlugin = Path.GetFileName(cfg.Read("UI-Console", "RspPlugin"));
+                        // Selected
+                        if (!string.IsNullOrWhiteSpace(rspPlugin))
+                        {
+                            VM.PluginsView.RSP_SelectedItem = rspPlugin;
+                        }
+                        // Missing Fallback
+                        else
+                        {
+                            // Default
+                            if (rspPlugin == "mupen64plus-rsp-hle.dll")
+                            {
+                                VM.PluginsView.RSP_SelectedItem = "mupen64plus-rsp-hle.dll";
+                            }
+                            // First Available
+                            else
+                            {
+                                VM.PluginsView.RSP_SelectedIndex = -1;
+                            }
+                        }
 
+                        // -------------------------
                         // Input
-                        VM.PluginsView.Input_SelectedItem = Path.GetFileName(cfg.Read("UI-Console", "InputPlugin"));
+                        // -------------------------
+                        string inputPlugin = Path.GetFileName(cfg.Read("UI-Console", "InputPlugin"));
+                        // Selected
+                        if (!string.IsNullOrWhiteSpace(inputPlugin))
+                        {
+                            VM.PluginsView.Input_SelectedItem = inputPlugin;
+                        }
+                        // Missing Fallback
+                        else
+                        {
+                            // Default
+                            if (inputPlugin == "mupen64plus-input-sdl.dll")
+                            {
+                                VM.PluginsView.Input_SelectedItem = "mupen64plus-input-sdl.dll";
+                            }
+                            // First Available
+                            else
+                            {
+                                VM.PluginsView.Input_SelectedIndex = -1;
+                            }
+                        }
                     }
                     // Error
                     catch
@@ -281,16 +359,16 @@ namespace Ultra
             // -------------------------
             // Check if Directory Exists
             // -------------------------
-            if (!Directory.Exists(directory/*path*/))
+            if (!Directory.Exists(directory))
             {
                 try
                 {
                     // Create Config Directory
-                    Directory.CreateDirectory(directory/*path*/);
+                    Directory.CreateDirectory(directory);
                 }
                 catch
                 {
-                    MessageBox.Show("Could not create config folder " + directory/*path*/ + ".\n\nMay require Administrator privileges.",
+                    MessageBox.Show("Could not create config folder " + directory + ".\n\nMay require Administrator privileges.",
                                     "Error",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Error);
@@ -304,45 +382,42 @@ namespace Ultra
             //if (!string.IsNullOrEmpty(VM.PathsView.Config_Text))
             //{
             // Check if Conf File Exists
-            if (Directory.Exists(directory/*path*/))
+            if (Directory.Exists(directory))
             {
-                //MessageBox.Show(path); //debug
+                //MessageBox.Show(directory); //debug
 
                 //Configure.ConigFile cfg = null;
 
                 // Access
-                if (MainWindow.hasWriteAccessToFolder(directory/*path*/) == true)
+                if (MainWindow.hasWriteAccessToFolder(directory) == false)
                 {
-                    try
-                    {
-                        // Start conf File Write
-                        Configure.ConigFile.cfg = new Configure.ConigFile(Path.Combine(directory, filename)/*path + "mupen64plus.cfg"*/);
-
-                        // Write each action in the list
-                        foreach (Action Write in actionsToWrite)
-                        {
-                            Write();
-                        }
-                    }
-
-                    // Error
-                    catch
-                    {
-                        MessageBox.Show("Could not save " + filename + " to " + directory,
-                                        "Error",
-                                        MessageBoxButton.OK,
-                                        MessageBoxImage.Error);
-                    }
-                }
-                // Denied
-                else
-                {
-                    MessageBox.Show("User does not have write access to " + directory/*+ path*/,
+                    // Denied
+                    MessageBox.Show("User does not have write access to " + directory,
                                     "Notice",
                                     MessageBoxButton.OK,
                                     MessageBoxImage.Warning);
+                    return;
                 }
 
+                try
+                {
+                    // Start mupen64plus.cfg file write
+                    Configure.ConigFile.cfg = new Configure.ConigFile(Path.Combine(directory, filename));
+
+                    // Write each action in the list
+                    foreach (Action Write in actionsToWrite)
+                    {
+                        Write();
+                    }
+                }
+                // Error
+                catch
+                {
+                    MessageBox.Show("Could not save " + filename + " to " + directory,
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                }
             }
             //}
             // Path not found
@@ -354,7 +429,6 @@ namespace Ultra
             //                    MessageBoxImage.Warning);
             //}
         }
-        
 
     }
 }
