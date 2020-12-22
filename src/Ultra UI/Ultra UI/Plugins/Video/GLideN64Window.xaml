@@ -49,7 +49,7 @@
         Title="Video Plugin - GLideN64 - Public Release 4.0"
         
         Width="650"
-        Height="505"
+        Height="525"
         
         Style="{DynamicResource WindowStyle}" 
         >
@@ -86,10 +86,11 @@
                 <Grid Margin="0,0,0,0" 
                       Background="Transparent">
 
-                    <!-- Basic -->
-                    <GroupBox Header="Basic" 
+                    <!-- Render -->
+                    <GroupBox Header="Render" 
                               Style="{DynamicResource GroupBoxStyle}"
                               Margin="10,10,0,9" 
+                              Padding="0,5,0,0"
                               HorizontalAlignment="Left" 
                               Width="196">
 
@@ -98,18 +99,16 @@
                                 <ColumnDefinition Width="135"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="56"/>
-                                <RowDefinition Height="53"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
                             <!-- Version -->
-                            <Label Content="Version"
+                            <!--<Label Content="Version"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
                                Margin="5,7,0,0" 
@@ -125,79 +124,101 @@
                                  Padding="2, 2, 0, 2" 
                                  VerticalAlignment="Top" 
                                  Height="22"
-                                 Width="120"/>
+                                 Width="120"/>-->
 
                             <!-- Multisampling -->
                             <Label Content="Multisampling"
-                               Style="{DynamicResource LabelStyle}"
-                               HorizontalAlignment="Left"
-                               Margin="5,5,0,0" 
-                               VerticalAlignment="Top" 
-                               Width="120" 
-                               Grid.Row="4"/>
+                                   Style="{DynamicResource LabelStyle}"
+                                   HorizontalAlignment="Left"
+                                   Margin="5,8,0,0" 
+                                   VerticalAlignment="Top" 
+                                   Width="120" 
+                                   Grid.Row="3"/>
                             <ComboBox x:Name="cboMultiSampling" 
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  Style="{DynamicResource ComboBoxStyle}"
-                                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                  ItemsSource="{Binding MultiSampling_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedValue="{Binding MultiSampling_SelectedItem}"
-                                  IsEnabled="{Binding MultiSampling_IsEnabled}"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,31,0,0" 
-                                  VerticalAlignment="Top" 
-                                  Height="22"
-                                  Width="120" 
-                                  Grid.Row="4"/>
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      ItemsSource="{Binding MultiSampling_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValue="{Binding MultiSampling_SelectedItem}"
+                                      IsEnabled="{Binding MultiSampling_IsEnabled}"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,35,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Height="22"
+                                      Width="120" 
+                                      Grid.Row="3"/>
+
+
+                            <!-- FXAA -->
+                            <CheckBox x:Name="cboFXAA" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding FXAA_IsChecked}"
+                                      IsEnabled="{Binding FXAA_IsEnabled}"
+                                      Content="FXAA"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,20,-0,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="160"
+                                      Grid.Row="4"
+                                      />
 
                             <!-- Aspect Ratio -->
                             <Label Content="Aspect Ratio"
-                               Style="{DynamicResource LabelStyle}"
-                               HorizontalAlignment="Left"
-                               Margin="5,5,0,0" 
-                               VerticalAlignment="Top" 
-                               Width="120" Grid.Row="1"/>
+                                   Style="{DynamicResource LabelStyle}"
+                                   HorizontalAlignment="Left"
+                                   Margin="5,8,0,0" 
+                                   VerticalAlignment="Top" 
+                                   Width="120" 
+                                   Grid.Row="0"/>
                             <ComboBox x:Name="cboAspectRatio" 
-                                  Style="{DynamicResource ComboBoxStyle}"
-                                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  ItemsSource="{Binding AspectRatio_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedValue="{Binding AspectRatio_SelectedItem}"
-                                  IsEnabled="{Binding AspectRatio_IsEnabled}"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,31,0,0" 
-                                  VerticalAlignment="Top" 
-                                  Height="22"
-                                  Width="120" 
-                                  Grid.Row="1"/>
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      ItemsSource="{Binding AspectRatio_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValue="{Binding AspectRatio_SelectedItem}"
+                                      IsEnabled="{Binding AspectRatio_IsEnabled}"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,35,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Height="22"
+                                      Width="120" 
+                                      Grid.Row="0"
+                                      ToolTipService.InitialShowDelay="100"
+                                      ToolTipService.ShowOnDisabled="True"
+                                      ToolTip="Multisample antialiasing (MSAA). Each pixel at the edge of a polygon is sampled multiple times."
+                                      />
 
                             <!-- Bilinear Mode -->
                             <Label Content="Bilinear Mode"
-                               Style="{DynamicResource LabelStyle}"
-                               HorizontalAlignment="Left"
-                               Margin="5,5,0,0" 
-                               VerticalAlignment="Top" 
-                               Width="120" Grid.Row="2"/>
+                                   Style="{DynamicResource LabelStyle}"
+                                   HorizontalAlignment="Left"
+                                   Margin="5,8,0,0" 
+                                   VerticalAlignment="Top" 
+                                   Width="120" 
+                                   Grid.Row="1"/>
                             <ComboBox x:Name="cboBilinearMode" 
-                                  Style="{DynamicResource ComboBoxStyle}"
-                                  ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  ItemsSource="{Binding BilinearMode_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedValue="{Binding BilinearMode_SelectedItem}"
-                                  IsEnabled="{Binding BilinearMode_IsEnabled}"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,31,0,0" 
-                                  VerticalAlignment="Top" 
-                                  Height="22"
-                                  Width="120" Grid.Row="2"/>
+                                      Style="{DynamicResource ComboBoxStyle}"
+                                      ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      ItemsSource="{Binding BilinearMode_Items, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedValue="{Binding BilinearMode_SelectedItem}"
+                                      IsEnabled="{Binding BilinearMode_IsEnabled}"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,35,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Height="22"
+                                      Width="120" 
+                                      Grid.Row="1"/>
 
                             <!-- Max Anisotropy -->
                             <Label Content="Max Anisotropy"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="5,5,0,0" 
+                               Margin="5,8,0,0" 
                                VerticalAlignment="Top" 
                                Width="120"
-                               Grid.Row="3"/>
+                               Grid.Row="2"/>
                             <ComboBox x:Name="cboMaxAnisotropy" 
                                   Style="{DynamicResource ComboBoxStyle}"
                                   ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
@@ -206,61 +227,42 @@
                                   SelectedValue="{Binding MaxAnisotropy_SelectedItem}"
                                   IsEnabled="{Binding MaxAnisotropy_IsEnabled}"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,31,0,0" 
+                                  Margin="10,35,0,0" 
                                   VerticalAlignment="Top" 
                                   Height="22"
                                   Width="120" 
-                                  Grid.Row="3"/>
+                                  Grid.Row="2"/>
 
 
 
-                            <!-- Show FPS -->
-                            <CheckBox x:Name="cboShowFPS" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding ShowFPS_IsChecked}"
-                                  IsEnabled="{Binding ShowFPS_IsEnabled}"
-                                  Content="Show FPS"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,14,0,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="115" Grid.Row="5"/>
 
-                            <!-- Show VIS -->
-                            <CheckBox x:Name="cboShowVIS" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding ShowVIS_IsChecked}"
-                                  IsEnabled="{Binding ShowVIS_IsEnabled}"
-                                  Content="Show VIS"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,41,0,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="115" Grid.Row="5"/>
 
                         </Grid>
 
                     </GroupBox>
 
-                    <!-- Render -->
-                    <GroupBox Header="Render" 
+                    <!-- Shaders -->
+                    <GroupBox Header="Shaders" 
                               Style="{DynamicResource GroupBoxStyle}"
                               Margin="211,10,10,9" 
+                              Padding="0,22,0,0"
                               HorizontalAlignment="Left" 
                               Width="196">
 
                         <Grid Background="Transparent">
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="135"/>
                             </Grid.ColumnDefinitions>
+
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="32"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
@@ -276,114 +278,97 @@
                                   VerticalAlignment="Top" 
                                   Width="120"/>-->
 
-                            <!-- FXAA -->
-                            <CheckBox x:Name="cboFXAA" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding FXAA_IsChecked}"
-                                  IsEnabled="{Binding FXAA_IsEnabled}"
-                                  Content="FXAA"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,14,-34,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="160"/>
 
                             <!-- EnableNoise -->
                             <CheckBox x:Name="cboEnableNoise" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding EnableNoise_IsChecked}"
-                                  IsEnabled="{Binding EnableNoise_IsEnabled}"
-                                  Content="Enable Noise"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,9,-34,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="160" Grid.Row="1"/>
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding EnableNoise_IsChecked}"
+                                      IsEnabled="{Binding EnableNoise_IsEnabled}"
+                                      Content="Enable Noise"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,0,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="160" 
+                                      Grid.Row="0"/>
 
                             <!-- EnableHalosRemoval -->
                             <CheckBox x:Name="cboEnableHalosRemoval" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding EnableHalosRemoval_IsChecked}"
-                                  IsEnabled="{Binding EnableHalosRemoval_IsEnabled}"
-                                  Content="EnableHalosRemoval"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,10,-34,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="160" 
-                                  Grid.Row="2"/>
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding EnableHalosRemoval_IsChecked}"
+                                      IsEnabled="{Binding EnableHalosRemoval_IsEnabled}"
+                                      Content="Enable Halos Removal"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,0,-34,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="160" 
+                                      Grid.Row="1"/>
 
                             <!-- EnableLOD -->
                             <CheckBox x:Name="cboEnableLOD" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding EnableLOD_IsChecked}"
-                                  IsEnabled="{Binding EnableLOD_IsEnabled}"
-                                  Content="Enable LOD"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,10,-34,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="160" 
-                                  Grid.Row="3"/>
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding EnableLOD_IsChecked}"
+                                      IsEnabled="{Binding EnableLOD_IsEnabled}"
+                                      Content="Enable LOD"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,0,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="160" 
+                                      Grid.Row="2"
+                                      ToolTipService.InitialShowDelay="100"
+                                      ToolTipService.ShowOnDisabled="True"
+                                      ToolTip="Level of Detail"
+                                      />
 
                             <!-- EnableHWLighting -->
                             <CheckBox x:Name="cboEnableHWLighting" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding EnableHWLighting_IsChecked}"
-                                  IsEnabled="{Binding EnableHWLighting_IsEnabled}"
-                                  Content="Enable HW Lighting"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,10,-34,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="160" 
-                                  Grid.Row="4"/>
-
-                            <!-- CorrectTexrectCoords-->
-                            <CheckBox x:Name="cboCorrectTexrectCoords" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding CorrectTexrectCoords_IsChecked}"
-                                  IsEnabled="{Binding CorrectTexrectCoords_IsEnabled}"
-                                  Content="Correct Texrect Coords"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,10,-34,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="160" 
-                                  Grid.Row="5"/>
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding EnableHWLighting_IsChecked}"
+                                      IsEnabled="{Binding EnableHWLighting_IsEnabled}"
+                                      Content="Enable HW Lighting"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,0,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="160" 
+                                      Grid.Row="3"/>
 
                             <!-- EnableShadersStorage-->
                             <CheckBox x:Name="cboEnableShadersStorage" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding EnableShadersStorage_IsChecked}"
-                                  IsEnabled="{Binding EnableShadersStorage_IsEnabled}"
-                                  Content="Enable Shaders Storage"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,10,-34,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="160" 
-                                  Grid.Row="6"/>
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding EnableShadersStorage_IsChecked}"
+                                      IsEnabled="{Binding EnableShadersStorage_IsEnabled}"
+                                      Content="Enable Shaders Storage"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,0,-38,0" 
+                                      VerticalAlignment="Top" 
+                                      Grid.Row="4" 
+                                      Width="164"/>
 
                         </Grid>
 
                     </GroupBox>
 
-                    <!-- Font -->
-                    <GroupBox Header="Font" 
+                    <!-- OSD -->
+                    <GroupBox Header="OSD" 
                               Style="{DynamicResource GroupBoxStyle}"
-                              Margin="412,10,10,9">
+                              Margin="412,10,10,9"
+                              Padding="0,5,0,0"
+                              >
 
                         <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="135"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="53"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
@@ -391,9 +376,9 @@
                             <Label Content="Font Name"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="8,7,0,0" 
+                               Margin="5,8,0,0" 
                                VerticalAlignment="Top" 
-                               Width="120" Grid.Column="1"/>
+                               Width="120"/>
                             <ComboBox x:Name="cboFontName" 
                                   Style="{DynamicResource ComboBoxStyle}"
                                   ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
@@ -402,49 +387,79 @@
                                   SelectedValue="{Binding Fonts_SelectedItem}"
                                   IsEnabled="{Binding Fonts_IsEnabled}"
                                   HorizontalAlignment="Left" 
-                                  Margin="13,33,0,0" 
+                                  Margin="10,35,0,0" 
                                   VerticalAlignment="Top" 
                                   Height="22"
-                                  Width="120" Grid.Column="1"/>
+                                  Width="120"/>
 
                             <!-- Font Size -->
                             <Label Content="Font Size"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="8,5,0,0" 
+                               Margin="5,8,0,0" 
                                VerticalAlignment="Top" 
-                               Width="120" Grid.Row="1" Grid.Column="1"/>
+                               Width="120" Grid.Row="1"/>
                             <TextBox x:Name="cboFontSize" 
                                  Style="{DynamicResource TextBoxStyle}"
                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
                                  Text="{Binding FontSize_Text}"
                                  IsEnabled="{Binding FontSize_IsEnabled}"
                                  HorizontalAlignment="Left" 
-                                 Margin="13,31,0,0" 
+                                 Margin="13,35,0,0" 
                                  Padding="2,2,0,2" 
                                  VerticalAlignment="Top" 
                                  Height="22"
                                  Width="120" 
-                                 Grid.Row="1" Grid.Column="1"/>
+                                 Grid.Row="1"/>
 
                             <!-- Font Color -->
                             <Label Content="Font Color"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="8,5,0,0" 
+                               Margin="5,8,0,0" 
                                VerticalAlignment="Top" 
-                               Width="120" Grid.Column="1" Grid.Row="2"/>
+                               Width="120" Grid.Row="2"/>
                             <TextBox x:Name="cboFontColor" 
                                  Style="{DynamicResource TextBoxStyle}" 
                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
                                  Text="{Binding FontColor_Text}"
                                  IsEnabled="{Binding FontColor_IsEnabled}"
                                  HorizontalAlignment="Left" 
-                                 Margin="13,31,0,0" 
+                                 Margin="13,35,0,0" 
                                  Padding="2,2,0,2" 
                                  VerticalAlignment="Top" 
                                  Height="22"
-                                 Width="120" Grid.Column="1" Grid.Row="2"/>
+                                 Width="120" Grid.Row="2"/>
+
+                            <!-- Show FPS -->
+                            <CheckBox x:Name="cboShowFPS" 
+                                  Style="{DynamicResource CheckBoxStyle}"
+                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                  IsChecked="{Binding ShowFPS_IsChecked}"
+                                  IsEnabled="{Binding ShowFPS_IsEnabled}"
+                                  Content="Show FPS"
+                                  HorizontalAlignment="Left" 
+                                  Margin="10,20,0,0" 
+                                  VerticalAlignment="Top" 
+                                  Width="115" 
+                                      Grid.Row="3"
+                                      ToolTipService.InitialShowDelay="100"
+                                      ToolTipService.ShowOnDisabled="True"
+                                      ToolTip="Frames Per Second"
+                                      />
+
+                            <!-- Show VIS -->
+                            <CheckBox x:Name="cboShowVIS" 
+                                  Style="{DynamicResource CheckBoxStyle}"
+                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                  IsChecked="{Binding ShowVIS_IsChecked}"
+                                  IsEnabled="{Binding ShowVIS_IsEnabled}"
+                                  Content="Show VIS"
+                                  HorizontalAlignment="Left" 
+                                  Margin="10,50,0,0" 
+                                  VerticalAlignment="Top" 
+                                  Width="115" 
+                                      Grid.Row="3" Grid.RowSpan="2"/>
                         </Grid>
 
                     </GroupBox>
@@ -469,17 +484,17 @@
 
                         <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="155"/>
+                                <ColumnDefinition Width="185"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition Height="53"/>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition Height="55"/>
-                                <RowDefinition Height="55"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
+                                <RowDefinition Height="57"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
@@ -504,46 +519,49 @@
 
                             <!-- txCacheSize -->
                             <Label Content="Tx Cache Size"
-                               Style="{DynamicResource LabelStyle}"
-                               HorizontalAlignment="Left"
-                               Margin="5,7,0,0" 
-                               VerticalAlignment="Top" 
-                               Width="120"/>
+                                   Style="{DynamicResource LabelStyle}"
+                                   HorizontalAlignment="Left"
+                                   Margin="5,8,0,0" 
+                                   VerticalAlignment="Top" 
+                                   Width="120"/>
                             <TextBox x:Name="cboTxCacheSize" 
-                                 Style="{DynamicResource TextBoxStyle}" 
-                                 DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                 Text="{Binding TxCacheSize_Text}"
-                                 IsEnabled="{Binding TxCacheSize_IsEnabled}"
-                                 HorizontalAlignment="Left" 
-                                 Margin="10,33,0,0" 
-                                 Padding="2, 2, 0, 2" 
-                                 VerticalAlignment="Top" 
-                                 Height="22"
-                                 Width="120"/>
+                                     Style="{DynamicResource TextBoxStyle}" 
+                                     DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                     Text="{Binding TxCacheSize_Text}"
+                                     IsEnabled="{Binding TxCacheSize_IsEnabled}"
+                                     HorizontalAlignment="Left" 
+                                     Margin="10,35,0,0" 
+                                     Padding="2, 2, 0, 2" 
+                                     VerticalAlignment="Top" 
+                                     Height="22"
+                                     Width="120"/>
 
                             <!-- txHiresEnable -->
                             <CheckBox x:Name="cboTxHiresEnable" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding TxHiresEnable_IsChecked}"
-                                  IsEnabled="{Binding TxHiresEnable_IsEnabled}"
-                                  Content="Tx Hires Enable"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,15,0,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="125" Grid.Column="1"/>
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding TxHiresEnable_IsChecked}"
+                                      IsEnabled="{Binding TxHiresEnable_IsEnabled}"
+                                      Content="Tx Hires Enable"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,42,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="125"
+                                      Grid.Column="1"/>
 
                             <!-- txFilterIgnore BG -->
                             <CheckBox x:Name="cboTxFilterIgnoreBG" 
-                                  Style="{DynamicResource CheckBoxStyle}"
-                                  DataContext="{Binding Plugins_Video_GLideN64_View}"
-                                  IsChecked="{Binding TxFilterIgnoreBG_IsChecked}"
-                                  IsEnabled="{Binding TxFilterIgnoreBG_IsEnabled}"
-                                  Content="Tx Filter Ignore BG"
-                                  HorizontalAlignment="Left" 
-                                  Margin="10,41,0,0" 
-                                  VerticalAlignment="Top" 
-                                  Width="125" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"/>
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding TxFilterIgnoreBG_IsChecked}"
+                                      IsEnabled="{Binding TxFilterIgnoreBG_IsEnabled}"
+                                      Content="Tx Filter Ignore BG"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,13,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="125"
+                                      Grid.Row="2"
+                                      Grid.Column="1"/>
 
                             <!-- txDeposterize -->
                             <CheckBox x:Name="cbotxDeposterize" 
@@ -553,9 +571,27 @@
                                   IsEnabled="{Binding TxDeposterize_IsEnabled}"
                                   Content="Tx Deposterize"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,15,0,0" 
+                                  Margin="10,42,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="125" Grid.Row="2" Grid.Column="1"/>
+
+                            <!-- CorrectTexrectCoords-->
+                            <CheckBox x:Name="cboCorrectTexrectCoords" 
+                                      Style="{DynamicResource CheckBoxStyle}"
+                                      DataContext="{Binding Plugins_Video_GLideN64_View}"
+                                      IsChecked="{Binding CorrectTexrectCoords_IsChecked}"
+                                      IsEnabled="{Binding CorrectTexrectCoords_IsEnabled}"
+                                      Content="Correct Texrect Coords"
+                                      HorizontalAlignment="Left" 
+                                      Margin="10,14,0,0" 
+                                      VerticalAlignment="Top" 
+                                      Width="160" 
+                                      Grid.Row="0"
+                                      Grid.Column="1"
+                                      ToolTipService.InitialShowDelay="100"
+                                      ToolTipService.ShowOnDisabled="True"
+                                      ToolTip="Make texrect coordinates continuous to avoid black lines between them."
+                                      />
 
                             <!-- txHiresFullAlphaChannel  -->
                             <CheckBox x:Name="cboTxHiresFullAlphaChannel" 
@@ -565,9 +601,9 @@
                                   IsEnabled="{Binding TxHiresFullAlphaChannel_IsEnabled}"
                                   Content="Tx Hires Full Alpha Channel"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,42,0,0" 
+                                  Margin="10,14,0,0" 
                                   VerticalAlignment="Top" 
-                                  Width="171" Grid.Column="1" Grid.RowSpan="2"/>
+                                  Width="171" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
 
                             <!-- txHresAltCRC  -->
                             <CheckBox x:Name="cboTxHresAltCRC" 
@@ -577,9 +613,9 @@
                                   IsEnabled="{Binding TxHresAltCRC_IsEnabled}"
                                   Content="Tx Hires Alt CRC"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,14,0,0" 
+                                  Margin="10,42,0,0" 
                                   VerticalAlignment="Top" 
-                                  Width="171" Grid.Row="1" Grid.Column="1"/>
+                                  Width="171" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
 
                             <!-- txDump  -->
                             <CheckBox x:Name="cboDump" 
@@ -589,10 +625,10 @@
                                   IsEnabled="{Binding TxDump_IsEnabled}"
                                   Content="Tx Dump"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,41,0,0" 
+                                  Margin="10,42,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="171" 
-                                  Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"/>
+                                  Grid.Row="1" Grid.Column="2"/>
 
                             <!-- txCacheCompression  -->
                             <CheckBox x:Name="cboTxCacheCompression" 
@@ -614,7 +650,7 @@
                                   IsEnabled="{Binding TxForce16bpp_IsEnabled}"
                                   Content="Tx Force 16bpp"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,15,0,0" 
+                                  Margin="10,14,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="171" Grid.Column="2"/>
 
@@ -634,13 +670,13 @@
                             <Label Content="Tx Path"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="7,5,0,0" 
+                               Margin="7,7,0,0" 
                                VerticalAlignment="Top" 
                                Width="120" Grid.Row="3"/>
                             <Button x:Name="btnTxPathBrowse" 
                                 Style="{DynamicResource ButtonStyle}"
                                 Cursor="Hand"
-                                Margin="10,31,0,0" 
+                                Margin="10,34,0,0" 
                                 Click="btnTxPathBrowse_Click" Grid.Row="3" HorizontalAlignment="Left" Width="60" Height="22" VerticalAlignment="Top">
                                 <TextBlock Text="Browse"
                                        Margin="0,-2,0,0"/>
@@ -651,23 +687,23 @@
                                  Text="{Binding TxPath_Text}"
                                  IsEnabled="{Binding TxPath_IsEnabled}"
                                  HorizontalAlignment="Left" 
-                                 Margin="75,31,0,0" 
+                                 Margin="75,34,0,0" 
                                  Padding="2, 2, 0, 2" 
                                  VerticalAlignment="Top" 
                                  Height="22"
-                                 Width="405" Grid.ColumnSpan="3" Grid.Row="3"/>
+                                 Width="490" Grid.ColumnSpan="3" Grid.Row="3"/>
 
                             <!-- txCachePath -->
                             <Label Content="Tx Cache Path"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="7,4,0,0" 
+                               Margin="7,7,0,0" 
                                VerticalAlignment="Top" 
                                Width="120" Grid.Row="4"/>
                             <Button x:Name="btnTxCachePathBrowse" 
                                 Style="{DynamicResource ButtonStyle}"
                                 Cursor="Hand"
-                                Margin="10,30,0,0" 
+                                Margin="10,34,0,0" 
                                 Grid.Row="4" 
                                 Click="btnTxCachePathBrowse_Click" HorizontalAlignment="Left" Width="60" Height="22" VerticalAlignment="Top">
                                 <TextBlock Text="Browse"
@@ -679,24 +715,24 @@
                                  Text="{Binding TxCachePath_Text}"
                                  IsEnabled="{Binding TxCachePath_IsEnabled}"
                                  HorizontalAlignment="Left" 
-                                 Margin="75,30,0,0" 
+                                 Margin="75,34,0,0" 
                                  Padding="2, 2, 0, 2" 
                                  VerticalAlignment="Top" 
                                  Height="22"
-                                 Width="405" 
+                                 Width="490" 
                                  Grid.Row="4" Grid.ColumnSpan="3"/>
 
                             <!-- txDumpPath -->
                             <Label Content="Tx Dump Path"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="7,2,0,0" 
+                               Margin="7,5,0,0" 
                                VerticalAlignment="Top" 
                                Width="120" Grid.Row="5"/>
                             <Button x:Name="btnTxDumpPathBrowse" 
                                 Style="{DynamicResource ButtonStyle}"
                                 Cursor="Hand"
-                                Margin="10,28,0,0" 
+                                Margin="10,34,0,0" 
                                 Grid.Row="5" 
                                 Click="btnTxDumpPathBrowse_Click" HorizontalAlignment="Left" Width="60" Height="22" VerticalAlignment="Top">
                                 <TextBlock Text="Browse"
@@ -708,11 +744,11 @@
                                  Text="{Binding TxDumpPath_Text}"
                                  IsEnabled="{Binding TxDumpPath_IsEnabled}"
                                  HorizontalAlignment="Left" 
-                                 Margin="75,28,0,0" 
+                                 Margin="75,34,0,0" 
                                  Padding="2, 2, 0, 2" 
                                  VerticalAlignment="Top" 
                                  Height="22"
-                                 Width="405" 
+                                 Width="490" 
                                  Grid.Row="5" Grid.ColumnSpan="3"/>
 
                             <!-- Validity Check Method -->
@@ -733,7 +769,7 @@
                             <Label Content="Tx Filter Mode"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="5,5,0,0" 
+                               Margin="5,8,0,0" 
                                VerticalAlignment="Top" 
                                Width="120" 
                                Grid.Row="1"/>
@@ -745,7 +781,7 @@
                                   SelectedValue="{Binding TxFilterMode_SelectedItem}"
                                   IsEnabled="{Binding TxFilterMode_IsEnabled}"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,31,0,0" 
+                                  Margin="10,35,0,0" 
                                   VerticalAlignment="Top" 
                                   Height="22"
                                   Width="120" 
@@ -755,7 +791,7 @@
                             <Label Content="Tx Enhancement Mode"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="5,5,0,0" 
+                               Margin="5,8,0,0" 
                                VerticalAlignment="Top" 
                                Width="145" 
                                Grid.Row="2"/>
@@ -767,7 +803,7 @@
                                   SelectedValue="{Binding TxEnhancementMode_SelectedItem}"
                                   IsEnabled="{Binding TxEnhancementMode_IsEnabled}"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,31,0,0" 
+                                  Margin="10,35,0,0" 
                                   VerticalAlignment="Top" 
                                   Height="22"
                                   Width="120" 
@@ -791,7 +827,9 @@
                     <!-- Other -->
                     <GroupBox Header="Other" 
                           Style="{DynamicResource GroupBoxStyle}"
-                          Margin="10,10,10,9">
+                          Margin="10,10,10,9"
+                             Padding="0,22,0,0" 
+                              >
 
                         <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
@@ -799,15 +837,15 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="32"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
-                                <RowDefinition Height="27"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
@@ -819,11 +857,10 @@
                                   IsEnabled="{Binding EnableFBEmulation_IsEnabled}"
                                   Content="Enable FB Emulation"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,15,0,0" 
+                                  Margin="10,0,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="175" 
-                                  Grid.Row="0" 
-                                  Grid.ColumnSpan="2"/>
+                                  Grid.Row="0"/>
 
                             <!-- DisableFBInfo -->
                             <CheckBox x:Name="cboDisableFBInfo" 
@@ -833,11 +870,10 @@
                                   IsEnabled="{Binding DisableFBInfo_IsEnabled}"
                                   Content="Disable FB Info"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,10,0,0" 
+                                   Margin="10,0,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="175" 
-                                  Grid.Row="1" 
-                                  Grid.ColumnSpan="2"/>
+                                  Grid.Row="1"/>
 
                             <!-- ForceDepthBufferClear -->
                             <CheckBox x:Name="cboForceDepthBufferClear" 
@@ -847,11 +883,10 @@
                                   IsEnabled="{Binding ForceDepthBufferClear_IsEnabled}"
                                   Content="Force Depth Buffer Clear"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,10,0,0" 
+                                  Margin="10,0,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="175" 
-                                  Grid.Row="2" 
-                                  Grid.ColumnSpan="2"/>
+                                  Grid.Row="2"/>
 
                             <!-- FBInfoReadColorChunk -->
                             <CheckBox x:Name="cboFBInfoReadColorChunk" 
@@ -861,11 +896,10 @@
                                   IsEnabled="{Binding FBInfoReadColorChunk_IsEnabled}"
                                   Content="FB Info Read Color Chunk"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,10,0,0" 
+                                   Margin="10,0,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="175" 
-                                  Grid.Row="3" 
-                                  Grid.ColumnSpan="2"/>
+                                  Grid.Row="3"/>
 
                             <!-- FBInfoReadDepthChunk -->
                             <CheckBox x:Name="cboFBInfoReadDepthChunk" 
@@ -875,7 +909,7 @@
                                   IsEnabled="{Binding FBInfoReadDepthChunk_IsEnabled}"
                                   Content="FB Info Read Depth Chunk"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,10,0,0" 
+                                   Margin="10,0,0,0"  
                                   VerticalAlignment="Top" 
                                   Width="175" 
                                   Grid.Row="4" 
@@ -902,7 +936,7 @@
                                   IsEnabled="{Binding EnableN64DepthCompare_IsEnabled}"
                                   Content="Enable N64 Depth Compare"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,10,0,0" 
+                                   Margin="10,0,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="196"
                                   Grid.ColumnSpan="3" 
@@ -916,7 +950,7 @@
                                   IsEnabled="{Binding EnableCopyAuxiliaryToRDRAM_IsEnabled}"
                                   Content="Enable Copy Auxiliary To RDRAM"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,10,0,0" 
+                                   Margin="10,0,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="211" 
                                   Grid.Row="6" 
@@ -930,7 +964,7 @@
                                   IsEnabled="{Binding EnableCopyColorFromRDRAM_IsEnabled}"
                                   Content="Enable Copy Color From RDRAM"
                                   HorizontalAlignment="Left" 
-                                  Margin="10,10,0,0" 
+                                   Margin="10,0,0,0" 
                                   VerticalAlignment="Top" 
                                   Width="211" 
                                   Grid.Row="7" 
@@ -940,9 +974,9 @@
                             <Label Content="Enable Copy Color To RDRAM"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="3,4,0,0" 
+                               Margin="3,-7,0,0" 
                                VerticalAlignment="Top" 
-                               Width="181" Grid.Column="2" Grid.RowSpan="2"/>
+                               Width="181" Grid.Column="1"/>
                             <ComboBox x:Name="cboEnableCopyColorToRDRAM" 
                                   Style="{DynamicResource ComboBoxStyle}"
                                   ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
@@ -951,20 +985,19 @@
                                   SelectedValue="{Binding EnableCopyColorToRDRAM_SelectedItem}"
                                   IsEnabled="{Binding EnableCopyColorToRDRAM_IsEnabled}"
                                   HorizontalAlignment="Left" 
-                                  Margin="8,2,0,0" 
+                                  Margin="8,21,0,0" 
                                   VerticalAlignment="Top" 
                                   Height="22"
-                                  Width="120" 
-                                  Grid.Row="1" Grid.Column="2"/>
+                                  Width="120" Grid.Column="1" Grid.RowSpan="2"/>
 
                             <!-- Enable Copy Depth To RDRAM -->
                             <Label Content="Enable Copy Depth To RDRAM"
                                Style="{DynamicResource LabelStyle}"
                                HorizontalAlignment="Left"
-                               Margin="2,5,0,0" 
+                               Margin="2,23,0,0" 
                                VerticalAlignment="Top" 
                                Width="180" 
-                               Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
+                               Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"/>
                             <ComboBox x:Name="cboEnableCopyDepthToRDRAM" 
                                   Style="{DynamicResource ComboBoxStyle}"
                                   ItemContainerStyle="{DynamicResource ComboBoxStyleItem}"
@@ -973,11 +1006,11 @@
                                   SelectedValue="{Binding EnableCopyDepthToRDRAM_SelectedItem}"
                                   IsEnabled="{Binding EnableCopyDepthToRDRAM_IsEnabled}"
                                   HorizontalAlignment="Left" 
-                                  Margin="7,7,0,0" 
+                                  Margin="7,21,0,0" 
                                   VerticalAlignment="Top" 
                                   Height="22"
                                   Width="120"
-                                  Grid.Row="3" Grid.Column="2" Grid.RowSpan="2"/>
+                                  Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"/>
                         </Grid>
                     </GroupBox>
 
@@ -1171,7 +1204,7 @@
                        Style="{DynamicResource LabelStyle}"
                        DataContext="{Binding Plugins_Video_GLideN64_View}"
                        Content="{Binding Save_Text}" 
-                       Margin="0,0,179,17" 
+                       Margin="0,0,181,16" 
                        HorizontalAlignment="Right"
                        HorizontalContentAlignment="Right"
                        Width="50" 
