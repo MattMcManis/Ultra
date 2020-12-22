@@ -39,6 +39,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using ViewModel;
+using System.Windows.Data;
 
 namespace Ultra
 {
@@ -457,8 +458,6 @@ namespace Ultra
             // -------------------------
             MupenCfg.ReadMupen64PlusCfg();
 
-            //Task<int> initPlugins = Parse.InitPluginsAsync();
-            //int count = await task;
             // -------------------------
             // Scan Plugins
             // -------------------------
@@ -467,7 +466,7 @@ namespace Ultra
             // -------------------------
             // Load Plugins
             // -------------------------
-            MupenCfg.LoadPlugins();
+            MupenCfg.LoadPlugins(this);
 
             // -------------------------
             // Parse ROMs List
@@ -1222,12 +1221,12 @@ namespace Ultra
         //{
         //    Game.m64pEmulator.Abort();
         //}
-        public static bool stopped = false;
+        public static bool stopper = false;
         private void Stop_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (Mupen64PlusAPI.api != null)
             {
-                stopped = true;
+                stopper = true;
                 Mupen64PlusAPI.api.Stop(); // Calls Dispose()
                 GC.Collect();
             }
@@ -1241,7 +1240,7 @@ namespace Ultra
             // API reset crashes, do it manually
             if (Mupen64PlusAPI.api != null)
             {
-                stopped = true;
+                stopper = true;
                 Mupen64PlusAPI.api.Stop();
                 GC.Collect();
             }
