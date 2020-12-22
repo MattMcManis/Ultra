@@ -276,7 +276,7 @@ namespace Ultra
                 VM.PluginsView.Video_Items.Count > 0)
             {
                 List<string> videoPluginNames = VM.PluginsView.Video_Items.Select(item => item.Name).ToList();
-
+                //MessageBox.Show(string.Join("\r\n", videoPluginNames)); //debug
                 // GLideN64
                 if (videoPluginNames.Contains("mupen64plus-video-GLideN64.dll"))
                 {
@@ -315,7 +315,7 @@ namespace Ultra
                 // First
                 else
                 {
-                    VM.PluginsView.Video_SelectedIndex = 0;
+                    VM.PluginsView.Video_SelectedIndex = -1;
                 }
             }
 
@@ -335,7 +335,7 @@ namespace Ultra
                 // First
                 else
                 {
-                    VM.PluginsView.Audio_SelectedIndex = 0;
+                    VM.PluginsView.Audio_SelectedIndex = -1;
                 }
             }
 
@@ -355,7 +355,7 @@ namespace Ultra
                 // First
                 else
                 {
-                    VM.PluginsView.Input_SelectedIndex = 0;
+                    VM.PluginsView.Input_SelectedIndex = -1;
                 }
             }
 
@@ -400,7 +400,7 @@ namespace Ultra
                 // First
                 else
                 {
-                    VM.PluginsView.RSP_SelectedIndex = 0;
+                    VM.PluginsView.RSP_SelectedIndex = -1;
                 }
             }
         }
