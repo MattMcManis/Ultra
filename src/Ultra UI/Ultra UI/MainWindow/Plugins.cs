@@ -59,8 +59,8 @@ namespace Ultra
                 // RSP
                 { "RSPHLE",   new RSPHLEWindow() },
                 { "CXD4",   new RSPcxd4Window() },
-                { "CXD4 SSE2",   new RSPcxd4SSE2Window() },
-                { "CXD4 SSSE3",   new RSPcxd4SSSE3Window() },
+                //{ "CXD4 SSE2",   new RSPcxd4SSE2Window() },
+                //{ "CXD4 SSSE3",   new RSPcxd4SSSE3Window() },
             };
         }
 
@@ -211,12 +211,14 @@ namespace Ultra
 
                 // CXD4 SSE2
                 case "mupen64plus-rsp-cxd4-sse2.dll":
-                    OpenPluginWindow((Window)_window["CXD4 SSE2"], "CXD4 SSE2");
+                    OpenPluginWindow((Window)_window["CXD4"], "CXD4");
+                    //OpenPluginWindow((Window)_window["CXD4 SSE2"], "CXD4 SSE2");
                     break;
 
                 // CXD4 SSSE3
                 case "mupen64plus-rsp-cxd4-ssse3.dll":
-                    OpenPluginWindow((Window)_window["CXD4 SSSE3"], "CXD4 SSSE3");
+                    OpenPluginWindow((Window)_window["CXD4"], "CXD4");
+                    //OpenPluginWindow((Window)_window["CXD4 SSSE3"], "CXD4 SSSE3");
                     break;
 
                 // Unknown
