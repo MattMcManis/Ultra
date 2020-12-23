@@ -199,6 +199,16 @@ namespace Ultra
             //                    MessageBoxImage.Warning);
             //}
         }
+        public static async Task<int> ScanGameFilesAsync(MainWindow mainwindow)
+        {
+            int count = 0;
+            await Task.Run(() =>
+            {
+                ScanGameFiles();
+            });
+
+            return count;
+        }
 
 
         /// <summary>
@@ -241,7 +251,7 @@ namespace Ultra
             try
             {
                 mainwindow.Dispatcher.BeginInvoke((Action)(() => // must use dispatch to cross-thread
-                {        
+                {
                     // Clear Games List to prevent doubling up
                     if (VM.MainView.Games_Items != null)
                     {
@@ -271,6 +281,16 @@ namespace Ultra
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
             }
+        }
+        public static async Task<int> ParseGamesListAsync(MainWindow mainwindow)
+        {
+            int count = 0;
+            await Task.Run(() =>
+            {
+                ParseGamesList(mainwindow);
+            });
+
+            return count;
         }
 
 
@@ -307,39 +327,39 @@ namespace Ultra
                     {
                         // Video
                         foundVideoPluginsList = Directory
-                                               .EnumerateFiles(VM.PathsView.Plugins_Text)
-                                               //.Select(System.IO.Path.GetFileName)
-                                               .Select(System.IO.Path.GetFullPath)
-                                               .Where(file => file.ToLower().Contains("mupen64plus-video-"))
-                                               .Where(file => file.ToLower().EndsWith("dll"))
-                                               .ToList();
+                                                .EnumerateFiles(VM.PathsView.Plugins_Text)
+                                                //.Select(System.IO.Path.GetFileName)
+                                                .Select(System.IO.Path.GetFullPath)
+                                                .Where(file => file.ToLower().Contains("mupen64plus-video-"))
+                                                .Where(file => file.ToLower().EndsWith("dll"))
+                                                .ToList();
 
                         // Audio
                         foundAudioPluginsList = Directory
-                                               .EnumerateFiles(VM.PathsView.Plugins_Text)
-                                               //.Select(System.IO.Path.GetFileName)
-                                               .Select(System.IO.Path.GetFullPath)
-                                               .Where(file => file.ToLower().Contains("mupen64plus-audio-"))
-                                               .Where(file => file.ToLower().EndsWith("dll"))
-                                               .ToList();
+                                                .EnumerateFiles(VM.PathsView.Plugins_Text)
+                                                //.Select(System.IO.Path.GetFileName)
+                                                .Select(System.IO.Path.GetFullPath)
+                                                .Where(file => file.ToLower().Contains("mupen64plus-audio-"))
+                                                .Where(file => file.ToLower().EndsWith("dll"))
+                                                .ToList();
 
                         // Input
                         foundInputPluginsList = Directory
-                                               .EnumerateFiles(VM.PathsView.Plugins_Text)
-                                               //.Select(System.IO.Path.GetFileName)
-                                               .Select(System.IO.Path.GetFullPath)
-                                               .Where(file => file.ToLower().Contains("mupen64plus-input-"))
-                                               .Where(file => file.ToLower().EndsWith("dll"))
-                                               .ToList();
+                                                .EnumerateFiles(VM.PathsView.Plugins_Text)
+                                                //.Select(System.IO.Path.GetFileName)
+                                                .Select(System.IO.Path.GetFullPath)
+                                                .Where(file => file.ToLower().Contains("mupen64plus-input-"))
+                                                .Where(file => file.ToLower().EndsWith("dll"))
+                                                .ToList();
 
                         // RSP
                         foundRSPPluginsList = Directory
-                                              .EnumerateFiles(VM.PathsView.Plugins_Text)
-                                              //.Select(System.IO.Path.GetFileName)
-                                              .Select(System.IO.Path.GetFullPath)
-                                              .Where(file => file.ToLower().Contains("mupen64plus-rsp-"))
-                                              .Where(file => file.ToLower().EndsWith("dll"))
-                                              .ToList();
+                                                .EnumerateFiles(VM.PathsView.Plugins_Text)
+                                                //.Select(System.IO.Path.GetFileName)
+                                                .Select(System.IO.Path.GetFullPath)
+                                                .Where(file => file.ToLower().Contains("mupen64plus-rsp-"))
+                                                .Where(file => file.ToLower().EndsWith("dll"))
+                                                .ToList();
 
                         //MessageBox.Show(string.Join("\r\n", foundVideoPluginsList)); //debug
                     }
@@ -574,7 +594,6 @@ namespace Ultra
                     }
                 }
             }
-
         }
 
 
