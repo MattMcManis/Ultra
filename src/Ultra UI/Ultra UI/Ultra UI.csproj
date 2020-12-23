@@ -146,7 +146,7 @@
     <Compile Include="ViewModel\Main\DisplayViewModel.cs" />
     <Compile Include="ViewModel\Plugins\Audio\AudioSDLViewModel.cs" />
     <Compile Include="ViewModel\Plugins\Input\InputSDLViewModel.cs" />
-    <Compile Include="ViewModel\Plugins\RSP\cdx4SSSE2ViewMode.cs" />
+    <Compile Include="ViewModel\Plugins\RSP\cdx4SSSE2ViewModel.cs" />
     <Compile Include="ViewModel\Plugins\RSP\cdx4ViewModel.cs" />
     <Compile Include="ViewModel\Plugins\RSP\cdx4SSSE3ViewModel.cs" />
     <Compile Include="ViewModel\Plugins\RSP\RSPHLEViewModel.cs" />
