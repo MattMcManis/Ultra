@@ -94,10 +94,13 @@ Requires
 
 * Ultra UI Config  
   `C:\Users\<username>\AppData\Roaming\Ultra UI\ultra.conf`
+  
 * Mupen64Plus Config  
   `C:\Users\<username>\AppData\Roaming\Mupen64Plus\mupen64plus.cfg`
+  
 * Saves  
   `C:\Users\<username>\AppData\Roaming\Mupen64Plus\save\`
+  
 * Screenshots  
   `C:\Users\<username>\AppData\Roaming\Mupen64Plus\screenshot\`
 
@@ -111,9 +114,17 @@ Requires
 
 **Resolution**
 
-- If `Windowed`, select `4:3` aspect ratio to avoid black bars on sides.
-- If `Fullscreen`, select your monitors actual aspect ratio, such as `16:9`, or else `4:3` will stretch to fit your screen.
-- If you want an extended view, select a `16:9` resolution, and in the Plugin select `Aspect Ratio Force 16:9` or `Widescreen`.
+- If `Windowed`, select `4:3` aspect ratio to avoid black bars on sides.  
+  [Screenshot (black bars)](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Display%20Settings/02%20Windowed%2016-9.jpg)  
+  [Screenshot (fit)](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Display%20Settings/01%20Windowed%204-3.jpg)
+
+- If `Fullscreen`, select your monitor's actual aspect ratio, such as `16:9`, then select the Plugin's option `Force 4:3`, or else it will stretch to fit your screen.  
+  [Screenshot (stretched)](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Display%20Settings/03%20Fullscreen%204-3%20%28stretched%29.jpg)  
+  [Screenshot (native)](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Display%20Settings/04%20Fullscreen%2016-9%20%28Plugin%20Force%204-3%29.jpg)
+
+- If you want an extended view, select a `16:9` resolution, and in the Plugin select `Aspect Ratio Adjust` or `Widescreen`.  
+  [Screenshot (widescreen)](https://raw.githubusercontent.com/MattMcManis/Ultra/master/docs/Display%20Settings/05%20Fullscreen%2016-9%20%28Plugin%20Aspect%20Adjust%29.jpg)
+
 - If game is slow, select a lower resolution.
 
 &nbsp;
