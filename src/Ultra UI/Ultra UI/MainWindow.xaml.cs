@@ -463,13 +463,11 @@ namespace Ultra
             MupenCfg.LoadPlugins(this);
 
             // -------------------------
-            // Scan Game Files
             // Parse ROMs List
             // -------------------------
-            Task<int> games = Parse.ScanAndParseGamesAsync(this);
-            int count = await games;
-            //Parse.ScanGameFiles();
-            //Parse.ParseGamesList();
+            // Do not scan for game files at startup, it will be slow. Only parse the list from ultra.conf.
+            Task<int> parseGames = Parse.ParseGamesListAsync(this);
+            int count = await parseGames;
 
             // -------------------------
             // utlra.conf initialize
