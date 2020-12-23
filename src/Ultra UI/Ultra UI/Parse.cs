@@ -51,132 +51,160 @@ namespace Ultra
         /// </summary>
         public static void ScanGameFiles()
         {
+            // Check if ROMs path is empty
+            if (string.IsNullOrWhiteSpace(VM.PathsView.ROMs_Text))
+            {
+                return;
+            }
+
             // Check if Paths ROMs TextBox is Empty
-            if (MainWindow.IsValidPath(VM.PathsView.ROMs_Text))
+            if (MainWindow.IsValidPath(VM.PathsView.ROMs_Text) == false)
             {
-                // Check if Directory exists
-                if (Directory.Exists(VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\"))
-                {
-                    List<string> romsList = new List<string>();
-
-                    // Scan PC Directory
-                    try
-                    {
-                        romsList = Directory.GetFiles(VM.PathsView.ROMs_Text, "*.*", SearchOption.AllDirectories)
-                                   .Where(file => file.ToLower().EndsWith("n64") || file.ToLower().EndsWith("v64") || file.ToLower().EndsWith("z64"))
-                                   .ToList();
-
-                        // ROM files not found
-                        if (romsList.Count <= 0)
-                        {
-                            MessageBox.Show("N64 ROM files (.n64, .v64, .z64) not found.",
-                                            "Notice",
-                                            MessageBoxButton.OK,
-                                            MessageBoxImage.Warning);
-                        }
-                    }
-                    // Error
-                    catch
-                    {
-                        MessageBox.Show("Could not scan ROMs folder.",
-                                        "Error",
-                                        MessageBoxButton.OK,
-                                        MessageBoxImage.Error);
-                    }
-
-                    // -------------------------
-                    // Write Game Paths to ultra.conf
-                    // -------------------------
-                    Configure.ConigFile conf = null; // Initialize Read & Write
-
-                    try
-                    {
-                        // Read
-                        conf = new Configure.ConigFile(MainWindow.ultraConfFile);
-                    }
-                    // Error
-                    catch
-                    {
-                        //MessageBox.Show("Could not save ROMs list to ultra.conf.",
-                        //                "Error",
-                        //                MessageBoxButton.OK,
-                        //                MessageBoxImage.Error);
-                    }
-
-                    // Only if conf can be read/written
-                    if (conf != null)
-                    {
-                        // -------------------------
-                        // [ROMs]
-                        // -------------------------
-                        // Clear ROMs List
-                        List<string> romsConfList = new List<string>();
-
-                        // Count ROM Paths in ultra.conf
-                        for (int i = 0; i < 999; i++)
-                        {
-                            // Read
-                            romsConfList.Add(conf.Read("ROMs", i.ToString()));
-                        }
-                        romsConfList = romsConfList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
-
-                        // -------------------------
-                        // Write ROM File Paths to ultra.conf
-                        // -------------------------
-                        // ultra.conf actions to write
-                        List<Action> actionsToWrite = new List<Action>
-                        {
-                            // Clear Missing ROM Paths
-                            new Action(() =>
-                            {
-                                for (int i = 0; i < romsConfList.Count; i++)
-                                {
-                                    Configure.ConigFile.conf.Write("ROMs", i.ToString(), string.Empty);
-                                }
-                            }),
-
-                            // Write ROM Paths
-                            new Action(() =>
-                            {
-                                for (int i = 0; i < romsList.Count; i++)
-                                {
-                                    Configure.ConigFile.conf.Write("ROMs", i.ToString(), romsList[i]);
-                                }
-                            }),
-                        };
-
-                        // Save Config
-                        Configure.WriteUltraConf(MainWindow.ultraConfDir, // Directory: %AppData%\Ultra UI\
-                                                 "ultra.conf",            // Filename
-                                                 actionsToWrite           // Actions to write
-                                                 );
-                    }
-                    
-                }
-                // ROM Path Error
-                else
-                {
-                    MessageBox.Show("ROMs folder does not exist.",
-                                    "Error",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
-                }
-            }
-            // ROM Path Error
-            else
-            {
-                MessageBox.Show("ROMs Path is empty.",
-                                "Notice",
+                MessageBox.Show("ROMs folder path is not valid.",
+                                "Error",
                                 MessageBoxButton.OK,
-                                MessageBoxImage.Warning);
+                                MessageBoxImage.Error);
+
+                return;
             }
+
+            // Check if Directory exists
+            if (Directory.Exists(VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\") == false)
+            {
+                MessageBox.Show("ROMs folder does not exist.",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                return;
+            }
+
+
+            // Check if Paths ROMs TextBox is Empty
+            //if (MainWindow.IsValidPath(VM.PathsView.ROMs_Text))
+            //{
+            // Check if Directory exists
+            //if (Directory.Exists(VM.PathsView.ROMs_Text.TrimEnd('\\') + @"\"))
+            //{
+            List<string> romsList = new List<string>();
+
+            // Scan PC Directory
+            try
+            {
+                romsList = Directory.GetFiles(VM.PathsView.ROMs_Text, "*.*", SearchOption.AllDirectories)
+                            .Where(file => file.ToLower().EndsWith("n64") || file.ToLower().EndsWith("v64") || file.ToLower().EndsWith("z64"))
+                            .ToList();
+
+                // ROM files not found
+                if (romsList.Count <= 0)
+                {
+                    MessageBox.Show("N64 ROM files (.n64, .v64, .z64) not found.",
+                                    "Notice",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+                }
+            }
+            // Error
+            catch
+            {
+                MessageBox.Show("Could not scan ROMs folder.",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
+
+            // -------------------------
+            // Write Game Paths to ultra.conf
+            // -------------------------
+            Configure.ConigFile conf = null; // Initialize Read & Write
+
+            try
+            {
+                // Read
+                conf = new Configure.ConigFile(MainWindow.ultraConfFile);
+            }
+            // Error
+            catch
+            {
+                //MessageBox.Show("Could not save ROMs list to ultra.conf.",
+                //                "Error",
+                //                MessageBoxButton.OK,
+                //                MessageBoxImage.Error);
+            }
+
+            // Only if conf can be read/written
+            if (conf != null)
+            {
+                // -------------------------
+                // [ROMs]
+                // -------------------------
+                // Clear ROMs List
+                List<string> romsConfList = new List<string>();
+
+                // Count ROM Paths in ultra.conf
+                for (int i = 0; i < 999; i++)
+                {
+                    // Read
+                    romsConfList.Add(conf.Read("ROMs", i.ToString()));
+                }
+                romsConfList = romsConfList.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+
+                // -------------------------
+                // Write ROM File Paths to ultra.conf
+                // -------------------------
+                // ultra.conf actions to write
+                List<Action> actionsToWrite = new List<Action>
+                {
+                    // Clear Missing ROM Paths
+                    new Action(() =>
+                    {
+                        for (int i = 0; i < romsConfList.Count; i++)
+                        {
+                            Configure.ConigFile.conf.Write("ROMs", i.ToString(), string.Empty);
+                        }
+                    }),
+
+                    // Write ROM Paths
+                    new Action(() =>
+                    {
+                        for (int i = 0; i < romsList.Count; i++)
+                        {
+                            Configure.ConigFile.conf.Write("ROMs", i.ToString(), romsList[i]);
+                        }
+                    }),
+                };
+
+                // Save Config
+                Configure.WriteUltraConf(MainWindow.ultraConfDir, // Directory: %AppData%\Ultra UI\
+                                            "ultra.conf",            // Filename
+                                            actionsToWrite           // Actions to write
+                                            );
+            }
+
+            //}
+            //    // ROM Path Error
+            //    else
+            //    {
+            //        MessageBox.Show("ROMs folder does not exist.",
+            //                        "Error",
+            //                        MessageBoxButton.OK,
+            //                        MessageBoxImage.Error);
+            //    }
+            //}
+            //// ROM Path Error
+            //else
+            //{
+            //    MessageBox.Show("ROMs Path is empty.",
+            //                    "Notice",
+            //                    MessageBoxButton.OK,
+            //                    MessageBoxImage.Warning);
+            //}
         }
 
 
         /// <summary>
         /// Parse Games List from ultra.conf
         /// </summary>
-        public static void ParseGamesList()
+        public static void ParseGamesList(MainWindow mainwindow)
         {
             // -------------------------
             // Parse ultra.conf
@@ -212,30 +240,33 @@ namespace Ultra
             // -------------------------
             try
             {
-                // Clear Games List to prevent doubling up
-                if (VM.MainView.Games_Items != null)
-                {
-                    VM.MainView.Games_Items.Clear();
-                }
-
-                // Alphabetize
-                romsList.Sort();
-
-                // Add ROMs to Games ListView
-                for (int i = 0; i < romsList.Count; i++)
-                {
-                    VM.MainView.Games_Items.Add(new MainViewModel.Games()
+                mainwindow.Dispatcher.BeginInvoke((Action)(() => // must use dispatch to cross-thread
+                {        
+                    // Clear Games List to prevent doubling up
+                    if (VM.MainView.Games_Items != null)
                     {
-                        FullPath = romsList[i],
-                        Directory = System.IO.Path.GetDirectoryName(romsList[i]),
-                        Name = System.IO.Path.GetFileNameWithoutExtension(romsList[i])
-                    });
-                }
+                        VM.MainView.Games_Items.Clear();
+                    }
+
+                    // Alphabetize
+                    romsList.Sort();
+
+                    // Add ROMs to Games ListView
+                    for (int i = 0; i < romsList.Count; i++)
+                    {
+                        VM.MainView.Games_Items.Add(new MainViewModel.Games()
+                        {
+                            FullPath = romsList[i],
+                            Directory = System.IO.Path.GetDirectoryName(romsList[i]),
+                            Name = System.IO.Path.GetFileNameWithoutExtension(romsList[i])
+                        });
+                    }
+                }));
             }
-            catch
+            catch (Exception ex)
             {
                 //Console.WriteLine("Problem parsing Games List. Please try another Proxy.");
-                MessageBox.Show("Problem reading Games List.",
+                MessageBox.Show("Problem reading Games List.\r\n\r\n" + ex.ToString(),
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
@@ -313,9 +344,9 @@ namespace Ultra
                         //MessageBox.Show(string.Join("\r\n", foundVideoPluginsList)); //debug
                     }
                     // Error
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Could not scan Plugins folder.",
+                        MessageBox.Show("Could not scan Plugins folder.\r\n\r\n" + ex.ToString(),
                                         "Error",
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Error);
@@ -388,9 +419,9 @@ namespace Ultra
                         }
                     }
                     // Error
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Problem adding Video Plugin dll's to dropdown menu.",
+                        MessageBox.Show("Problem adding Video Plugin dll's to dropdown menu.\r\n\r\n" + ex.ToString(),
                                         "Error",
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Error);
@@ -432,9 +463,9 @@ namespace Ultra
                         }
                     }
                     // Error
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Problem adding Audio Plugin dll's to dropdown menu.",
+                        MessageBox.Show("Problem adding Audio Plugin dll's to dropdown menu.\r\n\r\n" + ex.ToString(),
                                         "Error",
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Error);
@@ -476,9 +507,9 @@ namespace Ultra
                         }
                     }
                     // Error
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Problem adding Input Plugin dll's to dropdown menu.",
+                        MessageBox.Show("Problem adding Input Plugin dll's to dropdown menu.\r\n\r\n" + ex.ToString(),
                                         "Error",
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Error);
@@ -520,9 +551,9 @@ namespace Ultra
                         }
                     }
                     // Error
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Problem adding RSP Plugin dll's to dropdown menu.",
+                        MessageBox.Show("Problem adding RSP Plugin dll's to dropdown menu.\r\n\r\n" + ex.ToString(),
                                         "Error",
                                         MessageBoxButton.OK,
                                         MessageBoxImage.Error);
@@ -547,6 +578,20 @@ namespace Ultra
         }
 
 
+        /// <summary>
+        /// Scan And Parse Games Async
+        /// </summary>
+        public static async Task<int> ScanAndParseGamesAsync(MainWindow mainwindow)
+        {
+            int count = 0;
+            await Task.Run(() =>
+            {
+                ScanGameFiles();
+                ParseGamesList(mainwindow);
+            });
+
+            return count;
+        }
 
     }
 }
