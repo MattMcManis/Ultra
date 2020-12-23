@@ -78,11 +78,17 @@ namespace Ultra
         /// <summary>
         /// Reload Games List
         /// </summary>
-        private void btnRebuildList_Click(object sender, RoutedEventArgs e)
+        private async void btnRebuildList_Click(object sender, RoutedEventArgs e)
         {
             // ROMs List
-            Parse.ScanGameFiles();
-            Parse.ParseGamesList();
+            //Parse.ScanGameFiles();
+            //Parse.ParseGamesList(this);
+            // -------------------------
+            // Scan Game Files
+            // Parse ROMs List
+            // -------------------------
+            Task<int> games = Parse.ScanAndParseGamesAsync(this);
+            int count = await games;
         }
 
         /// <summary>
