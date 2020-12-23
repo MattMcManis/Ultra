@@ -72,13 +72,13 @@ namespace Ultra
                 //wc.Headers.Add("accept-encoding", "gzip, deflate, br"); //error
 
                 // -------------------------
-                // Parse GitHub .version file
+                // Parse GitHub version file
                 // -------------------------
                 string parseLatestVersion = string.Empty;
 
                 try
                 {
-                    parseLatestVersion = wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Ultra/master/.version");
+                    parseLatestVersion = wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Ultra/master/version");
                 }
                 catch
                 {
@@ -234,13 +234,13 @@ namespace Ultra
                     //wc.Headers.Add("accept-encoding", "gzip, deflate, br"); //error
 
                     // -------------------------
-                    // Parse GitHub .version file
+                    // Parse GitHub version file
                     // -------------------------
                     string parseLatestVersion = string.Empty;
 
                     try
                     {
-                        parseLatestVersion = wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Ultra/master/.version");
+                        parseLatestVersion = wc.DownloadString("https://raw.githubusercontent.com/MattMcManis/Ultra/master/version");
                     }
                     catch
                     {
