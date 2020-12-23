@@ -169,16 +169,9 @@ namespace Ultra
             // -------------------------
             // Set Paths
             // -------------------------
-            // Mupen64Plus Folder
-            // Folder with mupen64plus.dll (Hardcoded for now, can't change location)
-            //VM.PathsView.Mupen_Text = appRootDir;
-
             // Config Folder
             // Mupen Config File mupen64plus.cfg (Hardcoded for now, can't change location)
             VM.PathsView.Config_Text = appDataRoamingDir + @"Mupen64Plus\";
-
-            // Plugins Folder
-            //VM.PathsView.Plugins_Text = appRootDir;
 
             // -------------------------
             // ultra.conf actions to read
@@ -382,7 +375,7 @@ namespace Ultra
         /// <summary>
         /// Window Loaded
         /// </summary>
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow = this;
 
@@ -470,9 +463,13 @@ namespace Ultra
             MupenCfg.LoadPlugins(this);
 
             // -------------------------
+            // Scan Game Files
             // Parse ROMs List
             // -------------------------
-            Parse.ParseGamesList();
+            Task<int> games = Parse.ScanAndParseGamesAsync(this);
+            int count = await games;
+            //Parse.ScanGameFiles();
+            //Parse.ParseGamesList();
 
             // -------------------------
             // utlra.conf initialize
