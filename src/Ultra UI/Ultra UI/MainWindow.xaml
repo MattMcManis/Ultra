@@ -510,7 +510,7 @@
 
                             <!-- Games List -->
                             <ListView Margin="0,0,0,0" 
-                                      Padding="6,6,6,6"
+                                      Padding="10,12,10,10"
                                       Name="listViewGames" 
                                       IsSynchronizedWithCurrentItem="False"
                                       SelectionMode="Single"
