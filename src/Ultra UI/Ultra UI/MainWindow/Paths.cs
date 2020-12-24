@@ -41,6 +41,24 @@ namespace Ultra
         /// </summary>
         public static string SetMupen64PlusExe()
         {
+            // Check if Mupen64Plus Path is empty
+            if (string.IsNullOrWhiteSpace(VM.PathsView.Mupen_Text))
+            {
+                return string.Empty;
+            }
+
+            // Check if Mupen64Plus Path is valid
+            if (IsValidPath(VM.PathsView.Mupen_Text) == false)
+            {
+                return string.Empty;
+            }
+
+            // Check if Mupen64Plus Directory exists
+            if (Directory.Exists(VM.PathsView.Mupen_Text.TrimEnd('\\') + @"\") == false)
+            {
+                return string.Empty;
+            }
+
             // mupen64plus-ui-console.exe
             if (File.Exists(Path.Combine(VM.PathsView.Mupen_Text, "mupen64plus-ui-console.exe")))
             {
@@ -67,6 +85,24 @@ namespace Ultra
         /// </summary>
         public static string SetMupen64PlusDll()
         {
+            // Check if Mupen64Plus Path is empty
+            if (string.IsNullOrWhiteSpace(VM.PathsView.Mupen_Text))
+            {
+                return string.Empty;
+            }
+
+            // Check if Mupen64Plus Path is valid
+            if (IsValidPath(VM.PathsView.Mupen_Text) == false)
+            {
+                return string.Empty;
+            }
+
+            // Check if Mupen64Plus Directory exists
+            if (Directory.Exists(VM.PathsView.Mupen_Text.TrimEnd('\\') + @"\") == false)
+            {
+                return string.Empty;
+            }
+
             // mupen64plus-ui-console.exe
             if (File.Exists(Path.Combine(VM.PathsView.Mupen_Text, "mupen64plus.dll")))
             {
@@ -288,15 +324,13 @@ namespace Ultra
             //string mupen64plusExeFolder = string.Empty;
 
             // -------------------------
-            // Mupen64Plus Exe Path
+            // Mupen64Plus Dll Path
             // -------------------------
             // -------------------------
             // Path TextBox is Empty
             // Check if Ultra.exe is in the Mupen64Plus folder 
             // -------------------------
-            if (File.Exists(Path.Combine(appRootDir, "mupen64plus-ui-console.exe")) ||
-                File.Exists(Path.Combine(appRootDir, "mupen64plus.exe")) ||
-                File.Exists(Path.Combine(appRootDir, "mupen64.exe")))
+            if (File.Exists(Path.Combine(appRootDir, "mupen64plus.dll")))
             {
                 VM.PathsView.Mupen_Text = appRootDir;
             }
@@ -305,11 +339,27 @@ namespace Ultra
             // -------------------------
             else
             {
-                MessageBox.Show("Could not find Mupen64Plus exe.\n\nPlease place Ultra.exe in the Mupen64Plus folder.",
+                MessageBox.Show("Could not find mupen64plus.dll.\n\nPlease place Ultra.exe in the Mupen64Plus folder.",
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
             }
+            //if (File.Exists(Path.Combine(appRootDir, "mupen64plus-ui-console.exe")) ||
+            //    File.Exists(Path.Combine(appRootDir, "mupen64plus.exe")) ||
+            //    File.Exists(Path.Combine(appRootDir, "mupen64.exe")))
+            //{
+            //    VM.PathsView.Mupen_Text = appRootDir;
+            //}
+            //// -------------------------
+            //// Exe Not Found
+            //// -------------------------
+            //else
+            //{
+            //    MessageBox.Show("Could not find Mupen64Plus exe.\n\nPlease place Ultra.exe in the Mupen64Plus folder.",
+            //                    "Notice",
+            //                    MessageBoxButton.OK,
+            //                    MessageBoxImage.Warning);
+            //}
 
             // -------------------------
             // Cofig Path
