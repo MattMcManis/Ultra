@@ -88,19 +88,19 @@ namespace Ultra
         public void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             // Progress Info
-            this.Dispatcher.BeginInvoke((Action)(() =>
+            this.Dispatcher.Invoke(() =>
             {
                 this.labelProgressInfo.Content = progressInfo;
-            }));
+            });
 
             // Progress Bar
-            this.Dispatcher.BeginInvoke((Action)(() =>
+            this.Dispatcher.Invoke(() =>
             {
                 double bytesIn = double.Parse(e.BytesReceived.ToString());
                 double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
                 double percentage = bytesIn / totalBytes * 100;
                 this.progressBar.Value = int.Parse(Math.Truncate(percentage).ToString());
-            }));
+            });
         }
 
         // -------------------------
@@ -110,10 +110,10 @@ namespace Ultra
         {
             // Set the waiter Release
             // Must be here
-            this.Dispatcher.BeginInvoke((Action)(() =>
+            this.Dispatcher.Invoke(() =>
             {
                 waiter.Set();
-            }));
+            });
         }
 
         // -------------------------
