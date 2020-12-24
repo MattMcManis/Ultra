@@ -452,22 +452,24 @@ namespace Ultra
             // -------------------------
             MupenCfg.ReadMupen64PlusCfg();
 
-            // -------------------------
-            // Scan Plugins
-            // -------------------------
-            Parse.ScanPlugins();
+            //// -------------------------
+            //// Scan Plugins
+            //// -------------------------
+            //Parse.ScanPlugins();
 
-            // -------------------------
-            // Load Plugins
-            // -------------------------
-            MupenCfg.LoadPlugins(this);
+            //// -------------------------
+            //// Load Plugins
+            //// -------------------------
+            //MupenCfg.LoadPlugins(this);
+            Task<int> scan_load_plugins = Parse.ScanAndLoadPluginsAsync(this);
+            int count1 = await scan_load_plugins;
 
             // -------------------------
             // Parse ROMs List
             // -------------------------
             // Do not scan for game files at startup, it will be slow. Only parse the list from ultra.conf.
-            Task<int> parseGames = Parse.ParseGamesListAsync(this);
-            int count = await parseGames;
+            Task<int> parse_games = Parse.ParseGamesListAsync(this);
+            int count2 = await parse_games;
 
             // -------------------------
             // utlra.conf initialize
@@ -538,7 +540,7 @@ namespace Ultra
             // -------------------------
             // Check for Available Updates
             // -------------------------
-            Task<int> updates = UpdateAvailableCheck();
+            Task<int> update = UpdateAvailableCheck();
         }
 
 
@@ -1351,7 +1353,8 @@ namespace Ultra
             // -------------------------
             // Plugins
             // -------------------------
-            Parse.ScanPlugins();
+            // Do not use Async here or PluginDefaults() will trigger too early
+            Parse.ScanPlugins(this);
 
             // -------------------------
             // Plugins Defaults
