@@ -89,8 +89,6 @@ namespace Ultra
             // -------------------------
             Task<int> games = Parse.ScanAndParseGamesAsync(this);
             int count = await games;
-
-
         }
 
         /// <summary>
