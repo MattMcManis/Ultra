@@ -75,7 +75,6 @@ namespace Ultra
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
-
                 return;
             }
 
@@ -86,7 +85,6 @@ namespace Ultra
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
-
                 return;
             }
 
@@ -97,7 +95,6 @@ namespace Ultra
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
-
                 return;
             }
 
@@ -112,7 +109,6 @@ namespace Ultra
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
-
                 return;
             }
 
@@ -124,7 +120,6 @@ namespace Ultra
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
-
                 return;
             }
             // Does not exist
@@ -147,7 +142,6 @@ namespace Ultra
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
-
                 return;
             }
 
@@ -163,7 +157,6 @@ namespace Ultra
                                 "Notice",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Warning);
-
                 return;
             }
 
@@ -205,7 +198,6 @@ namespace Ultra
                 windowHeight = 720;
             }
 
-
             // -------------------------
             // Reset the Label Notice
             // -------------------------
@@ -214,7 +206,6 @@ namespace Ultra
             // -------------------------
             // Launch Game
             // -------------------------
-
             Task.Run(() => CfgDefaultsProcess(romBuffer,
                                               videoPlugin,
                                               audioPlugin,
@@ -222,8 +213,8 @@ namespace Ultra
                                               rspPlugin,
                                               windowWidth,
                                               windowHeight
-                                            )
-            );
+                                             )
+                    );
         }
 
         /// <summary>
