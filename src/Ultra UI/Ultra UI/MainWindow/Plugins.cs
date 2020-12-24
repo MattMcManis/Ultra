@@ -277,6 +277,7 @@ namespace Ultra
 
         public static void PluginDefaults()
         {
+            //MessageBox.Show(string.Join("\r\n", VM.PluginsView.Video_Items));
             // -------------------------
             // Video
             // -------------------------
